@@ -9,7 +9,7 @@ import projects.Project;
 import entities.individuals.Notification;
 
 /**
- * @author Pedro Urbina Rodríguez
+ * @author Pedro Urbina Rodriguez
  *
  */
 public class User extends Account {
@@ -21,7 +21,7 @@ public class User extends Account {
 	
 	public User(String name, String pwd, String nif) {
 		super(name, pwd);
-		nif = this.nif;		
+		nif = this.nif;
 		collectives = new ArrayList<Collective>();
 		representedCollectives = new ArrayList<Collective>();
 		followedProjects = new ArrayList<Project>();

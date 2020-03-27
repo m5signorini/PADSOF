@@ -4,9 +4,8 @@
 package projects;
 import entities.*;
 /**
- * @author eps
+ * @author 
  *
  */
 public abstract class Project {
-
 }
