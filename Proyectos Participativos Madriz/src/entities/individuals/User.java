@@ -18,6 +18,8 @@ public class User extends Account {
 	protected ArrayList<Collective> representedCollectives;
 	protected ArrayList<Project> followedProjects;
 	protected ArrayList<Project> votedProjects;
+	boolean banned = false;
+	Calendar unbanDate;
 	
 	public User(String name, String pwd, String nif) {
 		super(name, pwd);
@@ -53,12 +55,27 @@ public class User extends Account {
 		}
 	}
 	
-	public void unban() {
-		
+	public boolean tryUnban() {
+		if (this.banned == false) 
+			return true;
+		Calendar fecha = Calendar.getInstance();
+		if(fecha.compareTo(this.unbanDate) == -1)
+			return false;
+		this.unban();
+		return true;
 	}
 	
-	public void ban(String message, int time) {
-		
+	public void unban() {
+		this.banned = false;
+	}
+	
+	public void ban(String message, int days) {
+		this.banned = true;
+		Calendar fecha = Calendar.getInstance();
+		fecha.add(Calendar.DAY_OF_YEAR, days);
+		this.unbanDate = fecha;
+		Notification n = new Notification(message);
+		this.getNotified(n);
 	}
 	
 	public void logout() {
