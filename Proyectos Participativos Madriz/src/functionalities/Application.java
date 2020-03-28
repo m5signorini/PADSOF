@@ -1,3 +1,4 @@
+package functionalities;
 /**
  * 
  */
@@ -32,19 +33,34 @@ public class Application implements Serializable{
 	
 	private SearchEngine searcher;
 	private Admin admin;
-	
+	private User loggedUser;
 	
 	public Application() {
 		minSupports = 0;
 		maxInactivity = 0;
 	}
-	
+	/* Metodo que crea un usuario como pendiente para que su registro
+	 * sea aceptaado por el admin
+	 * @param name 	Nombre de usuario
+	 * @param nif 	NIF del usuario
+	 * @param pwd	Contraseña del usuario
+	 * @return true si se ha podido crear, false si no
+	 */
 	public boolean register(String name, String nif, String pwd) {
-		return false;
+		if(name == null || nif == null || pwd == null) return false;
+		/* Controlar nif unico */
+		User u = new User(name, pwd, nif);
+		unregisteredUsers.add(u);
+		return true;
 	}
 	
 	public boolean login(String nif, String pwd) {
-		
+		if(nif == null || pwd == null) return false;
+		for(User u: registeredUsers) {
+			if(u.login(nif, pwd) == true) {
+				return true;
+			}
+		}
 		return false;
 	}
 	
@@ -103,7 +119,7 @@ public class Application implements Serializable{
 	}
 	
 	/* Metodo que se usa para controlar cuando los proyectos caducan,
-	 * se llama al comienzo de la sesiÃ³n
+	 * se llama al comienzo de la sesion
 	 */
 	public void updateProjects() {
 		
