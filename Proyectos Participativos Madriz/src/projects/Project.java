@@ -148,11 +148,6 @@ public abstract class Project implements GrantRequest{
 		return this.budget;
 	}
 
-	
-	
-	
-	
-	
     private void notifyFollowers(Notification notification ) {
     	for(int i = 0; i < this.followers.size(); i++) {
 			this.followers.get(i).notifications.add(notification);
