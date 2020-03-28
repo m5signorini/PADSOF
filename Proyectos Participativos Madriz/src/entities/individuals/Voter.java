@@ -4,7 +4,7 @@ import java.util.*;
 import projects.Project; 
 
 public abstract class Voter {
-	private ArrayList<Project> projects;
+	protected ArrayList<Project> projects;
 	
 	public Voter() {
 		this.projects = new ArrayList<Project>();
@@ -18,13 +18,8 @@ public abstract class Voter {
 		this.projects= projects;
 	}
 	
-	public boolean vote(Project p) {
-		if(p.getVoters().contains(this) == true) {
-			return false;
-		}
-		this.projects.add(p.support(this));
-		return true;
-	}
+	
+	public abstract boolean vote(Project p);
 	public abstract Set<User> count();
 
 }
