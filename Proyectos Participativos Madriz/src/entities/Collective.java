@@ -12,7 +12,7 @@ import projects.Project;
  * @author eps
  *
  */
-public class Collective extends Voter{
+public class Collective implements Voter{
 	private String name;
     private String description;
     private ArrayList<User> members;
@@ -108,6 +108,14 @@ public class Collective extends Voter{
 		members.add(u);
 		return this;
 	}
+	
+	@Override
+	
+	public boolean addProject(Project p) {
+		this.createdProjects.add(p);
+		return true;
+	}
+	
 	@Override
 	
 	public boolean vote(Project p) {
