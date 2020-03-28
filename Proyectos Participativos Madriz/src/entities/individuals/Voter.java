@@ -3,13 +3,9 @@ import java.util.*;
 
 import projects.Project; 
 
-public abstract class Voter {
-	
-	public Voter() {
-		
-	}
+public interface Voter {
 
-	public abstract boolean vote(Project p);
-	public abstract Set<User> count();
+	boolean vote(Project p);
+	Set<User> count();
 
 }
