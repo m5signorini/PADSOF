@@ -16,7 +16,8 @@ public class Collective extends Voter{
 	private String name;
     private String description;
     private ArrayList<User> members;
-    private ArrayList<Project> projects;
+    private ArrayList<Project> supportedProjects;
+    private ArrayList<Project> createdProjects;
     private User representative;
     private Collective parent;
  
@@ -24,12 +25,29 @@ public class Collective extends Voter{
     public Collective(String name, String description, User representative) {
         this.name = name;
         this.description = description;
+        this.supportedProjects = new ArrayList<Project>();
+        this.createdProjects= new ArrayList<Project>();
         this.members = new ArrayList<User>();
-        this.projects = new ArrayList<Project>();
         members.add(representative);
     }
     
-    public Collective(String name, String description, User representative, Collective parent) {
+    public ArrayList<Project> getSupportedProjects() {
+		return supportedProjects;
+	}
+
+	public void setSupportedProjects(ArrayList<Project> supportedProjects) {
+		this.supportedProjects = supportedProjects;
+	}
+
+	public ArrayList<Project> getCreatedProjects() {
+		return createdProjects;
+	}
+
+	public void setCreatedProjects(ArrayList<Project> createdProjects) {
+		this.createdProjects = createdProjects;
+	}
+
+	public Collective(String name, String description, User representative, Collective parent) {
         this(name, description, representative);
         this.parent = parent;
     }
@@ -90,10 +108,13 @@ public class Collective extends Voter{
 		members.add(u);
 		return this;
 	}
+	@Override
 	
 	public boolean vote(Project p) {
-		if(this.projects.contains(p)) return false;
-		else return this.projects.add(p);
+		if(this.supportedProjects.contains(p)) return false;
+		else {
+			return this.supportedProjects.add(p);
+		}
 	}
 	
 	@Override
