@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package projects;
 import entities.*;
@@ -21,7 +21,7 @@ public abstract class Project {
     private Voter creator;
     private ArrayList<Voter> voters;
     private ArrayList<User> followers;
- 
+
 
     public Project(String title, String description, Double cost, Date creationDate, Voter creator) {
         this.title = title;
@@ -124,11 +124,11 @@ public abstract class Project {
 	public void setFollowers(ArrayList<User> followers) {
 		this.followers = followers;
 	}
-    
+
     private void notifyFollowers(String type) {
     	/*Podemos sustituir todos los bucles por
     	 * uno al final ya que estamos seguros de que notifyFollowers()
-    	 * solo se va a llamar cuando el proyecto se 
+    	 * solo se va a llamar cuando el proyecto se
     	 * encuentre en los estados indicados al ser
     	 * llamado directamente desde la clase Application.
     	 */
@@ -148,42 +148,42 @@ public abstract class Project {
 			this.followers.get(i).notifications.add(notification);
 		}
     }
-    
-    Project reject() {
+
+    public Project reject() {
     	return this;
     }
-    
-    Project validate() {
+
+    public Project validate() {
     	return this;
     }
-    
-    Project send() {
+
+    public Project send() {
     	return this;
     }
-    
-    Project support(Voter v) {
+
+    public Project support(Voter v) {
     	this.voters.add(v);
     	return this;
     }
-    
-    void financiate(double budget) {
+
+    public void financiate(double budget) {
     	this.budget = budget;
     }
-    
-    int countVotes() {
+
+    public int countVotes() {
     	return this.voters.size();
     }
-    
-    Boolean hasExpired(int maxInactivity) {
+
+    public boolean hasExpired(int maxInactivity) {
     	Calendar calendar = Calendar.getInstance();
     	calendar.setTime(new Date());
     	int today = calendar.get(Calendar.DAY_OF_MONTH);
-    	
+
     	Calendar calendarAux = Calendar.getInstance();
     	calendarAux.setTime(this.creationDate);
     	int creationDay = calendarAux.get(Calendar.DAY_OF_MONTH);
 
-    	
+
     	if ((today - creationDay) > maxInactivity) {
     		return true;
     	}
