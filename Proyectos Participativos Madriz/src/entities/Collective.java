@@ -96,7 +96,10 @@ public class Collective implements Voter{
 	 *
 	 */
 	
-	private void notifyMembers() {
+	private void notifyMembers(Notification notification) {
+		for(int i; i < this.members.size(); i++) {
+			this.members.get(i).notifications.add(notification);
+		}
 	}
 	
 	public Collective leave(User u) {
@@ -121,6 +124,8 @@ public class Collective implements Voter{
 	public boolean vote(Project p) {
 		if(this.supportedProjects.contains(p)) return false;
 		else {
+			Notification notification = new Notification("New voted project.", "The colective" + this.name + "now supports" + String.valueOf(p));
+			notifyMembers(notification);
 			return this.supportedProjects.add(p);
 		}
 	}
