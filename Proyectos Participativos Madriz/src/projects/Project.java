@@ -8,7 +8,7 @@ import entities.individuals.*;
 import java.util.*;
 import java.time.*;
 /**
- * @author César Ramírez
+ * @author Cesar Ramirez Martinez
  *
  */
 public abstract class Project {
@@ -21,10 +21,9 @@ public abstract class Project {
     private Voter creator;
     private ArrayList<Voter> voters;
     private ArrayList<User> followers;
-    private Application app;
  
 
-    public Project(String title, String description, Double cost, Date creationDate, Voter creator, Application app) {
+    public Project(String title, String description, Double cost, Date creationDate, Voter creator) {
         this.title = title;
         this.description = description;
         this.cost = cost;
@@ -32,7 +31,6 @@ public abstract class Project {
         this.creationDate = creationDate;
         this.lastVote = null;
         this.creator = creator;
-        this.app = app; 
         this.voters = new ArrayList<Voter>();
         this.followers = new ArrayList<User>();
     }
@@ -126,36 +124,25 @@ public abstract class Project {
 	public void setFollowers(ArrayList<User> followers) {
 		this.followers = followers;
 	}
-
-
-	public Application getApp() {
-		return app;
-	}
-
-
-	public void setApp(Application app) {
-		this.app = app;
-	}
     
-	
-    void notifyFollowers() {
+    private void notifyFollowers(String type) {
     	/*Podemos sustituir todos los bucles por
     	 * uno al final ya que estamos seguros de que notifyFollowers()
     	 * solo se va a llamar cuando el proyecto se 
     	 * encuentre en los estados indicados al ser
     	 * llamado directamente desde la clase Application.
     	 */
-    	if (this.app.financiatedProjects.contains(this) == true) {
-    		Notification notification = new Notification("Financiated", "The project " + this.title + " is now financiated.");
+    	if (type == "Financiated") {
+    		Notification notification = new Notification(type, "The project " + this.title + " has been financiated with " + this.budget + "euros.");
     	}
-    	else if (this.app.sentProjects.contains(this) == true) {
-    		Notification notification = new Notification("Sent", "The project " + this.title + " has been sent.");
+    	else if (type == "Sent") {
+    		Notification notification = new Notification(type, "The project " + this.title + " has been sent to verification.");
     	}
-    	else if (this.app.rejectedProjects.contains(this) == true) {
-    		Notification notification = new Notification("Rejected", "The project " + this.title + " has been rejected.");
+    	else if (type == "Rejected") {
+    		Notification notification = new Notification(type, "The project " + this.title + " has been rejected.");
     	}
-    	else if (this.app.expiredProjects.contains(this) == true) {
-    		Notification notification = new Notification("Expired", "The project " + this.title + " has been expired.");
+    	else if (type == "Expired") {
+    		Notification notification = new Notification(type, "The project " + this.title + " has expired.");
     		}
     	for(int i = 0; i < this.followers.size(); i++) {
 			this.followers.get(i).notifications.add(notification);
@@ -163,17 +150,15 @@ public abstract class Project {
     }
     
     Project reject() {
-    	this.app.rejectedProjects.add(this);
     	return this;
     }
     
     Project validate() {
-    	this.app.publicProjects.add(this);
     	return this;
     }
     
-    void send() {
-    	this.app.sentProjects.add(this);
+    Project send() {
+    	return this;
     }
     
     Project support(Voter v) {
@@ -189,7 +174,7 @@ public abstract class Project {
     	return this.voters.size();
     }
     
-    Boolean hasExpired() {
+    Boolean hasExpired(int maxInactivity) {
     	Calendar calendar = Calendar.getInstance();
     	calendar.setTime(new Date());
     	int today = calendar.get(Calendar.DAY_OF_MONTH);
@@ -199,8 +184,7 @@ public abstract class Project {
     	int creationDay = calendarAux.get(Calendar.DAY_OF_MONTH);
 
     	
-    	if ((today - creationDay) > this.app.maxInactivity) {
-    		this.app.expiredProjects.add(this);
+    	if ((today - creationDay) > maxInactivity) {
     		return true;
     	}
     	return false;
