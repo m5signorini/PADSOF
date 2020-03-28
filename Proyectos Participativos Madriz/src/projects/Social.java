@@ -8,6 +8,7 @@ import java.util.*;
 import entities.individuals.*;
 
 
+
 /**
  * @author eps
  *
@@ -17,12 +18,13 @@ enum ScopeType {
 	  national,
 	  international
 	}
+
 public class Social extends Project {
 	private ScopeType scope;
 	private String group;
 	private String picture;
 	
-	public Social(String title, String description, Double cost, Date creationDate, User creator, ScopeType scope, String group, String picture) {
+	public Social(String title, String description, Double cost, Date creationDate, Voter creator, ScopeType scope, String group, String picture) {
 		super(title, description, cost, creationDate, creator);
 		this.scope = scope;
 		this.group = group;
@@ -52,5 +54,12 @@ public class Social extends Project {
 	public void setPicture(String picture) {
 		this.picture = picture;
 	}
-
+	
+	public String getExtraData() {
+		return super.getExtraData() + String.valueOf(this.scope) + this.group + this.picture;
+	}
+	
+	public ProjectKind getProjectKind() {
+		return ProjectKind.Social;
+	}
 }
