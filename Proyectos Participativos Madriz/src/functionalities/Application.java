@@ -7,7 +7,6 @@ package functionalities;
  * @author
  *
  */
-
 import java.util.*;
 import java.io.*;
 import entities.individuals.*;
@@ -35,19 +34,135 @@ public class Application implements Serializable{
 	private Admin admin;
 	private User loggedUser;
 	
-	public Application() {
-		minSupports = 0;
-		maxInactivity = 0;
+	public Application(Admin admin) {
+		this.admin = admin;
 	}
 	
+	public int getMinSupports() {
+		return minSupports;
+	}
 	
+	public void setMinSupports(int minSupports) {
+		this.minSupports = minSupports;
+	}
 	
-	/* Metodo que crea un usuario como pendiente para que su registro
-	 * sea aceptado por el admin
-	 * @param name 	Nombre de usuario
-	 * @param nif 	NIF del usuario
-	 * @param pwd	Contraseña del usuario
-	 * @return true si se ha podido crear, false si no
+	public int getMaxInactivity() {
+		return maxInactivity;
+	}
+	
+	public void setMaxInactivity(int maxInactivity) {
+		this.maxInactivity = maxInactivity;
+	}
+
+	public List<Project> getSentProjects() {
+		return sentProjects;
+	}
+
+	public void setSentProjects(List<Project> sentProjects) {
+		this.sentProjects = sentProjects;
+	}
+
+	public List<Project> getFinanciatedProjects() {
+		return financiatedProjects;
+	}
+
+	public void setFinanciatedProjects(List<Project> financiatedProjects) {
+		this.financiatedProjects = financiatedProjects;
+	}
+
+	public List<Project> getRejectedProjects() {
+		return rejectedProjects;
+	}
+
+	public void setRejectedProjects(List<Project> rejectedProjects) {
+		this.rejectedProjects = rejectedProjects;
+	}
+
+	public List<Project> getPublicProjects() {
+		return publicProjects;
+	}
+
+	public void setPublicProjects(List<Project> publicProjects) {
+		this.publicProjects = publicProjects;
+	}
+
+	public List<Project> getExpiredProjects() {
+		return expiredProjects;
+	}
+
+	public void setExpiredProjects(List<Project> expiredProjects) {
+		this.expiredProjects = expiredProjects;
+	}
+
+	public List<Project> getPendingProjects() {
+		return pendingProjects;
+	}
+
+	public void setPendingProjects(List<Project> pendingProjects) {
+		this.pendingProjects = pendingProjects;
+	}
+
+	public List<User> getRegisteredUsers() {
+		return registeredUsers;
+	}
+
+	public void setRegisteredUsers(List<User> registeredUsers) {
+		this.registeredUsers = registeredUsers;
+	}
+
+	public List<User> getUnregisteredUsers() {
+		return unregisteredUsers;
+	}
+
+	public void setUnregisteredUsers(List<User> unregisteredUsers) {
+		this.unregisteredUsers = unregisteredUsers;
+	}
+
+	public List<User> getBannedUsers() {
+		return bannedUsers;
+	}
+
+	public void setBannedUsers(List<User> bannedUsers) {
+		this.bannedUsers = bannedUsers;
+	}
+
+	public List<Collective> getCollectives() {
+		return collectives;
+	}
+
+	public void setCollectives(List<Collective> collectives) {
+		this.collectives = collectives;
+	}
+
+	public SearchEngine getSearcher() {
+		return searcher;
+	}
+
+	public void setSearcher(SearchEngine searcher) {
+		this.searcher = searcher;
+	}
+
+	public Admin getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(Admin admin) {
+		this.admin = admin;
+	}
+
+	public User getLoggedUser() {
+		return loggedUser;
+	}
+
+	public void setLoggedUser(User loggedUser) {
+		this.loggedUser = loggedUser;
+	}
+
+	/* Method that creates an unregistered user
+	 * @param name 	Name of the user
+	 * @param nif 	NIF of user
+	 * @param pwd	User's password
+	 * @return true if creation went well, false if not
 	 */
 	public boolean register(String name, String nif, String pwd) {
 		if(name == null || nif == null || pwd == null) return false;
@@ -67,96 +182,89 @@ public class Application implements Serializable{
 		return false;
 	}
 	
-	/* Metodo que usa el usuario estandar para incluir un proyecto
-	 * conviertiendolo en uno pendiente
-	 * @param P Proyecto que se incluye como pendiente
-	 * @return Si se ha podido crear true, si no, false
+	/* Method for creating a project
+	 * @param P Created project
+	 * @return true if creation was possible, false if not
 	 */
-	public boolean createProject(Project P) {
-		if(P == null) return false;
-		
-		pendingProjects.add(P);
+	public boolean createProject(Project p) {
+		if(p == null) return false;
+		pendingProjects.add(p);
 		return false;
 	}
 	
-	/* Metodo que usa el admin para validar un proyecto pendiente
-	 * convirtiendolo en un proyecto publico (se puede votar)
-	 * @param P Proyecto que se valida
-	 * @return Si se ha podido validar true, si no, false
+	/* Method for validating projects as administrator
+	 * @param P Validated project
+	 * @return true if validation was possible, false if not
 	 */
-	public boolean validateProject(Project P) {
-		if(P == null) return false;
-		if(pendingProjects.remove(P) != true) {
+	public boolean validateProject(Project p) {
+		if(p == null) return false;
+		if(pendingProjects.remove(p) != true) {
 			return false;
 		}
-		publicProjects.add(P);
+		publicProjects.add(p);
 		return true;
 	}
 	
-	/* Metodo que usa el usuario para enviar un proyecto publico
-	 * pudiendo no ser posible en caso de que el numero de votos sea incorrecto
-	 * @param P Proyecto que se trata de enviar
-	 * @return Si se ha podido enviar true, si no, false
+	/* Method for sending project to the council
+	 * @param P Sent project
+	 * @return true if sending was possible, false if not
 	 */
-	public boolean sendProject(Project P) {
-		if(P == null) return false; 
-		if(publicProjects.remove(P) != true) {
+	public boolean sendProject(Project p) {
+		if(p == null) return false; 
+		if(publicProjects.remove(p) != true) {
 			return false;
 		}
-		P.send();
-		sentProjects.add(P);
+		p.send();
+		sentProjects.add(p);
 		return true;
 	}
 	
-	/* Metodo que usa el admin para denegar un proyecto pendiente
-	 * convirtiendolo en un proyecto rechazado
-	 * @param P Proyecto que se deniega
-	 * @return Si se ha podido denegar true, si no, false
+	/* Method used by the administrator to reject pending projects
+	 * @param P Project to be rejected
+	 * @return true if rejection was possible, false if not
 	 */
-	public boolean rejectProject(Project P) {
-		if(P == null) return false;
-		if(pendingProjects.remove(P) != true) {
+	public boolean rejectProject(Project p) {
+		if(p == null) return false;
+		if(pendingProjects.remove(p) != true) {
 			return false;
 		}
-		rejectedProjects.add(P);
+		rejectedProjects.add(p);
 		return true;
 	}
 	
-	/* Metodo que se usa para controlar cuando los proyectos 
-	 * caducan, son aceptados por el consejo, etc...
-	 * Se llama al comienzo de la sesion
+	/* Method used to manage time-related events like
+	 * when a project expires or gets accepted
 	 */
 	public void updateProjects() {
 		
 	}
 	
-	/* Para hacer logout del usuario que actualmente usa
-	 * la aplicacion
+	/* Method for logging out of the current session
 	 */
 	public void logout() {
 		
 	}
 	
-	/* Incluye usuario designado a la lista de usuarios baneados
-	 * @param u Usuario a banear 
+	/* Adds user to ban list
+	 * @param u User to be banned
 	 * @param 
-	 * @return true si se ha baneado correctamente, false si no
+	 * @return true if could ban, false if not
 	 */
 	public boolean ban(User u) {
 		return false;
 	}
 	
-	/* Quita al usuario designado de la lista de usuarios baneados
-	 * @param u Usuario a desbanear 
-	 * @return true si se ha desbaneado correctamente, false si no
+	/* Removes user from ban list
+	 * @param u User to remove ban
+	 * @return true if could remove ban, false if not
 	 */
 	public boolean unban(User u) {
 		return false;
 	}
 	
-	/* Valida un registro como admin
-	 * @param u Registro de usuario aceptado
-	 * @return true si se ha podido validar, false si no
+	/* Validates user registration
+	 * @param u Accepted user
+	 * @return true if validation went well, false if not
 	 */
 	public boolean validateUser(User u) {
 		if(u == null) return false;
@@ -167,9 +275,9 @@ public class Application implements Serializable{
 		return true;
 	}
 	
-	/* Rechaza un registro como admin
-	 * @param u Registro de usuario rechazado
-	 * @return true si se ha podido rechazar, false si no
+	/* Rejects an user registration as an administrator
+	 * @param u User register that has been rejected
+	 * @return true if rejection went well, false if not
 	 */
 	public boolean rejectUser(User u) {
 		if(u == null) return false;
