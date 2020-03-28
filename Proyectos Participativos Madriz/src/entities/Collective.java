@@ -2,6 +2,7 @@
  * 
  */
 package entities;
+import entities.individuals.*;
 import java.util.*;
 
 import entities.individuals.User;
@@ -11,7 +12,7 @@ import projects.Project;
  * @author eps
  *
  */
-public class Collective {
+public class Collective extends Voter{
 	private String name;
     private String description;
     private ArrayList<User> members;
@@ -94,6 +95,8 @@ public class Collective {
 		if(this.projects.contains(p)) return false;
 		else return this.projects.add(p);
 	}
+	
+	@Override
 	
 	public Set<User> count() {
 		Set<User> s = new HashSet<User>();
