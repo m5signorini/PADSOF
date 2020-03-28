@@ -18,12 +18,12 @@ public abstract class Project {
     private double budget;
     private Date creationDate;
     private Date lastVote;
-    private Voter creator;
+    private User creator;
     private ArrayList<Voter> voters;
     private ArrayList<User> followers;
 
 
-    public Project(String title, String description, Double cost, Date creationDate, Voter creator) {
+    public Project(String title, String description, Double cost, Date creationDate, User creator) {
         this.title = title;
         this.description = description;
         this.cost = cost;
@@ -96,12 +96,12 @@ public abstract class Project {
 	}
 
 
-	public Voter getCreator() {
+	public  User getCreator() {
 		return creator;
 	}
 
 
-	public void setCreator(Voter creator) {
+	public void setCreator(User creator) {
 		this.creator = creator;
 	}
 
@@ -125,31 +125,15 @@ public abstract class Project {
 		this.followers = followers;
 	}
 
-    private void notifyFollowers(String type) {
-    	/*Podemos sustituir todos los bucles por
-    	 * uno al final ya que estamos seguros de que notifyFollowers()
-    	 * solo se va a llamar cuando el proyecto se
-    	 * encuentre en los estados indicados al ser
-    	 * llamado directamente desde la clase Application.
-    	 */
-    	if (type == "Financiated") {
-    		Notification notification = new Notification(type, "The project " + this.title + " has been financiated with " + this.budget + "euros.");
-    	}
-    	else if (type == "Sent") {
-    		Notification notification = new Notification(type, "The project " + this.title + " has been sent to verification.");
-    	}
-    	else if (type == "Rejected") {
-    		Notification notification = new Notification(type, "The project " + this.title + " has been rejected.");
-    	}
-    	else if (type == "Expired") {
-    		Notification notification = new Notification(type, "The project " + this.title + " has expired.");
-    		}
+    private void notifyFollowers(Notification notification ) {
     	for(int i = 0; i < this.followers.size(); i++) {
 			this.followers.get(i).notifications.add(notification);
 		}
     }
 
     public Project reject() {
+		Notification notification = new Notification("Rejection", "The project " + this.title + " has been rejected.");
+		notifyFollowers(notification);
     	return this;
     }
 
@@ -158,6 +142,8 @@ public abstract class Project {
     }
 
     public Project send() {
+    	Notification notification = new Notification("Sent", "The project " + this.title + " has been sent to validation.");
+		notifyFollowers(notification);
     	return this;
     }
 
@@ -168,6 +154,8 @@ public abstract class Project {
 
     public void financiate(double budget) {
     	this.budget = budget;
+    	Notification notification = new Notification("Financing", "The project " + this.title + " has been financiated with " + budget + "euros.");
+		notifyFollowers(notification);
     }
 
     public int countVotes() {
@@ -185,6 +173,8 @@ public abstract class Project {
 
 
     	if ((today - creationDay) > maxInactivity) {
+    		Notification notification = new Notification("Expired", "The project " + this.title + " has been expired.");
+    		notifyFollowers(notification);
     		return true;
     	}
     	return false;
