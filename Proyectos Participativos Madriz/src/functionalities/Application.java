@@ -39,8 +39,11 @@ public class Application implements Serializable{
 		minSupports = 0;
 		maxInactivity = 0;
 	}
+	
+	
+	
 	/* Metodo que crea un usuario como pendiente para que su registro
-	 * sea aceptaado por el admin
+	 * sea aceptado por el admin
 	 * @param name 	Nombre de usuario
 	 * @param nif 	NIF del usuario
 	 * @param pwd	Contraseña del usuario
@@ -64,13 +67,14 @@ public class Application implements Serializable{
 		return false;
 	}
 	
-	/* Metodo que usa el usuario estandar para crear un proyecto
+	/* Metodo que usa el usuario estandar para incluir un proyecto
 	 * conviertiendolo en uno pendiente
-	 * @param P Proyecto que se crea
+	 * @param P Proyecto que se incluye como pendiente
 	 * @return Si se ha podido crear true, si no, false
 	 */
 	public boolean createProject(Project P) {
 		if(P == null) return false;
+		
 		pendingProjects.add(P);
 		return false;
 	}
@@ -95,7 +99,7 @@ public class Application implements Serializable{
 	 * @return Si se ha podido enviar true, si no, false
 	 */
 	public boolean sendProject(Project P) {
-		if(P == null) return false;
+		if(P == null) return false; 
 		if(publicProjects.remove(P) != true) {
 			return false;
 		}
@@ -118,30 +122,60 @@ public class Application implements Serializable{
 		return true;
 	}
 	
-	/* Metodo que se usa para controlar cuando los proyectos caducan,
-	 * se llama al comienzo de la sesion
+	/* Metodo que se usa para controlar cuando los proyectos 
+	 * caducan, son aceptados por el consejo, etc...
+	 * Se llama al comienzo de la sesion
 	 */
 	public void updateProjects() {
 		
 	}
 	
+	/* Para hacer logout del usuario que actualmente usa
+	 * la aplicacion
+	 */
 	public void logout() {
 		
 	}
 	
+	/* Incluye usuario designado a la lista de usuarios baneados
+	 * @param u Usuario a banear 
+	 * @param 
+	 * @return true si se ha baneado correctamente, false si no
+	 */
 	public boolean ban(User u) {
 		return false;
 	}
 	
+	/* Quita al usuario designado de la lista de usuarios baneados
+	 * @param u Usuario a desbanear 
+	 * @return true si se ha desbaneado correctamente, false si no
+	 */
 	public boolean unban(User u) {
 		return false;
 	}
 	
+	/* Valida un registro como admin
+	 * @param u Registro de usuario aceptado
+	 * @return true si se ha podido validar, false si no
+	 */
 	public boolean validateUser(User u) {
-		return false;
+		if(u == null) return false;
+		if(unregisteredUsers.remove(u) != true) {
+			return false;
+		}
+		registeredUsers.add(u);
+		return true;
 	}
 	
+	/* Rechaza un registro como admin
+	 * @param u Registro de usuario rechazado
+	 * @return true si se ha podido rechazar, false si no
+	 */
 	public boolean rejectUser(User u) {
+		if(u == null) return false;
+		if(unregisteredUsers.remove(u) != true) {
+			return false;
+		}
 		return false;
 	}
 	
