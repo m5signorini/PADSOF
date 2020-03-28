@@ -12,7 +12,7 @@ import projects.Project;
  * @author eps
  *
  */
-public class Collective extends Voter{
+public class Collective implements Voter{
 	private String name;
     private String description;
     private ArrayList<User> members;
@@ -96,7 +96,10 @@ public class Collective extends Voter{
 	 *
 	 */
 	
-	private void notifyMembers() {
+	private void notifyMembers(Notification notification) {
+		for(int i; i < this.members.size(); i++) {
+			this.members.get(i).notifications.add(notification);
+		}
 	}
 	
 	public Collective leave(User u) {
@@ -108,11 +111,21 @@ public class Collective extends Voter{
 		members.add(u);
 		return this;
 	}
+	
+	@Override
+	
+	public boolean addProject(Project p) {
+		this.createdProjects.add(p);
+		return true;
+	}
+	
 	@Override
 	
 	public boolean vote(Project p) {
 		if(this.supportedProjects.contains(p)) return false;
 		else {
+			Notification notification = new Notification("New voted project.", "The colective" + this.name + "now supports" + String.valueOf(p));
+			notifyMembers(notification);
 			return this.supportedProjects.add(p);
 		}
 	}

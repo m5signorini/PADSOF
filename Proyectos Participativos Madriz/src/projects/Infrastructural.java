@@ -7,6 +7,7 @@ import java.util.*;
 
 import entities.individuals.*;
 
+
 /**
  * @author eps
  *
@@ -16,7 +17,7 @@ public class Infrastructural extends Project {
 	private String location;
 	private ArrayList<District> affectedDistricts;
 	
-	public Infrastructural(String title, String description, Double cost, Date creationDate, User creator, String scheme, String location) {
+	public Infrastructural(String title, String description, Double cost, Date creationDate, Voter creator, String scheme, String location) {
 		super(title, description, cost, creationDate, creator);
 		this.scheme = scheme;
 		this.location = location;
@@ -45,6 +46,14 @@ public class Infrastructural extends Project {
 
 	public void setLocation(String location) {
 		this.location = location;
+	}
+	
+	public String getExtraData() {
+		return super.getExtraData() + this.scheme + this.location;
+	}
+	
+	public ProjectKind getProjectKind() {
+		return ProjectKind.Infrastructure;
 	}
 	
 }

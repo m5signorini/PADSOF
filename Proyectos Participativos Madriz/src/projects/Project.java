@@ -4,6 +4,8 @@
 package projects;
 import entities.*;
 import entities.individuals.*;
+import es.uam.eps.sadp.*;
+import es.uam.eps.sadp.grants.GrantRequest;
 
 import java.util.*;
 import java.time.*;
@@ -11,19 +13,19 @@ import java.time.*;
  * @author Cesar Ramirez Martinez
  *
  */
-public abstract class Project {
+public abstract class Project implements GrantRequest{
 	private String title;
     private String description;
     private double cost;
     private double budget;
     private Date creationDate;
     private Date lastVote;
-    private User creator;
+    private Voter creator;
     private ArrayList<Voter> voters;
     private ArrayList<User> followers;
 
 
-    public Project(String title, String description, Double cost, Date creationDate, User creator) {
+    public Project(String title, String description, Double cost, Date creationDate, Voter creator) {
         this.title = title;
         this.description = description;
         this.cost = cost;
@@ -33,6 +35,8 @@ public abstract class Project {
         this.creator = creator;
         this.voters = new ArrayList<Voter>();
         this.followers = new ArrayList<User>();
+        this.creator.addProject(this);
+        this.voters.add(creator);
     }
 
 
@@ -96,12 +100,12 @@ public abstract class Project {
 	}
 
 
-	public  User getCreator() {
+	public  Voter getCreator() {
 		return creator;
 	}
 
 
-	public void setCreator(User creator) {
+	public void setCreator(Voter creator) {
 		this.creator = creator;
 	}
 
@@ -120,9 +124,29 @@ public abstract class Project {
 		return followers;
 	}
 
-
+	
 	public void setFollowers(ArrayList<User> followers) {
 		this.followers = followers;
+	}
+	
+	public String getExtraData() {
+		return String.valueOf(this.cost) + String.valueOf(this.creationDate) + String.valueOf(this.lastVote) + String.valueOf(this.creator);
+	}
+	
+	public String getProjectTitle(){
+		String s = getTitle();
+		return s.substring(0, Math.min(25, s.length()));
+	}
+	
+	public String getProjectDescription(){
+		String s = getDescription();
+		return s.substring(0, Math.min(500, s.length()));
+	}
+	
+	public abstract ProjectKind getProjectKind();
+	
+	public double getRequestedAmount(){
+		return this.budget;
 	}
 
     private void notifyFollowers(Notification notification ) {
@@ -159,20 +183,24 @@ public abstract class Project {
     }
 
     public int countVotes() {
-    	return this.voters.size();
+    	Set<User> s = new HashSet<User>();
+    	for(int i = 0; i < this.voters.size(); i++) {
+    		s.addAll(this.voters.get(i).count());
+    	}
+    	return s.size();
     }
 
     public boolean hasExpired(int maxInactivity) {
     	Calendar calendar = Calendar.getInstance();
     	calendar.setTime(new Date());
-    	int today = calendar.get(Calendar.DAY_OF_MONTH);
+    	int today = calendar.get(Calendar.DAY_OF_YEAR);
 
     	Calendar calendarAux = Calendar.getInstance();
-    	calendarAux.setTime(this.creationDate);
-    	int creationDay = calendarAux.get(Calendar.DAY_OF_MONTH);
+    	calendarAux.setTime(this.lastVote);
+    	int lastVoteDay = calendarAux.get(Calendar.DAY_OF_YEAR);
 
 
-    	if ((today - creationDay) > maxInactivity) {
+    	if ((today - lastVoteDay) > maxInactivity) {
     		Notification notification = new Notification("Expired", "The project " + this.title + " has been expired.");
     		notifyFollowers(notification);
     		return true;
