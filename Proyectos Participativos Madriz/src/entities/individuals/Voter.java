@@ -25,6 +25,6 @@ public abstract class Voter {
 		this.projects.add(p.support(this));
 		return true;
 	}
-	public abstract HashSet<User> count();
+	public abstract Set<User> count();
 
 }
