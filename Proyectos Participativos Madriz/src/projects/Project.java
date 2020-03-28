@@ -36,6 +36,7 @@ public abstract class Project implements GrantRequest{
         this.voters = new ArrayList<Voter>();
         this.followers = new ArrayList<User>();
         this.creator.addProject(this);
+        this.voters.add(creator);
     }
 
 
