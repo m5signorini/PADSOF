@@ -2,17 +2,14 @@
  *
  */
 package projects;
-import entities.*;
 import entities.individuals.*;
-import es.uam.eps.sadp.*;
 import es.uam.eps.sadp.grants.GrantRequest;
 
-import java.util.*;
-import java.time.*;
-/**
+import java.util.*;/**
  * @author Cesar Ramirez Martinez
  *
  */
+
 public abstract class Project implements GrantRequest{
 	private String title;
     private String description;
@@ -149,6 +146,13 @@ public abstract class Project implements GrantRequest{
 		return this.budget;
 	}
 	
+	/* Method used to add a follower to the followers list of a project.
+	 * @param user User that will be added to the project followers.
+	 */
+    public void addFollower(User user) {
+    	this.followers.add(user);
+    }
+    
 	/* Method used to send any notification to the followers of a project.
 	 * @param notification Notification that will be sent to all the project followers.
 	 */
