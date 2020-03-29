@@ -85,7 +85,7 @@ public class InfrastructuralTest {
 		
 		Notification not = collective.getMembers().get(0).getNotifications().get(0);
 		assertEquals("New voted project.", not.getTitle());
-		assertEquals("The colective" + collective.getName() + "now supports" + String.valueOf(projectI), not.getText());
+		assertEquals("The collective " + collective.getName() + " now supports " +projectI.getTitle(), not.getText());
 		projectI.getFollowers().get(0).getNotifications().remove(0);
 		collective.getMembers().get(0).getNotifications().remove(0);
 	}
