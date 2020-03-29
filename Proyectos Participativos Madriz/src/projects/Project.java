@@ -37,7 +37,7 @@ public abstract class Project implements GrantRequest{
         this.voters.add(creator);
     }
     
-    public String getFolloUpID() {
+    public String getFollowUpID() {
     	return followUpID;
     }
     
@@ -147,7 +147,7 @@ public abstract class Project implements GrantRequest{
 	public abstract ProjectKind getProjectKind();
 	
 	public double getRequestedAmount(){
-		return this.budget;
+		return this.cost;
 	}
 	
 	/* Method used to add a follower to the followers list of a project.
