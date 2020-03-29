@@ -5,6 +5,7 @@ package entities;
 import entities.individuals.*;
 import java.util.*;
 
+import entities.individuals.User;
 import projects.Project;
 
 /**
@@ -82,50 +83,6 @@ public class Collective implements Voter{
 		this.childCollectives = childCollectives;
 	}
 	
-	public String toString() {
-		StringBuffer sb = new StringBuffer();
-		sb.append("Name: " + this.name + ".\n Description: "+ this.description);
-		return sb.toString();
-	}
-	
-
-	/* Extended toString.
-	 * @return A String containing all the information of the User.
-	 */
-	public String printAllInfo() {
-		StringBuffer sb = new StringBuffer();
-		sb.append("Name: " + this.name + ".\n Description: "+ this.description);
-		sb.append(".\nRepresentative's name: " + this.representative.getName());
-		sb.append("Parent's collective name: " + this.parent.getName());
-		if(!this.members.isEmpty()) {
-			sb.append("\nUsers that belong to this collective: ");
-			for(User u: this.members) {
-				sb.append(u.getName() + ", ");
-			}
-		}
-		if(!this.supportedProjects.isEmpty()) {
-			sb.append("\nHas supported projects: ");
-			for(Project p: this.supportedProjects) {
-				sb.append(p.getTitle() + ", ");
-			}
-		}
-		if(!this.createdProjects.isEmpty()) {
-			sb.append("\nHas created this projects: ");
-			for(Project p: this.createdProjects) {
-				sb.append(p.getTitle() + ", ");
-			}
-		}
-		if(!this.childCollectives.isEmpty()) {
-			sb.append("\nHas this children collectives: ");
-			for(Collective c: this.childCollectives) {
-				sb.append(c.getName() + ", ");
-			}
-		}
-		return sb.toString();
-	}
-		
-		
-	
 	/* Notifies every member of the collective.
 	 * @param notification Notification that will be sent to every member of the collective.
 	 */
@@ -169,6 +126,18 @@ public class Collective implements Voter{
 		}
 		this.supportedProjects.add(p);
 		return true;
+	}
+	
+	/* Adds a Member to members list of the collective.
+	 * @param user User that will be added to the memebers list of the collective.
+	 * @return True if the user was not already part of the collective, false otherwise.
+	 */	
+
+	public boolean addMember(User user) {
+		if(this.members.contains(user)) return false;
+		else {
+			return this.members.add(user);
+		}
 	}
 	
 	/* Returns set containing all the users that vote when the representative of the collective votes as representative.
