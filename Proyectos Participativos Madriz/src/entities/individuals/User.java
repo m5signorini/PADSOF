@@ -13,12 +13,13 @@ import entities.individuals.Notification;
  * @author 
  *
  */
-public class User extends Account implements Voter, Serializable {
+public class User extends Account implements Voter{
 	protected String nif;
 	protected ArrayList<Collective> collectives;
 	protected ArrayList<Collective> representedCollectives;
 	protected ArrayList<Project> followedProjects;
 	protected ArrayList<Project> votedProjects;
+	protected ArrayList<Project> createdProjects;
 	protected ArrayList<Notification> notifications;
 	Calendar unbanDate;
 	boolean banned = false;
@@ -30,6 +31,7 @@ public class User extends Account implements Voter, Serializable {
 		representedCollectives = new ArrayList<Collective>();
 		followedProjects = new ArrayList<Project>();
 		votedProjects = new ArrayList<Project>();
+		createdProjects = new ArrayList<Project>();
 		this.notifications= new ArrayList<Notification>();
 	}
 		
@@ -269,6 +271,18 @@ public class User extends Account implements Voter, Serializable {
 		if(this.representedCollectives.contains(c))
 			return false;
 		this.representedCollectives.add(c);
+		return true;
+	}
+	
+	/* Adds a Project createdProjects list.
+	 * @param p Project that will be added to the createdProjects list of the collective.
+	 * @return True if the project was not already created by the user, false otherwise.
+	 */
+	public boolean createProject(Project p) {
+		if (this.createdProjects.contains(p)) {
+			return false;
+		}
+		this.createdProjects.add(p);
 		return true;
 	}
 	

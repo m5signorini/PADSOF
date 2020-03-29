@@ -32,6 +32,7 @@ public class Collective implements Voter{
         members.add(representative);
         this.representative = representative;
     	this.childCollectives = new HashSet<Collective>();
+    	representative.createCollective(this);
     }
     
     public Collective(String name, String description, User representative, Collective father) {
@@ -173,7 +174,7 @@ public class Collective implements Voter{
 		if (this.createdProjects.contains(p)) {
 			return false;
 		}
-		this.supportedProjects.add(p);
+		this.createdProjects.add(p);
 		return true;
 	}
 	
@@ -199,7 +200,9 @@ public class Collective implements Voter{
 	public boolean addMember(User user) {
 		if(this.members.contains(user)) return false;
 		else {
-			return this.members.add(user);
+			this.members.add(user);
+			user.enterCollective(this);
+			return true;
 		}
 	}
 	

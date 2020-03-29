@@ -24,6 +24,7 @@ public class Social extends Project {
 		this.scope = scope;
 		this.group = group;
 		this.picture = picture;
+		creator.createProject(this);
 	}
 
 	public ScopeType getScope() {

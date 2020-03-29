@@ -7,5 +7,6 @@ public interface Voter {
 
 	Set<User> count();
 	boolean addVotedProject(Project p);
+	boolean createProject(Project p);
 
 }
