@@ -46,7 +46,7 @@ public class SearchEngine {
 		pool.addAll(data.getBannedUsers());
 		pool.addAll(data.getUnregisteredUsers());
 		for(User u: pool) {
-			if(u.getNif() == nif) {
+			if(u.getNif().equals(nif)) {
 				return u;
 			}
 		}

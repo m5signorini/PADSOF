@@ -214,10 +214,10 @@ public class Application implements Serializable{
 	public boolean register(User u) {
 		if(u == null) return false;
 		for(User u2: registeredUsers) {
-			if(u2.getNif() == u.getNif()) return false;
+			if(u2.getNif().equals(u.getNif())) return false;
 		}
 		for(User u2: unregisteredUsers) {
-			if(u2.getNif() == u.getNif()) return false;
+			if(u2.getNif().equals(u.getNif())) return false;
 		}
 		unregisteredUsers.add(u);
 		return true;
