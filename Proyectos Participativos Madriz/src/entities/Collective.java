@@ -205,7 +205,7 @@ public class Collective implements Voter{
 		for(Collective c: this.childCollectives) {
 			p.support(c);
 		}
-		Notification notification = new Notification("New voted project.", "The collective " + this.name + "now supports " + p.getTitle());
+		Notification notification = new Notification("New voted project.", "The collective " + this.name + " now supports " + p.getTitle());
 		notifyMembers(notification);
 		return this.supportedProjects.add(p);
 	}

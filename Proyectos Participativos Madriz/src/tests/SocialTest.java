@@ -19,7 +19,7 @@ public class SocialTest {
 	@Before
 	public void setUp() throws Exception {
 		Date date = new Date();
-		User voterS = new User("Julio", "hello", "28036512C");		
+		voterS = new User("Julio", "hello", "28036512C");		
 		projectS = new Social("Increase pensions", "Notable improvement of retirement pensions", 500000.00 , date, voterS, ScopeType.national, "Retirees", "picture");
 		projectS.addFollower(voterS);
 	}
@@ -75,13 +75,12 @@ public class SocialTest {
 
 	@Test
 	public void testCountVotes() {
-		
 		User representative = new User("Antonio", "bye", "39036520H");
 		Collective collective = new Collective("Go retirees", "fighting for retirees rights", representative);
 		
 		collective.join(voterS);
 		
-		/*VoterI is the creator of the ProjectS project so it is already in the
+		/*VoterS is the creator of the ProjectS project so it is already in the
 		 * voters list of the project. With this test we will check if the vote 
 		 * of Julio(voterS) is counted twice.
 		 */
@@ -93,7 +92,7 @@ public class SocialTest {
 		
 		Notification not = collective.getMembers().get(0).getNotifications().get(0);
 		assertEquals("New voted project.", not.getTitle());
-		assertEquals("The colective" + collective.getName() + "now supports" + String.valueOf(projectS), not.getText());
+		assertEquals("The collective " + collective.getName() + " now supports " + projectS.getTitle(), not.getText());
 		projectS.getFollowers().get(0).getNotifications().remove(0);
 		collective.getMembers().get(0).getNotifications().remove(0);
 	}
