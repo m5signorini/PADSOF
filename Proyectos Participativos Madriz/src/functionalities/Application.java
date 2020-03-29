@@ -34,10 +34,28 @@ public class Application implements Serializable{
 	private Admin admin;
 	private User loggedUser;
 	
+	private static final String filepath = "data";
+	
 	public Application(Admin admin) {
 		this.admin = admin;
 	}
 	
+	public void writeToFile() {
+        try {
+            FileOutputStream fileOut = new FileOutputStream(filepath);
+            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+            objectOut.writeObject(this);
+            objectOut.close();
+            System.out.println("The Object  was succesfully written to a file");
+ 
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+	
+	/*
+	 * GETTERS AND SETTERS
+	 */
 	public int getMinSupports() {
 		return minSupports;
 	}
@@ -166,16 +184,36 @@ public class Application implements Serializable{
 	 */
 	public boolean register(String name, String nif, String pwd) {
 		if(name == null || nif == null || pwd == null) return false;
-		/* Controlar nif unico */
+		for(User u2: registeredUsers) {
+			if(u2.getNif() == nif) return false;
+		}
+		for(User u2: unregisteredUsers) {
+			if(u2.getNif() == nif) return false;
+		}
 		User u = new User(name, pwd, nif);
 		unregisteredUsers.add(u);
 		return true;
 	}
 	
+	/* Method for logging in
+	 * @param nif 	NIF of account
+	 * @param pwd	Account's password
+	 * @return true if login was correct, false if wrong credentials
+	 */
 	public boolean login(String nif, String pwd) {
 		if(nif == null || pwd == null) return false;
+		// Check as administrator
+		if(admin.login(nif, pwd) == true) {
+			return true;
+		}
+		// Check as user
 		for(User u: registeredUsers) {
 			if(u.login(nif, pwd) == true) {
+				// Ban check
+				if(bannedUsers.contains(u) && !u.tryUnban()) {
+					return false;
+				}
+				loggedUser = u;
 				return true;
 			}
 		}
@@ -231,18 +269,18 @@ public class Application implements Serializable{
 		rejectedProjects.add(p);
 		return true;
 	}
-	
+		
 	/* Method used to manage time-related events like
 	 * when a project expires or gets accepted
 	 */
 	public void updateProjects() {
-		
+		// Checking 
 	}
 	
 	/* Method for logging out of the current session
 	 */
 	public void logout() {
-		
+		loggedUser = null;
 	}
 	
 	/* Adds user to ban list
@@ -250,7 +288,13 @@ public class Application implements Serializable{
 	 * @param 
 	 * @return true if could ban, false if not
 	 */
-	public boolean ban(User u) {
+	public boolean ban(User u, String message, int days) {
+		if(u == null) return false;
+		if(registeredUsers.contains(u) == false) {
+			return false;
+		}
+		bannedUsers.add(u);
+		u.ban(message, days);
 		return false;
 	}
 	
@@ -258,9 +302,16 @@ public class Application implements Serializable{
 	 * @param u User to remove ban
 	 * @return true if could remove ban, false if not
 	 */
+	/*
 	public boolean unban(User u) {
+		if(u == null) return false;
+		if(bannedUsers.remove(u) != true) {
+			return false;
+		}
+		registeredUsers.add(u);
 		return false;
 	}
+	*/
 	
 	/* Validates user registration
 	 * @param u Accepted user
@@ -291,6 +342,11 @@ public class Application implements Serializable{
 		return false;
 	}
 	
+	/* Method for calculating collectives affinity
+	 * @param c1 Collective 1
+	 * @param c2 Collective 2
+	 * @return Affinity level using a specific formula
+	 */
 	public double calcAffinity(Collective c1, Collective c2) {
 		return 2.0;
 	}
