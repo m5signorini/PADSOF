@@ -211,15 +211,14 @@ public class Application implements Serializable{
 	 * @param pwd	User's password
 	 * @return true if creation went well, false if not
 	 */
-	public boolean register(String name, String nif, String pwd) {
-		if(name == null || nif == null || pwd == null) return false;
+	public boolean register(User u) {
+		if(u == null) return false;
 		for(User u2: registeredUsers) {
-			if(u2.getNif() == nif) return false;
+			if(u2.getNif() == u.getNif()) return false;
 		}
 		for(User u2: unregisteredUsers) {
-			if(u2.getNif() == nif) return false;
+			if(u2.getNif() == u.getNif()) return false;
 		}
-		User u = new User(name, pwd, nif);
 		unregisteredUsers.add(u);
 		return true;
 	}
@@ -403,6 +402,83 @@ public class Application implements Serializable{
 	 */
 	public double calcAffinity(Collective c1, Collective c2) {
 		return 2.0;
+	}
+	
+	private String projectsToString() {
+		String s = "";
+		s += "Pending projects:\n";
+		for(Project p: this.pendingProjects) {
+			s += " " + p;
+		}
+		s += "Denied projects:\n";
+		for(Project p: this.deniedProjects) {
+			s += " " + p;
+		}
+		s += "Sent projects:\n";
+		for(Project p: this.sentProjects) {
+			s += " " + p;
+		}
+		s += "Rejected projects:\n";
+		for(Project p: this.rejectedProjects) {
+			s += " " + p;
+		}
+		s += "Financiated projects:\n";
+		for(Project p: this.financiatedProjects) {
+			s += " " + p;
+		}
+		s += "Public projects:\n";
+		for(Project p: this.publicProjects) {
+			s += " " + p;
+		}
+		s += "Expired projects:\n";
+		for(Project p: this.expiredProjects) {
+			s += " " + p;
+		}
+		return s;
+	}
+	
+	private String usersToString() {
+		String s = "";
+		s += "Unregistered users:\n";
+		for(User u: this.unregisteredUsers) {
+			s += " " + u;
+		}
+		s += "Registered users:\n";
+		for(User u: this.registeredUsers) {
+			s += " " + u;
+		}
+		s += "Banned Users:\n";
+		for(User u: this.bannedUsers) {
+			s += " " + u;
+		}
+		return s;
+	}
+	
+	private String collectivesToString() {
+		String s = "";
+		s += "Collectives:\n";
+		for(Collective c: this.collectives) {
+			s += " " + c;
+		}
+		return s;
+	}
+	
+	private String extraDataToString() {
+		String s = "";
+		s += "Admin: " + admin;
+		s += "Logged user: " + loggedUser;
+		s += "Minimum Supports: " + minSupports + "\n";
+		s += "Maximum Inactivity: " + maxInactivity + "\n";
+		return s;
+	}
+	
+	public String toString() {
+		String s = "";
+		s += projectsToString();
+		s += collectivesToString();
+		s += usersToString();
+		s += extraDataToString();
+		return s;
 	}
 }
 
