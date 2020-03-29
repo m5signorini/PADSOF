@@ -2,26 +2,23 @@ package tests;
 
 import java.util.*;
 import projects.*;
-import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestInstance.Lifecycle;
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
 
 import entities.individuals.*;
 import es.uam.eps.sadp.grants.GrantRequest.ProjectKind;
 import entities.*;
 
-@TestInstance(Lifecycle.PER_CLASS)
 class InfrastructuralTest {
 	
 	private Infrastructural projectI;
 	private User voterI;
 
 	
-	@BeforeAll
-	public void setUpBeforeClass() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		Date date = new Date();
 		voterI = new User("Julio", "hello", "28036512C");
 		projectI = new Infrastructural("Refugee center", "New center to embrace refugees", 1000000.00 , date, voterI, "scheme", "Madrid");
@@ -138,7 +135,7 @@ class InfrastructuralTest {
 		
 		projectI.financiate(budget);
 		projectI.getFollowers().get(0).getNotifications().remove(0);
-		assertEquals(projectI.getRequestedAmount(), projectI.getBudget());
+		assertEquals(projectI.getRequestedAmount(), projectI.getBudget(), 0);
 	}
 	
 }

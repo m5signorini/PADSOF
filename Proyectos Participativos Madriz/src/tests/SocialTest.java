@@ -2,26 +2,23 @@ package tests;
 
 import java.util.*;
 import projects.*;
-import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestInstance.Lifecycle;
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
 
 import entities.individuals.*;
 import es.uam.eps.sadp.grants.GrantRequest.ProjectKind;
 import entities.*;
 
-@TestInstance(Lifecycle.PER_CLASS)
 class SocialTest {
 	
 	private Social projectS;
 	private Collective collectiveS;
 
 	
-	@BeforeAll
-	public void setUpBeforeClass() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		Date date = new Date();
 		User representative = new User("Antonio", "bye", "39036520H");
 		collectiveS = new Collective("Go retirees", "fighting for retirees rights", representative);
@@ -140,7 +137,7 @@ class SocialTest {
 		
 		projectS.financiate(budget);
 		projectS.getFollowers().get(0).getNotifications().remove(0);
-		assertEquals(projectS.getRequestedAmount(), projectS.getBudget());
+		assertEquals(projectS.getRequestedAmount(), projectS.getBudget(), 0);
 	}
 	
 }
