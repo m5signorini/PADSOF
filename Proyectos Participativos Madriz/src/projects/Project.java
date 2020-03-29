@@ -194,7 +194,7 @@ public abstract class Project implements GrantRequest{
     	return this;
     }
     
-    /* Method used to financiate a project with a certain amount of money.
+    /* Method used to financiate a project with a certain amount of money(euros).
      * A notification reporting this decision will be sent to all the project followers.
   	 * @param budget Double that indicates the amount of money that wiil be used to financiate the project.
   	 * @return The project that will be added to the financiated projects list by the application.
