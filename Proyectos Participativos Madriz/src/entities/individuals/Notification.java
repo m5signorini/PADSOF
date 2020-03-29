@@ -32,4 +32,8 @@ public class Notification {
 		this.text = text;
 	}
 	
+	public String toString() {
+		return "Title: "+ title + ". Text: " + text;
+	}
+	
 }
