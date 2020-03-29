@@ -21,6 +21,7 @@ public class User extends Account implements Voter, Serializable {
 	protected ArrayList<Project> votedProjects;
 	protected ArrayList<Notification> notifications;
 	Calendar unbanDate;
+	boolean banned = false;
 	
 	public User(String name, String pwd, String nif) {
 		super(name, pwd);
@@ -76,7 +77,51 @@ public class User extends Account implements Voter, Serializable {
 	}
 	
 	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("Name: " + this.name + ". Nif: "+ this.nif);
+		return sb.toString();
+	}
+	
+	/* Extended toString.
+	 * @return A String containing all the information of the User.
+	 */
+	public String printAllInfo() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("Name: " + this.name + ". Nif: "+ this.nif + ". Password: " + this.pwd);
+		if(!this.collectives.isEmpty()) {
+			sb.append("\nBelongs to collectives: ");
+			for(Collective c: this.collectives) {
+				sb.append(c.getName() + ", ");
+			}
+		}
+		if(!this.representedCollectives.isEmpty()) {
+			sb.append("\nHas created collectives: ");
+			for(Collective c: this.representedCollectives) {
+				sb.append(c.getName() + ", ");
+			}
+		}
+		if(!this.followedProjects.isEmpty()) {
+			sb.append("\nHas followed this projects: ");
+			for(Project p: this.followedProjects) {
+				sb.append(p.getTitle() + ", ");
+			}
+		}
+		if(!this.votedProjects.isEmpty()) {
+			sb.append("\nHas voted for this projects: ");
+			for(Project p: this.votedProjects) {
+				sb.append(p.getTitle() + ", ");
+			}
+		}
+		if(!this.notifications.isEmpty()) {
+			sb.append("\nHas this notifications pending: ");
+			for(Notification n: this.notifications) {
+				sb.append(n.getTitle() + ", ");
+			}
+		}
+		if(this.banned == true)
+			sb.append("\nThis user has been banned till: " + this.unbanDate);		
 		
+		return sb.toString();
 	}
 	
 	public User validate() {
@@ -101,28 +146,33 @@ public class User extends Account implements Voter, Serializable {
 	}
 	
 	/* Tries to unban a user.
-	 * @return True if the the banned period has finished, false otherwise.
+	 * @return True if the the banned period has finished or the user was already unbanned, false otherwise.
 	 */
 	public boolean tryUnban() {
 		Calendar fecha = Calendar.getInstance();
+		if(banned == false)
+			return true;
 		if(fecha.compareTo(this.unbanDate) == -1)
 			return false;
+		banned = false;
 		return true;
-	}
-	
-	public void unban() {
 	}
 	
 	/* Function that sets the end of the banning period and notifies the user with the reason of the ban.
 	 * @param message String containing the reason why the user has been banned.
 	 * @param days int representing the number of days the User will be banned.
+	 * @return false if the user was already banned, true otherwise
 	 */
-	public void ban(String message, int days) {
+	public boolean ban(String message, int days) {
+		if (banned == true)
+			return false;
+		banned = true;
 		Calendar fecha = Calendar.getInstance();
 		fecha.add(Calendar.DAY_OF_YEAR, days);
 		this.unbanDate = fecha;
 		Notification n = new Notification("You have been banned!",message);
 		this.getNotified(n);
+		return true;
 	}
 	
 	public void logout() {

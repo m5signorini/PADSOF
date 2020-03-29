@@ -5,7 +5,6 @@ package entities;
 import entities.individuals.*;
 import java.util.*;
 
-import entities.individuals.User;
 import projects.Project;
 
 /**
@@ -82,6 +81,50 @@ public class Collective implements Voter{
 	public void setChildCollectives(Set<Collective> childCollectives) {
 		this.childCollectives = childCollectives;
 	}
+	
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("Name: " + this.name + ".\n Description: "+ this.description);
+		return sb.toString();
+	}
+	
+
+	/* Extended toString.
+	 * @return A String containing all the information of the User.
+	 */
+	public String printAllInfo() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("Name: " + this.name + ".\n Description: "+ this.description);
+		sb.append(".\nRepresentative's name: " + this.representative.getName());
+		sb.append("Parent's collective name: " + this.parent.getName());
+		if(!this.members.isEmpty()) {
+			sb.append("\nUsers that belong to this collective: ");
+			for(User u: this.members) {
+				sb.append(u.getName() + ", ");
+			}
+		}
+		if(!this.supportedProjects.isEmpty()) {
+			sb.append("\nHas supported projects: ");
+			for(Project p: this.supportedProjects) {
+				sb.append(p.getTitle() + ", ");
+			}
+		}
+		if(!this.createdProjects.isEmpty()) {
+			sb.append("\nHas created this projects: ");
+			for(Project p: this.createdProjects) {
+				sb.append(p.getTitle() + ", ");
+			}
+		}
+		if(!this.childCollectives.isEmpty()) {
+			sb.append("\nHas this children collectives: ");
+			for(Collective c: this.childCollectives) {
+				sb.append(c.getName() + ", ");
+			}
+		}
+		return sb.toString();
+	}
+		
+		
 	
 	/* Notifies every member of the collective.
 	 * @param notification Notification that will be sent to every member of the collective.
