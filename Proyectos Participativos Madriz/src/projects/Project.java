@@ -3,8 +3,9 @@
  */
 package projects;
 import entities.individuals.*;
-import es.uam.eps.sadp.grants.GrantRequest;
+import es.uam.eps.sadp.grants.*;
 
+import java.io.IOException;
 import java.util.*;/**
  * @author Cesar Ramirez Martinez
  *
@@ -20,7 +21,7 @@ public abstract class Project implements GrantRequest{
     private Voter creator;
     private ArrayList<Voter> voters;
     private ArrayList<User> followers;
-
+    private String followUpID;
 
     public Project(String title, String description, Double cost, Date creationDate, Voter creator) {
         this.title = title;
@@ -35,8 +36,11 @@ public abstract class Project implements GrantRequest{
         this.creator.addVotedProject(this);
         this.voters.add(creator);
     }
-
-
+    
+    public String getFolloUpID() {
+    	return followUpID;
+    }
+    
 	public double getBudget() {
 		return budget;
 	}
@@ -181,12 +185,22 @@ public abstract class Project implements GrantRequest{
     
     /* Method used to send to financiation a project that has reached the minimum number of votes established.
      * A notification reporting this decision will be sent to all the project followers.
-	 * @return The project that will be added to the public projects list by the application.
+	 * @return true if no problem was found when sending the project
 	 */
-    public Project send() {
+    public boolean send() {
     	Notification notification = new Notification("Sent", "The project " + this.title + " has been sent to validation.");
 		notifyFollowers(notification);
-    	return this;
+		CCGG gateway = CCGG.getGateway();
+		try {
+			followUpID = gateway.submitRequest(this);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		} catch (InvalidRequestException e) {
+			e.printStackTrace();
+			return false;
+		}
+    	return true;
     }
     
     /* Method used to add a vote to the project.
@@ -245,5 +259,17 @@ public abstract class Project implements GrantRequest{
     		return true;
     	}
     	return false;
+    }
+    
+    public String toString() {
+    	String s = "PROJECT\n";
+    	s += "Title: "+ title + "\n";
+    	s += "Description: " + description +"\n";
+    	s += "Cost: " + cost + "\n";
+    	s += "Creator: " + creator + "\n";
+    	s += "Number of votes: " + this.countVotes() + "\n";
+    	s += "Number of followers: " + this.followers.size() + "\n";
+    	s += "FollowUpID: " + this.followUpID;
+    	return s;
     }
 }
