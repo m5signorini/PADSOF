@@ -102,7 +102,8 @@ public class User extends Account implements Voter, Serializable {
 	 */
 	public Set<User> count() {
 		Set<User> s = new HashSet<User>();
-		s.add(this);		
+		if (this.tryUnban())
+			s.add(this);		
 		return s;
 	}
 
@@ -159,6 +160,7 @@ public class User extends Account implements Voter, Serializable {
 	public boolean exitCollective(Collective c) {
 		if(this.collectives.contains(c)) {
 			this.collectives.remove(collectives.indexOf(c));
+			c.leave(this);
 			return true;
 		}
 		return false;
