@@ -29,10 +29,54 @@ public class User extends Account implements Voter, Serializable {
 		representedCollectives = new ArrayList<Collective>();
 		followedProjects = new ArrayList<Project>();
 		votedProjects = new ArrayList<Project>();
+		this.notifications= new ArrayList<Notification>();
 	}
-	
+		
+	public ArrayList<Collective> getCollectives() {
+		return collectives;
+	}
+	public void setCollectives(ArrayList<Collective> collectives) {
+		this.collectives = collectives;
+	}
+	public ArrayList<Collective> getRepresentedCollectives() {
+		return representedCollectives;
+	}
+	public void setRepresentedCollectives(ArrayList<Collective> representedCollectives) {
+		this.representedCollectives = representedCollectives;
+	}
+	public ArrayList<Project> getFollowedProjects() {
+		return followedProjects;
+	}
+	public void setFollowedProjects(ArrayList<Project> followedProjects) {
+		this.followedProjects = followedProjects;
+	}
+	public ArrayList<Project> getVotedProjects() {
+		return votedProjects;
+	}
+	public void setVotedProjects(ArrayList<Project> votedProjects) {
+		this.votedProjects = votedProjects;
+	}
+	public ArrayList<Notification> getNotifications() {
+		return notifications;
+	}
+	public void setNotifications(ArrayList<Notification> notifications) {
+		this.notifications = notifications;
+	}
+	public Calendar getUnbanDate() {
+		return unbanDate;
+	}
+	public void setUnbanDate(Calendar unbanDate) {
+		this.unbanDate = unbanDate;
+	}
+	public void setNif(String nif) {
+		this.nif = nif;
+	}
 	public String getNif() {
 		return nif;
+	}
+	
+	public String toString() {
+		
 	}
 	
 	public User validate() {
