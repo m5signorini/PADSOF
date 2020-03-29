@@ -51,6 +51,7 @@ public class InfrastructuralTest {
 		User voterII = new User("Julan", "hello", "28034542C");
 		projectI.support(voterII);
 		assertEquals(true, projectI.getVoters().contains(voterII));
+		assertEquals(true, voterII.getVotedProjects().contains(projectI));
 	}
 
 	@Test

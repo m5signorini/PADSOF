@@ -56,6 +56,7 @@ public class SocialTest {
 		User voterII = new User("Julan", "hello", "28034542C");
 		projectS.support(voterII);
 		assertEquals(true, projectS.getVoters().contains(voterII));
+		assertEquals(true, voterII.getVotedProjects().contains(projectS));
 	}
 
 	@Test
