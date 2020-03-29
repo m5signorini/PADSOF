@@ -19,7 +19,7 @@ public class SocialTest {
 	@Before
 	public void setUp() throws Exception {
 		Date date = new Date();
-		voterS = new User("Julio", "hello", "28036512C");		
+		User voterS = new User("Julio", "hello", "28036512C");		
 		projectS = new Social("Increase pensions", "Notable improvement of retirement pensions", 500000.00 , date, voterS, ScopeType.national, "Retirees", "picture");
 		projectS.addFollower(voterS);
 	}
@@ -79,7 +79,7 @@ public class SocialTest {
 		User representative = new User("Antonio", "bye", "39036520H");
 		Collective collective = new Collective("Go retirees", "fighting for retirees rights", representative);
 		
-		collective.addMember(voterS);
+		collective.join(voterS);
 		
 		/*VoterI is the creator of the ProjectS project so it is already in the
 		 * voters list of the project. With this test we will check if the vote 

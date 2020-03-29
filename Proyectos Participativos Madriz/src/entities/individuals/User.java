@@ -278,7 +278,7 @@ public class User extends Account implements Voter{
 	 * @param p Project that will be added to the createdProjects list of the collective.
 	 * @return True if the project was not already created by the user, false otherwise.
 	 */
-	public boolean createProject(Project p) {
+	public boolean addCreatedProject(Project p) {
 		if (this.createdProjects.contains(p)) {
 			return false;
 		}

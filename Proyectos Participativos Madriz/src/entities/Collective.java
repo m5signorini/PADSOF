@@ -163,6 +163,7 @@ public class Collective implements Voter{
 			return false;
 		}
 		this.members.add(u);
+		u.enterCollective(this);
 		return true;
 	}
 	
@@ -170,7 +171,7 @@ public class Collective implements Voter{
 	 * @param p Project that will be added to the createdProjects list of the collective.
 	 * @return True if the project was not already created by the collective, false otherwise.
 	 */	
-	public boolean createProject(Project p) {
+	public boolean addCreatedProject(Project p) {
 		if (this.createdProjects.contains(p)) {
 			return false;
 		}
@@ -191,19 +192,6 @@ public class Collective implements Voter{
 			}
 		}
 		return s;
-	}
-	
-	/* Adds a memeber to members list.
-	 * @param user User that will be added to the addMember list of the collective.
-	 * @return True if the project was not already part of the collective, false otherwise.
-	 */	
-	public boolean addMember(User user) {
-		if(this.members.contains(user)) return false;
-		else {
-			this.members.add(user);
-			user.enterCollective(this);
-			return true;
-		}
 	}
 	
 	/* Adds a Project supportedProjects list.

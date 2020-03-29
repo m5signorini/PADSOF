@@ -1,6 +1,7 @@
 package tests;
 
 import java.util.*;
+
 import projects.*;
 
 import static org.junit.Assert.*;
@@ -70,7 +71,7 @@ public class InfrastructuralTest {
 		User representative = new User("Antonio", "bye", "39036520H");
 		Collective collective = new Collective("Go retirees", "fighting for retirees rights", representative);
 		
-		collective.addMember(voterI);
+		collective.join(voterI);
 		
 		/*VoterI is the creator of the ProjectI project so it is already in the
 		 * voters list of the project. With this test we will check if the vote 
