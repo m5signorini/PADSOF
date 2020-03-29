@@ -187,6 +187,17 @@ public class Collective implements Voter{
 		return s;
 	}
 	
+	/* Adds a memeber to members list.
+	 * @param user User that will be added to the addMember list of the collective.
+	 * @return True if the project was not already part of the collective, false otherwise.
+	 */	
+	public boolean addMember(User user) {
+		if(this.members.contains(user)) return false;
+		else {
+			return this.members.add(user);
+		}
+	}
+	
 	/* Adds a Project supportedProjects list.
 	 * @param p Project that will be added to the supportedProjects list of the collective.
 	 * @return True if the project was not already supported by the collective, false otherwise.
