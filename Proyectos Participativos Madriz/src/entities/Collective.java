@@ -34,6 +34,11 @@ public class Collective implements Voter{
     	this.childCollectives = new HashSet<Collective>();
     }
     
+    public Collective(String name, String description, User representative, Collective father) {
+    	this(name, description, representative);
+    	father.addChildCollective(this);
+    }
+    
 	public String getName() {
 		return name;
 	}
