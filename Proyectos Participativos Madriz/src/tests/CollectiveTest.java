@@ -24,18 +24,22 @@ public class CollectiveTest {
 	@Test
 	public void testJoin() {
 		User u = new User("Antonio", "bye", "76589395S");
-		collective.join(u);
 		
-		assertEquals(true, collective.getMembers().contains(u));
+		assertEquals(true, collective.join(u));
+		
+		/*If we try to add it again it will return false*/
+		assertEquals(false, collective.join(u));
 	}
 	
 	@Test
 	public void testLeave() {
 		User u = new User("Antonio", "bye", "76589395S");
 		collective.join(u);
-		collective.leave(u);
 		
-		assertEquals(false, collective.getMembers().contains(u));
+		assertEquals(true ,collective.leave(u));
+		
+		/*If we try to leave the collective again it will return false*/
+		assertEquals(false, collective.leave(u));
 	}
 
 	@Test
@@ -43,12 +47,11 @@ public class CollectiveTest {
 		Date date = new Date();
 		User user = new User("Julian", "hellos", "28036512C");
 		Project project = new Social("Increase pensions", "Notable improvement of retirement pensions", 500000.00 , date, user, ScopeType.national, "Retirees", "picture");
-		collective.addCreatedProject(project);
 		
-		assertEquals(true, collective.getCreatedProjects().contains(project));
+		assertEquals(true, collective.addCreatedProject(project));
 		
 		/*If we try to add it again it will return false*/
-		assertEquals(false, collective.getCreatedProjects().contains(project));
+		assertEquals(false, collective.addCreatedProject(project));
 
 	}
 
@@ -67,12 +70,11 @@ public class CollectiveTest {
 		Date date = new Date();
 		User user = new User("Julian", "hellos", "28036512C");
 		Project project = new Social("Increase pensions", "Notable improvement of retirement pensions", 500000.00 , date, user, ScopeType.national, "Retirees", "picture");
-		collective.addVotedProject(project);
 		
-		assertEquals(true, collective.getSupportedProjects().contains(project));
+		assertEquals(true, collective.addVotedProject(project));
 		
 		/*If we try to add it again it will return false*/
-		assertEquals(false, collective.getSupportedProjects().contains(project));
+		assertEquals(false, collective.addVotedProject(project));
 	}
 
 	@Test
@@ -81,17 +83,14 @@ public class CollectiveTest {
 		
 		Collective aux = new Collective("Soccer", "Soccer Lovers", user);
 		
-		/*If I try to add as a child collective a collective itself, it should return false*/
-		assertEquals(true, collective.addChildCollective(collective));
-
 		/*If I try to add as a collective child of collective aux it should return true*/
 		assertEquals(true, collective.addChildCollective(aux));
 		
 		/*But if I try to add as a collective child of aux collective now it should return false*/
-		assertEquals(true, aux.addChildCollective(collective));
+		assertEquals(false, aux.addChildCollective(collective));
 		
 		/*Collective already contains aux, so i cant add it as a child again*/
-		assertEquals(true, collective.addChildCollective(aux));
+		assertEquals(false, collective.addChildCollective(aux));
 
 	}
 
@@ -99,10 +98,10 @@ public class CollectiveTest {
 	public void testGetDescendantCollectives() {
 		User user = new User("Julian", "hellos", "28036512C");
 		
-		Collective aux = new Collective("Soccer", "Soccer Lovers", user);
+		Collective aux2 = new Collective("Basket", "Basket Lovers", user);
 		Collective aux1 = new Collective("Tennis", "Tennis Lovers", user);
 		
-		collective.addChildCollective(aux);
+		collective.addChildCollective(aux2);
 		collective.addChildCollective(aux1);
 		
 		Set<Collective> s = collective.getDescendantCollectives();
