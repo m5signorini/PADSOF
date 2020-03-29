@@ -9,7 +9,7 @@ import entities.individuals.*;
 
 
 /**
- * @author eps
+ * @author César Ramírez
  *
  */
 public class Infrastructural extends Project {
@@ -22,7 +22,7 @@ public class Infrastructural extends Project {
 		this.scheme = scheme;
 		this.location = location;
 		this.affectedDistricts = new ArrayList<District>();
-		creator.createProject(this);
+		creator.addCreatedProject(this);
 	}
 
 	public ArrayList<District> getAffectedDistricts() {

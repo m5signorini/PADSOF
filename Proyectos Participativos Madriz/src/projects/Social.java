@@ -10,7 +10,7 @@ import entities.individuals.*;
 
 
 /**
- * @author eps
+ * @author César Ramírez
  *
  */
 
@@ -24,7 +24,7 @@ public class Social extends Project {
 		this.scope = scope;
 		this.group = group;
 		this.picture = picture;
-		creator.createProject(this);
+		creator.addCreatedProject(this);
 	}
 
 	public ScopeType getScope() {
