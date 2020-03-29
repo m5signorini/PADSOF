@@ -210,11 +210,13 @@ public class Collective implements Voter{
 	@Override
 	public boolean addVotedProject(Project p) {
 		if(this.supportedProjects.contains(p)) return false;
-		else {
-			Notification notification = new Notification("New voted project.", "The colective" + this.name + "now supports" + String.valueOf(p));
-			notifyMembers(notification);
-			return this.supportedProjects.add(p);
+		// Add as voters all its children too
+		for(Collective c: this.childCollectives) {
+			p.support(c);
 		}
+		Notification notification = new Notification("New voted project.", "The collective " + this.name + "now supports " + p.getTitle());
+		notifyMembers(notification);
+		return this.supportedProjects.add(p);
 	}
 	
 	/* Adds a collective to the childCollectives list, if it is permitted.

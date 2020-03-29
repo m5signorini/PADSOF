@@ -194,7 +194,9 @@ public abstract class Project implements GrantRequest{
 	 * @return The project itself.
 	 */
     public Project support(Voter voter) {
+    	if(voters.contains(voter)) return this;
     	this.voters.add(voter);
+    	voter.addVotedProject(this);
     	return this;
     }
     
