@@ -12,7 +12,7 @@ public class Admin extends Account {
 		super(n, p);
 	}
 	
-	public boolean login(String pwd, String nif) {
+	public boolean login(String nif, String pwd) {
 		if(this.pwd.equals(pwd))
 				return true;
 		return false;
