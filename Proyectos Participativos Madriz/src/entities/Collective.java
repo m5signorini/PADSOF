@@ -33,6 +33,7 @@ public class Collective implements Voter{
         this.representative = representative;
     	this.childCollectives = new HashSet<Collective>();
     	representative.createCollective(this);
+    	representative.enterCollective(this);
     }
     
     public Collective(String name, String description, User representative, Collective father) {
@@ -147,6 +148,7 @@ public class Collective implements Voter{
 	 * @return True if the user was in the collective and left it, false otherwise.
 	 */
 	public boolean leave(User u) {
+		if(u == representative) return false;
 		if (this.members.contains(u)) {
 			members.remove(this.members.indexOf(u));
 			return true;

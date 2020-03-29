@@ -77,6 +77,15 @@ public class User extends Account implements Voter{
 	public String getNif() {
 		return nif;
 	}
+	public boolean getBanned() {
+		return banned;
+	}
+	public void setBanned(boolean b) {
+		this.banned = b;
+	}
+	public ArrayList<Project> getCreatedProjects() {
+		return this.createdProjects;
+	}
 	
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
@@ -140,6 +149,7 @@ public class User extends Account implements Voter{
 	 * @return True if the login is correct, false otherwise.
 	 */
 	public boolean login(String nif, String pwd) {
+		if (this.tryUnban() == false) return false;
 		if (nif != this.nif || pwd != this.pwd) {
 			return false;
 		} else {
@@ -173,24 +183,8 @@ public class User extends Account implements Voter{
 		fecha.add(Calendar.DAY_OF_YEAR, days);
 		this.unbanDate = fecha;
 		Notification n = new Notification("You have been banned!",message);
-		this.getNotified(n);
+		this.addNotification(n);
 		return true;
-	}
-	
-	public void logout() {
-		
-	}
-	
-	public void unfollow (Project p) {
-		
-	}
-	
-	public boolean readNotification(Notification n) {
-		return true;
-	}
-	
-	public void getNotified(Notification n) {
-		
 	}
 	
 	/* Returns a set containing the User, in order to be joined with other sets later.
@@ -246,6 +240,7 @@ public class User extends Account implements Voter{
 		if(this.collectives.contains(c))
 			return false;
 		this.collectives.add(c);
+		c.join(this);
 		return true;
 	}
 	
@@ -254,6 +249,7 @@ public class User extends Account implements Voter{
 	 * @return true in case the collective has been removed from to the list, false if it was not already there.
 	 */
 	public boolean exitCollective(Collective c) {
+		if (c.getRepresentative() == this) return false;
 		if(this.collectives.contains(c)) {
 			this.collectives.remove(collectives.indexOf(c));
 			c.leave(this);

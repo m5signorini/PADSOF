@@ -7,8 +7,7 @@ import org.junit.*;
 import entities.Collective;
 import entities.individuals.*;
 import projects.*;
-
-public class UserTest {	
+public class User2Test {	
 	private User u1;
 	private User u2;
 	private Collective c1;
@@ -122,10 +121,10 @@ public class UserTest {
 	@Test
 	public void testCreateProject() {
 		//u1 is already c1's representative as specified when created c1
-		assert(!u1.createProject(p1));
+		assert(!u1.addCreatedProject(p1));
 		//the same project can be in two representedCollectives lists in Voters. 
 		//That is why this function must only be used in the Project's constructor.
-		assert(u1.createProject(p2)); 
+		assert(u1.addCreatedProject(p2)); 
 		assert(c1.getCreatedProjects().contains(p2));
 		assert(u1.getCreatedProjects().contains(p2));		
 	}
@@ -141,6 +140,5 @@ public class UserTest {
 		assert(!u1.addNotification(n3));
 		assert(u1.removeNotification(n3));
 		assert(!u1.getNotifications().contains(n3));
-	}
-	
+	}	
 }
