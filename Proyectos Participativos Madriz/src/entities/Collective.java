@@ -217,7 +217,10 @@ public class Collective implements Voter{
 	 *  descendant, or if the project being added has this collective as descendant).
 	 */		
 	public boolean addChildCollective(Collective c) {
-		if (c.getParent() == this.getParent()) {
+		if(c == null) {
+			return false;
+		}
+		if (c.getParent() == this.getParent() && this.getParent() != null) {
 			return false;
 		}
 		if (this.getDescendantCollectives().contains(c)) {
