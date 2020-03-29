@@ -11,7 +11,7 @@ import entities.individuals.*;
 import es.uam.eps.sadp.grants.GrantRequest.ProjectKind;
 import entities.*;
 
-class InfrastructuralTest {
+public class InfrastructuralTest {
 	
 	private Infrastructural projectI;
 	private User voterI;
@@ -26,46 +26,46 @@ class InfrastructuralTest {
 	}
 	
 	@Test
-	void testReject() {
+	public void testReject() {
 		projectI.reject();
 		
 		Notification not = projectI.getFollowers().get(0).getNotifications().get(0);
-		assertEquals(not.getTitle(), "Rejection");
-		assertEquals(not.getText(), "The project " + projectI.getTitle() + " has been rejected.");
+		assertEquals("Rejection", not.getTitle());
+		assertEquals("The project " + projectI.getTitle() + " has been rejected.", not.getText());
 		projectI.getFollowers().get(0).getNotifications().remove(0);
 	}
 
 	@Test
-	void testSend() {
+	public void testSend() {
 		projectI.send();
 		
 		Notification not = projectI.getFollowers().get(0).getNotifications().get(0);
-		assertEquals(not.getTitle(), "Sent");
-		assertEquals(not.getText(), "The project " + projectI.getTitle() + " has been sent to validation.");
+		assertEquals("Sent", not.getTitle());
+		assertEquals("The project " + projectI.getTitle() + " has been sent to validation.", not.getText());
 		projectI.getFollowers().get(0).getNotifications().remove(0);
 
 	}
 
 	@Test
-	void testSupport() {
+	public void testSupport() {
 		User voterII = new User("Julan", "hello", "28034542C");
 		projectI.support(voterII);
-		assertEquals(projectI.getVoters().contains(voterII), true);
+		assertEquals(true, projectI.getVoters().contains(voterII));
 	}
 
 	@Test
-	void testFinanciate() {
+	public void testFinanciate() {
 		projectI.financiate(25000.00);
 		
 		Notification not = projectI.getFollowers().get(0).getNotifications().get(0);
-		assertEquals(not.getTitle(), "Financing");
-		assertEquals(not.getText(),  "The project " + projectI.getTitle() + " has been financiated with " + projectI.getBudget() + "euros.");
+		assertEquals("Financing", not.getTitle());
+		assertEquals("The project " + projectI.getTitle() + " has been financiated with " + projectI.getBudget() + "euros.", not.getText());
 		projectI.getFollowers().get(0).getNotifications().remove(0);
 
 	}
 
 	@Test
-	void testCountVotes() {
+	public void testCountVotes() {
 		User representative = new User("Antonio", "bye", "39036520H");
 		Collective collective = new Collective("Go retirees", "fighting for retirees rights", representative);
 		
@@ -79,17 +79,17 @@ class InfrastructuralTest {
 		collective.addVotedProject(projectI);
 		projectI.support(collective);
 		
-		assertEquals(projectI.countVotes(), 2, 0);
+		assertEquals(2, projectI.countVotes(), 0);
 		
 		Notification not = collective.getMembers().get(0).getNotifications().get(0);
-		assertEquals(not.getTitle(), "New voted project.");
-		assertEquals(not.getText(),  "The colective" + collective.getName() + "now supports" + String.valueOf(projectI));
+		assertEquals("New voted project.", not.getTitle());
+		assertEquals("The colective" + collective.getName() + "now supports" + String.valueOf(projectI), not.getText());
 		projectI.getFollowers().get(0).getNotifications().remove(0);
 		collective.getMembers().get(0).getNotifications().remove(0);
 	}
 
 	@Test
-	void testHasExpired() {
+	public void testHasExpired() {
 
 		int maxInactivity = 10;
 		
@@ -101,41 +101,41 @@ class InfrastructuralTest {
 		
 		projectI.setLastVote(date);
 		
-		assertEquals(projectI.hasExpired(maxInactivity), true);
+		assertEquals(true, projectI.hasExpired(maxInactivity));
 		
 		Notification not = projectI.getFollowers().get(0).getNotifications().get(0);
-		assertEquals(not.getTitle(), "Expired");
-		assertEquals(not.getText(),  "The project " + projectI.getTitle() + " has been expired.");
+		assertEquals("Expired", not.getTitle());
+		assertEquals("The project " + projectI.getTitle() + " has been expired.", not.getText());
 		projectI.getFollowers().get(0).getNotifications().remove(0);
 	}
 	
 	@Test
-	void testGetExtraData() {
-		assertEquals(projectI.getExtraData(),  String.valueOf(projectI.getCost()) + String.valueOf(projectI.getCreationDate()) + String.valueOf(projectI.getLastVote()) + String.valueOf(projectI.getCreator()) + projectI.getScheme() + projectI.getLocation());
+	public void testGetExtraData() {
+		assertEquals(String.valueOf(projectI.getCost()) + String.valueOf(projectI.getCreationDate()) + String.valueOf(projectI.getLastVote()) + String.valueOf(projectI.getCreator()) + projectI.getScheme() + projectI.getLocation(), projectI.getExtraData());
 	}
 	
 	@Test
-	void testGetProjectKind() {
-		assertEquals(projectI.getProjectKind(), ProjectKind.Infrastructure);
+	public void testGetProjectKind() {
+		assertEquals(ProjectKind.Infrastructure, projectI.getProjectKind());
 	}
 	
 	@Test
-	void testGetProjectTitle() {
-		assertEquals(projectI.getProjectTitle(), projectI.getTitle());
+	public void testGetProjectTitle() {
+		assertEquals(projectI.getTitle(), projectI.getProjectTitle());
 	}
 	
 	@Test
-	void testGetProjectDescription() {
-		assertEquals(projectI.getProjectDescription(), projectI.getDescription());
+	public void testGetProjectDescription() {
+		assertEquals(projectI.getDescription(), projectI.getProjectDescription());
 	}
 	
 	@Test
-	void testGetRequestedAmount() {
+	public void testGetRequestedAmount() {
 		double budget = 100000.00;
 		
 		projectI.financiate(budget);
 		projectI.getFollowers().get(0).getNotifications().remove(0);
-		assertEquals(projectI.getRequestedAmount(), projectI.getBudget(), 0);
+		assertEquals(projectI.getBudget(), projectI.getRequestedAmount(), 0);
 	}
 	
 }

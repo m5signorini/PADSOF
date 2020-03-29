@@ -11,87 +11,94 @@ import entities.individuals.*;
 import es.uam.eps.sadp.grants.GrantRequest.ProjectKind;
 import entities.*;
 
-class SocialTest {
+public class SocialTest {
 	
 	private Social projectS;
-	private Collective collectiveS;
-
+	private User voterS;
 	
 	@Before
 	public void setUp() throws Exception {
 		Date date = new Date();
-		User representative = new User("Antonio", "bye", "39036520H");
-		collectiveS = new Collective("Go retirees", "fighting for retirees rights", representative);
-		projectS = new Social("Increase pensions", "Notable improvement of retirement pensions", 500000.00 , date, collectiveS, ScopeType.national, "Retirees", "picture");
-	
-		projectS.addFollower(representative);
+		voterS = new User("Julio", "hello", "28036512C");		
+		projectS = new Social("Increase pensions", "Notable improvement of retirement pensions", 500000.00 , date, voterS, ScopeType.national, "Retirees", "picture");
+		projectS.addFollower(voterS);
 	}
 	
 	@Test
-	void testReject() {
+	public void testReject() {
+
 		projectS.reject();
 		
 		Notification not = projectS.getFollowers().get(0).getNotifications().get(0);
-		assertEquals(not.getTitle(), "Rejection");
-		assertEquals(not.getText(), "The project " + projectS.getTitle() + " has been rejected.");
+		assertEquals("Rejection", not.getTitle());
+		assertEquals("The project " + projectS.getTitle() + " has been rejected.", not.getText());
+		
+		/* We eliminate any message sent before by any other @Test*/
 		projectS.getFollowers().get(0).getNotifications().remove(0);
 	}
 
 	@Test
-	void testSend() {
+	public void testSend() {
+
 		projectS.send();
 		
 		Notification not = projectS.getFollowers().get(0).getNotifications().get(0);
-		assertEquals(not.getTitle(), "Sent");
-		assertEquals(not.getText(), "The project " + projectS.getTitle() + " has been sent to validation.");
+		assertEquals("Sent", not.getTitle());
+		assertEquals("The project " + projectS.getTitle() + " has been sent to validation.", not.getText());
+		
+		/* We eliminate any message sent before by any other @Test*/
 		projectS.getFollowers().get(0).getNotifications().remove(0);
-
 	}
 
 	@Test
-	void testSupport() {
+	public void testSupport() {
+		
 		User voterII = new User("Julan", "hello", "28034542C");
 		projectS.support(voterII);
-		assertEquals(projectS.getVoters().contains(voterII), true);
+		assertEquals(true, projectS.getVoters().contains(voterII));
 	}
 
 	@Test
-	void testFinanciate() {
+	public void testFinanciate() {
+
+
 		projectS.financiate(25000.00);
 		
 		Notification not = projectS.getFollowers().get(0).getNotifications().get(0);
-		assertEquals(not.getTitle(), "Financing");
-		assertEquals(not.getText(),  "The project " + projectS.getTitle() + " has been financiated with " + projectS.getBudget() + "euros.");
+		assertEquals("Financing", not.getTitle());
+		assertEquals("The project " + projectS.getTitle() + " has been financiated with " + projectS.getBudget() + "euros.", not.getText());
+		
+		/* We eliminate any message sent before by any other @Test*/
 		projectS.getFollowers().get(0).getNotifications().remove(0);
-
 	}
 
 	@Test
-	void testCountVotes() {
-		User voterI = new User("Julio", "hello", "28036512C");
+	public void testCountVotes() {
 		
-		projectS.support(voterI);
-		collectiveS.addMember(voterI);
-		collectiveS.addVotedProject(projectS);
-		projectS.support(collectiveS);
+		User representative = new User("Antonio", "bye", "39036520H");
+		Collective collective = new Collective("Go retirees", "fighting for retirees rights", representative);
 		
-		/*VoterI has voted thr project projects as an individual user and 
-		 * the colective he belongs to, has supported that project too.
-		 * With this test we will check if the vote of Julio(voterI) is counted twice.
-		 * The result must be 2. One vote from Julio, and one from 
-		 * Antonio, the representative of the collectiveS.
+		collective.addMember(voterS);
+		
+		/*VoterI is the creator of the ProjectS project so it is already in the
+		 * voters list of the project. With this test we will check if the vote 
+		 * of Julio(voterS) is counted twice.
 		 */
 		
-		assertEquals(projectS.countVotes(), 2, 0);
+		collective.addVotedProject(projectS);
+		projectS.support(collective);
 		
-		Notification not = collectiveS.getMembers().get(0).getNotifications().get(0);
-		assertEquals(not.getTitle(), "New voted project.");
-		assertEquals(not.getText(),  "The colective" + collectiveS.getName() + "now supports" + String.valueOf(projectS));
+		assertEquals(2, projectS.countVotes());
+		
+		Notification not = collective.getMembers().get(0).getNotifications().get(0);
+		assertEquals("New voted project.", not.getTitle());
+		assertEquals("The colective" + collective.getName() + "now supports" + String.valueOf(projectS), not.getText());
 		projectS.getFollowers().get(0).getNotifications().remove(0);
+		collective.getMembers().get(0).getNotifications().remove(0);
 	}
 
 	@Test
-	void testHasExpired() {
+	public void testHasExpired() {
 
 		int maxInactivity = 10;
 		
@@ -106,38 +113,40 @@ class SocialTest {
 		assertEquals(projectS.hasExpired(maxInactivity), true);
 		
 		Notification not = projectS.getFollowers().get(0).getNotifications().get(0);
-		assertEquals(not.getTitle(), "Expired");
-		assertEquals(not.getText(),  "The project " + projectS.getTitle() + " has been expired.");
+		assertEquals("Expired", not.getTitle());
+		assertEquals("The project " + projectS.getTitle() + " has been expired.", not.getText());
+		/* We eliminate any message sent before by any other @Test*/
 		projectS.getFollowers().get(0).getNotifications().remove(0);
+		
 	}
 	
 	@Test
-	void testGetExtraData() {
-		assertEquals(projectS.getExtraData(),  String.valueOf(projectS.getCost()) + String.valueOf(projectS.getCreationDate()) + String.valueOf(projectS.getLastVote()) + String.valueOf(projectS.getCreator()) + String.valueOf(projectS.getScope()) + projectS.getGroup() +projectS.getPicture());
+	public void testGetExtraData() {
+		assertEquals(String.valueOf(projectS.getCost()) + String.valueOf(projectS.getCreationDate()) + String.valueOf(projectS.getLastVote()) + String.valueOf(projectS.getCreator()) + String.valueOf(projectS.getScope()) + projectS.getGroup() +projectS.getPicture(), projectS.getExtraData());
 	}
 	
 	@Test
-	void testGetProjectKind() {
-		assertEquals(projectS.getProjectKind(), ProjectKind.Social);
+	public void testGetProjectKind() {
+		assertEquals(ProjectKind.Social, projectS.getProjectKind());
 	}
 	
 	@Test
-	void testGetProjectTitle() {
-		assertEquals(projectS.getProjectTitle(), projectS.getTitle());
+	public void testGetProjectTitle() {
+		assertEquals(projectS.getTitle(), projectS.getProjectTitle());
 	}
 	
 	@Test
-	void testGetProjectDescription() {
-		assertEquals(projectS.getProjectDescription(), projectS.getDescription());
+	public void testGetProjectDescription() {
+		assertEquals(projectS.getDescription(), projectS.getProjectDescription());
 	}
 	
 	@Test
-	void testGetRequestedAmount() {
+	public void testGetRequestedAmount() {
 		double budget = 100000.00;
 		
 		projectS.financiate(budget);
 		projectS.getFollowers().get(0).getNotifications().remove(0);
-		assertEquals(projectS.getRequestedAmount(), projectS.getBudget(), 0);
+		assertEquals(projectS.getBudget(), projectS.getRequestedAmount(), 0);
 	}
 	
 }
