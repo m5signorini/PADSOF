@@ -19,7 +19,10 @@ public class Application implements Serializable{
 	
 	private List<Project> sentProjects;
 	private List<Project> financiatedProjects;
+	/* Projects rejected by council */
 	private List<Project> rejectedProjects;
+	/* Projects denied by the administrator */
+	private List<Project> deniedProjects;
 	private List<Project> publicProjects;
 	private List<Project> expiredProjects;
 	private List<Project> pendingProjects;
@@ -36,8 +39,25 @@ public class Application implements Serializable{
 	
 	private static final String filepath = "data";
 	
-	public Application(Admin admin) {
+	public Application(Admin admin, int minSupports, int maxInactivity) {
 		this.admin = admin;
+		this.minSupports = minSupports;
+		this.maxInactivity = maxInactivity;
+		
+		sentProjects = new ArrayList<Project>();
+		financiatedProjects = new ArrayList<Project>();
+		rejectedProjects = new ArrayList<Project>();
+		deniedProjects = new ArrayList<Project>();
+		publicProjects = new ArrayList<Project>();
+		expiredProjects = new ArrayList<Project>();
+		pendingProjects = new ArrayList<Project>();
+		
+		registeredUsers = new ArrayList<User>();
+		unregisteredUsers = new ArrayList<User>();
+		bannedUsers = new ArrayList<User>();
+		
+		collectives = new ArrayList<Collective>();
+		this.searcher = new SearchEngine(this);
 	}
 	
 	public void writeToFile() {
@@ -94,6 +114,14 @@ public class Application implements Serializable{
 
 	public void setRejectedProjects(List<Project> rejectedProjects) {
 		this.rejectedProjects = rejectedProjects;
+	}
+	
+	public List<Project> getDeniedProjects() {
+		return deniedProjects;
+	}
+
+	public void setDeniedProjects(List<Project> deniedProjects) {
+		this.deniedProjects = deniedProjects;
 	}
 
 	public List<Project> getPublicProjects() {
@@ -176,7 +204,8 @@ public class Application implements Serializable{
 		this.loggedUser = loggedUser;
 	}
 
-	/* Method that creates an unregistered user
+	/**
+	 * Method that creates an unregistered user
 	 * @param name 	Name of the user
 	 * @param nif 	NIF of user
 	 * @param pwd	User's password
@@ -195,7 +224,8 @@ public class Application implements Serializable{
 		return true;
 	}
 	
-	/* Method for logging in
+	/**
+	 * Method for logging in
 	 * @param nif 	NIF of account
 	 * @param pwd	Account's password
 	 * @return true if login was correct, false if wrong credentials
@@ -220,7 +250,8 @@ public class Application implements Serializable{
 		return false;
 	}
 	
-	/* Method for creating a project
+	/**
+	 * Method for creating a project
 	 * @param P Created project
 	 * @return true if creation was possible, false if not
 	 */
@@ -230,7 +261,8 @@ public class Application implements Serializable{
 		return false;
 	}
 	
-	/* Method for validating projects as administrator
+	/**
+	 * Method for validating projects as administrator
 	 * @param P Validated project
 	 * @return true if validation was possible, false if not
 	 */
@@ -243,7 +275,8 @@ public class Application implements Serializable{
 		return true;
 	}
 	
-	/* Method for sending project to the council
+	/**
+	 * Method for sending project to the council
 	 * @param P Sent project
 	 * @return true if sending was possible, false if not
 	 */
@@ -257,20 +290,36 @@ public class Application implements Serializable{
 		return true;
 	}
 	
-	/* Method used by the administrator to reject pending projects
+	/**
+	 * Method used when the administrator denies a project
+	 * @param P Project to be rejected
+	 * @return true if rejection was possible, false if not
+	 */
+	public boolean denyProject(Project p) {
+		if(p == null) return false;
+		if(pendingProjects.remove(p) != true) {
+			return false;
+		}
+		deniedProjects.add(p);
+		return true;
+	}
+	
+	/**
+	 * Method used when the council to reject a project
 	 * @param P Project to be rejected
 	 * @return true if rejection was possible, false if not
 	 */
 	public boolean rejectProject(Project p) {
 		if(p == null) return false;
-		if(pendingProjects.remove(p) != true) {
+		if(sentProjects.remove(p) != true) {
 			return false;
 		}
 		rejectedProjects.add(p);
 		return true;
 	}
 		
-	/* Method used to manage time-related events like
+	/**
+	 * Method used to manage time-related events like
 	 * when a project expires or gets accepted
 	 */
 	public void updateProjects() {
@@ -283,7 +332,8 @@ public class Application implements Serializable{
 		loggedUser = null;
 	}
 	
-	/* Adds user to ban list
+	/**
+	 * Adds user to ban list
 	 * @param u User to be banned
 	 * @param 
 	 * @return true if could ban, false if not
@@ -298,7 +348,8 @@ public class Application implements Serializable{
 		return false;
 	}
 	
-	/* Removes user from ban list
+	/**
+	 * Removes user from ban list
 	 * @param u User to remove ban
 	 * @return true if could remove ban, false if not
 	 */
@@ -313,7 +364,8 @@ public class Application implements Serializable{
 	}
 	*/
 	
-	/* Validates user registration
+	/**
+	 * Validates user registration
 	 * @param u Accepted user
 	 * @return true if validation went well, false if not
 	 */
@@ -326,7 +378,8 @@ public class Application implements Serializable{
 		return true;
 	}
 	
-	/* Rejects an user registration as an administrator
+	/**
+	 * Rejects an user registration as an administrator
 	 * @param u User register that has been rejected
 	 * @return true if rejection went well, false if not
 	 */
@@ -342,7 +395,8 @@ public class Application implements Serializable{
 		return false;
 	}
 	
-	/* Method for calculating collectives affinity
+	/**
+	 * Method for calculating collectives affinity
 	 * @param c1 Collective 1
 	 * @param c2 Collective 2
 	 * @return Affinity level using a specific formula

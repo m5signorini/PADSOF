@@ -18,7 +18,8 @@ public class SearchEngine {
 		this.data = data;
 	}
 	
-	/* Method for searching collectives
+	/**
+	 * Method for searching collectives
 	 * @param s String to look for
 	 * @return Matched collectives
 	 */
@@ -34,7 +35,8 @@ public class SearchEngine {
 		return result;
 	}
 	
-	/* Method for searching a user by NIF
+	/**
+	 * Method for searching a user by NIF
 	 * @param nif String to look for
 	 * @return Matched user
 	 */
@@ -51,7 +53,8 @@ public class SearchEngine {
 		return null;
 	}
 	
-	/* Private method to search for a project by title given a pool of projects
+	/** 
+	 * Private method to search for a project by title given a pool of projects
 	 * @param title String that the project title must contain
 	 * @param pool List of projects in which to look for
 	 * @return List of found projects with partially matching titles
@@ -67,7 +70,8 @@ public class SearchEngine {
 		return result;
 	}
 	
-	/* Method for searching projects sent to council
+	/**
+	 * Method for searching projects sent to council
 	 * @param title String to look for
 	 * @return Matched projects
 	 */
@@ -75,7 +79,8 @@ public class SearchEngine {
 		return searchProjects(title, data.getSentProjects());
 	}
 	
-	/* Method for searching projects that expired
+	/**
+	 * Method for searching projects that expired
 	 * @param title String to look for
 	 * @return Matched projects
 	 */
@@ -83,7 +88,8 @@ public class SearchEngine {
 		return searchProjects(title, data.getExpiredProjects());
 	}
 	
-	/* Method for searching projects available to vote
+	/**
+	 * Method for searching projects available to vote
 	 * @param title String to look for
 	 * @return Matched projects
 	 */
@@ -91,7 +97,8 @@ public class SearchEngine {
 		return searchProjects(title, data.getPublicProjects());
 	}
 	
-	/* Method for searching projects pending administrator approval
+	/**
+	 * Method for searching projects pending administrator approval
 	 * @param title String to look for
 	 * @return Matched projects
 	 */
@@ -99,7 +106,8 @@ public class SearchEngine {
 		return searchProjects(title, data.getPendingProjects());
 	}
 	
-	/* Method for searching projects accepted by council
+	/**
+	 * Method for searching projects accepted by council
 	 * @param title String to look for
 	 * @return Matched projects
 	 */
@@ -107,7 +115,8 @@ public class SearchEngine {
 		return searchProjects(title, data.getFinanciatedProjects());
 	}
 	
-	/* Method for searching projects denied by the administrator
+	/**
+	 * Method for searching projects denied by the administrator
 	 * @param title String to look for
 	 * @return Matched projects
 	 */
@@ -115,7 +124,8 @@ public class SearchEngine {
 		return searchProjects(title, data.getDeniedProjects());
 	}
 	
-	/* Method for searching projects rejected by council
+	/**
+	 * Method for searching projects rejected by council
 	 * @param title String to look for
 	 * @return Matched projects
 	 */
@@ -123,7 +133,8 @@ public class SearchEngine {
 		return searchProjects(title, data.getRejectedProjects());
 	}
 	
-	/* Method for getting social projects in a pool
+	/**
+	 * Method for getting social projects in a pool
 	 * @param pool Pool of projects
 	 * @result List of social projects in the pool
 	 */
@@ -138,7 +149,8 @@ public class SearchEngine {
 		return result;
 	}
 	
-	/* Method for getting infrastructure projects in a pool
+	/**
+	 * Method for getting infrastructure projects in a pool
 	 * @param pool Pool of projects
 	 * @result List of infrastructure projects in the pool
 	 */
