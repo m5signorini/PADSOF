@@ -224,17 +224,13 @@ public class Application implements Serializable{
 	}
 	
 	/**
-	 * Method for logging in
+	 * Method for logging in as an user
 	 * @param nif 	NIF of account
 	 * @param pwd	Account's password
 	 * @return true if login was correct, false if wrong credentials
 	 */
 	public boolean login(String nif, String pwd) {
 		if(nif == null || pwd == null) return false;
-		// Check as administrator
-		if(admin.login(nif, pwd) == true) {
-			return true;
-		}
 		// Check as user
 		for(User u: registeredUsers) {
 			if(u.login(nif, pwd) == true) {
@@ -245,6 +241,20 @@ public class Application implements Serializable{
 				loggedUser = u;
 				return true;
 			}
+		}
+		return false;
+	}
+	
+	/**
+	 * Method for logging in as an administrator
+	 * Note that administrators only need a password
+	 * @param pwd	Admin's password
+	 * @return true if login was correct, false if wrong credentials
+	 */
+	public boolean loginAdmin(String pwd) {
+		// Check as administrator
+		if(admin.login("", pwd) == true) {
+			return true;
 		}
 		return false;
 	}

@@ -56,7 +56,7 @@ public class Demonstration {
 		}
 		System.out.print(app.toString());
 		app.logout();
-		app.login("admin", "admin");
+		app.loginAdmin("admin");
 		if(app.validateProject(sProj) == false) {
 			System.out.println("Error: Project Validation");
 		}
@@ -66,9 +66,53 @@ public class Demonstration {
 		System.out.print(app.toString());
 		app.logout();
 		
+		/* COLLECTIVE */
+		app.login("0000000A", "24051941");
+		Collective c1 = new Collective("Deporte", "Para los amantes del deporte", app.getLoggedUser());
+		Collective c2 = new Collective("Futbol", "Soccer para los ingleses", app.getLoggedUser(), c1);
+		app.createCollective(c1);
+		app.createCollective(c2);
+		app.logout();
+		
+		/* ADD MEMBER */
+		User secondUser = new User("Jesus", "0", "0000000B");
+		app.register(secondUser);
+		app.loginAdmin("admin");
+		app.validateUser(secondUser);
+		app.logout();
+		app.login("0000000B", "0");
+		if(c1.join(secondUser) == false) {
+			System.out.println("Error: Joining Collective");
+		}
+		app.logout();
+		
 		/* VOTING */
 		app.login("0000000A", "24051941");
 		sProj.support(app.getLoggedUser());
+		iProj.support(c1);
+		int voteCount = iProj.countVotes();
+		iProj.support(app.getLoggedUser());
+		if(voteCount != iProj.countVotes()) {
+			System.out.println("Error: Vote Counting");
+		}
+		
+		/* AFFINITY */
+		c2 = new Collective("Tecnologia", "Robots y demas", app.getLoggedUser());
+		sProj = new Social("Proyecto C1", "Desc", 10.0, new Date(), c1, ScopeType.international, "", "");
+		app.createProject(sProj);
+		sProj.support(c2);
+		sProj = new Social("Proyecto C2", "Desc", 10.0, new Date(), c2, ScopeType.international, "", "");
+		app.createProject(sProj);
+		sProj.support(c1);
+		System.out.println("Affinity between c1 and c2: " + app.calcAffinity(c1, c2));
+		app.logout();
+		
+		/* PROJECT LIFE */
+		app.login("0000000B", "0");
+		sProj = new Social("Proyecto C1", "Desc", 10.0, new Date(), app.getLoggedUser(), ScopeType.international, "", "");
+		app.logout();
+		app.loginAdmin("admin");
+		
 		
 		/* Registrar usuario 	*/
 		/* Entrar como admin 	*/
