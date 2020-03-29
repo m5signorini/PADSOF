@@ -12,7 +12,7 @@ import entities.individuals.Notification;
  * @author Pedro Urbina Rodriguez
  *
  */
-public class User extends Account {
+public class User extends Account implements Voter {
 	protected String nif;
 	protected ArrayList<Collective> collectives;
 	protected ArrayList<Collective> representedCollectives;
@@ -74,7 +74,7 @@ public class User extends Account {
 		Calendar fecha = Calendar.getInstance();
 		fecha.add(Calendar.DAY_OF_YEAR, days);
 		this.unbanDate = fecha;
-		Notification n = new Notification(message);
+		Notification n = new Notification("You have been banned!",message);
 		this.getNotified(n);
 	}
 	
@@ -132,5 +132,11 @@ public class User extends Account {
 
 	public void setVotedCollectives(ArrayList<Project> votedProjects) {
 		this.votedProjects = votedProjects;
+	}
+	
+	public Set<User> count() {
+		Set<User> s = new HashSet<User>();
+		s.add(this);		
+		return s;
 	}
 }
