@@ -1,3 +1,4 @@
+
 /**
  * 
  */
@@ -232,19 +233,5 @@ public class Collective implements Voter{
 		}
 		return c;
 	}
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
 
 }
