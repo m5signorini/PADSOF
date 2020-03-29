@@ -139,14 +139,6 @@ public class SocialTest {
 	public void testGetProjectDescription() {
 		assertEquals(projectS.getDescription(), projectS.getProjectDescription());
 	}
-	
-	@Test
-	public void testGetRequestedAmount() {
-		double budget = 100000.00;
-		
-		projectS.financiate(budget);
-		projectS.getFollowers().get(0).getNotifications().remove(0);
-		assertEquals(projectS.getBudget(), projectS.getRequestedAmount(), 0);
-	}
+
 	
 }

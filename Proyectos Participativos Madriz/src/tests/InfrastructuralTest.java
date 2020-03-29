@@ -131,13 +131,4 @@ public class InfrastructuralTest {
 		assertEquals(projectI.getDescription(), projectI.getProjectDescription());
 	}
 	
-	@Test
-	public void testGetRequestedAmount() {
-		double budget = 100000.00;
-		
-		projectI.financiate(budget);
-		projectI.getFollowers().get(0).getNotifications().remove(0);
-		assertEquals(projectI.getBudget(), projectI.getRequestedAmount(), 0);
-	}
-	
 }
