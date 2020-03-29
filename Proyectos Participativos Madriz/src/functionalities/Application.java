@@ -394,6 +394,12 @@ public class Application implements Serializable{
 		return false;
 	}
 	
+	public boolean createCollective(Collective c) {
+		if(c == null) return false;
+		collectives.add(c);
+		return true;
+	}
+	
 	/**
 	 * Method for calculating collectives affinity
 	 * @param c1 Collective 1

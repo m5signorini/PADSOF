@@ -154,7 +154,7 @@ public class SearchEngine {
 	 * @param pool Pool of projects
 	 * @result List of infrastructure projects in the pool
 	 */
-	public List<Project> getInfrastucturals(List<Project> pool) {
+	public List<Project> getInfrastructurals(List<Project> pool) {
 		if(pool == null) return null;
 		List<Project> result = new ArrayList<Project>();
 		for(Project p: pool) {

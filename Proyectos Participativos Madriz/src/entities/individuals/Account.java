@@ -22,7 +22,7 @@ public abstract class Account {
 	public String getPwd() { return pwd; }
 	public void setPwd(String pwd) { this.pwd = pwd; }
 	
-	boolean login(String nif, String pwd) { return true;}
+	public abstract boolean login(String nif, String pwd);
 
 }
 	
