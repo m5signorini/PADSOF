@@ -19,6 +19,7 @@ public class User extends Account implements Voter, Serializable {
 	protected ArrayList<Collective> representedCollectives;
 	protected ArrayList<Project> followedProjects;
 	protected ArrayList<Project> votedProjects;
+	protected ArrayList<Notification> notifications;
 	Calendar unbanDate;
 	
 	public User(String name, String pwd, String nif) {
@@ -96,18 +97,6 @@ public class User extends Account implements Voter, Serializable {
 		
 	}
 	
-	/* Votes for a project.
-	 * @param p Project to be voted.
-	 * @return True if the project was not already voted, false otherwise.
-	 */
-	public boolean vote(Project p) {
-		if(this.votedProjects.contains(p)) {
-			return false;
-		}
-		this.votedProjects.add(p);
-		return true;
-	}
-	
 	/* Returns a set containing the User, in order to be joined with other sets later.
 	 * @return A HashSet containing the User.
 	 */
@@ -140,6 +129,18 @@ public class User extends Account implements Voter, Serializable {
 		return true;
 	}
 	
+	/* Removes a project to the FollowedProjects list.
+	 * @param p Project to be removed.
+	 * @return true in case the project has been removed from the list, false if it was not already there.
+	 */
+	public boolean removeFollowedProject(Project p) {
+		if(this.followedProjects.contains(p)) {
+			this.followedProjects.remove(followedProjects.indexOf(p));
+			return true;
+		}
+		return false;
+	}
+	
 	/* Adds a collective to the collectives list.
 	 * @param c Collective to be added.
 	 * @return true in case the collective has been added to the list, false if it was already there.
@@ -157,7 +158,7 @@ public class User extends Account implements Voter, Serializable {
 	 */
 	public boolean exitCollective(Collective c) {
 		if(this.collectives.contains(c)) {
-			this.collectives.remove(c);
+			this.collectives.remove(collectives.indexOf(c));
 			return true;
 		}
 		return false;
@@ -173,5 +174,30 @@ public class User extends Account implements Voter, Serializable {
 			return false;
 		this.representedCollectives.add(c);
 		return true;
+	}
+	
+	
+	/* Adds a notification to the notifications list.
+	 * @param n Notification to be added.
+	 * @return true in case the notification has been added to the list, false if it was already there.
+	 */
+	public boolean addNotification(Notification n) {
+		if(this.notifications.contains(n))
+			return false;
+		this.notifications.add(n);
+		return true;
+	}
+	
+	
+	/* Removes a notification to the notifications list.
+	 * @param notification to be removed.
+	 * @return true in case the notification has been removed from the list, false if it was not already there.
+	 */
+	public boolean removeNotification(Notification n) {
+		if(this.notifications.contains(n)) {
+			notifications.remove(notifications.indexOf(n));
+			return true;
+		}
+		return false;
 	}
 }

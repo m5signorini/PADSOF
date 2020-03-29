@@ -97,8 +97,8 @@ public class Collective implements Voter{
 	 */
 	
 	private void notifyMembers(Notification notification) {
-		for(int i; i < this.members.size(); i++) {
-			this.members.get(i).notifications.add(notification);
+		for(User u: members) {
+			u.addNotification(notification);
 		}
 	}
 	
@@ -112,29 +112,26 @@ public class Collective implements Voter{
 		return this;
 	}
 	
-	@Override
-	
 	public boolean addProject(Project p) {
 		this.createdProjects.add(p);
 		return true;
 	}
 	
-	@Override
 	
-	public boolean vote(Project p) {
+	@Override	
+	public Set<User> count() {
+		Set<User> s = new HashSet<User>();
+		s.addAll(this.members);
+		return s;
+	}
+
+	@Override
+	public boolean addVotedProject(Project p) {
 		if(this.supportedProjects.contains(p)) return false;
 		else {
 			Notification notification = new Notification("New voted project.", "The colective" + this.name + "now supports" + String.valueOf(p));
 			notifyMembers(notification);
 			return this.supportedProjects.add(p);
 		}
-	}
-	
-	@Override
-	
-	public Set<User> count() {
-		Set<User> s = new HashSet<User>();
-		s.addAll(this.members);
-		return s;
 	}
 }
