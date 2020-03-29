@@ -23,14 +23,16 @@ public class User extends Account implements Voter, Serializable {
 	
 	public User(String name, String pwd, String nif) {
 		super(name, pwd);
-		nif = this.nif;
+		this.nif = nif;
 		collectives = new ArrayList<Collective>();
 		representedCollectives = new ArrayList<Collective>();
 		followedProjects = new ArrayList<Project>();
 		votedProjects = new ArrayList<Project>();
 	}
 	
-	
+	public String getNif() {
+		return nif;
+	}
 	
 	public User validate() {
 		return this;
