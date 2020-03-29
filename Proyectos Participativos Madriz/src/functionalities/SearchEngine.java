@@ -129,7 +129,7 @@ public class SearchEngine {
 	 */
 	public List<Project> getSocials(List<Project> pool) {
 		if(pool == null) return null;
-		List<Project> result = new ArrayList<Project>()
+		List<Project> result = new ArrayList<Project>();
 		for(Project p: pool) {
 			if(p.getClass() == Social.class) {
 				result.add(p);
@@ -144,7 +144,7 @@ public class SearchEngine {
 	 */
 	public List<Project> getInfrastucturals(List<Project> pool) {
 		if(pool == null) return null;
-		List<Project> result = new ArrayList<Project>()
+		List<Project> result = new ArrayList<Project>();
 		for(Project p: pool) {
 			if(p.getClass() == Infrastructural.class) {
 				result.add(p);
