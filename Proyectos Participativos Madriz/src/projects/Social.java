@@ -14,11 +14,6 @@ import entities.individuals.*;
  *
  */
 
-enum ScopeType {
-	  national,
-	  international
-	}
-
 public class Social extends Project {
 	private ScopeType scope;
 	private String group;
