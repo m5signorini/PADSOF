@@ -31,7 +31,7 @@ public abstract class Project implements GrantRequest, Serializable {
         this.cost = cost;
         this.budget = 0.0;
         this.creationDate = creationDate;
-        this.lastVote = null;
+        this.lastVote = new Date();
         this.creator = creator;
         this.voters = new ArrayList<Voter>();
         this.followers = new ArrayList<User>();
