@@ -113,7 +113,7 @@ public class Demonstration {
 		
 		/* PROJECT LIFE */
 		app.login("0000000B", "0");
-		sProj = new Social("Proyecto C1", "Desc", 10.0, new Date(), app.getLoggedUser(), ScopeType.international, "", "");
+		sProj = new Social("Proyecto C1", "Desc", 10000.0, new Date(), app.getLoggedUser(), ScopeType.international, "", "");
 		app.createProject(sProj);
 		//
 		app.logout();
@@ -138,7 +138,11 @@ public class Demonstration {
 		app.login("0000000B", "0");
 		System.out.print(app.toString()+"\n");
 		
-		app.writeToFile();
+		app.writeToFile("data");
+		
+		app = null;
+		app = Application.readFromFile("data");
+		System.out.print(app.toString()+"\n");
 		
 		/* Registrar usuario 	*/
 		/* Entrar como admin 	*/

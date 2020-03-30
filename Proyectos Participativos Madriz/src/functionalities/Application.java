@@ -38,8 +38,6 @@ public class Application implements Serializable{
 	private Admin admin;
 	private User loggedUser;
 	
-	private static final String filepath = "data";
-	
 	public Application(Admin admin, int minSupports, int maxInactivity) {
 		this.admin = admin;
 		this.minSupports = minSupports;
@@ -61,7 +59,7 @@ public class Application implements Serializable{
 		this.searcher = new SearchEngine(this);
 	}
 	
-	public void writeToFile() {
+	public void writeToFile(String filepath) {
         try {
             FileOutputStream fileOut = new FileOutputStream(filepath);
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
@@ -73,7 +71,7 @@ public class Application implements Serializable{
         }
     }
 	
-	public Application readFromFile(String path) {
+	public static Application readFromFile(String filepath) {
 		try {
             FileInputStream fileIn = new FileInputStream(filepath);
             ObjectInputStream objectIn = new ObjectInputStream(fileIn);
