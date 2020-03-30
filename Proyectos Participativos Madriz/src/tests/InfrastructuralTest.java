@@ -15,15 +15,16 @@ import entities.*;
 public class InfrastructuralTest {
 	
 	private Infrastructural projectI;
-	private User voterI;
-
+	private User userI;
+	private Collective collectiveI;
 	
 	@Before
 	public void setUp() throws Exception {
 		Date date = new Date();
-		voterI = new User("Julio", "hello", "28036512C");
-		projectI = new Infrastructural("Refugee center", "New center to embrace refugees", 1000000.00 , date, voterI, "scheme", "Madrid");
-		projectI.addFollower(voterI);
+		userI = new User("Julio", "hello", "28036512C");
+		collectiveI = new Collective("New Collective", "Interesting Collective", userI);
+		projectI = new Infrastructural("Refugee center", "New center to embrace refugees", 1000000.00 , date, userI, "scheme", "Madrid");
+		projectI.addFollower(userI);
 	}
 	
 	@Test
@@ -56,9 +57,15 @@ public class InfrastructuralTest {
 	@Test
 	public void testSupport() {
 		User voterII = new User("Julan", "hello", "28034542C");
+		User voterI = new User("Julian", "hellos", "28056542C");
+
 		projectI.support(voterII);
+		projectI.support(collectiveI);
 		assertEquals(true, projectI.getVoters().contains(voterII));
 		assertEquals(true, voterII.getVotedProjects().contains(projectI));
+		assertEquals(true, collectiveI.getSupportedProjects().contains(projectI));
+		/*But if we dont support the project with voter2...*/
+		assertEquals(false, voterI.getVotedProjects().contains(projectI));
 	}
 
 	@Test
@@ -80,11 +87,11 @@ public class InfrastructuralTest {
 		User representative = new User("Antonio", "bye", "39036520H");
 		Collective collective = new Collective("Go retirees", "fighting for retirees rights", representative);
 		
-		collective.join(voterI);
+		collective.join(userI);
 		
-		/*VoterI is the creator of the ProjectI project so it is already in the
+		/*userI is the creator of the ProjectI project so it is already in the
 		 * voters list of the project. With this test we will check if the vote 
-		 * of Julio(voterI) is counted twice.
+		 * of Julio(userI) is counted twice.
 		 */
 		
 		collective.addVotedProject(projectI);

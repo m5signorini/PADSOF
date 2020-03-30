@@ -14,14 +14,16 @@ import entities.*;
 public class SocialTest {
 	
 	private Social projectS;
-	private User voterS;
-	
+	private User userS;
+	private Collective collectiveS;
+
 	@Before
 	public void setUp() throws Exception {
 		Date date = new Date();
-		voterS = new User("Julio", "hello", "28036512C");		
-		projectS = new Social("Increase pensions", "Notable improvement of retirement pensions", 500000.00 , date, voterS, ScopeType.national, "Retirees", "picture");
-		projectS.addFollower(voterS);
+		userS = new User("Julio", "hello", "28036512C");	
+		collectiveS = new Collective("New Collective", "Interesting Collective", userS);
+		projectS = new Social("Increase pensions", "Notable improvement of retirement pensions", 500000.00 , date, userS, ScopeType.national, "Retirees", "picture");
+		projectS.addFollower(userS);
 	}
 	
 	@Test
@@ -59,10 +61,16 @@ public class SocialTest {
 	@Test
 	public void testSupport() {
 		
-		User voterII = new User("Julan", "hello", "28034542C");
-		projectS.support(voterII);
-		assertEquals(true, projectS.getVoters().contains(voterII));
-		assertEquals(true, voterII.getVotedProjects().contains(projectS));
+		User voter1 = new User("Julan", "hello", "28034542C");
+		User voter2 = new User("Julian", "hellos", "28056542C");
+		
+		projectS.support(voter1);
+		projectS.support(collectiveS);
+		assertEquals(true, projectS.getVoters().contains(voter1));
+		assertEquals(true, voter1.getVotedProjects().contains(projectS));
+		assertEquals(true, collectiveS.getSupportedProjects().contains(projectS));
+		/*But if we dont support the project with voter2...*/
+		assertEquals(false, voter2.getVotedProjects().contains(projectS));
 	}
 
 	@Test
@@ -87,11 +95,11 @@ public class SocialTest {
 		User representative = new User("Antonio", "bye", "39036520H");
 		Collective collective = new Collective("Go retirees", "fighting for retirees rights", representative);
 		
-		collective.join(voterS);
+		collective.join(userS);
 		
-		/*VoterS is the creator of the ProjectS project so it is already in the
+		/*userS is the creator of the ProjectS project so it is already in the
 		 * voters list of the project. With this test we will check if the vote 
-		 * of Julio(voterS) is counted twice.
+		 * of Julio(userS) is counted twice.
 		 */
 		
 		collective.addVotedProject(projectS);
