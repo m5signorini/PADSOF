@@ -136,6 +136,8 @@ public class Demonstration {
 		app.login("0000000B", "0");
 		System.out.print(app.toString()+"\n");
 		
+		app.writeToFile();
+		
 		/* Registrar usuario 	*/
 		/* Entrar como admin 	*/
 		/* Aceptar registro  	*/

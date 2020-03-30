@@ -5,14 +5,14 @@
 package entities;
 import entities.individuals.*;
 import java.util.*;
-
+import java.io.*;
 import projects.Project;
 
 /**
  * @author eps
  *
  */
-public class Collective implements Voter{
+public class Collective implements Voter, Serializable{
 	protected String name;
 	protected String description;
 	protected ArrayList<User> members;
@@ -98,7 +98,8 @@ public class Collective implements Voter{
 	}
 	
 
-	/* Extended toString.
+	/**
+	 * Extended toString.
 	 * @return A String containing all the information of the User.
 	 */
 	public String printAllInfo() {
@@ -135,7 +136,8 @@ public class Collective implements Voter{
 		
 		
 	
-	/* Notifies every member of the collective.
+	/**
+	 * Notifies every member of the collective.
 	 * @param notification Notification that will be sent to every member of the collective.
 	 */
 	private void notifyMembers(Notification notification) {
@@ -144,7 +146,8 @@ public class Collective implements Voter{
 		}
 	}
 	
-	/* Removes a User from the members list.
+	/**
+	 * Removes a User from the members list.
 	 * @param u User that will be removed from the collective.
 	 * @return True if the user was in the collective and left it, false otherwise.
 	 */
@@ -157,7 +160,8 @@ public class Collective implements Voter{
 		return false;
 	}
 	
-	/* Adds a User to the members list.
+	/**
+	 * Adds a User to the members list.
 	 * @param u User that will be added to the collective.
 	 * @return True if the user was not in the collective and joined it, false otherwise.
 	 */
@@ -174,7 +178,8 @@ public class Collective implements Voter{
 		return true;
 	}
 	
-	/* Adds a Project createdProjects list.
+	/**
+	 * Adds a Project createdProjects list.
 	 * @param p Project that will be added to the createdProjects list of the collective.
 	 * @return True if the project was not already created by the collective, false otherwise.
 	 */	
@@ -186,7 +191,8 @@ public class Collective implements Voter{
 		return true;
 	}
 	
-	/* Returns set containing all the users that vote when the representative of the collective votes as representative.
+	/**
+	 * Returns set containing all the users that vote when the representative of the collective votes as representative.
 	 * @return The set containing all the users.
 	 */		
 	@Override	
@@ -201,7 +207,8 @@ public class Collective implements Voter{
 		return s;
 	}
 	
-	/* Adds a Project supportedProjects list.
+	/**
+	 * Adds a Project supportedProjects list.
 	 * @param p Project that will be added to the supportedProjects list of the collective.
 	 * @return True if the project was not already supported by the collective, false otherwise.
 	 */	
@@ -217,7 +224,8 @@ public class Collective implements Voter{
 		return this.supportedProjects.add(p);
 	}
 	
-	/* Adds a collective to the childCollectives list, if it is permitted.
+	/**
+	 * Adds a collective to the childCollectives list, if it is permitted.
 	 * @param c Collective that will be added to the childCollectives list of the collective.
 	 * @return True if the collective was not already a descendant and has been added to the childCollectives list,
 	 *  false if it cannot be the child of this project (because they are both son of the same parent, if it is already a
@@ -233,7 +241,8 @@ public class Collective implements Voter{
 		return true;
 	}
 	
-	/* Returns a set containing all the descendant collectives.
+	/**
+	 * Returns a set containing all the descendant collectives.
 	 * @return HashSet containing all the descendant collectives.
 	 */		
 	public Set<Collective> getDescendantCollectives(){

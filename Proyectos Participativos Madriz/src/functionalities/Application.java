@@ -441,11 +441,12 @@ public class Application implements Serializable{
 		if(unregisteredUsers.remove(u) != true) {
 			return false;
 		}
-		return false;
+		return true;
 	}
 	
 	public boolean notify(User u, Notification n) {
-		return false;
+		if(u == null || n== null) return false;
+		return u.addNotification(n);
 	}
 	
 	public boolean createCollective(Collective c) {
@@ -468,6 +469,7 @@ public class Application implements Serializable{
 		String s = "";
 		s += "Pending projects:\n";
 		for(Project p: this.pendingProjects) {
+			/* For pretty printing the application */
 			s += p.toString().replaceAll("(?m)^", "\t") + "\n";
 		}
 		s += "Denied projects:\n";

@@ -10,7 +10,7 @@ import entities.individuals.*;
 
 
 /**
- * @author César Ramírez
+ * @author Cesar Ramirez
  *
  */
 

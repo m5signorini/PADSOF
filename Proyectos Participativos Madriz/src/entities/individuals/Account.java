@@ -3,11 +3,12 @@
  */
 package entities.individuals;
 
+import java.io.*;
 /**
  * @author Pedro Urbina Rodriguez
  *
  */
-public abstract class Account {
+public abstract class Account implements Serializable {
 	
 	protected String name;
 	protected String pwd;

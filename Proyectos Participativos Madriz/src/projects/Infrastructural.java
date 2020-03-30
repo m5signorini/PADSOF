@@ -9,7 +9,7 @@ import entities.individuals.*;
 
 
 /**
- * @author César Ramírez
+ * @author Cesar Ramirez
  *
  */
 public class Infrastructural extends Project {

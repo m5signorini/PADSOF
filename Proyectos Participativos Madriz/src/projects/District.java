@@ -3,11 +3,12 @@
  */
 package projects;
 
+import java.io.*;
 /**
  * @author eps
  *
  */
-public class District {
+public class District implements Serializable{
 	private String name;
 	
 	public District(String name){

@@ -3,7 +3,7 @@
  */
 package entities.individuals;
 
-import java.io.Serializable;
+import java.io.*;
 import java.util.*;
 import entities.Collective;
 import projects.Project;
@@ -13,7 +13,7 @@ import entities.individuals.Notification;
  * @author 
  *
  */
-public class User extends Account implements Voter{
+public class User extends Account implements Voter, Serializable{
 	protected String nif;
 	protected ArrayList<Collective> collectives;
 	protected ArrayList<Collective> representedCollectives;
@@ -93,7 +93,8 @@ public class User extends Account implements Voter{
 		return sb.toString();
 	}
 	
-	/* Extended toString.
+	/**
+	 * Extended toString.
 	 * @return A String containing all the information of the User.
 	 */
 	public String printAllInfo() {
@@ -143,7 +144,8 @@ public class User extends Account implements Voter{
 		return this;
 	}
 	
-	/* Returns true if the login is correct, false otherwise.
+	/**
+	 * Returns true if the login is correct, false otherwise.
 	 * @param nif String containing the nif of the user trying to login.
 	 * @param pwd String containing password written by the user trying to login.
 	 * @return True if the login is correct, false otherwise.
@@ -157,7 +159,8 @@ public class User extends Account implements Voter{
 		}
 	}
 	
-	/* Tries to unban a user.
+	/**
+	 * Tries to unban a user.
 	 * @return True if the the banned period has finished or the user was already unbanned, false otherwise.
 	 */
 	public boolean tryUnban() {
@@ -170,7 +173,8 @@ public class User extends Account implements Voter{
 		return true;
 	}
 	
-	/* Function that sets the end of the banning period and notifies the user with the reason of the ban.
+	/**
+	 * Function that sets the end of the banning period and notifies the user with the reason of the ban.
 	 * @param message String containing the reason why the user has been banned.
 	 * @param days int representing the number of days the User will be banned.
 	 * @return false if the user was already banned, true otherwise
@@ -187,7 +191,8 @@ public class User extends Account implements Voter{
 		return true;
 	}
 	
-	/* Returns a set containing the User, in order to be joined with other sets later.
+	/**
+	 * Returns a set containing the User, in order to be joined with other sets later.
 	 * @return A HashSet containing the User.
 	 */
 	public Set<User> count() {
@@ -198,7 +203,8 @@ public class User extends Account implements Voter{
 	}
 
 
-	/* Adds a project to the VotedProjects list.
+	/**
+	 * Adds a project to the VotedProjects list.
 	 * @param p Project to be added.
 	 * @return true in case the project has been added to the list, false if it was already there.
 	 */
@@ -209,7 +215,8 @@ public class User extends Account implements Voter{
 		return true;
 	}
 	
-	/* Adds a project to the FollowedProjects list.
+	/**
+	 * Adds a project to the FollowedProjects list.
 	 * @param p Project to be added.
 	 * @return true in case the project has been added to the list, false if it was already there.
 	 */
@@ -220,7 +227,8 @@ public class User extends Account implements Voter{
 		return true;
 	}
 	
-	/* Removes a project to the FollowedProjects list.
+	/**
+	 * Removes a project to the FollowedProjects list.
 	 * @param p Project to be removed.
 	 * @return true in case the project has been removed from the list, false if it was not already there.
 	 */
@@ -232,7 +240,8 @@ public class User extends Account implements Voter{
 		return false;
 	}
 	
-	/* Adds a collective to the collectives list.
+	/**
+	 * Adds a collective to the collectives list.
 	 * @param c Collective to be added.
 	 * @return true in case the collective has been added to the list, false if it was already there.
 	 */
@@ -250,7 +259,8 @@ public class User extends Account implements Voter{
 		return true;
 	}
 	
-	/* Removes a collective to the collectives list.
+	/**
+	 * Removes a collective to the collectives list.
 	 * @param c Collective to be removed.
 	 * @return true in case the collective has been removed from to the list, false if it was not already there.
 	 */
@@ -265,7 +275,8 @@ public class User extends Account implements Voter{
 	}
 	
 	
-	/* Adds a collective to the representedCollectives list.
+	/**
+	 * Adds a collective to the representedCollectives list.
 	 * @param c Collective to be added.
 	 * @return true in case the collective has been added to the list, false if it was already there.
 	 */
@@ -276,7 +287,8 @@ public class User extends Account implements Voter{
 		return true;
 	}
 	
-	/* Adds a Project createdProjects list.
+	/**
+	 * Adds a Project createdProjects list.
 	 * @param p Project that will be added to the createdProjects list of the collective.
 	 * @return True if the project was not already created by the user, false otherwise.
 	 */
@@ -289,7 +301,8 @@ public class User extends Account implements Voter{
 	}
 	
 	
-	/* Adds a notification to the notifications list.
+	/**
+	 * Adds a notification to the notifications list.
 	 * @param n Notification to be added.
 	 * @return true in case the notification has been added to the list, false if it was already there.
 	 */
@@ -301,7 +314,8 @@ public class User extends Account implements Voter{
 	}
 	
 	
-	/* Removes a notification to the notifications list.
+	/**
+	 * Removes a notification to the notifications list.
 	 * @param notification to be removed.
 	 * @return true in case the notification has been removed from the list, false if it was not already there.
 	 */

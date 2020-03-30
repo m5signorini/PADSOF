@@ -5,13 +5,15 @@ package projects;
 import entities.individuals.*;
 import es.uam.eps.sadp.grants.*;
 
-import java.io.IOException;
-import java.util.*;/**
+import java.io.*;
+import java.util.*;
+
+/**
  * @author Cesar Ramirez Martinez
  *
  */
 
-public abstract class Project implements GrantRequest{
+public abstract class Project implements GrantRequest, Serializable {
 	private String title;
     private String description;
     private double cost;
@@ -150,7 +152,8 @@ public abstract class Project implements GrantRequest{
 		return this.cost;
 	}
 	
-	/* Method used to add a follower to the followers list of a project.
+	/**
+	 * Method used to add a follower to the followers list of a project.
 	 * @param user User that will be added to the project followers.
 	 */
     public boolean addFollower(User user) {
@@ -159,7 +162,8 @@ public abstract class Project implements GrantRequest{
     	return true;
     }
     
-	/* Method used to send any notification to the followers of a project.
+	/**
+	 * Method used to send any notification to the followers of a project.
 	 * @param notification Notification that will be sent to all the project followers.
 	 */
     private void notifyFollowers(Notification notification ) {
@@ -168,7 +172,8 @@ public abstract class Project implements GrantRequest{
 		}
     }
     
-    /* Method used to reject a proposal project. A notification will be sent to all the 
+    /**
+     * Method used to reject a proposal project. A notification will be sent to all the 
      * project followers reporting this decision.
 	 * @return The project that will be added to the rejected projects list by the application.
 	 */
@@ -178,14 +183,16 @@ public abstract class Project implements GrantRequest{
     	return this;
     }
     
-    /* Method used to validate a proposal project.
+    /**
+     * Method used to validate a proposal project.
 	 * @return The project that will be added to the public projects list by the application.
 	 */
     public Project validate() {
     	return this;
     }
     
-    /* Method used to send to financiation a project that has reached the minimum number of votes established.
+    /**
+     * Method used to send to financiation a project that has reached the minimum number of votes established.
      * A notification reporting this decision will be sent to all the project followers.
 	 * @return true if no problem was found when sending the project
 	 */
@@ -205,7 +212,8 @@ public abstract class Project implements GrantRequest{
     	return true;
     }
     
-    /* Method used to add a vote to the project.
+    /**
+     * Method used to add a vote to the project.
 	 * @param voter Voter that will be added to the voters list of the project.
 	 * @return The project itself.
 	 */
@@ -216,7 +224,8 @@ public abstract class Project implements GrantRequest{
     	return this;
     }
     
-    /* Method used to financiate a project with a certain amount of money(euros).
+    /**
+     * Method used to financiate a project with a certain amount of money(euros).
      * A notification reporting this decision will be sent to all the project followers.
   	 * @param budget Double that indicates the amount of money that wiil be used to financiate the project.
   	 * @return The project that will be added to the financiated projects list by the application.
@@ -228,7 +237,8 @@ public abstract class Project implements GrantRequest{
 		return this;
     }
     
-    /* Method used to count all the votes that a project has.
+    /**
+     * Method used to count all the votes that a project has.
   	 * @return The number of votes that a project has got.
   	 */
     public int countVotes() {
@@ -239,7 +249,8 @@ public abstract class Project implements GrantRequest{
     	return s.size();
     }
     
-    /* Method used to check if a project has expired since the it recieved its last vote.
+    /**
+     * Method used to check if a project has expired since the it recieved its last vote.
      * We obtain todays day and we subtract the day of the last vote. If the result 
      * is greater than maxInactivity it will have expired. 
      * @param maxInactivity Integer that indicates the max number of days that a project can remain public without receiving any support.

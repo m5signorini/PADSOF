@@ -6,11 +6,12 @@ import java.util.*;
 import entities.individuals.*;
 import entities.*;
 import projects.*;
+import java.io.*;
 /**
  * @author eps
  *
  */
-public class SearchEngine {
+public class SearchEngine implements Serializable{
 	
 	private Application data;
 	
