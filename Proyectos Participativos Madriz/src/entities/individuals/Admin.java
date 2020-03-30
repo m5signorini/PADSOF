@@ -8,13 +8,12 @@ package entities.individuals;
  *
  */
 public class Admin extends Account {	
-	public Admin(String n, String p) {
-		super(n, p);
+	public Admin(String pwd) {
+		super("Administrator", pwd);
 	}
 	
 	public boolean login(String nif, String pwd) {
-		if(this.pwd.equals(pwd))
-				return true;
+		if(this.pwd.equals(pwd)) return true;
 		return false;
 	}
 	
