@@ -10,10 +10,18 @@ import projects.*;
 public class UserTest {	
 	private User u1;
 	private User u2;
+	private User u3;
+	private User u4;
+	private User u5;
+	private User u6;
 	private Collective c1;
 	private Collective c2;
 	private Collective c3;
 	private Collective c4;
+	private Collective c5;
+	private Collective c6;
+	private Collective c7;
+	private Collective c8;
 	private Project p1;
 	private Project p2;
 	
@@ -21,10 +29,18 @@ public class UserTest {
 	public void setup() throws Exception {
 		u1 = new User("Luis", "qwerty", "0123456H");
 		u2 = new User("Juan", "poiuy", "6543210H");
+		u3 = new User("Antonio", "bye", "76589395S");
+		u4 = new User("Luis", "bye", "1234567A");
+		u5 = new User("Sara", "bye", "1234567B");
+		u6 = new User("Jaime", "bye", "1234567C");
 		c1 = new Collective("Colectivo1", "poco que contar", u1);
 		c2 = new Collective("Colectivo2", "poco que contar", u2);
 		c3 = new Collective("Colectivo3", "Esto es un colectivo", u1);
 		c4 = new Collective("Colectivo4", "poco que contar", u1);
+		c5 = new Collective("Sports", "Sports lovers", u3);
+		c6 = new Collective("Fooball", "Football lovers", u4, c5);
+		c7 = new Collective("Tennis", "Tennis lovers", u5, c5);
+		c8 = new Collective("Real Madrid", "Real Madrid lovers", u6, c6);
 		Date d1 = new Date();
 		p1 = new Infrastructural("Poryecto1", "Este proyecto es el proyecto 1", 1111.11, d1, u1, "nose", "Getafe");
 		p2 = new Infrastructural("Poryecto2", "Este proyecto es el proyecto 2", 2222.22, d1, c1, "nose", "Madrid");		
@@ -51,8 +67,6 @@ public class UserTest {
 		assertEquals(u2.getBanned(), false);
 		assertEquals(u2.ban("I am angry with you", 1), true);
 		assertEquals(u2.ban("I am angry with you", 1), false);
-		assertEquals(u2.getNotifications().get(0).getTitle(), "You have been banned!");
-		assertEquals(u2.getNotifications().get(0).getText(), "I am angry with you");
 		//should be banned now and if we try to unban it returns false and we cannot login
 		assertEquals(u2.getBanned(), true);
 		assertEquals(u2.tryUnban(), false);
@@ -104,7 +118,15 @@ public class UserTest {
 		assert(u1.exitCollective(c2));
 		assert(!c2.getMembers().contains(u1));
 		//u1 cannot leave c1 because he created it
-		assert(!u1.exitCollective(c1));		
+		assert(!u1.exitCollective(c1));	
+		
+		// User can enter in a descendant collective of his collectives.
+		assert(u3.enterCollective(c8));
+		// User cannot enter in a father collective of his collectives.
+		assert(!u4.enterCollective(c5));
+		assert(u4.enterCollective(c8));
+		// Users can join to the siblings of his collectives.
+		assert(u4.enterCollective(c7));
 	}
 	
 	@Test
