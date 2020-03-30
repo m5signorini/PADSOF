@@ -2,12 +2,12 @@ package tests;
 
 import static org.junit.Assert.*;
 import java.util.*;
-
 import org.junit.*;
 import entities.Collective;
 import entities.individuals.*;
 import projects.*;
-public class User2Test {	
+
+public class UserTest {	
 	private User u1;
 	private User u2;
 	private Collective c1;
