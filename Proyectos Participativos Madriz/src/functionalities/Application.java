@@ -1,11 +1,8 @@
 package functionalities;
 /**
- * 
- */
-
-/**
- * @author
- *
+ * Application class containing all the necessary information
+ * for its correct use.
+ * @author Martin Sanchez Signorini
  */
 import java.util.*;
 import java.io.*;

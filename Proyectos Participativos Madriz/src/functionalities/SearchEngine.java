@@ -8,7 +8,8 @@ import entities.*;
 import projects.*;
 import java.io.*;
 /**
- * @author eps
+ * Search engine of an application. Used for searching methods
+ * @author Martin Sanchez Signorini
  *
  */
 public class SearchEngine implements Serializable{
