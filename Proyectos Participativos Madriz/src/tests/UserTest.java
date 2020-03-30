@@ -16,8 +16,6 @@ public class UserTest {
 	private User u6;
 	private Collective c1;
 	private Collective c2;
-	private Collective c3;
-	private Collective c4;
 	private Collective c5;
 	private Collective c6;
 	private Collective c7;
@@ -35,8 +33,6 @@ public class UserTest {
 		u6 = new User("Jaime", "bye", "1234567C");
 		c1 = new Collective("Colectivo1", "poco que contar", u1);
 		c2 = new Collective("Colectivo2", "poco que contar", u2);
-		c3 = new Collective("Colectivo3", "Esto es un colectivo", u1);
-		c4 = new Collective("Colectivo4", "poco que contar", u1);
 		c5 = new Collective("Sports", "Sports lovers", u3);
 		c6 = new Collective("Fooball", "Football lovers", u4, c5);
 		c7 = new Collective("Tennis", "Tennis lovers", u5, c5);
