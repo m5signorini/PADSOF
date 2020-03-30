@@ -312,7 +312,7 @@ public class User extends Account implements Voter, Serializable{
 	
 	/**
 	 * Removes a notification to the notifications list.
-	 * @param notification to be removed.
+	 * @param n to be removed.
 	 * @return true in case the notification has been removed from the list, false if it was not already there.
 	 */
 	public boolean removeNotification(Notification n) {

@@ -157,6 +157,7 @@ public abstract class Project implements GrantRequest, Serializable {
 	/**
 	 * Method used to add a follower to the followers list of a project.
 	 * @param user User that will be added to the project followers.
+	 * @return true if adding follower was a success
 	 */
     public boolean addFollower(User user) {
     	if(this.followers.contains(user)) return false;

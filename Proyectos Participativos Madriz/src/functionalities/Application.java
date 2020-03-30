@@ -217,9 +217,7 @@ public class Application implements Serializable{
 
 	/**
 	 * Method that creates an unregistered user
-	 * @param name 	Name of the user
-	 * @param nif 	NIF of user
-	 * @param pwd	User's password
+	 * @param u User registered
 	 * @return true if creation went well, false if not
 	 */
 	public boolean register(User u) {
@@ -274,7 +272,7 @@ public class Application implements Serializable{
 	
 	/**
 	 * Method for creating a project
-	 * @param P Created project
+	 * @param p Created project
 	 * @return true if creation was possible, false if not
 	 */
 	public boolean createProject(Project p) {
@@ -285,7 +283,7 @@ public class Application implements Serializable{
 	
 	/**
 	 * Method for validating projects as administrator
-	 * @param P Validated project
+	 * @param p Validated project
 	 * @return true if validation was possible, false if not
 	 */
 	public boolean validateProject(Project p) {
@@ -300,7 +298,7 @@ public class Application implements Serializable{
 	
 	/**
 	 * Method for sending project to the council
-	 * @param P Sent project
+	 * @param p Sent project
 	 * @return true if sending was possible, false if not
 	 */
 	public boolean sendProject(Project p) {
@@ -318,7 +316,7 @@ public class Application implements Serializable{
 	
 	/**
 	 * Method used when the administrator denies a project
-	 * @param P Project to be rejected
+	 * @param p Project to be rejected
 	 * @return true if rejection was possible, false if not
 	 */
 	public boolean denyProject(Project p) {
@@ -332,7 +330,7 @@ public class Application implements Serializable{
 	
 	/**
 	 * Method used for manual project rejection
-	 * @param P Project to be rejected
+	 * @param p Project to be rejected
 	 * @return true if rejection was possible, false if not
 	 */
 	public boolean rejectProject(Project p) {
@@ -401,7 +399,8 @@ public class Application implements Serializable{
 	/**
 	 * Adds user to ban list
 	 * @param u User to be banned
-	 * @param 
+	 * @param message Message containing the ban reason
+	 * @param days days that the ban will last
 	 * @return true if could ban, false if not
 	 */
 	public boolean ban(User u, String message, int days) {
