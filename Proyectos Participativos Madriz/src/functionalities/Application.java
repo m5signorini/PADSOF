@@ -12,6 +12,7 @@ import java.io.*;
 import entities.individuals.*;
 import entities.*;
 import projects.*;
+import es.uam.eps.sadp.grants.*;
 
 public class Application implements Serializable{
 	private int minSupports;
@@ -67,7 +68,6 @@ public class Application implements Serializable{
             objectOut.writeObject(this);
             objectOut.close();
             System.out.println("The Object  was succesfully written to a file");
- 
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -239,6 +239,7 @@ public class Application implements Serializable{
 					return false;
 				}
 				loggedUser = u;
+				this.updateProjects();
 				return true;
 			}
 		}
@@ -267,7 +268,7 @@ public class Application implements Serializable{
 	public boolean createProject(Project p) {
 		if(p == null) return false;
 		pendingProjects.add(p);
-		return false;
+		return true;
 	}
 	
 	/**
@@ -281,6 +282,8 @@ public class Application implements Serializable{
 			return false;
 		}
 		publicProjects.add(p);
+		// Update last vote to match validation date
+		p.setLastVote(new Date());
 		return true;
 	}
 	
@@ -290,11 +293,14 @@ public class Application implements Serializable{
 	 * @return true if sending was possible, false if not
 	 */
 	public boolean sendProject(Project p) {
-		if(p == null) return false; 
+		if(p == null || p.countVotes() < minSupports) return false; 
 		if(publicProjects.remove(p) != true) {
 			return false;
 		}
-		p.send();
+		if(p.send() == false) {
+			publicProjects.add(p);
+			return false;
+		}
 		sentProjects.add(p);
 		return true;
 	}
@@ -332,7 +338,45 @@ public class Application implements Serializable{
 	 * when a project expires or gets accepted
 	 */
 	public void updateProjects() {
-		// Checking 
+		// Checking sent
+		CCGG gateway = CCGG.getGateway();
+		Double budget;
+		Iterator<Project> it = sentProjects.iterator();
+		while(it.hasNext()) {
+			Project p = it.next();
+			try {
+				budget = gateway.getAmountGranted(p.getFollowUpID());
+				if(budget == null) {
+					continue;
+				}
+				else if(budget == 0) {
+					it.remove();
+					rejectedProjects.add(p);
+				}
+				else if(budget > 0) {
+					p.setBudget(budget);
+					it.remove();
+					financiatedProjects.add(p);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (InvalidIDException e) {
+				// Invalid ID, treat project as rejected
+				it.remove();
+				rejectedProjects.add(p);
+				e.printStackTrace();
+			}
+		}
+		// Checking expired projects
+		it = publicProjects.iterator();
+		while(it.hasNext()) {
+			Project p = it.next();
+			if(p.hasExpired(maxInactivity) == true) {
+				it.remove();
+				expiredProjects.add(p);
+			}
+		}
+		
 	}
 	
 	/* Method for logging out of the current session
@@ -424,31 +468,31 @@ public class Application implements Serializable{
 		String s = "";
 		s += "Pending projects:\n";
 		for(Project p: this.pendingProjects) {
-			s += " " + p;
+			s += p.toString().replaceAll("(?m)^", "\t") + "\n";
 		}
 		s += "Denied projects:\n";
 		for(Project p: this.deniedProjects) {
-			s += " " + p;
+			s += p.toString().replaceAll("(?m)^", "\t") + "\n";
 		}
 		s += "Sent projects:\n";
 		for(Project p: this.sentProjects) {
-			s += " " + p;
+			s += p.toString().replaceAll("(?m)^", "\t") + "\n";
 		}
 		s += "Rejected projects:\n";
 		for(Project p: this.rejectedProjects) {
-			s += " " + p;
+			s += p.toString().replaceAll("(?m)^", "\t") + "\n";
 		}
 		s += "Financiated projects:\n";
 		for(Project p: this.financiatedProjects) {
-			s += " " + p;
+			s += p.toString().replaceAll("(?m)^", "\t") + "\n";
 		}
 		s += "Public projects:\n";
 		for(Project p: this.publicProjects) {
-			s += " " + p;
+			s += p.toString().replaceAll("(?m)^", "\t") + "\n";
 		}
 		s += "Expired projects:\n";
 		for(Project p: this.expiredProjects) {
-			s += " " + p;
+			s += p.toString().replaceAll("(?m)^", "\t") + "\n";
 		}
 		return s;
 	}
@@ -457,15 +501,15 @@ public class Application implements Serializable{
 		String s = "";
 		s += "Unregistered users:\n";
 		for(User u: this.unregisteredUsers) {
-			s += " " + u;
+			s += u.toString().replaceAll("(?m)^", "\t") + "\n";
 		}
 		s += "Registered users:\n";
 		for(User u: this.registeredUsers) {
-			s += " " + u;
+			s += u.toString().replaceAll("(?m)^", "\t") + "\n";
 		}
 		s += "Banned Users:\n";
 		for(User u: this.bannedUsers) {
-			s += " " + u;
+			s += u.toString().replaceAll("(?m)^", "\t") + "\n";
 		}
 		return s;
 	}
@@ -474,22 +518,22 @@ public class Application implements Serializable{
 		String s = "";
 		s += "Collectives:\n";
 		for(Collective c: this.collectives) {
-			s += " " + c;
+			s += c.toString().replaceAll("(?m)^", "\t") + "\n";
 		}
 		return s;
 	}
 	
 	private String extraDataToString() {
 		String s = "";
-		s += "Admin: " + admin;
-		s += "Logged user: " + loggedUser;
+		s += "Admin: " + admin + "\n";
+		s += "Logged user: " + loggedUser + "\n";
 		s += "Minimum Supports: " + minSupports + "\n";
 		s += "Maximum Inactivity: " + maxInactivity + "\n";
 		return s;
 	}
 	
 	public String toString() {
-		String s = "";
+		String s = "APPLICATION\n";
 		s += projectsToString();
 		s += collectivesToString();
 		s += usersToString();

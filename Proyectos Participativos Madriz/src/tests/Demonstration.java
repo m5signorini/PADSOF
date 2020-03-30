@@ -8,7 +8,9 @@ import java.io.*;
 import functionalities.*;
 import entities.*;
 import entities.individuals.*;
+import es.uam.eps.sadp.grants.CCGG;
 import projects.*;
+import fechasimulada.*;
 /**
  * @author mssig
  *
@@ -22,16 +24,16 @@ public class Demonstration {
 		/* First we create a new Application with a custom made administrator
 		 * and initial values (minSupports and maxInactivity can be later changed)
 		 */
-		Admin admin = new Admin("admin","admin");
+		Admin admin = new Admin("admin");
 		Application app = new Application(admin, 2, 2);
-		User firstUser = new User("Bob Dylan", "0000000A", "24051941");
+		User firstUser = new User("Bob Dylan", "24051941", "0000000A");
 		
 		/* Register first user */
 		if(app.register(firstUser) == false) {
 			System.out.println("Error: Registration");
 		}
 		/* Login as administrator */
-		if(app.login("admin", "admin") == false) {
+		if(app.loginAdmin("admin") == false) {
 			System.out.println("Error: Admin login");
 		}
 		/* Accept registration */
@@ -54,7 +56,7 @@ public class Demonstration {
 		if(app.createProject(iProj) == false) {
 			System.out.println("Error: Project Creation");
 		}
-		System.out.print(app.toString());
+		System.out.print(app.toString()+"\n");
 		app.logout();
 		app.loginAdmin("admin");
 		if(app.validateProject(sProj) == false) {
@@ -63,7 +65,7 @@ public class Demonstration {
 		if(app.validateProject(iProj) == false) {
 			System.out.println("Error: Project Validation");
 		}
-		System.out.print(app.toString());
+		System.out.print(app.toString() + "\n");
 		app.logout();
 		
 		/* COLLECTIVE */
@@ -110,9 +112,29 @@ public class Demonstration {
 		/* PROJECT LIFE */
 		app.login("0000000B", "0");
 		sProj = new Social("Proyecto C1", "Desc", 10.0, new Date(), app.getLoggedUser(), ScopeType.international, "", "");
+		app.createProject(sProj);
+		//
 		app.logout();
 		app.loginAdmin("admin");
-		
+		app.setMinSupports(1);
+		app.validateProject(sProj);
+		app.logout();
+		System.out.print(app.toString()+"\n");
+		//
+		app.login("0000000B", "0");
+		if(app.sendProject(sProj) == false) {
+			System.out.println("Error: Sending Project");
+		}
+		app.logout();
+		System.out.print(app.toString()+"\n");
+		//
+		CCGG gateway = CCGG.getGateway();
+		FechaSimulada.restablecerHoyReal();
+		FechaSimulada.avanzar(10);
+		gateway.setDate(FechaSimulada.getHoy());
+		//
+		app.login("0000000B", "0");
+		System.out.print(app.toString()+"\n");
 		
 		/* Registrar usuario 	*/
 		/* Entrar como admin 	*/

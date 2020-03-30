@@ -20,7 +20,7 @@ public class SearchEngineTest {
 
 	@Before
 	public void setUp() throws Exception {
-		app = new Application(new Admin("admin", "admin"), 10, 10);
+		app = new Application(new Admin("admin"), 10, 10);
 		User user = new User("Tester", "123456", "123456");
 		
 		List<Project> projectPool = new ArrayList<Project>();
