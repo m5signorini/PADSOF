@@ -237,8 +237,14 @@ public class User extends Account implements Voter{
 	 * @return true in case the collective has been added to the list, false if it was already there.
 	 */
 	public boolean enterCollective(Collective c) {
-		if(this.collectives.contains(c))
-			return false;
+		Set<Collective> s = new HashSet<Collective>();
+		s = c.getDescendantCollectives();
+		// If the user is in a child collective, it cannot join this collective.
+		for(Collective aux: this.getCollectives()) {
+			if(s.contains(aux)) return false;
+		}
+		
+		if(this.collectives.contains(c)) return false;
 		this.collectives.add(c);
 		c.join(this);
 		return true;

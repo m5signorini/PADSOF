@@ -161,9 +161,13 @@ public class Collective implements Voter{
 	 * @return True if the user was not in the collective and joined it, false otherwise.
 	 */
 	public boolean join(User u) {
-		if (this.members.contains(u)) {
-			return false;
-		}
+		Set<Collective> s = new HashSet<Collective>();
+		s = this.getDescendantCollectives();
+		// If the user is in a child collective, it cannot join this collective.
+		for(Collective c: u.getCollectives()) {
+			if(s.contains(c)) return false;
+		}		
+		if (this.members.contains(u)) return false;
 		this.members.add(u);
 		u.enterCollective(this);
 		return true;
@@ -219,18 +223,10 @@ public class Collective implements Voter{
 	 *  descendant, or if the project being added has this collective as descendant).
 	 */		
 	public boolean addChildCollective(Collective c) {
-		if(c == null) {
-			return false;
-		}
-		if (c.getParent() == this.getParent() && this.getParent() != null) {
-			return false;
-		}
-		if (this.getDescendantCollectives().contains(c)) {
-			return false;
-		}
-		if (c.getDescendantCollectives().contains(this)) {
-			return false;
-		}
+		if(c == null) return false;
+		if (c.getParent() == this.getParent() && this.getParent() != null) return false;
+		if (this.getDescendantCollectives().contains(c)) return false;
+		if (c.getDescendantCollectives().contains(this)) return false;
 		c.setParent(this);
 		this.childCollectives.add(c);		
 		return true;

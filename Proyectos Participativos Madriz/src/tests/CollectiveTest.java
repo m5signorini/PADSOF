@@ -11,14 +11,30 @@ import org.junit.Test;
 import entities.individuals.*;
 import entities.*;
 
-public class CollectiveTest {
-	
+public class CollectiveTest {	
 	private Collective collective;
+	private User representative;
+	private User u1;
+	private User u2;
+	private User u3;
+	private User u4;
+	private Collective c1;
+	private Collective c2;
+	private Collective c3;
+	private Collective c4;
 	
 	@Before
 	public void setUp() throws Exception {
-		User representative = new User("Julio", "hello", "28036512C");
+		representative = new User("Julio", "hello", "28036512C");
 		collective = new Collective("Sports", "Sports lovers", representative);
+		u1 = new User("Antonio", "bye", "76589395S");
+		u2 = new User("Luis", "bye", "1234567A");
+		u3 = new User("Sara", "bye", "1234567B");
+		u4 = new User("Juan", "bye", "1234567C");
+		c1 = new Collective("Sports", "Sports lovers", u1);
+		c2 = new Collective("Fooball", "Football lovers", u2, c1);
+		c3 = new Collective("Tennis", "Tennis lovers", u3, c1);
+		c4 = new Collective("Real Madrid", "Real Madrid lovers", u4, c2);
 	}
 
 	@Test
@@ -40,6 +56,11 @@ public class CollectiveTest {
 		
 		/*If we try to leave the collective again it will return false*/
 		assertEquals(false, collective.leave(u));
+		
+		/* u4 cannot join c1 because he created c4 (and therefore he is inside it) which is a descendant of c1*/
+		assert(!c1.join(u4));
+		/* Users inside  */
+		assert(c4.join(u3));
 	}
 
 	@Test
@@ -57,11 +78,9 @@ public class CollectiveTest {
 
 	@Test
 	public void testCount() {
-		User u = new User("Antonio", "bye", "76589395S");
-		collective.join(u);
-		Set<User> s = collective.count();
-		
-		assertEquals(collective.getMembers().size(), s.size());
+		/* Repeated members do not count twice, members of descendant collectives are correctly counted. */
+		assert(c4.join(u3));		
+		assertEquals(c1.count().size(), 4);
 	}
 
 
