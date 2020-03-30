@@ -188,6 +188,7 @@ public abstract class Project implements GrantRequest, Serializable {
 	 * @return The project that will be added to the public projects list by the application.
 	 */
     public Project validate() {
+    	this.lastVote = new Date();
     	return this;
     }
     
