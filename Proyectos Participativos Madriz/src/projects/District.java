@@ -5,7 +5,7 @@ import java.io.*;
  * This class represents the different places where
  * an infrastructural project will be done.
  * 
- * @author César Ramírez
+ * @author Cesar Ramirez
  *
  */
 public class District implements Serializable{
