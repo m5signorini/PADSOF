@@ -4,8 +4,10 @@
 package entities.individuals;
 
 /**
- * @author 
- *
+ * Class representing the Administrator's account. With a already defined name, he can 
+ * mainly login as an administrator of the application.
+ * @author Pedro Urbina Rodriguez
+ * 
  */
 public class Admin extends Account {	
 	public Admin(String pwd) {
