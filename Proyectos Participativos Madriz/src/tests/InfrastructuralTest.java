@@ -23,7 +23,12 @@ public class InfrastructuralTest {
 		Date date = new Date();
 		userI = new User("Julio", "hello", "28036512C");
 		collectiveI = new Collective("New Collective", "Interesting Collective", userI);
-		projectI = new Infrastructural("Refugee center", "New center to embrace refugees", 1000000.00 , date, userI, "scheme", "Madrid");
+		District district = new District("Tres Cantos");
+		District district1 = new District("Alcobendas");
+		ArrayList<District> affectedDistricts = new ArrayList<District>();
+		affectedDistricts.add(district);
+		affectedDistricts.add(district1);
+		projectI = new Infrastructural("Refugee center", "New center to embrace refugees", 1000000.00 , date, userI, affectedDistricts, "scheme", "Madrid");
 		projectI.addFollower(userI);
 	}
 	
