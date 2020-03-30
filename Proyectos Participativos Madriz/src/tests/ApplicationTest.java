@@ -191,7 +191,13 @@ public class ApplicationTest {
 
 	@Test
 	public void testCalcAffinity() {
-		fail("Not yet implemented");
+		Collective c1 = new Collective("C1", "desc", creator);
+		Collective c2 = new Collective("C2", "desc", creator);
+		Project p1 = new Social("Test", "Desc", 10.0, new Date(), c1, ScopeType.international, "","");
+		Project p2 = new Social("Test", "Desc", 10.0, new Date(), c2, ScopeType.international, "","");
+		p1.support(c2);
+		p2.support(c1);
+		assertTrue(app.calcAffinity(c1, c2) == 1.0);
 	}
 
 }
