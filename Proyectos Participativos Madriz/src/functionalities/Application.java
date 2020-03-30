@@ -250,7 +250,7 @@ public class Application implements Serializable{
 		for(User u: registeredUsers) {
 			if(u.login(nif, pwd) == true) {
 				// Ban check
-				if(bannedUsers.contains(u) && !u.tryUnban()) {
+				if(bannedUsers.contains(u) && u.tryUnban() == false) {
 					return false;
 				}
 				loggedUser = u;
@@ -270,7 +270,7 @@ public class Application implements Serializable{
 	 */
 	public boolean loginAdmin(String pwd) {
 		// Check as administrator
-		if(admin.login("", pwd) == true) {
+		if(admin.login("Administrator", pwd) == true) {
 			return true;
 		}
 		return false;
@@ -298,8 +298,7 @@ public class Application implements Serializable{
 			return false;
 		}
 		publicProjects.add(p);
-		// Update last vote to match validation date
-		p.setLastVote(new Date());
+		p.validate();
 		return true;
 	}
 	
@@ -346,6 +345,7 @@ public class Application implements Serializable{
 			return false;
 		}
 		rejectedProjects.add(p);
+		p.reject();
 		return true;
 	}
 		
@@ -415,7 +415,7 @@ public class Application implements Serializable{
 		}
 		bannedUsers.add(u);
 		u.ban(message, days);
-		return false;
+		return true;
 	}
 	
 	/**
@@ -442,6 +442,7 @@ public class Application implements Serializable{
 			return false;
 		}
 		registeredUsers.add(u);
+		u.validate();
 		return true;
 	}
 	
@@ -455,6 +456,7 @@ public class Application implements Serializable{
 		if(unregisteredUsers.remove(u) != true) {
 			return false;
 		}
+		u.reject();
 		return true;
 	}
 	
@@ -464,7 +466,7 @@ public class Application implements Serializable{
 	 * @param n Sent notification
 	 * @return true if notification was able to be sent
 	 */
-	public boolean notify(User u, Notification n) {
+	public boolean notifyUser(User u, Notification n) {
 		if(u == null || n== null) return false;
 		return u.addNotification(n);
 	}
