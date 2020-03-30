@@ -1,7 +1,5 @@
 package functionalities;
-/**
- * 
- */
+
 import java.util.*;
 import entities.individuals.*;
 import entities.*;

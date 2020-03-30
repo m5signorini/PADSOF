@@ -1,9 +1,5 @@
 package functionalities;
-/**
- * Application class containing all the necessary information
- * for its correct use.
- * @author Martin Sanchez Signorini
- */
+
 import java.util.*;
 import java.io.*;
 import entities.individuals.*;
@@ -11,6 +7,11 @@ import entities.*;
 import projects.*;
 import es.uam.eps.sadp.grants.*;
 
+/**
+ * Application class containing all the necessary information
+ * for its correct use.
+ * @author Martin Sanchez Signorini
+ */
 public class Application implements Serializable{
 	private int minSupports;
 	private int maxInactivity;
