@@ -33,8 +33,11 @@ public class SocialTest {
 		assertEquals("Rejection", not.getTitle());
 		assertEquals("The project " + projectS.getTitle() + " has been rejected.", not.getText());
 		
-		/* We eliminate any message sent before by any other @Test*/
-		projectS.getFollowers().get(0).getNotifications().remove(0);
+		/* We eliminate the notification sent in this test to avoid any +
+		 * error in the next ones*/
+		for(int i = 0; i < projectS.getFollowers().size(); i++) {
+			projectS.getFollowers().get(i).removeNotification(not);
+		}
 	}
 
 	@Test
@@ -46,8 +49,11 @@ public class SocialTest {
 		assertEquals("Sent", not.getTitle());
 		assertEquals("The project " + projectS.getTitle() + " has been sent to validation.", not.getText());
 		
-		/* We eliminate any message sent before by any other @Test*/
-		projectS.getFollowers().get(0).getNotifications().remove(0);
+		/* We eliminate the notification sent in this test to avoid any +
+		 * error in the next ones*/
+		for(int i = 0; i < projectS.getFollowers().size(); i++) {
+			projectS.getFollowers().get(i).removeNotification(not);
+		}
 	}
 
 	@Test
@@ -69,8 +75,11 @@ public class SocialTest {
 		assertEquals("Financing", not.getTitle());
 		assertEquals("The project " + projectS.getTitle() + " has been financiated with " + projectS.getBudget() + "euros.", not.getText());
 		
-		/* We eliminate any message sent before by any other @Test*/
-		projectS.getFollowers().get(0).getNotifications().remove(0);
+		/* We eliminate the notification sent in this test to avoid any +
+		 * error in the next ones*/
+		for(int i = 0; i < projectS.getFollowers().size(); i++) {
+			projectS.getFollowers().get(i).removeNotification(not);
+		}
 	}
 
 	@Test
@@ -93,14 +102,18 @@ public class SocialTest {
 		Notification not = collective.getMembers().get(0).getNotifications().get(0);
 		assertEquals("New voted project.", not.getTitle());
 		assertEquals("The collective " + collective.getName() + " now supports " + projectS.getTitle(), not.getText());
-		projectS.getFollowers().get(0).getNotifications().remove(0);
-		collective.getMembers().get(0).getNotifications().remove(0);
+		/* We eliminate the notification sent in this test to avoid any +
+		 * error in the next ones*/
+		for(int i = 0; i < projectS.getFollowers().size(); i++) {
+			projectS.getFollowers().get(i).removeNotification(not);
+		}
 	}
 
 	@Test
 	public void testHasExpired() {
 
 		int maxInactivity = 10;
+		int maxInactivityAux = 100000;
 		
 		Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.YEAR, 2020);
@@ -115,8 +128,20 @@ public class SocialTest {
 		Notification not = projectS.getFollowers().get(0).getNotifications().get(0);
 		assertEquals("Expired", not.getTitle());
 		assertEquals("The project " + projectS.getTitle() + " has been expired.", not.getText());
-		/* We eliminate any message sent before by any other @Test*/
-		projectS.getFollowers().get(0).getNotifications().remove(0);
+		
+		/*If we set maxInactivityAux as the last vote date, it wont
+		 * expire until 100000 days from today;
+		 */
+		projectS.setLastVote(date);
+		
+		assertEquals(projectS.hasExpired(maxInactivityAux), false);
+		
+		/* We eliminate the notification sent in this test to avoid any +
+		 * error in the next ones*/
+		for(int i = 0; i < projectS.getFollowers().size(); i++) {
+			projectS.getFollowers().get(i).removeNotification(not);
+		}
+
 		
 	}
 	

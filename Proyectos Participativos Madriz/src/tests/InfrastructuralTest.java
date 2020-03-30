@@ -33,8 +33,11 @@ public class InfrastructuralTest {
 		Notification not = projectI.getFollowers().get(0).getNotifications().get(0);
 		assertEquals("Rejection", not.getTitle());
 		assertEquals("The project " + projectI.getTitle() + " has been rejected.", not.getText());
-		projectI.getFollowers().get(0).getNotifications().remove(0);
-	}
+		/* We eliminate the notification sent in this test to avoid any +
+		 * error in the next ones*/
+		for(int i = 0; i < projectI.getFollowers().size(); i++) {
+			projectI.getFollowers().get(i).removeNotification(not);
+		}	}
 
 	@Test
 	public void testSend() {
@@ -43,8 +46,11 @@ public class InfrastructuralTest {
 		Notification not = projectI.getFollowers().get(0).getNotifications().get(0);
 		assertEquals("Sent", not.getTitle());
 		assertEquals("The project " + projectI.getTitle() + " has been sent to validation.", not.getText());
-		projectI.getFollowers().get(0).getNotifications().remove(0);
-
+		/* We eliminate the notification sent in this test to avoid any +
+		 * error in the next ones*/
+		for(int i = 0; i < projectI.getFollowers().size(); i++) {
+			projectI.getFollowers().get(i).removeNotification(not);
+		}
 	}
 
 	@Test
@@ -62,8 +68,11 @@ public class InfrastructuralTest {
 		Notification not = projectI.getFollowers().get(0).getNotifications().get(0);
 		assertEquals("Financing", not.getTitle());
 		assertEquals("The project " + projectI.getTitle() + " has been financiated with " + projectI.getBudget() + "euros.", not.getText());
-		projectI.getFollowers().get(0).getNotifications().remove(0);
-
+		/* We eliminate the notification sent in this test to avoid any +
+		 * error in the next ones*/
+		for(int i = 0; i < projectI.getFollowers().size(); i++) {
+			projectI.getFollowers().get(i).removeNotification(not);
+		}
 	}
 
 	@Test
@@ -86,15 +95,19 @@ public class InfrastructuralTest {
 		Notification not = collective.getMembers().get(0).getNotifications().get(0);
 		assertEquals("New voted project.", not.getTitle());
 		assertEquals("The collective " + collective.getName() + " now supports " +projectI.getTitle(), not.getText());
-		projectI.getFollowers().get(0).getNotifications().remove(0);
-		collective.getMembers().get(0).getNotifications().remove(0);
+		/* We eliminate the notification sent in this test to avoid any +
+		 * error in the next ones*/
+		for(int i = 0; i < projectI.getFollowers().size(); i++) {
+			projectI.getFollowers().get(i).removeNotification(not);
+		}
 	}
 
 	@Test
 	public void testHasExpired() {
 
 		int maxInactivity = 10;
-		
+		int maxInactivityAux = 100000;
+
 		Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.YEAR, 2020);
 		cal.set(Calendar.MONTH, Calendar.JANUARY);
@@ -108,8 +121,17 @@ public class InfrastructuralTest {
 		Notification not = projectI.getFollowers().get(0).getNotifications().get(0);
 		assertEquals("Expired", not.getTitle());
 		assertEquals("The project " + projectI.getTitle() + " has been expired.", not.getText());
-		projectI.getFollowers().get(0).getNotifications().remove(0);
-	}
+		/*If we set maxInactivityAux as the last vote date, it wont
+		 * expire until 100000 days from today;
+		 */
+		projectI.setLastVote(date);
+		
+		assertEquals(projectI.hasExpired(maxInactivityAux), false);
+		/* We eliminate the notification sent in this test to avoid any +
+		 * error in the next ones*/
+		for(int i = 0; i < projectI.getFollowers().size(); i++) {
+			projectI.getFollowers().get(i).removeNotification(not);
+		}	}
 	
 	@Test
 	public void testGetExtraData() {
