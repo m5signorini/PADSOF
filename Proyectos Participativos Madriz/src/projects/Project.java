@@ -153,8 +153,10 @@ public abstract class Project implements GrantRequest{
 	/* Method used to add a follower to the followers list of a project.
 	 * @param user User that will be added to the project followers.
 	 */
-    public void addFollower(User user) {
+    public boolean addFollower(User user) {
+    	if(this.followers.contains(user)) return false;
     	this.followers.add(user);
+    	return true;
     }
     
 	/* Method used to send any notification to the followers of a project.
