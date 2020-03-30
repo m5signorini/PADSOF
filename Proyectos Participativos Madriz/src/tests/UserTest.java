@@ -79,6 +79,7 @@ public class UserTest {
 	
 	@Test
 	public void testCount() {
+		// when banned, the count() returns an empty set for counting votes.
 		assert(u1.ban("hey", 1));
 		assert(u1.count().isEmpty());
 		u1.setBanned(false);
@@ -97,6 +98,7 @@ public class UserTest {
 	
 	@Test
 	public void testFollowingProjects() {
+		// the creator has to vote his own project.
 		assert(u1.addFollowedProject(p1));
 		assert(u1.addFollowedProject(p2));
 		assert(!u1.addFollowedProject(p2));
