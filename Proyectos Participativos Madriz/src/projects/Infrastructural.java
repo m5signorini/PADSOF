@@ -9,9 +9,13 @@ import entities.individuals.*;
 
 
 /**
+ * This class represents the projects of infrastructure type.
+ * This kind of projects will affect specific districts of Madrid.
+ * 
  * @author Cesar Ramirez
  *
  */
+
 public class Infrastructural extends Project {
 	private String scheme;
 	private String location;

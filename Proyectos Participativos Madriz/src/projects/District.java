@@ -1,11 +1,11 @@
-/**
- * 
- */
 package projects;
 
 import java.io.*;
 /**
- * @author eps
+ * This class represents the different places where
+ * an infrastructural project will be done.
+ * 
+ * @author César Ramírez
  *
  */
 public class District implements Serializable{

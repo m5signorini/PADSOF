@@ -1,6 +1,3 @@
-/**
- *
- */
 package projects;
 import entities.individuals.*;
 import es.uam.eps.sadp.grants.*;
@@ -9,6 +6,11 @@ import java.io.*;
 import java.util.*;
 
 /**
+ * This class is the father class of Social
+ * and Infrastructural. It contains all the general
+ * information about the ideas that the users of the
+ * application propose.
+ *  
  * @author Cesar Ramirez Martinez
  *
  */

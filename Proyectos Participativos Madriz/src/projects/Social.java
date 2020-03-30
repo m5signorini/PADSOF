@@ -8,8 +8,11 @@ import java.util.*;
 import entities.individuals.*;
 
 
-
 /**
+ * This class represents the projects of social type.
+ * This kind of projects will affect one specific group
+ * of the society.
+ * 
  * @author Cesar Ramirez
  *
  */
