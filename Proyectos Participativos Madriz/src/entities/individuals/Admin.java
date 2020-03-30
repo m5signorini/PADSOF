@@ -15,7 +15,7 @@ public class Admin extends Account {
 	}
 	
 	public boolean login(String name, String pwd) {
-		if(this.pwd.equals(pwd) && name.equals("Administrator")) return true;
+		if(this.pwd.equals(pwd)) return true;
 		return false;
 	}
 	
