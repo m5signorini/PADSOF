@@ -440,7 +440,6 @@ public class Application implements Serializable{
 			return false;
 		}
 		registeredUsers.add(u);
-		u.validate();
 		return true;
 	}
 	
@@ -454,7 +453,6 @@ public class Application implements Serializable{
 		if(unregisteredUsers.remove(u) != true) {
 			return false;
 		}
-		u.reject();
 		return true;
 	}
 	
