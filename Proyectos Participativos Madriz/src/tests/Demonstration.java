@@ -12,14 +12,13 @@ import es.uam.eps.sadp.grants.CCGG;
 import projects.*;
 import fechasimulada.*;
 /**
- * @author mssig
- *
+ * Class that represents a demo of the application.
+ * The main method starts an application, demonstrating its
+ * use and printing information as well.
+ * @author Martin Sanchez Signorini
  */
 public class Demonstration {
-
-	/**
-	 * @param args
-	 */
+	
 	public static void main(String[] args) {
 		/* First we create a new Application with a custom made administrator
 		 * and initial values (minSupports and maxInactivity can be later changed)
