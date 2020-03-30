@@ -93,7 +93,7 @@ public class Collective implements Voter{
 	
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
-		sb.append("Name: " + this.name + ".\n Description: "+ this.description);
+		sb.append("Name: " + this.name + ".\nDescription: "+ this.description);
 		return sb.toString();
 	}
 	
@@ -103,7 +103,7 @@ public class Collective implements Voter{
 	 */
 	public String printAllInfo() {
 		StringBuffer sb = new StringBuffer();
-		sb.append("Name: " + this.name + ".\n Description: "+ this.description);
+		sb.append("Name: " + this.name + ".\nDescription: "+ this.description);
 		sb.append(".\nRepresentative's name: " + this.representative.getName());
 		sb.append("Parent's collective name: " + this.parent.getName());
 		if(!this.members.isEmpty()) {
