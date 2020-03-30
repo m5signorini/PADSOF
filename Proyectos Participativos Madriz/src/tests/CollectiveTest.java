@@ -45,6 +45,11 @@ public class CollectiveTest {
 		
 		/*If we try to add it again it will return false*/
 		assertEquals(false, collective.join(u));
+		
+		/* u4 cannot join c1 because he created c4 (and therefore he is inside it) which is a descendant of c1*/
+		assertEquals(c1.join(u4), false);
+		/* Users inside  */
+		assertEquals(c4.join(u3), true);
 	}
 	
 	@Test
@@ -57,10 +62,9 @@ public class CollectiveTest {
 		/*If we try to leave the collective again it will return false*/
 		assertEquals(false, collective.leave(u));
 		
-		/* u4 cannot join c1 because he created c4 (and therefore he is inside it) which is a descendant of c1*/
-		assert(!c1.join(u4));
-		/* Users inside  */
-		assert(c4.join(u3));
+		/*If the person who created the collective tries to leave it will return false,
+		 * not letting him leave. */
+		assertEquals(false, collective.leave(representative));
 	}
 
 	@Test

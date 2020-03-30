@@ -136,14 +136,6 @@ public class User extends Account implements Voter, Serializable{
 		return sb.toString();
 	}
 	
-	public User validate() {
-		return this;
-	}
-	
-	public User reject() {
-		return this;
-	}
-	
 	/**
 	 * Returns true if the login is correct, false otherwise.
 	 * @param nif String containing the nif of the user trying to login.
