@@ -10,8 +10,12 @@ import projects.Project;
 import entities.individuals.Notification;
 
 /**
- * @author 
- *
+ * The User class represents the account of a user and all the objects associated with it, 
+ * including projects, collectives and several attributes such as name, password...
+ * This class is allowed to create, vote and follow projects, create, enter and exit
+ * collectives, can be temporarily banned and can receive messages through notifications.
+ * @author Pedro Urbina Rodriguez
+ * 
  */
 public class User extends Account implements Voter, Serializable{
 	protected String nif;

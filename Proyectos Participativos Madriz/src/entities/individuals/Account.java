@@ -4,9 +4,12 @@
 package entities.individuals;
 
 import java.io.*;
+
 /**
+ * Abstract class from which Admin and User inherit. This forces both classes to have a login function
+ * having both of them a name and a password in order to login.
  * @author Pedro Urbina Rodriguez
- *
+ * 
  */
 public abstract class Account implements Serializable {
 	

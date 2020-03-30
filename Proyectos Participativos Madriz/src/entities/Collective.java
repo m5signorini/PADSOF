@@ -9,8 +9,11 @@ import java.io.*;
 import projects.Project;
 
 /**
- * @author eps
- *
+ * The Collective class represents collectives through which users with similar interests 
+ * can associate and support different projects all at the same time, being notified when
+ * projects are voted and being able to enter and exit this collectives. Also, collectives 
+ * can have children so the users can easily find collectives that are interesting to them.
+ * @author Pedro Urbina Rodriguez 
  */
 public class Collective implements Voter, Serializable{
 	protected String name;
