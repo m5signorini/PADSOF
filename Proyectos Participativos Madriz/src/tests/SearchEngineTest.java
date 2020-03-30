@@ -42,11 +42,13 @@ public class SearchEngineTest {
 		userPool.add(userToFind);
 		
 		// Projects pool
+		ArrayList<District> aff = new ArrayList<District>();
+		aff.add(new District("Barajas"));
 		for(int i = 0; i < 20; i++) {
-			projectPool.add(new Infrastructural(""+i, "Desc", 10.0, new Date(), user, "", ""));
+			projectPool.add(new Infrastructural(""+i, "Desc", 10.0, new Date(), user, aff, "", ""));
 			projectPool.add(new Social(""+i, "Desc", 10.0, new Date(), user, ScopeType.national, "", ""));
 		}
-		projToFind = new Infrastructural("20", "Desc", 10.0, new Date(), user, "", "");
+		projToFind = new Infrastructural("20", "Desc", 10.0, new Date(), user, aff, "", "");
 		projectPool.add(projToFind);
 		
 		// Set pools for all application

@@ -73,6 +73,21 @@ public class Application implements Serializable{
         }
     }
 	
+	public Application readFromFile(String path) {
+		try {
+            FileInputStream fileIn = new FileInputStream(filepath);
+            ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+            Object obj = objectIn.readObject();
+            System.out.println("The Object has been read from the file");
+            objectIn.close();
+            return (Application)obj;
+ 
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+	}
+	
 	/*
 	 * GETTERS AND SETTERS
 	 */
@@ -240,6 +255,7 @@ public class Application implements Serializable{
 				}
 				loggedUser = u;
 				this.updateProjects();
+				this.updateUsers();
 				return true;
 			}
 		}
@@ -320,7 +336,7 @@ public class Application implements Serializable{
 	}
 	
 	/**
-	 * Method used when the council to reject a project
+	 * Method used for manual project rejection
 	 * @param P Project to be rejected
 	 * @return true if rejection was possible, false if not
 	 */
@@ -335,7 +351,7 @@ public class Application implements Serializable{
 		
 	/**
 	 * Method used to manage time-related events like
-	 * when a project expires or gets accepted
+	 * when a project expires or gets accepted by council
 	 */
 	public void updateProjects() {
 		// Checking sent
@@ -379,7 +395,8 @@ public class Application implements Serializable{
 		
 	}
 	
-	/* Method for logging out of the current session
+	/**
+	 * Method for logging out of the current session
 	 */
 	public void logout() {
 		loggedUser = null;
@@ -402,20 +419,17 @@ public class Application implements Serializable{
 	}
 	
 	/**
-	 * Removes user from ban list
-	 * @param u User to remove ban
-	 * @return true if could remove ban, false if not
+	 * Updates users lists unbanning those who can be
 	 */
-	/*
-	public boolean unban(User u) {
-		if(u == null) return false;
-		if(bannedUsers.remove(u) != true) {
-			return false;
+	public void updateUsers(){
+		Iterator<User> it = bannedUsers.iterator();
+		while(it.hasNext()) {
+			User u = it.next();
+			if(u.tryUnban()==true) {
+				it.remove();
+			}
 		}
-		registeredUsers.add(u);
-		return false;
 	}
-	*/
 	
 	/**
 	 * Validates user registration
@@ -444,11 +458,22 @@ public class Application implements Serializable{
 		return true;
 	}
 	
+	/**
+	 * Method for sending a notification to a specific user
+	 * @param u User that will receive the notification
+	 * @param n Sent notification
+	 * @return true if notification was able to be sent
+	 */
 	public boolean notify(User u, Notification n) {
 		if(u == null || n== null) return false;
 		return u.addNotification(n);
 	}
 	
+	/**
+	 * Adds a collective to the application
+	 * @param c New collective
+	 * @return true if it was possible to add
+	 */
 	public boolean createCollective(Collective c) {
 		if(c == null) return false;
 		collectives.add(c);

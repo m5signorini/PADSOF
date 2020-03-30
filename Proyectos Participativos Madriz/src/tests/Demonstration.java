@@ -48,8 +48,10 @@ public class Demonstration {
 		}
 		
 		/* PROJECT CREATION AND VALIDATION */
+		ArrayList<District> aff = new ArrayList<District>();
+		aff.add(new District("Barajas"));
 		Social sProj = new Social("TITLE", "DESCRIPTION", 1000.666, new Date(), app.getLoggedUser(), ScopeType.national, "GRUPO", "pic");
-		Infrastructural iProj = new Infrastructural("TITLE", "DESCRIPTION", 1000.666, new Date(), app.getLoggedUser(), "scheme", "LOCATION");
+		Infrastructural iProj = new Infrastructural("TITLE", "DESCRIPTION", 1000.666, new Date(), app.getLoggedUser(), aff, "scheme", "LOCATION" );
 		if(app.createProject(sProj) == false) {
 			System.out.println("Error: Project Creation");
 		}
