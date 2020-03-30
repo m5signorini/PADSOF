@@ -38,8 +38,11 @@ public class UserTest {
 		c7 = new Collective("Tennis", "Tennis lovers", u5, c5);
 		c8 = new Collective("Real Madrid", "Real Madrid lovers", u6, c6);
 		Date d1 = new Date();
-		p1 = new Infrastructural("Poryecto1", "Este proyecto es el proyecto 1", 1111.11, d1, u1, "nose", "Getafe");
-		p2 = new Infrastructural("Poryecto2", "Este proyecto es el proyecto 2", 2222.22, d1, c1, "nose", "Madrid");		
+		District d = new District("Sur");
+		ArrayList<District> affectedDistricts = new ArrayList<District>();
+		affectedDistricts.add(d);
+		p1 = new Infrastructural("Poryecto1", "Este proyecto es el proyecto 1", 1111.11, d1, u1, affectedDistricts, "nose", "Getafe");
+		p2 = new Infrastructural("Poryecto2", "Este proyecto es el proyecto 2", 2222.22, d1, c1, affectedDistricts, "nose", "Madrid");		
 	}
 	
 	@Test
