@@ -17,11 +17,11 @@ public class Infrastructural extends Project {
 	private String location;
 	private ArrayList<District> affectedDistricts;
 	
-	public Infrastructural(String title, String description, Double cost, Date creationDate, Voter creator, String scheme, String location) {
+	public Infrastructural(String title, String description, Double cost, Date creationDate, Voter creator, ArrayList<District> affectedDistricts, String scheme, String location) {
 		super(title, description, cost, creationDate, creator);
 		this.scheme = scheme;
 		this.location = location;
-		this.affectedDistricts = new ArrayList<District>();
+		this.affectedDistricts = new ArrayList<District>(affectedDistricts);
 		creator.addCreatedProject(this);
 	}
 
