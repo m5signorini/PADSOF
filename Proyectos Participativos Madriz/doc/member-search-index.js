@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"entities.individuals","c":"Admin","l":"Admin(String)","url":"%3Cinit%3E(java.lang.String)"},{"p":"entities.individuals","c":"Admin","l":"login(String, String)","url":"login(java.lang.String,java.lang.String)"},{"p":"entities.individuals","c":"Admin","l":"toString()"}]

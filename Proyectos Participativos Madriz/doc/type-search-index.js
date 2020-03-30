@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"entities.individuals","l":"Admin"},{"l":"All Classes","url":"allclasses-index.html"}]
