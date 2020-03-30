@@ -97,8 +97,6 @@ public class ApplicationTest {
 	public void testLogin() {
 		User u = new User("John", "pwd", "nif");
 		app.register(u);
-		System.out.println(projectsPublic.get(0));
-		System.out.println(app.getPublicProjects().get(0));
 		assertFalse(app.login("nif", "pwd"));
 		assertTrue(app.login(usersR.get(0).getNif(), usersR.get(0).getPwd()));
 	}
