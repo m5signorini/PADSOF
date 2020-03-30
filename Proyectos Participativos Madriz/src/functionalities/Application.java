@@ -59,15 +59,16 @@ public class Application implements Serializable{
 		this.searcher = new SearchEngine(this);
 	}
 	
-	public void writeToFile(String filepath) {
+	public boolean writeToFile(String filepath) {
         try {
             FileOutputStream fileOut = new FileOutputStream(filepath);
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
             objectOut.writeObject(this);
             objectOut.close();
-            System.out.println("The Object  was succesfully written to a file");
+            return true;
         } catch (Exception ex) {
             ex.printStackTrace();
+            return false;
         }
     }
 	
@@ -76,7 +77,6 @@ public class Application implements Serializable{
             FileInputStream fileIn = new FileInputStream(filepath);
             ObjectInputStream objectIn = new ObjectInputStream(fileIn);
             Object obj = objectIn.readObject();
-            System.out.println("The Object has been read from the file");
             objectIn.close();
             return (Application)obj;
  
@@ -484,10 +484,33 @@ public class Application implements Serializable{
 	 * Method for calculating collectives affinity
 	 * @param c1 Collective 1
 	 * @param c2 Collective 2
-	 * @return Affinity level using a specific formula
+	 * @return A number more than or equals to 0 representing the affinity between
+	 * these two collectives.
 	 */
 	public double calcAffinity(Collective c1, Collective c2) {
-		return 2.0;
+		if(c1 == null || c2 == null) return 0;
+		//(projC1suppC2 + projC2suppC2)/totProySuppC1C2
+		double nProjOfC1SuppByC2 = 0;
+		double nProjOfC2SuppByC1 = 0;
+		double totalCreatedProjs = 0;
+		// Projects created by c1 supported by c2
+		for(Project p: c1.getCreatedProjects()) {
+			if(c2.getSupportedProjects().contains(p)) {
+				nProjOfC1SuppByC2 += 1;
+			}
+			totalCreatedProjs += 1;
+		}
+		// Projects created by c2 supported by c1
+		for(Project p: c2.getCreatedProjects()) {
+			if(c1.getSupportedProjects().contains(p)) {
+				nProjOfC2SuppByC1 += 1;
+			}
+			totalCreatedProjs += 1;
+		}
+		if(totalCreatedProjs == 0) {
+			return 0;
+		}
+		return (nProjOfC1SuppByC2+nProjOfC2SuppByC1)/(totalCreatedProjs);
 	}
 	
 	private String projectsToString() {

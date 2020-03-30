@@ -108,7 +108,8 @@ public class Demonstration {
 		sProj = new Social("Proyecto C2", "Desc", 10.0, new Date(), c2, ScopeType.international, "", "");
 		app.createProject(sProj);
 		sProj.support(c1);
-		System.out.println("Affinity between c1 and c2: " + app.calcAffinity(c1, c2));
+		// Expected 1
+		System.out.println("Affinity between c1 and c2: " + app.calcAffinity(c1, c2) + "\n");
 		app.logout();
 		
 		/* PROJECT LIFE */
@@ -138,22 +139,13 @@ public class Demonstration {
 		app.login("0000000B", "0");
 		System.out.print(app.toString()+"\n");
 		
-		app.writeToFile("data");
-		
+		/* FILE WRITING AND READING */
+		if(app.writeToFile("data")) {
+			System.out.println("The application was succesfully written to a file");
+		}
 		app = null;
 		app = Application.readFromFile("data");
 		System.out.print(app.toString()+"\n");
-		
-		/* Registrar usuario 	*/
-		/* Entrar como admin 	*/
-		/* Aceptar registro  	*/
-		/* Salir de admin    	*/
-		/* Iniciar como usuario */
-		/* Crear proyecto 		*/
-		/* Crear colectivo 		*/
-		/* Salir del todo		*/
-		/* Revivir aplicacion	*/
-		/* Controlar correccion	*/
 	}
 
 }

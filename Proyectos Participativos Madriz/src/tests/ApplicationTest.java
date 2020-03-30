@@ -76,12 +76,14 @@ public class ApplicationTest {
 
 	@Test
 	public void testWriteToFile() {
-		fail("Not yet implemented");
+		assertTrue(app.writeToFile("data_test"));
 	}
 
 	@Test
 	public void testReadFromFile() {
-		fail("Not yet implemented");
+		app.writeToFile("data_test");
+		app = Application.readFromFile("data_test");
+		assertTrue(app != null);
 	}
 
 	@Test
