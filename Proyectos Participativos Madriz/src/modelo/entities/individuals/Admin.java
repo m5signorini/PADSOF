@@ -1,7 +1,7 @@
 /**
  * 
  */
-package entities.individuals;
+package modelo.entities.individuals;
 
 /**
  * Class representing the Administrator's account. With a already defined name, he can 

@@ -1,4 +1,4 @@
-package tests;
+package modelo.tests;
 
 import static org.junit.Assert.*;
 
@@ -7,10 +7,10 @@ import java.util.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import functionalities.Application;
-import entities.individuals.*;
-import entities.*;
-import projects.*;
+import modelo.entities.*;
+import modelo.entities.individuals.*;
+import modelo.functionalities.Application;
+import modelo.projects.*;
 
 public class ApplicationTest {
 	

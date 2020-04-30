@@ -1,13 +1,14 @@
-package tests;
+package modelo.tests;
 
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import functionalities.*;
-import projects.*;
-import entities.*;
-import entities.individuals.*;
+import modelo.entities.*;
+import modelo.entities.individuals.*;
+import modelo.functionalities.*;
+import modelo.projects.*;
+
 import java.util.*;
 
 public class SearchEngineTest {

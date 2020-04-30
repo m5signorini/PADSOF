@@ -1,16 +1,17 @@
 /**
  * 
  */
-package tests;
+package modelo.tests;
 
 import java.util.*;
 import java.io.*;
-import functionalities.*;
-import entities.*;
-import entities.individuals.*;
+
 import es.uam.eps.sadp.grants.CCGG;
-import projects.*;
-import fechasimulada.*;
+import modelo.entities.*;
+import modelo.entities.individuals.*;
+import modelo.fechasimulada.*;
+import modelo.functionalities.*;
+import modelo.projects.*;
 /**
  * Class that represents a demo of the application.
  * The main method starts an application, demonstrating its

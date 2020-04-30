@@ -1,16 +1,15 @@
-package tests;
+package modelo.tests;
 
 import java.util.*;
-
-import projects.*;
 
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import entities.individuals.*;
 import es.uam.eps.sadp.grants.GrantRequest.ProjectKind;
-import entities.*;
+import modelo.entities.*;
+import modelo.entities.individuals.*;
+import modelo.projects.*;
 
 public class InfrastructuralTest {
 	

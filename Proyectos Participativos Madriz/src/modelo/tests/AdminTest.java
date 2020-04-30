@@ -1,4 +1,4 @@
-package tests;
+package modelo.tests;
 
 import static org.junit.Assert.*;
 
@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import entities.individuals.*;
+import modelo.entities.individuals.*;
 
 
 public class AdminTest {

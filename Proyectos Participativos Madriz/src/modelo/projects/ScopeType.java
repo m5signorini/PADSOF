@@ -1,4 +1,4 @@
-package projects;
+package modelo.projects;
 
 /**
  * This public enumeration defines the 

@@ -1,6 +1,6 @@
-package projects;
-import entities.individuals.*;
+package modelo.projects;
 import es.uam.eps.sadp.grants.*;
+import modelo.entities.individuals.*;
 
 import java.io.*;
 import java.util.*;

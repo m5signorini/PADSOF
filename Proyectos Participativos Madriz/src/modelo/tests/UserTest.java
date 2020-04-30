@@ -1,11 +1,12 @@
-package tests;
+package modelo.tests;
 
 import static org.junit.Assert.*;
 import java.util.*;
 import org.junit.*;
-import entities.Collective;
-import entities.individuals.*;
-import projects.*;
+
+import modelo.entities.Collective;
+import modelo.entities.individuals.*;
+import modelo.projects.*;
 
 public class UserTest {	
 	private User u1;

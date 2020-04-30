@@ -1,9 +1,10 @@
-package tests;
+package modelo.tests;
 
 import static org.junit.Assert.*;
-import entities.individuals.*;
 
 import org.junit.Test;
+
+import modelo.entities.individuals.*;
 
 public class NotificationTest {
 	

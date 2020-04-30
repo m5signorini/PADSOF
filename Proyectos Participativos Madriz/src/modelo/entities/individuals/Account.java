@@ -1,7 +1,7 @@
 /**
  * 
  */
-package entities.individuals;
+package modelo.entities.individuals;
 
 import java.io.*;
 

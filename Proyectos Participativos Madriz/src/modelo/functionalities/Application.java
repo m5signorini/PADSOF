@@ -1,11 +1,12 @@
-package functionalities;
+package modelo.functionalities;
 
 import java.util.*;
 import java.io.*;
-import entities.individuals.*;
-import entities.*;
-import projects.*;
+
 import es.uam.eps.sadp.grants.*;
+import modelo.entities.*;
+import modelo.entities.individuals.*;
+import modelo.projects.*;
 
 /**
  * Application class containing all the necessary information

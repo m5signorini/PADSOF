@@ -1,7 +1,7 @@
-package entities.individuals;
+package modelo.entities.individuals;
 import java.util.*;
 
-import projects.Project; 
+import modelo.projects.Project; 
 
 
 /**

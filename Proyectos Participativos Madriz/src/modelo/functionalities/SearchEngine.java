@@ -1,9 +1,11 @@
-package functionalities;
+package modelo.functionalities;
 
 import java.util.*;
-import entities.individuals.*;
-import entities.*;
-import projects.*;
+
+import modelo.entities.*;
+import modelo.entities.individuals.*;
+import modelo.projects.*;
+
 import java.io.*;
 /**
  * Search engine of an application. Used for searching methods

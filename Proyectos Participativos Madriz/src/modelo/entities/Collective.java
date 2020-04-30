@@ -2,11 +2,13 @@
 /**
  * 
  */
-package entities;
-import entities.individuals.*;
+package modelo.entities;
 import java.util.*;
+
+import modelo.entities.individuals.*;
+import modelo.projects.Project;
+
 import java.io.*;
-import projects.Project;
 
 /**
  * The Collective class represents collectives through which users with similar interests 

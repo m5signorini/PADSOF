@@ -1,11 +1,11 @@
 /**
  * 
  */
-package projects;
+package modelo.projects;
 
 import java.util.*;
 
-import entities.individuals.*;
+import modelo.entities.individuals.*;
 
 
 /**

@@ -1,13 +1,14 @@
 /**
  * 
  */
-package entities.individuals;
+package modelo.entities.individuals;
 
 import java.io.*;
 import java.util.*;
-import entities.Collective;
-import projects.Project;
-import entities.individuals.Notification;
+
+import modelo.entities.Collective;
+import modelo.entities.individuals.Notification;
+import modelo.projects.Project;
 
 /**
  * The User class represents the account of a user and all the objects associated with it, 
