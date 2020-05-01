@@ -1,4 +1,4 @@
-package vista.proyectos.creacion;
+package vista.proyectos;
 
 
 
