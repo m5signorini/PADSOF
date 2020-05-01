@@ -10,15 +10,16 @@ public class Ventana extends JFrame {
 	private Registro vistaRegistro;
 
 	private ControlInicio contInicio;
-	private ControlCambioRegistro contCambioRegistro;
 	private ControlRegistro contRegistro;
+	private ControlCambioRegistro contCambioRegistro;
+	private ControlCambioInicio contCambioInicio;
 	
 	private JPanel contentPane;
 	
 	public Ventana() {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(10000, 10000, 10000, 10000);
 		contentPane = new JPanel();
 		setContentPane(contentPane);
 		contentPane.setLayout(new CardLayout());
@@ -34,10 +35,15 @@ public class Ventana extends JFrame {
 	public void setControlador(Controlador controlador) {
 		this.contInicio = controlador.getControlInicio();
 		vistaInicio.setControladorValidar(contInicio);
+
 		this.contCambioRegistro = controlador.getControlCambioRegistro();
-		vistaInicio.setControladorRegistro(contCambioRegistro);
+		vistaInicio.setControladorCambioRegistro(contCambioRegistro);
+		
 		this.contRegistro = controlador.getControlRegistro();
-		vistaRegistro.setControlador(contRegistro);
+		vistaRegistro.setControladorRegistro(contRegistro);
+
+		this.contCambioInicio = controlador.getControlCambioInicio();
+		vistaRegistro.setControladorCambioInicio(contCambioInicio);
 	}
 
 	public Inicio getVistaInicio() {

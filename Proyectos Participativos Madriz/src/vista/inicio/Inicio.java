@@ -37,7 +37,7 @@ public class Inicio extends JPanel {
 		botonValidar.addActionListener(c);
 	}
 	
-	public void setControladorRegistro(ActionListener c) {  
+	public void setControladorCambioRegistro(ActionListener c) {  
 		botonRegistro.addActionListener(c);
 	}
 

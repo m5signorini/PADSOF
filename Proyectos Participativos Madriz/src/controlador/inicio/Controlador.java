@@ -9,6 +9,7 @@ public class Controlador {
 	
 	private ControlInicio contInicio;
 	private ControlCambioRegistro contCambioRegistro;
+	private ControlCambioInicio contCambioInicio;
 	private ControlRegistro contRegistro;
 	private Ventana frame;
 	private Application app;
@@ -18,6 +19,7 @@ public class Controlador {
 		this.app = app;
 		this.contInicio = new ControlInicio(frame2, app);
 		this.contCambioRegistro= new ControlCambioRegistro(frame2, app);
+		this.contCambioInicio= new ControlCambioInicio(frame2, app);
 		this.contRegistro= new ControlRegistro(frame2, app);
 	}
 
@@ -31,5 +33,9 @@ public class Controlador {
 	
 	public ControlRegistro getControlRegistro() {
 		return this.contRegistro;
+	}
+
+	public ControlCambioInicio getControlCambioInicio() {
+		return this.contCambioInicio;
 	}
 }

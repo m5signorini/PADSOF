@@ -6,7 +6,8 @@ import controlador.*;
 
 public class Registro extends JPanel {
 
-	private JButton boton;
+	private JButton botonRegistro;
+	private JButton botonInicio;
 	private JLabel etiqueta;
 	private JTextField campoNif;
 	private JTextField campoPwd;
@@ -32,9 +33,12 @@ public class Registro extends JPanel {
 		campoPwd.setColumns(10);
 		campoPwd.requestFocus();
 	
-		
-		boton = new JButton("Registrarse");
-		add(boton);
+
+		botonRegistro = new JButton("Registrarse");
+		add(botonRegistro);
+
+		botonInicio = new JButton("Iniciar sesion");
+		add(botonInicio);
 	}
 	
 	public String getName() {
@@ -49,8 +53,12 @@ public class Registro extends JPanel {
 		return campoPwd.getText();
 	}
 
-	public void setControlador(ActionListener c) {
-		boton.addActionListener(c);
+	public void setControladorRegistro(ActionListener c) {
+		botonRegistro.addActionListener(c);
+	}
+
+	public void setControladorCambioInicio(ActionListener c) {
+		botonInicio.addActionListener(c);
 	}
 		
 	public void update() { 
