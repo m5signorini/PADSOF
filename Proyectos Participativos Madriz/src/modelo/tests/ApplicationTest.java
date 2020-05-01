@@ -58,6 +58,7 @@ public class ApplicationTest {
 		
 		collectives.add(new Collective("C", "desc", creator));
 		
+		Application.clearApplication();
 		app = Application.getApplication();
 		
 		app.setAdmin(admin);

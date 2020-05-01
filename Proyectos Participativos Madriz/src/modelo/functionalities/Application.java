@@ -14,7 +14,7 @@ import modelo.projects.*;
  * @author Martin Sanchez Signorini
  */
 public class Application implements Serializable{
-	private static Application APPLICATION;
+	private static Application APPLICATION = new Application();
 	private int minSupports;
 	private int maxInactivity;
 	
@@ -60,10 +60,11 @@ public class Application implements Serializable{
 	}
 	
 	public static Application getApplication() {
-		if(APPLICATION == null) {
-			APPLICATION = new Application();
-		}
 		return APPLICATION;
+	}
+	
+	public static void clearApplication() {
+		APPLICATION = new Application();
 	}
 	
 	public boolean writeToFile(String filepath) {
@@ -85,7 +86,8 @@ public class Application implements Serializable{
             ObjectInputStream objectIn = new ObjectInputStream(fileIn);
             Object obj = objectIn.readObject();
             objectIn.close();
-            return (Application)obj;
+            APPLICATION = (Application)obj;
+            return APPLICATION;
  
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -180,10 +182,10 @@ public class Application implements Serializable{
 		this.loggedUser = loggedUser;
 	}
 	
-	private boolean nifUsedIn(User u, Collection<User> c) {
-		if(u == null) return false;
+	private boolean nifUsedIn(String nif, Collection<User> c) {
+		if(nif == null) return false;
 		for(User u2: c) {
-			if(u2.getNif().contentEquals(u.getNif())) return true;
+			if(u2.getNif().equals(nif)) return true;
 		}
 		return false;
 	}
@@ -195,8 +197,8 @@ public class Application implements Serializable{
 	 */
 	public boolean register(User u) {
 		if(u == null) return false;
-		if(nifUsedIn(u, registeredUsers)) return false;
-		if(nifUsedIn(u, unregisteredUsers)) return false;
+		if(nifUsedIn(u.getNif(), registeredUsers)) return false;
+		if(nifUsedIn(u.getNif(), unregisteredUsers)) return false;
 		unregisteredUsers.add(u);
 		return true;
 	}
