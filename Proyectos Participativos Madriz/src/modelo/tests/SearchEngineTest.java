@@ -21,6 +21,7 @@ public class SearchEngineTest {
 
 	@Before
 	public void setUp() throws Exception {
+		Application.clearApplication();
 		app = Application.getApplication();
 		app.setAdmin(new Admin("admin"));
 		app.setMaxInactivity(10);
