@@ -22,10 +22,15 @@ public class Social extends Project {
 	private String group;
 	private String picture;
 	
-	public Social(String title, String description, Double cost, Date creationDate, Voter creator, ScopeType scope, String group, String picture) {
+	public Social(String title, String description, Double cost, Date creationDate, Voter creator, ScopeType scope, String group) {
 		super(title, description, cost, creationDate, creator);
 		this.scope = scope;
 		this.group = group;
+		creator.addCreatedProject(this);
+	}
+	
+	public Social(String title, String description, Double cost, Date creationDate, Voter creator, ScopeType scope, String group, String picture) {
+		this(title, description, cost, creationDate, creator, scope, group);
 		this.picture = picture;
 		creator.addCreatedProject(this);
 	}

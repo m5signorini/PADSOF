@@ -56,9 +56,9 @@ public class CreateProjectView {
 	JLabel etiquetaDescS;
 	JTextArea descS;
 	
-	//Ambit
-	JPanel ambit;
-	JLabel etiquetaAmbitS;
+	//Scope
+	JPanel scope;
+	JLabel etiquetaScopeS;
 	ButtonGroup groupS;
 	JRadioButton nacS;
 	JRadioButton interS;
@@ -215,7 +215,7 @@ public class CreateProjectView {
 		MainPanelSoc.add(scrollS);
 		
 		//Ambito
-		etiquetaAmbitS = new JLabel("Ámbito:");
+		etiquetaScopeS = new JLabel("Ámbito:");
 		nacS = new JRadioButton("Nacional");
 		interS = new JRadioButton("Internacional");
 		nacS.setSelected(true);
@@ -224,12 +224,12 @@ public class CreateProjectView {
 		groupS.add(nacS);
 		groupS.add(interS);
 				
-		ambit = new JPanel(new GridLayout(1,2));
-		ambit.add(nacS);
-		ambit.add(interS);
+		scope = new JPanel(new GridLayout(1,2));
+		scope.add(nacS);
+		scope.add(interS);
 		
-		MainPanelSoc.add(etiquetaAmbitS);
-		MainPanelSoc.add(ambit);
+		MainPanelSoc.add(etiquetaScopeS);
+		MainPanelSoc.add(scope);
 		
 		//Grupo social
 		etiquetaGroupS = new JLabel("Grupo social afectado:");
@@ -238,7 +238,7 @@ public class CreateProjectView {
 		MainPanelSoc.add(etiquetaGroupS);
 		MainPanelSoc.add(group);
 		
-		//Esquema
+		//Imagen
 		etiquetaImage = new JLabel("Imagen(Opcional):");
 		image = new JTextField(10);
 		etiquetaImage.setLabelFor(image);
@@ -471,7 +471,7 @@ public class CreateProjectView {
 	 * Return the ambit of the social project the user has created.
 	 * @return ambit of the affected social group.
 	 */
-	public String getAmbit() {
+	public String getScope() {
 		if (nacS.isSelected() == true) {
 			return "Nacional";
 		}
@@ -485,7 +485,7 @@ public class CreateProjectView {
 	 * @return list of affected districts.
 	 */
 
-	public List<String> affectedDistricts() {
+	public List<String> getAffectedDistricts() {
 		List<String> affected = new ArrayList<String>();
 		Component[] components = districts.getComponents();
 		for(Component c : components) {
@@ -494,6 +494,41 @@ public class CreateProjectView {
 			}
 		}
 		return affected;
+	}
+	
+	/**
+	 * Return the image(Optional) districts of a social project.
+	 * @return the image as a string.
+	 */
+	public String getImage() {
+		if(image.getText() == null || image.getText() == "") {
+			return null;
+		}
+		return image.getText();
+	}
+	
+	/**
+	 * Return the location of a infrastructural project.
+	 * @return the location as a string.
+	 */
+	public String getLocation() {
+		if(location.getText() == null || location.getText() == "") {
+			JOptionPane.showMessageDialog(null, "You must write a location for the project.", "Wrong location.", JOptionPane.OK_OPTION);
+			return null; 
+		}
+		return location.getText();
+	}
+	
+	/**
+	 * Return the scheme of a infrastructural project.
+	 * @return the scheme as a string.
+	 */
+	public String getScheme() {
+		if(scheme.getText() == null || scheme.getText() == "") {
+			JOptionPane.showMessageDialog(null, "You must write an scheme for the project.", "Wrong scheme.", JOptionPane.OK_OPTION);
+			return null; 
+		}
+		return scheme.getText();
 	}
 	
 	public void setController(ActionListener c) {
