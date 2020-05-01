@@ -179,6 +179,14 @@ public class Application implements Serializable{
 	public void setLoggedUser(User loggedUser) {
 		this.loggedUser = loggedUser;
 	}
+	
+	private boolean nifUsedIn(User u, Collection<User> c) {
+		if(u == null) return false;
+		for(User u2: c) {
+			if(u2.getNif().contentEquals(u.getNif())) return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Method that creates an unregistered user
@@ -187,12 +195,8 @@ public class Application implements Serializable{
 	 */
 	public boolean register(User u) {
 		if(u == null) return false;
-		for(User u2: registeredUsers) {
-			if(u2.getNif().equals(u.getNif())) return false;
-		}
-		for(User u2: unregisteredUsers) {
-			if(u2.getNif().equals(u.getNif())) return false;
-		}
+		if(nifUsedIn(u, registeredUsers)) return false;
+		if(nifUsedIn(u, unregisteredUsers)) return false;
 		unregisteredUsers.add(u);
 		return true;
 	}
@@ -207,9 +211,9 @@ public class Application implements Serializable{
 		if(nif == null || pwd == null) return false;
 		// Check as user
 		for(User u: registeredUsers) {
-			if(u.login(nif, pwd) == true) {
+			if(u.login(nif, pwd)) {
 				// Ban check
-				if(bannedUsers.contains(u) && u.tryUnban() == false) {
+				if(bannedUsers.contains(u) && !u.tryUnban()) {
 					return false;
 				}
 				loggedUser = u;
@@ -229,7 +233,7 @@ public class Application implements Serializable{
 	 */
 	public boolean loginAdmin(String pwd) {
 		// Check as administrator
-		if(admin.login("Administrator", pwd) == true) {
+		if(admin.login("Administrator", pwd)) {
 			return true;
 		}
 		return false;
@@ -253,7 +257,7 @@ public class Application implements Serializable{
 	 */
 	public boolean validateProject(Project p) {
 		if(p == null) return false;
-		if(pendingProjects.remove(p) != true) {
+		if(!pendingProjects.remove(p)) {
 			return false;
 		}
 		publicProjects.add(p);
@@ -268,10 +272,10 @@ public class Application implements Serializable{
 	 */
 	public boolean sendProject(Project p) {
 		if(p == null || p.countVotes() < minSupports) return false; 
-		if(publicProjects.remove(p) != true) {
+		if(!publicProjects.remove(p)) {
 			return false;
 		}
-		if(p.send() == false) {
+		if(!p.send()) {
 			publicProjects.add(p);
 			return false;
 		}
@@ -286,7 +290,7 @@ public class Application implements Serializable{
 	 */
 	public boolean denyProject(Project p) {
 		if(p == null) return false;
-		if(pendingProjects.remove(p) != true) {
+		if(!pendingProjects.remove(p)) {
 			return false;
 		}
 		deniedProjects.add(p);
@@ -300,7 +304,7 @@ public class Application implements Serializable{
 	 */
 	public boolean rejectProject(Project p) {
 		if(p == null) return false;
-		if(sentProjects.remove(p) != true) {
+		if(!sentProjects.remove(p)) {
 			return false;
 		}
 		rejectedProjects.add(p);
@@ -346,7 +350,7 @@ public class Application implements Serializable{
 		it = publicProjects.iterator();
 		while(it.hasNext()) {
 			Project p = it.next();
-			if(p.hasExpired(maxInactivity) == true) {
+			if(p.hasExpired(maxInactivity)) {
 				it.remove();
 				expiredProjects.add(p);
 			}
@@ -370,7 +374,7 @@ public class Application implements Serializable{
 	 */
 	public boolean ban(User u, String message, int days) {
 		if(u == null) return false;
-		if(registeredUsers.contains(u) == false) {
+		if(!registeredUsers.contains(u)) {
 			return false;
 		}
 		bannedUsers.add(u);
@@ -385,7 +389,7 @@ public class Application implements Serializable{
 		Iterator<User> it = bannedUsers.iterator();
 		while(it.hasNext()) {
 			User u = it.next();
-			if(u.tryUnban()==true) {
+			if(u.tryUnban()) {
 				it.remove();
 			}
 		}
@@ -398,7 +402,7 @@ public class Application implements Serializable{
 	 */
 	public boolean validateUser(User u) {
 		if(u == null) return false;
-		if(unregisteredUsers.remove(u) != true) {
+		if(!unregisteredUsers.remove(u)) {
 			return false;
 		}
 		registeredUsers.add(u);
@@ -412,7 +416,7 @@ public class Application implements Serializable{
 	 */
 	public boolean rejectUser(User u) {
 		if(u == null) return false;
-		if(unregisteredUsers.remove(u) != true) {
+		if(!unregisteredUsers.remove(u)) {
 			return false;
 		}
 		return true;
