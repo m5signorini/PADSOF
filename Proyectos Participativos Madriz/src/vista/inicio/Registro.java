@@ -26,7 +26,7 @@ public class Registro extends JPanel {
 
 		add(Box.createRigidArea(new Dimension(0, 10)));
 		
-		etiqueta = new JLabel("Por favpr, introduzca sus datos: ");
+		etiqueta = new JLabel("Por favor, introduzca sus datos: ");
 		etiqueta.setAlignmentX(CENTER_ALIGNMENT);
 		add(etiqueta);
 		
@@ -60,7 +60,7 @@ public class Registro extends JPanel {
 
 		add(Box.createRigidArea(new Dimension(0, 10)));
 		
-		botonInicio = new JButton("Iniciar sesion");
+		botonInicio = new JButton("Pulse aqui para iniciar sesion");
 		botonInicio.setAlignmentX(CENTER_ALIGNMENT);
 		add(botonInicio);
 	}

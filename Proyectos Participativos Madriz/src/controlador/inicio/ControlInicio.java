@@ -9,7 +9,7 @@ import modelo.functionalities.Application;
 import vista.*;
 import vista.inicio.Inicio;
 import vista.inicio.Ventana;
-import vista.proyectos.CreateProjectView;
+//import vista.proyectos.CreateProjectView;
 
 public class ControlInicio implements ActionListener {
 	
@@ -25,36 +25,27 @@ public class ControlInicio implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		
-		// validar valores en la vista
 		String nif = vista.getNif();
 		if (nif.equals("")) {
-			JOptionPane.showMessageDialog(vista,
-					"Debe introducir un nif.", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(vista, "Debe introducir un nif.", "Error", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		String pwd = vista.getPwd();
 		if (pwd.equals("")) {
-			JOptionPane.showMessageDialog(vista,
-					"Debe introducir un pwd.", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(vista, "Debe introducir un pwd.", "Error", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-		
 		
 		if(modelo.login(nif, pwd)){
 			JOptionPane.showMessageDialog(null, "Correctly logged in!");
 		} else {
-			JOptionPane.showMessageDialog(null, "Incorrect login: " + nif + pwd + "! Please, try again.");
-		}
+			JOptionPane.showMessageDialog(null, "Incorrect login! Please, try again.");
+		}	
 		
 		vista.update();
 	
 	}
 	
-	private CreateProjectView CreateProjectView() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public Inicio getPanelVistaIn() {
 		return frame.getVistaInicio();
 	}
