@@ -21,7 +21,10 @@ public class SearchEngineTest {
 
 	@Before
 	public void setUp() throws Exception {
-		app = new Application(new Admin("admin"), 10, 10);
+		app = Application.getApplication();
+		app.setAdmin(new Admin("admin"));
+		app.setMaxInactivity(10);
+		app.setMinSupports(10);
 		User user = new User("Tester", "123456", "123456");
 		
 		List<Project> projectPool = new ArrayList<Project>();
@@ -53,19 +56,19 @@ public class SearchEngineTest {
 		projectPool.add(projToFind);
 		
 		// Set pools for all application
-		app.setUnregisteredUsers(userPool);
-		app.setRegisteredUsers(userPool);
-		app.setBannedUsers(userPool);
-		
-		app.setPendingProjects(projectPool);
-		app.setDeniedProjects(projectPool);
-		app.setPublicProjects(projectPool);
-		app.setExpiredProjects(projectPool);
-		app.setFinanciatedProjects(projectPool);
-		app.setRejectedProjects(projectPool);
-		app.setSentProjects(projectPool);
-		
-		app.setCollectives(collectivePool);
+		app.getUnregisteredUsers().addAll(userPool);
+		app.getRegisteredUsers().addAll(userPool);
+		app.getBannedUsers().addAll(userPool);
+		    
+		app.getPendingProjects().addAll(projectPool);
+		app.getDeniedProjects().addAll(projectPool);
+		app.getPublicProjects().addAll(projectPool);
+		app.getExpiredProjects().addAll(projectPool);
+		app.getFinanciatedProjects().addAll(projectPool);
+		app.getRejectedProjects().addAll(projectPool);
+		app.getSentProjects().addAll(projectPool);
+		    
+		app.getCollectives().addAll(collectivePool);
 	}
 
 	@Test

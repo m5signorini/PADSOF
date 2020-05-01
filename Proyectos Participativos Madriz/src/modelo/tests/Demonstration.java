@@ -25,7 +25,12 @@ public class Demonstration {
 		 * and initial values (minSupports and maxInactivity can be later changed)
 		 */
 		Admin admin = new Admin("admin");
-		Application app = new Application(admin, 2, 2);
+		Application app = Application.getApplication();
+		
+		app.setAdmin(admin);
+		app.setMaxInactivity(2);
+		app.setMinSupports(2);
+		
 		User firstUser = new User("Bob Dylan", "24051941", "0000000A");
 		
 		/* Register first user */

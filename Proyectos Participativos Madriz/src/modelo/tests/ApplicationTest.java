@@ -58,20 +58,24 @@ public class ApplicationTest {
 		
 		collectives.add(new Collective("C", "desc", creator));
 		
-		app = new Application(admin, 1, 2);
+		app = Application.getApplication();
 		
-		app.setUnregisteredUsers(usersU);
-		app.setBannedUsers(usersB);
-		app.setRegisteredUsers(usersR);
+		app.setAdmin(admin);
+		app.setMaxInactivity(2);
+		app.setMinSupports(2);
 		
-		app.setDeniedProjects(projectsDenied);
-		app.setRejectedProjects(projectsRejected);
-		app.setFinanciatedProjects(projectsFinanciated);
-		app.setPublicProjects(projectsPublic);
-		app.setExpiredProjects(projectsExpired);
-		app.setPendingProjects(projectsPending);
-		
-		app.setCollectives(collectives);
+		app.getUnregisteredUsers().addAll(usersU);
+		app.getBannedUsers().addAll(usersB);
+		app.getRegisteredUsers().addAll(usersR);
+		    
+		app.getDeniedProjects().addAll(projectsDenied);
+		app.getRejectedProjects().addAll(projectsRejected);
+		app.getFinanciatedProjects().addAll(projectsFinanciated);
+		app.getPublicProjects().addAll(projectsPublic);
+		app.getExpiredProjects().addAll(projectsExpired);
+		app.getPendingProjects().addAll(projectsPending);
+		    
+		app.getCollectives().addAll(collectives);
 	}
 
 	@Test

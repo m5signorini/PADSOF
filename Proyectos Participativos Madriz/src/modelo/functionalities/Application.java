@@ -14,6 +14,7 @@ import modelo.projects.*;
  * @author Martin Sanchez Signorini
  */
 public class Application implements Serializable{
+	private static Application APPLICATION;
 	private int minSupports;
 	private int maxInactivity;
 	
@@ -37,10 +38,10 @@ public class Application implements Serializable{
 	private Admin admin;
 	private User loggedUser;
 	
-	public Application(Admin admin, int minSupports, int maxInactivity) {
-		this.admin = admin;
+	private Application(/*Admin admin, int minSupports, int maxInactivity*/) {
+		/*this.admin = admin;
 		this.minSupports = minSupports;
-		this.maxInactivity = maxInactivity;
+		this.maxInactivity = maxInactivity;*/
 		
 		sentProjects = new ArrayList<Project>();
 		financiatedProjects = new ArrayList<Project>();
@@ -56,6 +57,13 @@ public class Application implements Serializable{
 		
 		collectives = new ArrayList<Collective>();
 		this.searcher = new SearchEngine(this);
+	}
+	
+	public static Application getApplication() {
+		if(APPLICATION == null) {
+			APPLICATION = new Application();
+		}
+		return APPLICATION;
 	}
 	
 	public boolean writeToFile(String filepath) {
@@ -108,88 +116,44 @@ public class Application implements Serializable{
 		return sentProjects;
 	}
 
-	public void setSentProjects(List<Project> sentProjects) {
-		this.sentProjects = sentProjects;
-	}
-
 	public List<Project> getFinanciatedProjects() {
 		return financiatedProjects;
 	}
 
-	public void setFinanciatedProjects(List<Project> financiatedProjects) {
-		this.financiatedProjects = financiatedProjects;
-	}
-
 	public List<Project> getRejectedProjects() {
 		return rejectedProjects;
-	}
-
-	public void setRejectedProjects(List<Project> rejectedProjects) {
-		this.rejectedProjects = rejectedProjects;
 	}
 	
 	public List<Project> getDeniedProjects() {
 		return deniedProjects;
 	}
 
-	public void setDeniedProjects(List<Project> deniedProjects) {
-		this.deniedProjects = deniedProjects;
-	}
-
 	public List<Project> getPublicProjects() {
 		return publicProjects;
-	}
-
-	public void setPublicProjects(List<Project> publicProjects) {
-		this.publicProjects = publicProjects;
 	}
 
 	public List<Project> getExpiredProjects() {
 		return expiredProjects;
 	}
 
-	public void setExpiredProjects(List<Project> expiredProjects) {
-		this.expiredProjects = expiredProjects;
-	}
-
 	public List<Project> getPendingProjects() {
 		return pendingProjects;
-	}
-
-	public void setPendingProjects(List<Project> pendingProjects) {
-		this.pendingProjects = pendingProjects;
 	}
 
 	public List<User> getRegisteredUsers() {
 		return registeredUsers;
 	}
 
-	public void setRegisteredUsers(List<User> registeredUsers) {
-		this.registeredUsers = registeredUsers;
-	}
-
 	public List<User> getUnregisteredUsers() {
 		return unregisteredUsers;
-	}
-
-	public void setUnregisteredUsers(List<User> unregisteredUsers) {
-		this.unregisteredUsers = unregisteredUsers;
 	}
 
 	public List<User> getBannedUsers() {
 		return bannedUsers;
 	}
 
-	public void setBannedUsers(List<User> bannedUsers) {
-		this.bannedUsers = bannedUsers;
-	}
-
 	public List<Collective> getCollectives() {
 		return collectives;
-	}
-
-	public void setCollectives(List<Collective> collectives) {
-		this.collectives = collectives;
 	}
 
 	public SearchEngine getSearcher() {
