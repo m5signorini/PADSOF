@@ -42,7 +42,6 @@ public class ControlInicio implements ActionListener {
 		
 		if(modelo.login(nif, pwd)){
 			JOptionPane.showMessageDialog(null, "Correctly logged in!");
-			//CreateProjectView projectView = new CreateProjectView();
 		} else {
 			JOptionPane.showMessageDialog(null, "Incorrect login: " + nif + pwd + "! Please, try again.");
 		}

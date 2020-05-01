@@ -15,7 +15,7 @@ public class Main {
 				try {						
 					//CreateProjectView projectView = new CreateProjectView();
 					Ventana frame = new Ventana();
-					Application app = new Application(/*new Admin("admin"), 2, 2*/);
+					Application app = Application.getApplication();
 					Controlador controlador = new Controlador(frame, app);
 					frame.setControlador(controlador);
 					frame.setVisible(true);
