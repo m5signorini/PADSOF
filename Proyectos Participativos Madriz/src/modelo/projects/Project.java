@@ -247,8 +247,8 @@ public abstract class Project implements GrantRequest, Serializable {
   	 */
     public int countVotes() {
     	Set<User> s = new HashSet<User>();
-    	for(int i = 0; i < this.voters.size(); i++) {
-    		s.addAll(this.voters.get(i).count());
+    	for(Voter v: this.voters) {
+    		s.addAll(v.count());
     	}
     	return s.size();
     }
