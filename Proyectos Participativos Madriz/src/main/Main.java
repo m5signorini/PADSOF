@@ -1,9 +1,10 @@
 package main;
 
 import java.awt.EventQueue;
-import modelo.*;
-import vista.*;
-import controlador.*;
+import modelo.entities.individuals.Admin;
+import modelo.functionalities.Application;
+import vista.inicio.Ventana;
+import controlador.inicio.Controlador;
 
 public class Main {
 	public static void main(String[] args) {
@@ -11,8 +12,8 @@ public class Main {
 			public void run() {
 				try {						
 					Ventana frame = new Ventana();
-					Proyecto modelo = new Proyecto();
-					Controlador controlador = new Controlador(frame, modelo);
+					Application app = new Application(new Admin("admin"), 2, 2);
+					Controlador controlador = new Controlador(frame, app);
 					frame.setControlador(controlador);
 					frame.setVisible(true);
 				} catch (Exception e) {
