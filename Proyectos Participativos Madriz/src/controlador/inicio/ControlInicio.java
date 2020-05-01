@@ -9,7 +9,7 @@ import modelo.functionalities.Application;
 import vista.*;
 import vista.inicio.Inicio;
 import vista.inicio.Ventana;
-//import vista.proyectos.CreateProjectView;
+import vista.proyectos.CreateProjectView;
 
 public class ControlInicio implements ActionListener {
 	
@@ -38,6 +38,7 @@ public class ControlInicio implements ActionListener {
 		
 		if(modelo.login(nif, pwd)){
 			JOptionPane.showMessageDialog(null, "Correctly logged in!");
+			CreateProjectView projectView = new CreateProjectView();
 		} else {
 			JOptionPane.showMessageDialog(null, "Incorrect login! Please, try again.");
 		}	
