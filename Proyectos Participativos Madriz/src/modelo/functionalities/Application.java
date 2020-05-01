@@ -103,6 +103,7 @@ public class Application implements Serializable{
             FileReader reader = new FileReader(filepath);
             BufferedReader buffered = new BufferedReader(reader);
             String line = buffered.readLine();
+            availableDistricts = new ArrayList<District>();
             while(line != null) {
             	availableDistricts.add(new District(line));
             	line = buffered.readLine();
