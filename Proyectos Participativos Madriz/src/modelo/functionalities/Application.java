@@ -38,6 +38,8 @@ public class Application implements Serializable{
 	private Admin admin;
 	private User loggedUser;
 	
+	private List<District> availableDistricts;
+	
 	private Application(/*Admin admin, int minSupports, int maxInactivity*/) {
 		/*this.admin = admin;
 		this.minSupports = minSupports;
@@ -56,7 +58,8 @@ public class Application implements Serializable{
 		bannedUsers = new ArrayList<User>();
 		
 		collectives = new ArrayList<Collective>();
-		this.searcher = new SearchEngine(this);
+		searcher = new SearchEngine(this);
+		availableDistricts = new ArrayList<District>();
 	}
 	
 	public static Application getApplication() {
@@ -95,9 +98,28 @@ public class Application implements Serializable{
         }
 	}
 	
+	public void readDistrictsFromFile(String filepath) {
+		try {
+            FileReader reader = new FileReader(filepath);
+            BufferedReader buffered = new BufferedReader(reader);
+            String line = buffered.readLine();
+            while(line != null) {
+            	availableDistricts.add(new District(line));
+            	line = buffered.readLine();
+            }
+            buffered.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+	}
+	
 	/*
 	 * GETTERS AND SETTERS
 	 */
+	public List<District> getDistricts() {
+		return this.availableDistricts;
+	}
+	
 	public int getMinSupports() {
 		return minSupports;
 	}
