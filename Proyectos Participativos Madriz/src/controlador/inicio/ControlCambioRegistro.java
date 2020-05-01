@@ -26,7 +26,7 @@ public class ControlCambioRegistro implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 	
 		// mostrar nueva vista
-		Registro nuevaVista = this.getPanelRegistro();
+		Registro nuevaVista = frame.getVistaRegistro();
 		nuevaVista.update();
 
 		nuevaVista.setVisible(true);
@@ -35,10 +35,6 @@ public class ControlCambioRegistro implements ActionListener {
 		// this.frame.mostrarPanel("detalleProyecto"); 
 			// alternativa usando CardLayout a las dos lineas anteriores
 		
-	}
-	
-	public Registro getPanelRegistro() {
-		return frame.getVistaRegistro();
 	}
 	
 }

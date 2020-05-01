@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import modelo.*;
+import modelo.entities.individuals.User;
 import modelo.functionalities.Application;
 import vista.*;
 import vista.inicio.Inicio;
@@ -38,10 +39,11 @@ public class ControlInicio implements ActionListener {
 			return;
 		}
 		
+		
 		if(modelo.login(nif, pwd)){
 			JOptionPane.showMessageDialog(null, "Correctly logged in!");
 		} else {
-			JOptionPane.showMessageDialog(null, "Incorrect login! Please, try again.");
+			JOptionPane.showMessageDialog(null, "Incorrect login: " + nif + pwd + "! Please, try again.");
 		}
 		
 		vista.update();

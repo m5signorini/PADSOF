@@ -149,11 +149,12 @@ public class User extends Account implements Voter, Serializable{
 	 */
 	public boolean login(String nif, String pwd) {
 		if (this.tryUnban() == false) return false;
-		if (nif != this.nif || pwd != this.pwd) {
+		if (!nif.equals(this.nif) || !pwd.equals(this.pwd)) {
+			System.out.println(this + " " + nif + " 2");
 			return false;
-		} else {
-			return true;
-		}
+		}			
+		return true;
+	
 	}
 	
 	/**

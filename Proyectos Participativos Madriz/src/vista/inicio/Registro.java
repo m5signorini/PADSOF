@@ -36,6 +36,18 @@ public class Registro extends JPanel {
 		boton = new JButton("Registrarse");
 		add(boton);
 	}
+	
+	public String getName() {
+		return campoNombre.getText();
+	}
+	
+	public String getNif() {
+		return campoNif.getText();
+	}
+	
+	public String getPwd() {
+		return campoPwd.getText();
+	}
 
 	public void setControlador(ActionListener c) {
 		boton.addActionListener(c);
