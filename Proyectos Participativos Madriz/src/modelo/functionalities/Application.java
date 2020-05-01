@@ -444,6 +444,16 @@ public class Application implements Serializable{
 		return true;
 	}
 	
+	private double relatedProjects(Collective creator, Collective supporter) {
+		double supportedProjects = 0;
+		for(Project p: creator.getCreatedProjects()) {
+			if(supporter.getSupportedProjects().contains(p)) {
+				supportedProjects += 1;
+			}
+		}
+		return supportedProjects;
+	}
+	
 	/**
 	 * Method for calculating collectives affinity
 	 * @param c1 Collective 1
@@ -458,19 +468,12 @@ public class Application implements Serializable{
 		double nProjOfC2SuppByC1 = 0;
 		double totalCreatedProjs = 0;
 		// Projects created by c1 supported by c2
-		for(Project p: c1.getCreatedProjects()) {
-			if(c2.getSupportedProjects().contains(p)) {
-				nProjOfC1SuppByC2 += 1;
-			}
-			totalCreatedProjs += 1;
-		}
+		totalCreatedProjs += c1.getCreatedProjects().size();
+		nProjOfC1SuppByC2 += relatedProjects(c1, c2);
 		// Projects created by c2 supported by c1
-		for(Project p: c2.getCreatedProjects()) {
-			if(c1.getSupportedProjects().contains(p)) {
-				nProjOfC2SuppByC1 += 1;
-			}
-			totalCreatedProjs += 1;
-		}
+		totalCreatedProjs += c2.getCreatedProjects().size();
+		nProjOfC1SuppByC2 += relatedProjects(c2, c1);
+		
 		if(totalCreatedProjs == 0) {
 			return 0;
 		}
