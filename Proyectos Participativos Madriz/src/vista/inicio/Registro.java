@@ -47,7 +47,7 @@ public class Registro extends JPanel {
 		
 		etiqueta = new JLabel("Contraseña: ");
 		cont.add(etiqueta);
-		campoPwd = new JTextField();
+		campoPwd = new JPasswordField();
 		cont.add(campoPwd);
 		
 		add(cont);	

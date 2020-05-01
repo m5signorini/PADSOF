@@ -7,6 +7,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -39,7 +40,7 @@ public class Inicio extends JPanel {
 		
 		JLabel pwd = new JLabel("Password:");
 		cont.add(pwd);		
-		campoPwd = new JTextField();
+		campoPwd = new JPasswordField();
 		cont.add(campoPwd);
 		
 		add(cont);
@@ -78,6 +79,5 @@ public class Inicio extends JPanel {
 		campoNif.setText("");
 		campoPwd.setText("");
 		campoNif.grabFocus();
-		campoPwd.grabFocus();
 	}
 }

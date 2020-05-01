@@ -22,6 +22,8 @@ public class Ventana extends JFrame {
 		contentPane = new JPanel();
 		setContentPane(contentPane);
 
+		this.setLocationRelativeTo(null);
+
 		this.vistaInicio = new Inicio();
 		contentPane.add(vistaInicio, "INICIO DE SESION");
 
@@ -30,8 +32,7 @@ public class Ventana extends JFrame {
 		
 		vistaRegistro.setVisible(false);		
 
-		this.pack();
-		
+		this.pack();		
 	}
 
 	public void setControlador(Controlador controlador) {
