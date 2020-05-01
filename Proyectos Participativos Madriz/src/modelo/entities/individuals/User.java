@@ -26,7 +26,7 @@ public class User extends Account implements Voter, Serializable{
 	protected ArrayList<Project> votedProjects;
 	protected ArrayList<Project> createdProjects;
 	protected ArrayList<Notification> notifications;
-	Calendar unbanDate;
+	private Calendar unbanDate;
 	boolean banned = false;
 	
 	public User(String name, String pwd, String nif) {
