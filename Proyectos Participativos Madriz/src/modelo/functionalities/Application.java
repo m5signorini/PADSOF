@@ -473,63 +473,49 @@ public class Application implements Serializable{
 		return (nProjOfC1SuppByC2+nProjOfC2SuppByC1)/(totalCreatedProjs);
 	}
 	
+	private String collectionToString(Collection<?> c) {
+		String s = "";
+		for(Object o: c) {
+			/* For pretty printing the application */
+			s += o.toString().replaceAll("(?m)^", "\t") + "\n";
+		}
+		return s;
+	}
+	
 	private String projectsToString() {
 		String s = "";
 		s += "Pending projects:\n";
-		for(Project p: this.pendingProjects) {
-			/* For pretty printing the application */
-			s += p.toString().replaceAll("(?m)^", "\t") + "\n";
-		}
+		collectionToString(this.pendingProjects);
 		s += "Denied projects:\n";
-		for(Project p: this.deniedProjects) {
-			s += p.toString().replaceAll("(?m)^", "\t") + "\n";
-		}
+		collectionToString(this.deniedProjects);
 		s += "Sent projects:\n";
-		for(Project p: this.sentProjects) {
-			s += p.toString().replaceAll("(?m)^", "\t") + "\n";
-		}
+		collectionToString(this.sentProjects);
 		s += "Rejected projects:\n";
-		for(Project p: this.rejectedProjects) {
-			s += p.toString().replaceAll("(?m)^", "\t") + "\n";
-		}
+		collectionToString(this.rejectedProjects);
 		s += "Financiated projects:\n";
-		for(Project p: this.financiatedProjects) {
-			s += p.toString().replaceAll("(?m)^", "\t") + "\n";
-		}
+		collectionToString(this.financiatedProjects);
 		s += "Public projects:\n";
-		for(Project p: this.publicProjects) {
-			s += p.toString().replaceAll("(?m)^", "\t") + "\n";
-		}
+		collectionToString(this.publicProjects);
 		s += "Expired projects:\n";
-		for(Project p: this.expiredProjects) {
-			s += p.toString().replaceAll("(?m)^", "\t") + "\n";
-		}
+		collectionToString(this.expiredProjects);
 		return s;
 	}
 	
 	private String usersToString() {
 		String s = "";
 		s += "Unregistered users:\n";
-		for(User u: this.unregisteredUsers) {
-			s += u.toString().replaceAll("(?m)^", "\t") + "\n";
-		}
+		collectionToString(this.unregisteredUsers);
 		s += "Registered users:\n";
-		for(User u: this.registeredUsers) {
-			s += u.toString().replaceAll("(?m)^", "\t") + "\n";
-		}
+		collectionToString(this.registeredUsers);
 		s += "Banned Users:\n";
-		for(User u: this.bannedUsers) {
-			s += u.toString().replaceAll("(?m)^", "\t") + "\n";
-		}
+		collectionToString(this.bannedUsers);
 		return s;
 	}
 	
 	private String collectivesToString() {
 		String s = "";
 		s += "Collectives:\n";
-		for(Collective c: this.collectives) {
-			s += c.toString().replaceAll("(?m)^", "\t") + "\n";
-		}
+		collectionToString(this.collectives);
 		return s;
 	}
 	
