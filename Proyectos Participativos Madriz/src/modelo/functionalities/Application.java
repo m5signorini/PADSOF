@@ -40,7 +40,7 @@ public class Application implements Serializable{
 	
 	private List<District> availableDistricts;
 	
-	private Application(/*Admin admin, int minSupports, int maxInactivity*/) {
+	public Application(/*Admin admin, int minSupports, int maxInactivity*/) {
 		/*this.admin = admin;
 		this.minSupports = minSupports;
 		this.maxInactivity = maxInactivity;*/

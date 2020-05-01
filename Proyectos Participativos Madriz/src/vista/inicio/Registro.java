@@ -1,6 +1,9 @@
 package vista.inicio;
 
 import javax.swing.*;
+
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.*;
 import controlador.*;
 
@@ -15,29 +18,50 @@ public class Registro extends JPanel {
 	
 	public Registro() { 
 
-		etiqueta = new JLabel("Introduzca sus datos: ");
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		
+		etiqueta = new JLabel("REGISTRO: ");
+		etiqueta.setAlignmentX(CENTER_ALIGNMENT);
+		add(etiqueta);
+
+		add(Box.createRigidArea(new Dimension(0, 10)));
+		
+		etiqueta = new JLabel("Por favpr, introduzca sus datos: ");
+		etiqueta.setAlignmentX(CENTER_ALIGNMENT);
 		add(etiqueta);
 		
+		add(Box.createRigidArea(new Dimension(0, 10)));
+		
+		JPanel cont = new JPanel();
+		cont.setLayout(new GridLayout(3, 2, 5, 10));
+		
+		etiqueta = new JLabel("Nombre: ");
+		cont.add(etiqueta);
 		campoNombre = new JTextField();
-		add(campoNombre);
-		campoNombre.setColumns(10);
-		campoNombre.requestFocus();
+		cont.add(campoNombre);
 		
+		etiqueta = new JLabel("Nif: ");
+		cont.add(etiqueta);
 		campoNif = new JTextField();
-		add(campoNif);
-		campoNif.setColumns(10);
-		campoNif.requestFocus();
+		cont.add(campoNif);
 		
+		etiqueta = new JLabel("Contraseña: ");
+		cont.add(etiqueta);
 		campoPwd = new JTextField();
-		add(campoPwd);
-		campoPwd.setColumns(10);
-		campoPwd.requestFocus();
-	
+		cont.add(campoPwd);
+		
+		add(cont);	
+		
+		add(Box.createRigidArea(new Dimension(0, 10)));
 
 		botonRegistro = new JButton("Registrarse");
+		botonRegistro.setAlignmentX(CENTER_ALIGNMENT);
 		add(botonRegistro);
 
+		add(Box.createRigidArea(new Dimension(0, 10)));
+		
 		botonInicio = new JButton("Iniciar sesion");
+		botonInicio.setAlignmentX(CENTER_ALIGNMENT);
 		add(botonInicio);
 	}
 	

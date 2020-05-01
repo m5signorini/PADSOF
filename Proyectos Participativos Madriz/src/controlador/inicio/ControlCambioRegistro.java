@@ -22,19 +22,13 @@ public class ControlCambioRegistro implements ActionListener {
 		this.modelo = modelo;
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent e) {
-	
-		// mostrar nueva vista
 		Registro nuevaVista = frame.getVistaRegistro();
 		nuevaVista.update();
 
 		nuevaVista.setVisible(true);
 		vista.setVisible(false);
-		
-		// this.frame.mostrarPanel("detalleProyecto"); 
-			// alternativa usando CardLayout a las dos lineas anteriores
-		
+		frame.pack();		
 	}
 	
 }

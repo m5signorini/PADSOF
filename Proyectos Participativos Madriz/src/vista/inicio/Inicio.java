@@ -1,7 +1,16 @@
 package vista.inicio;
 
-import javax.swing.*;
-import java.awt.event.*;
+import java.awt.event.ActionListener;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 
 public class Inicio extends JPanel {
 
@@ -12,24 +21,40 @@ public class Inicio extends JPanel {
 	
 	public Inicio() {
 		
-		JLabel etiqueta = new JLabel("Inicio de sesion:");
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		
+		JLabel etiqueta = new JLabel("INICIO DE SESION:");
+		etiqueta.setAlignmentX(CENTER_ALIGNMENT);
 		add(etiqueta);
 
-		campoNif = new JTextField();
-		add(campoNif);
-		campoNif.setColumns(10);
-		campoNif.requestFocus();
+		add(Box.createRigidArea(new Dimension(0, 10)));
 		
+		JPanel cont = new JPanel();
+		cont.setLayout(new GridLayout(2, 2, 5, 10));		
+		
+		JLabel nif = new JLabel("Nif:");	
+		cont.add(nif);	
+		campoNif = new JTextField();
+		cont.add(campoNif);
+		
+		JLabel pwd = new JLabel("Password:");
+		cont.add(pwd);		
 		campoPwd = new JTextField();
-		add(campoPwd);
-		campoPwd.setColumns(10);
-		campoPwd.requestFocus();
+		cont.add(campoPwd);
+		
+		add(cont);
+		
+		add(Box.createRigidArea(new Dimension(0, 20)));
 		
 		botonValidar = new JButton("Validar");
+		botonValidar.setAlignmentX(CENTER_ALIGNMENT);
 		add(botonValidar);
 		
+		add(Box.createRigidArea(new Dimension(0, 10)));
+
 		botonRegistro = new JButton("Pulse aqui para registrarse");
-		add(botonRegistro);
+		botonRegistro.setAlignmentX(CENTER_ALIGNMENT);
+		add(botonRegistro);	
 		
 	}
 
@@ -55,5 +80,4 @@ public class Inicio extends JPanel {
 		campoNif.grabFocus();
 		campoPwd.grabFocus();
 	}
-
 }

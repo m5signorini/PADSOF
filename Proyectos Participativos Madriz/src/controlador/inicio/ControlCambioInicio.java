@@ -22,7 +22,7 @@ public class ControlCambioInicio implements ActionListener {
 		this.modelo = modelo;
 	}
 
-	@Override
+
 	public void actionPerformed(ActionEvent e) {
 	
 		// mostrar nueva vista
@@ -31,6 +31,7 @@ public class ControlCambioInicio implements ActionListener {
 
 		nuevaVista.setVisible(true);
 		vista.setVisible(false);
+		frame.pack();		
 		
 		// this.frame.mostrarPanel("detalleProyecto"); 
 			// alternativa usando CardLayout a las dos lineas anteriores

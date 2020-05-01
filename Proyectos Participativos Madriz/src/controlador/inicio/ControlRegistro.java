@@ -25,7 +25,7 @@ public class ControlRegistro implements ActionListener {
 		this.app = app;
 	}
 
-	@Override
+
 	public void actionPerformed(ActionEvent e) {
 		mostrarPanelRegistro();
 	}

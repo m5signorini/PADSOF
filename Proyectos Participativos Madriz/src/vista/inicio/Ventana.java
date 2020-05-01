@@ -19,16 +19,18 @@ public class Ventana extends JFrame {
 	public Ventana() {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(10000, 10000, 10000, 10000);
 		contentPane = new JPanel();
 		setContentPane(contentPane);
-		contentPane.setLayout(new CardLayout());
 
 		this.vistaInicio = new Inicio();
-		contentPane.add(vistaInicio, "incio sesion");
+		contentPane.add(vistaInicio, "INICIO DE SESION");
 
 		this.vistaRegistro = new Registro(); 
-		contentPane.add(vistaRegistro, "detalleProyecto");
+		contentPane.add(vistaRegistro, "REGISTRO");
+		
+		vistaRegistro.setVisible(false);		
+
+		this.pack();
 		
 	}
 
@@ -53,10 +55,4 @@ public class Ventana extends JFrame {
 	public Registro getVistaRegistro() {
 		return this.vistaRegistro;
 	}
-	
-	public void mostrarPanel(String carta) {
-		CardLayout l = (CardLayout)contentPane.getLayout();
-		l.show(contentPane, carta);
-	}
-
 }

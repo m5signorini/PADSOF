@@ -9,6 +9,7 @@ import modelo.functionalities.Application;
 import vista.*;
 import vista.inicio.Inicio;
 import vista.inicio.Ventana;
+import vista.proyectos.CreateProjectView;
 
 public class ControlInicio implements ActionListener {
 	
@@ -22,7 +23,6 @@ public class ControlInicio implements ActionListener {
 		this.modelo = modelo;
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		
 		// validar valores en la vista
@@ -42,24 +42,20 @@ public class ControlInicio implements ActionListener {
 		
 		if(modelo.login(nif, pwd)){
 			JOptionPane.showMessageDialog(null, "Correctly logged in!");
+			//CreateProjectView projectView = new CreateProjectView();
 		} else {
 			JOptionPane.showMessageDialog(null, "Incorrect login: " + nif + pwd + "! Please, try again.");
 		}
 		
 		vista.update();
 	
-		// mostrar nueva vista
-		//Inicio nuevaVista = this.getPanelDetalleProyecto();
-		//nuevaVista.update();
-
-		//nuevaVista.setVisible(true);
-		//vista.setVisible(false);
-		
-		// this.frame.mostrarPanel("detalleProyecto"); 
-			// alternativa usando CardLayout a las dos lineas anteriores
-		
 	}
 	
+	private CreateProjectView CreateProjectView() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	public Inicio getPanelVistaIn() {
 		return frame.getVistaInicio();
 	}
