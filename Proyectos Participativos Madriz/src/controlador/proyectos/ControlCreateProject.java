@@ -11,15 +11,18 @@ import modelo.entities.Collective;
 import modelo.entities.individuals.*;
 import modelo.functionalities.Application;
 import modelo.projects.*;
+import vista.Ventana;
 import vista.proyectos.CreateProjectView;
 
 public class ControlCreateProject implements ActionListener {
 	private Application modelo;
 	private CreateProjectView projectView;
+	private Ventana frame;
 	
-	public ControlCreateProject(Application modelo, CreateProjectView projectView) {
+	public ControlCreateProject(Application modelo, Ventana frame2) {
 		this.modelo = modelo;
-		this.projectView = projectView;
+		this.frame = frame2;
+		this.projectView = frame2.getCreateProjectView();
 	}
 
 	@Override
@@ -114,7 +117,7 @@ public class ControlCreateProject implements ActionListener {
 						}
 					}
 				}
-				String location = this.projectView.getLocation();
+				String location = this.projectView.getLocationP();
 				if(location == null) {
 					return;
 				}
