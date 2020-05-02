@@ -75,8 +75,8 @@ public class Ventana extends JFrame {
 		this.contPantallaPrincipal = controlador.getControlPantallaPrincipal();
 		vistaPantallaPrincipal.setControladores(contPantallaPrincipal);
 		
-		this.contCreateProject = controlador.getControlCreateProject();
-		vistaCreacionProyecto.setController(contCreateProject);
+		//this.contCreateProject = controlador.getControlCreateProject();
+		//vistaCreacionProyecto.setController(contCreateProject);
 	}
 
 	public Inicio getVistaInicio() {
