@@ -12,10 +12,7 @@ public class Main {
 			public void run() {
 				try {						
 					Ventana frame = new Ventana();
-					Application app = Application.getApplication();
-
-					app = Application.readFromFile("data");
-					
+					Application app = Application.readFromFile("data");					
 					Controlador controlador = new Controlador(frame, app);
 					frame.setControlador(controlador);
 					frame.setVisible(true);
