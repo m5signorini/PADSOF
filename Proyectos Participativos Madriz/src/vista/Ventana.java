@@ -53,7 +53,7 @@ public class Ventana extends JFrame {
 		contentPane.add(vistaPantallaPrincipal, "PRINCIPAL");
 		
 		vistaRegistro.setVisible(false);	
-		vistaInicio.setVisible(false);	
+		vistaPantallaPrincipal.setVisible(false);	
 
 		this.pack();
 	}
@@ -78,5 +78,9 @@ public class Ventana extends JFrame {
 
 	public Registro getVistaRegistro() {
 		return this.vistaRegistro;
+	}
+	
+	public PantallaPrincipal getVistaPantallaPrincipal() {
+		return this.vistaPantallaPrincipal;
 	}
 }

@@ -36,16 +36,16 @@ public class ControlInicio implements ActionListener {
 			return;
 		}
 		
-		if(modelo.login(nif, pwd)){
-			JOptionPane.showMessageDialog(null, "Correctly logged in!");
-			frame.setVisible(false);
-			CreateProjectView projectView = new CreateProjectView();
-		} else {
+		if(!modelo.login(nif, pwd)){
 			JOptionPane.showMessageDialog(null, "Incorrect login! Please, try again.");
+			vista.update();
+			return;
 		}	
-		
-		vista.update();
-	
+
+		JOptionPane.showMessageDialog(null, "Correctly logged in!");
+		frame.getVistaPantallaPrincipal().setVisible(true);
+		frame.getVistaInicio().setVisible(false);
+		frame.pack();
 	}
 	
 	public Inicio getPanelVistaIn() {
