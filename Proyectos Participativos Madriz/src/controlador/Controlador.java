@@ -3,6 +3,7 @@ package controlador;
 import controlador.inicio.ControlInicio;
 import controlador.inicio.ControlRegistro;
 import controlador.principal.ControlPantallaPrincipal;
+import controlador.proyectos.ControlCreateProject;
 import modelo.*;
 import modelo.functionalities.Application;
 import vista.*;
@@ -15,6 +16,7 @@ public class Controlador {
 	private ControlInicio contInicio;
 	private ControlRegistro contRegistro;
 	private ControlPantallaPrincipal contPantallaPrincipal;
+	private ControlCreateProject contCreateProject;
 
 	public Controlador(vista.Ventana frame2, Application app) {
 		this.frame = frame2;
@@ -35,5 +37,9 @@ public class Controlador {
 	
 	public ControlPantallaPrincipal getControlPantallaPrincipal() {
 		return this.contPantallaPrincipal;
+	}
+	
+	public ControlCreateProject getControlCreateProject() {
+		return this.contCreateProject;
 	}
 }
