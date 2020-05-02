@@ -38,6 +38,12 @@ public class ControlPantallaPrincipal implements ActionListener {
 		case "Cerrar Sesion":
 			cerrarSesion();
 			break;
+		case "Crear Proyecto":
+			CreateProjectView createProject = frame.getCreateProjectView();
+			createProject.setVisible(true);
+			//frame.getVistaInicio().setVisible(false);
+			frame.pack();
+			break;
 		}
 	}
 	
