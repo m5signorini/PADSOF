@@ -8,6 +8,7 @@ import modelo.entities.individuals.User;
 import modelo.exceptions.BannedUserException;
 import modelo.functionalities.Application;
 import vista.*;
+import vista.colectivos.CreateCollectiveView;
 import vista.inicio.Inicio;
 import vista.inicio.Registro;
 import vista.principal.PantallaPrincipal;
@@ -41,6 +42,12 @@ public class ControlPantallaPrincipal implements ActionListener {
 		case "Crear Proyecto":
 			CreateProjectView createProject = frame.getCreateProjectView();
 			createProject.setVisible(true);
+			//frame.getVistaInicio().setVisible(false);
+			frame.pack();
+			break;
+		case "Crear Colectivo":
+			CreateCollectiveView createCollective = frame.getCreateCollectiveView();
+			createCollective.setVisible(true);
 			//frame.getVistaInicio().setVisible(false);
 			frame.pack();
 			break;

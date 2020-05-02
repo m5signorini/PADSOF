@@ -1,5 +1,6 @@
 package controlador;
 
+import controlador.colectivos.ControlCreateCollective;
 import controlador.inicio.ControlInicio;
 import controlador.inicio.ControlRegistro;
 import controlador.principal.ControlPantallaPrincipal;
@@ -17,6 +18,7 @@ public class Controlador {
 	private ControlRegistro contRegistro;
 	private ControlPantallaPrincipal contPantallaPrincipal;
 	private ControlCreateProject contCreateProject;
+	private ControlCreateCollective contCreateCollective;
 
 	public Controlador(vista.Ventana frame2, Application app) {
 		this.frame = frame2;
@@ -26,7 +28,7 @@ public class Controlador {
 		this.contRegistro= new ControlRegistro(frame, app);
 		this.contPantallaPrincipal = new ControlPantallaPrincipal(frame, app);
 		this.contCreateProject = new ControlCreateProject(app, frame);
-
+		this.contCreateCollective = new ControlCreateCollective(app, frame);
 	}
 
 	public ControlInicio getControlInicio() {
@@ -43,5 +45,9 @@ public class Controlador {
 	
 	public ControlCreateProject getControlCreateProject() {
 		return this.contCreateProject;
+	}
+
+	public ControlCreateCollective getControlCreateCollective() {
+		return this.contCreateCollective;
 	}
 }

@@ -142,6 +142,9 @@ public class ControlCreateProject implements ActionListener {
 			break;
 		case "Cancelar":
 			this.projectView.setVisible(false);
+			break;
+		default:
+			break;
 		}
 	}
 }

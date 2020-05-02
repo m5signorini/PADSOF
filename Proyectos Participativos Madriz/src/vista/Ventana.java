@@ -8,10 +8,12 @@ import javax.swing.JPanel;
 
 
 import controlador.Controlador;
+import controlador.colectivos.ControlCreateCollective;
 import controlador.inicio.ControlInicio;
 import controlador.inicio.ControlRegistro;
 import controlador.principal.ControlPantallaPrincipal;
 import controlador.proyectos.ControlCreateProject;
+import vista.colectivos.CreateCollectiveView;
 import vista.inicio.Inicio;
 import vista.inicio.Registro;
 import vista.principal.PantallaPrincipal;
@@ -23,11 +25,13 @@ public class Ventana extends JFrame {
 	private Registro vistaRegistro;
 	private PantallaPrincipal vistaPantallaPrincipal;
 	private CreateProjectView vistaCreacionProyecto;
+	private CreateCollectiveView vistaCreacionColectivo;
 
 	private ControlInicio contInicio;
 	private ControlRegistro contRegistro;
 	private ControlPantallaPrincipal contPantallaPrincipal;
 	private ControlCreateProject contCreateProject;
+	private ControlCreateCollective contCreateCollective;
 	
 	private JPanel contentPane;
 	
@@ -55,10 +59,13 @@ public class Ventana extends JFrame {
 		this.vistaCreacionProyecto = new CreateProjectView();
 		contentPane.add(vistaCreacionProyecto, "CREACION DE PROYECTO");
 		
-		
+		this.vistaCreacionColectivo = new CreateCollectiveView();
+		contentPane.add(vistaCreacionColectivo, "CREACION DE PROYECTO");
+
 		vistaRegistro.setVisible(false);	
 		vistaPantallaPrincipal.setVisible(false);	
 		vistaCreacionProyecto.setVisible(false);
+		vistaCreacionColectivo.setVisible(false);
 		
 		this.pack();
 	}
@@ -77,6 +84,9 @@ public class Ventana extends JFrame {
 		
 		this.contCreateProject = controlador.getControlCreateProject();
 		vistaCreacionProyecto.setController(contCreateProject);
+		
+		this.contCreateCollective = controlador.getControlCreateCollective();
+		vistaCreacionColectivo.setController(contCreateCollective);
 	}
 
 	public Inicio getVistaInicio() {
@@ -93,5 +103,9 @@ public class Ventana extends JFrame {
 	
 	public CreateProjectView getCreateProjectView() {
 		return this.vistaCreacionProyecto;
+	}
+	
+	public CreateCollectiveView getCreateCollectiveView() {
+		return this.vistaCreacionColectivo;
 	}
 }

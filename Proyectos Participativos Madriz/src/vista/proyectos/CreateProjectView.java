@@ -413,7 +413,7 @@ public class CreateProjectView extends JPanel{
 	 */
 	public String getTitle() {
 		if ((titleS.getText() == null || titleS.getText().equals("")) && (titleI.getText() == null || titleI.getText().equals(""))) {
-			JOptionPane.showMessageDialog(null, "You must a project name.", "Wrong project name.", JOptionPane.OK_OPTION);
+			JOptionPane.showMessageDialog(null, "You must enter a project name.", "Wrong project name.", JOptionPane.OK_OPTION);
 			return null; 
 		}
 		if(aux == "Social"){
