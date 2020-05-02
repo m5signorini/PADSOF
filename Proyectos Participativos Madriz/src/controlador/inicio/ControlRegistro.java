@@ -11,7 +11,6 @@ import modelo.functionalities.Application;
 import vista.*;
 import vista.inicio.Inicio;
 import vista.inicio.Registro;
-import vista.inicio.Ventana;
 
 public class ControlRegistro implements ActionListener {
 	

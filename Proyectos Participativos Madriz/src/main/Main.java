@@ -1,11 +1,12 @@
 package main;
 
 import java.awt.EventQueue;
+
+import controlador.Controlador;
 import modelo.entities.individuals.Admin;
 import modelo.functionalities.Application;
-import vista.inicio.Ventana;
+import vista.Ventana;
 import vista.proyectos.CreateProjectView;
-import controlador.inicio.Controlador;
 import vista.proyectos.CreateProjectView;
 
 public class Main {

@@ -1,20 +1,24 @@
-package controlador.inicio;
+package controlador;
 
+import controlador.inicio.ControlCambioInicio;
+import controlador.inicio.ControlCambioRegistro;
+import controlador.inicio.ControlInicio;
+import controlador.inicio.ControlRegistro;
 import modelo.*;
 import modelo.functionalities.Application;
 import vista.*;
-import vista.inicio.Ventana;
 
 public class Controlador {
 	
+	private Ventana frame;
+	private Application app;	
+
 	private ControlInicio contInicio;
 	private ControlCambioRegistro contCambioRegistro;
 	private ControlCambioInicio contCambioInicio;
 	private ControlRegistro contRegistro;
-	private Ventana frame;
-	private Application app;
 
-	public Controlador(vista.inicio.Ventana frame2, Application app) {
+	public Controlador(vista.Ventana frame2, Application app) {
 		this.frame = frame2;
 		this.app = app;
 		this.contInicio = new ControlInicio(frame2, app);

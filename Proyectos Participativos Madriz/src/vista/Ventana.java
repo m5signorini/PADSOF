@@ -1,18 +1,33 @@
-package vista.inicio;
+package vista;
 
-import javax.swing.*;
-import java.awt.*;
-import controlador.inicio.*;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+
+import controlador.Controlador;
+import controlador.inicio.ControlCambioInicio;
+import controlador.inicio.ControlCambioRegistro;
+import controlador.inicio.ControlInicio;
+import controlador.inicio.ControlRegistro;
+import controlador.principal.ControlPantallaPrincipal;
+import vista.inicio.Inicio;
+import vista.inicio.Registro;
+import vista.principal.PantallaPrincipal;
 
 public class Ventana extends JFrame {
 	
 	private Inicio vistaInicio;
 	private Registro vistaRegistro;
+	private PantallaPrincipal vistaPantallaPrincipal;
 
 	private ControlInicio contInicio;
 	private ControlRegistro contRegistro;
 	private ControlCambioRegistro contCambioRegistro;
 	private ControlCambioInicio contCambioInicio;
+	private ControlPantallaPrincipal contPantallaPrincipal;
 	
 	private JPanel contentPane;
 	
@@ -22,17 +37,25 @@ public class Ventana extends JFrame {
 		contentPane = new JPanel();
 		setContentPane(contentPane);
 
-		this.setLocationRelativeTo(null);
-
+		// Para que se cree la ventana en el centro de la pantalla.
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		int a = (dim.width/2-this.getSize().width/2)/2;
+		int b = (dim.height/2-this.getSize().height/2)/2;
+		this.setLocation(a, b);
+		
 		this.vistaInicio = new Inicio();
 		contentPane.add(vistaInicio, "INICIO DE SESION");
 
 		this.vistaRegistro = new Registro(); 
 		contentPane.add(vistaRegistro, "REGISTRO");
 		
-		vistaRegistro.setVisible(false);		
+		this.vistaPantallaPrincipal = new PantallaPrincipal(); 
+		contentPane.add(vistaPantallaPrincipal, "PRINCIPAL");
+		
+		vistaRegistro.setVisible(false);	
+		vistaInicio.setVisible(false);	
 
-		this.pack();		
+		this.pack();
 	}
 
 	public void setControlador(Controlador controlador) {

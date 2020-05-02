@@ -1,4 +1,4 @@
-package controlador.inicio;
+package controlador.principal;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -11,13 +11,13 @@ import vista.inicio.Inicio;
 import vista.inicio.Registro;
 import vista.proyectos.CreateProjectView;
 
-public class ControlInicio implements ActionListener {
+public class ControlPantallaPrincipal implements ActionListener {
 	
 	private Inicio vista;
 	private Ventana frame;
 	private Application modelo;
 	
-	public ControlInicio(Ventana frame2, Application modelo) {
+	public ControlPantallaPrincipal(Ventana frame2, Application modelo) {
 		this.frame = frame2;
 		this.vista = frame2.getVistaInicio();
 		this.modelo = modelo;
