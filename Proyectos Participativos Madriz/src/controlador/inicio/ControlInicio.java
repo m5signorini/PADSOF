@@ -84,10 +84,5 @@ public class ControlInicio implements ActionListener {
 		pantallaPrincipal.setNotifications(u.getNotifications());
 		
 		pantallaPrincipal.update();
-	}
-	
-	public Inicio getPanelVistaIn() {
-		return frame.getVistaInicio();
-	}
-	
+	}	
 }

@@ -10,6 +10,7 @@ import modelo.functionalities.Application;
 import vista.*;
 import vista.inicio.Inicio;
 import vista.inicio.Registro;
+import vista.principal.PantallaPrincipal;
 import vista.proyectos.CreateProjectView;
 
 public class ControlPantallaPrincipal implements ActionListener {
@@ -25,7 +26,32 @@ public class ControlPantallaPrincipal implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		
+		JButton button = (JButton)e.getSource();
+		switch(button.getActionCommand()) {
+		case "Validar":
+			try {
+				intentaLogin();
+				break;
+			} catch (BannedUserException e1) {
+				e1.printStackTrace();
+			}
+		case "Pulse aqui para registrarse":
+			cambioRegistro();
+			break;
+		}
+	}
+	
+
+	private void cambioRegistro() {
+		Registro nuevaVista = frame.getVistaRegistro();
+		nuevaVista.update();
+		nuevaVista.setVisible(true);
+		vista.setVisible(false);
+		frame.pack();		
+	}
+	
+	private void intentaLogin() throws BannedUserException {
+	
 		String nif = vista.getNif();
 		if (nif.equals("")) {
 			JOptionPane.showMessageDialog(vista, "Debe introducir un nif.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -37,24 +63,27 @@ public class ControlPantallaPrincipal implements ActionListener {
 			return;
 		}
 		
-		try {
-			if(modelo.login(nif, pwd)){
-				JOptionPane.showMessageDialog(null, "Correctly logged in!");
-				frame.setVisible(false);
-				CreateProjectView projectView = new CreateProjectView();
-			} else {
-				JOptionPane.showMessageDialog(null, "Incorrect login! Please, try again.");
-			}
-		} catch (HeadlessException | BannedUserException e1) {
-			e1.printStackTrace();
+		if(!modelo.login(nif, pwd)){
+			JOptionPane.showMessageDialog(null, "Incorrect login! Please, try again.");
+			vista.update();
+			return;
 		}	
 		
-		vista.update();
-	
-	}
-	
-	public Inicio getPanelVistaIn() {
-		return frame.getVistaInicio();
-	}
+		PantallaPrincipal pantallaPrincipal = frame.getVistaPantallaPrincipal();
+		User u = modelo.getLoggedUser();
+			
+		JOptionPane.showMessageDialog(null, "Correctly logged in!");
+		pantallaPrincipal.setVisible(true);
+		frame.getVistaInicio().setVisible(false);
+		frame.pack();
+
+		pantallaPrincipal.setCreatedProjects(u.getCreatedProjects());
+		pantallaPrincipal.setFollowedProjects(u.getFollowedProjects());
+		pantallaPrincipal.setCollectives(u.getCollectives());
+		pantallaPrincipal.setRepresentedCollectives(u.getRepresentedCollectives());
+		pantallaPrincipal.setNotifications(u.getNotifications());
+		
+		pantallaPrincipal.update();
+	}	
 	
 }
