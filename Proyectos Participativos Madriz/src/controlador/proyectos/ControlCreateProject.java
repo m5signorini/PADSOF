@@ -6,6 +6,8 @@ import java.text.*;
 
 import javax.swing.*;
 import java.util.*;
+
+import modelo.entities.Collective;
 import modelo.entities.individuals.*;
 import modelo.functionalities.Application;
 import modelo.projects.*;
@@ -27,13 +29,36 @@ public class ControlCreateProject implements ActionListener {
 		switch(button.getActionCommand()) {
 		case "Crear":
 			User loggedUser = this.modelo.getLoggedUser();
-			String colectively = this.projectView.getCollectiveOption();
+			String collective = this.projectView.getCollectiveName();
+			//We get the collective if it exist in the represented collective of the loggedUser
+			Collective col = null;
+			if(collective != null && collective != "") {
+				Collective[] collectives= new Collective[this.modelo.getLoggedUser().getRepresentedCollectives().size()] ;
+				this.modelo.getLoggedUser().getRepresentedCollectives().toArray(collectives);
+				for(Collective c:collectives) {
+					if(c.getName().equals(collective)) {
+						col = c;
+					}
+				}
+			}
+
 			String title = this.projectView.getTitle();
+			if(title == null) {
+				return;
+			}
 			String description = this.projectView.getDescription();
+			if(description == null) {
+				return;
+			}
 			Double budget = this.projectView.getBudget();
+			if(budget <= 0) {
+				return;
+			}
 			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 			Date date = new Date();
+			Project project = null;
 			//Social
+
 			if(this.projectView.getProjectType() == "Social") {
 				String scope = this.projectView.getScope();
 				ScopeType aux;
@@ -44,27 +69,31 @@ public class ControlCreateProject implements ActionListener {
 					aux = ScopeType.international;
 				}
 				String group = this.projectView.getAffectedSocialGroup();
+				if(group == null) {
+					return;
+				}
+				
 				String picture = this.projectView.getImage();
 				//Lo crea como usuario
-				if() {
+				if(collective == null || collective.equals("") || col == null) {
 					if(picture == null) {
-						Social project = new Social(title, description, budget, date, loggedUser, aux, group);
+						project = new Social(title, description, budget, date, loggedUser, aux, group);
 						loggedUser.addCreatedProject(project);
 					}
 					else {
-						Social project = new Social(title, description, budget, date, loggedUser, aux, group, picture);
+						project = new Social(title, description, budget, date, loggedUser, aux, group, picture);
 						loggedUser.addCreatedProject(project);
 					}
 				}
 				//Sino
 				else {
 					if(picture == null) {
-						Social project = new Social(title, description, budget, date, algunColectivo, aux, group);
-						algunColectivo.addCreatedProject(project);
+						project = new Social(title, description, budget, date, col, aux, group);
+						col.addCreatedProject(project);
 					}
 					else {
-						Social project = new Social(title, description, budget, date, algunColectivo, aux, group, picture);
-						algunColectivo.addCreatedProject(project);
+						project = new Social(title, description, budget, date, col, aux, group, picture);
+						col.addCreatedProject(project);
 					}
 				}
 			}	
@@ -72,32 +101,44 @@ public class ControlCreateProject implements ActionListener {
 			else {
 				List<String> districts = new ArrayList<String>();
 				districts = this.projectView.getAffectedDistricts();
+				if(districts == null) {
+					return;
+				}
 				ArrayList<District> affectedDistricts = new ArrayList<District>();
+				District[] Districts= new District[this.modelo.getDistricts().size()];
+				this.modelo.getDistricts().toArray(Districts);
 				for(String s:districts) {
-					for(District d:this.modelo.getDistricts()) {
-						if(s == d.getName()) {
+					for(District d:Districts) {
+						if(s.equals(d.getName())) {
 							affectedDistricts.add(d);
 						}
 					}
 				}
 				String location = this.projectView.getLocation();
+				if(location == null) {
+					return;
+				}
 				String scheme = this.projectView.getScheme();
+				if(scheme == null) {
+					return;
+				}
 				//Lo crea como usuario
-				if() {
-					 Infrastructural project = new Infrastructural(title, description, budget, date, loggedUser, affectedDistricts, scheme, location);
-						loggedUser.addCreatedProject(project);
+				if(collective == null || collective.equals("") || col == null) {
+					project = new Infrastructural(title, description, budget, date, loggedUser, affectedDistricts, scheme, location);
+					loggedUser.addCreatedProject(project);  
 				}
 				//Sino
 				else {
-					 Infrastructural project = new Infrastructural(title, description, budget, date, algunColectivo, affectedDistricts, scheme, location);
-						algunColectivo.addCreatedProject(project);
+					project = new Infrastructural(title, description, budget, date, col, affectedDistricts, scheme, location);
+					col.addCreatedProject(project);
 				}
 			}
 			this.modelo.getPendingProjects().add(project);
-			this.projectView.setCloseOperation(JFrame.EXIT_ON_CLOSE);
+			this.projectView.setVisible(false);
+			
 			break;
 		case "Cancelar":
-			this.projectView.setCloseOperation(JFrame.EXIT_ON_CLOSE);
+			this.projectView.setVisible(false);
 		}
 	}
 }
