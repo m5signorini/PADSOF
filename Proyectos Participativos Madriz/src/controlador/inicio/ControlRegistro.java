@@ -31,8 +31,10 @@ public class ControlRegistro implements ActionListener {
 		switch(button.getActionCommand()) {
 		case "Registrarse":
 			intentarRegistro();
+			break;
 		case "Pulse aqui para iniciar sesion":
 			cambioInicio();
+			break;
 		}
 	}
 	

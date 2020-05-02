@@ -31,11 +31,13 @@ public class ControlInicio implements ActionListener {
 		case "Validar":
 			try {
 				intentaLogin();
+				break;
 			} catch (BannedUserException e1) {
 				e1.printStackTrace();
 			}
 		case "Pulse aqui para registrarse":
 			cambioRegistro();
+			break;
 		}
 	}
 	
