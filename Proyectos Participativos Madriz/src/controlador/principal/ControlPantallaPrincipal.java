@@ -5,6 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import modelo.*;
 import modelo.entities.individuals.User;
+import modelo.exceptions.BannedUserException;
 import modelo.functionalities.Application;
 import vista.*;
 import vista.inicio.Inicio;
@@ -36,12 +37,16 @@ public class ControlPantallaPrincipal implements ActionListener {
 			return;
 		}
 		
-		if(modelo.login(nif, pwd)){
-			JOptionPane.showMessageDialog(null, "Correctly logged in!");
-			frame.setVisible(false);
-			CreateProjectView projectView = new CreateProjectView();
-		} else {
-			JOptionPane.showMessageDialog(null, "Incorrect login! Please, try again.");
+		try {
+			if(modelo.login(nif, pwd)){
+				JOptionPane.showMessageDialog(null, "Correctly logged in!");
+				frame.setVisible(false);
+				CreateProjectView projectView = new CreateProjectView();
+			} else {
+				JOptionPane.showMessageDialog(null, "Incorrect login! Please, try again.");
+			}
+		} catch (HeadlessException | BannedUserException e1) {
+			e1.printStackTrace();
 		}	
 		
 		vista.update();

@@ -5,6 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import modelo.*;
 import modelo.entities.individuals.User;
+import modelo.exceptions.BannedUserException;
 import modelo.functionalities.Application;
 import vista.*;
 import vista.inicio.Inicio;
@@ -28,7 +29,11 @@ public class ControlInicio implements ActionListener {
 		JButton button = (JButton)e.getSource();
 		switch(button.getActionCommand()) {
 		case "Validar":
-			intentaLogin();
+			try {
+				intentaLogin();
+			} catch (BannedUserException e1) {
+				e1.printStackTrace();
+			}
 		case "Pulse aqui para registrarse":
 			cambioRegistro();
 		}
@@ -43,7 +48,7 @@ public class ControlInicio implements ActionListener {
 		frame.pack();		
 	}
 	
-	private void intentaLogin() {
+	private void intentaLogin() throws BannedUserException {
 	
 		String nif = vista.getNif();
 		if (nif.equals("")) {
