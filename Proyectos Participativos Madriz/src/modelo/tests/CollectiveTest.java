@@ -9,6 +9,7 @@ import org.junit.Test;
 import modelo.entities.*;
 import modelo.entities.individuals.*;
 import modelo.projects.*;
+import modelo.exceptions.*;
 
 public class CollectiveTest {	
 	private Collective collective;
@@ -36,23 +37,22 @@ public class CollectiveTest {
 		c4 = new Collective("Real Madrid", "Real Madrid lovers", u4, c2);
 	}
 
-	@Test
-	public void testJoin() {
+	@Test(expected = JoinException.class)
+	public void testJoin() throws Exception{
 		User u = new User("Antonio", "bye", "76589395S");
 		
 		assertEquals(true, collective.join(u));
 		
 		/*If we try to add it again it will return false*/
 		assertEquals(false, collective.join(u));
-		
-		/* u4 cannot join c1 because he created c4 (and therefore he is inside it) which is a descendant of c1*/
-		assertEquals(c1.join(u4), false);
 		/* Users inside  */
 		assertEquals(c4.join(u3), true);
+		/* u4 cannot join c1 because he created c4 (and therefore he is inside it) which is a descendant of c1*/
+		assertEquals(c1.join(u4), false);
 	}
 	
 	@Test
-	public void testLeave() {
+	public void testLeave() throws Exception{
 		User u = new User("Antonio", "bye", "76589395S");
 		collective.join(u);
 		
@@ -80,7 +80,7 @@ public class CollectiveTest {
 	}
 
 	@Test
-	public void testCount() {
+	public void testCount() throws Exception{
 		/* Repeated members do not count twice, members of descendant collectives are correctly counted. */
 		assert(c4.join(u3));		
 		assertEquals(c1.count().size(), 4);

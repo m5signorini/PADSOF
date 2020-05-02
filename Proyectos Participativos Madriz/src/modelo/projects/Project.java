@@ -1,6 +1,7 @@
 package modelo.projects;
 import es.uam.eps.sadp.grants.*;
 import modelo.entities.individuals.*;
+import modelo.exceptions.SendException;
 
 import java.io.*;
 import java.util.*;
@@ -200,20 +201,15 @@ public abstract class Project implements GrantRequest, Serializable {
      * A notification reporting this decision will be sent to all the project followers.
 	 * @return true if no problem was found when sending the project
 	 */
-    public boolean send() {
-    	Notification notification = new Notification("Sent", "The project " + this.title + " has been sent to validation.");
-		notifyFollowers(notification);
+    public void send() throws SendException {
 		CCGG gateway = CCGG.getGateway();
 		try {
 			followUpID = gateway.submitRequest(this);
-		} catch (IOException e) {
-			e.printStackTrace();
-			return false;
-		} catch (InvalidRequestException e) {
-			e.printStackTrace();
-			return false;
+		} catch (Exception e) {
+			throw new SendException(this, e);
 		}
-    	return true;
+		Notification notification = new Notification("Sent", "The project " + this.title + " has been sent to validation.");
+		notifyFollowers(notification);
     }
     
     /**

@@ -23,4 +23,7 @@ public class District implements Serializable{
 		this.name = name;
 	}
 	
+	public String toString() {
+		return name;
+	}
 }

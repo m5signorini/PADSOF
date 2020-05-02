@@ -6,6 +6,7 @@ package modelo.entities;
 import java.util.*;
 
 import modelo.entities.individuals.*;
+import modelo.exceptions.JoinException;
 import modelo.projects.Project;
 
 import java.io.*;
@@ -34,11 +35,10 @@ public class Collective implements Voter, Serializable{
         this.supportedProjects = new ArrayList<Project>();
         this.createdProjects= new ArrayList<Project>();
         this.members = new ArrayList<User>();
-        members.add(representative);
         this.representative = representative;
     	this.childCollectives = new HashSet<Collective>();
     	representative.createCollective(this);
-    	representative.enterCollective(this);
+    	this.members.add(representative);
     }
     
     public Collective(String name, String description, User representative, Collective father) {
@@ -169,16 +169,16 @@ public class Collective implements Voter, Serializable{
 	 * @param u User that will be added to the collective.
 	 * @return True if the user was not in the collective and joined it, false otherwise.
 	 */
-	public boolean join(User u) {
+	public boolean join(User u) throws JoinException{
 		Set<Collective> s = new HashSet<Collective>();
 		s = this.getDescendantCollectives();
 		// If the user is in a child collective, it cannot join this collective.
 		for(Collective c: u.getCollectives()) {
-			if(s.contains(c)) return false;
+			if(s.contains(c)) throw new JoinException(u, this, c);;
 		}		
 		if (this.members.contains(u)) return false;
 		this.members.add(u);
-		u.enterCollective(this);
+		u.getCollectives().add(this);
 		return true;
 	}
 	

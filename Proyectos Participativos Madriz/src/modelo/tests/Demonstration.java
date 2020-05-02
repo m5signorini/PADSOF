@@ -20,7 +20,7 @@ import modelo.projects.*;
  */
 public class Demonstration {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception{
 		/* First we create a new Application with a custom made administrator
 		 * and initial values (minSupports and maxInactivity can be later changed)
 		 */
