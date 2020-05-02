@@ -34,6 +34,6 @@ public class Controlador {
 	}
 	
 	public ControlPantallaPrincipal getControlPantallaPrincipal() {
-		return this.contPantallaPincipal;
+		return this.contPantallaPrincipal;
 	}
 }
