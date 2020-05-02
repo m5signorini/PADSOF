@@ -508,6 +508,15 @@ public class Application implements Serializable{
 		return (nProjOfC1SuppByC2+nProjOfC2SuppByC1)/(totalCreatedProjs);
 	}
 	
+	public List<Double> affinityList(Collective c1) {
+		List<Double> affinities =new ArrayList<Double>();
+		for(Collective c2: collectives) {
+			affinities.add(calcAffinity(c1, c2));
+		}
+		Collections.sort(affinities);
+		return affinities;
+	}
+	
 	private String collectionToString(Collection<?> c) {
 		String s = "";
 		for(Object o: c) {
