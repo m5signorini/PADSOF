@@ -26,7 +26,7 @@ import javax.swing.event.ChangeListener;
 import java.util.*;
 
 
-public class CreateProjectView {
+public class CreateProjectView extends JPanel{
 	JFrame window;
 	//Group of tabs
 	JTabbedPane tab;
@@ -544,7 +544,7 @@ public class CreateProjectView {
 	 * Return the location of a infrastructural project.
 	 * @return the location as a string.
 	 */
-	public String getLocation() {
+	public String getLocationP() {
 		if(location.getText() == null || location.getText().equals("")) {
 			JOptionPane.showMessageDialog(null, "You must write a location for the project.", "Wrong location.", JOptionPane.OK_OPTION);
 			return null; 
