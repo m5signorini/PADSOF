@@ -6,6 +6,8 @@ import java.io.*;
 import es.uam.eps.sadp.grants.*;
 import modelo.entities.*;
 import modelo.entities.individuals.*;
+import modelo.exceptions.BannedUserException;
+import modelo.exceptions.SendException;
 import modelo.projects.*;
 
 /**
@@ -14,7 +16,7 @@ import modelo.projects.*;
  * @author Martin Sanchez Signorini
  */
 public class Application implements Serializable{
-	private static Application APPLICATION = new Application();
+	private static Application APPLICATION;
 	private int minSupports;
 	private int maxInactivity;
 	
@@ -59,6 +61,9 @@ public class Application implements Serializable{
 	}
 	
 	public static Application getApplication() {
+		if(APPLICATION == null) {
+			APPLICATION = new Application();
+		}
 		return APPLICATION;
 	}
 	
@@ -212,7 +217,7 @@ public class Application implements Serializable{
 	/**
 	 * Method that creates an unregistered user
 	 * @param u User registered
-	 * @return true if creation went well, false if not
+	 * @return true if creation went well, false if credentials already in use
 	 */
 	public boolean register(User u) {
 		if(u == null) return false;
@@ -228,15 +233,12 @@ public class Application implements Serializable{
 	 * @param pwd	Account's password
 	 * @return true if login was correct, false if wrong credentials
 	 */
-	public boolean login(String nif, String pwd) {
+	public boolean login(String nif, String pwd) throws BannedUserException {
 		if(nif == null || pwd == null) return false;
 		// Check as user
 		for(User u: registeredUsers) {
+			// Ban check
 			if(u.login(nif, pwd)) {
-				// Ban check
-				if(bannedUsers.contains(u) && !u.tryUnban()) {
-					return false;
-				}
 				loggedUser = u;
 				this.updateProjects();
 				this.updateUsers();
@@ -287,19 +289,24 @@ public class Application implements Serializable{
 	}
 	
 	/**
+	 * Method for checking if project is available for sending
+	 * @param p Sent project
+	 * @return true if sending is possible, false if not
+	 */
+	public boolean canSendProject(Project p) {
+		if(p==null || p.countVotes() < minSupports || !publicProjects.contains(p)) return false;
+		return true;
+	}
+	
+	/**
 	 * Method for sending project to the council
 	 * @param p Sent project
 	 * @return true if sending was possible, false if not
 	 */
-	public boolean sendProject(Project p) {
-		if(p == null || p.countVotes() < minSupports) return false; 
-		if(!publicProjects.remove(p)) {
-			return false;
-		}
-		if(!p.send()) {
-			publicProjects.add(p);
-			return false;
-		}
+	public boolean sendProject(Project p) throws SendException{
+		if(!canSendProject(p)) return false;
+		p.send();
+		publicProjects.remove(p);
 		sentProjects.add(p);
 		return true;
 	}
@@ -501,6 +508,15 @@ public class Application implements Serializable{
 		return (nProjOfC1SuppByC2+nProjOfC2SuppByC1)/(totalCreatedProjs);
 	}
 	
+	public List<Double> affinityList(Collective c1) {
+		List<Double> affinities =new ArrayList<Double>();
+		for(Collective c2: collectives) {
+			affinities.add(calcAffinity(c1, c2));
+		}
+		Collections.sort(affinities);
+		return affinities;
+	}
+	
 	private String collectionToString(Collection<?> c) {
 		String s = "";
 		for(Object o: c) {
@@ -513,37 +529,37 @@ public class Application implements Serializable{
 	private String projectsToString() {
 		String s = "";
 		s += "Pending projects:\n";
-		collectionToString(this.pendingProjects);
+		s += collectionToString(this.pendingProjects);
 		s += "Denied projects:\n";
-		collectionToString(this.deniedProjects);
+		s += collectionToString(this.deniedProjects);
 		s += "Sent projects:\n";
-		collectionToString(this.sentProjects);
+		s += collectionToString(this.sentProjects);
 		s += "Rejected projects:\n";
-		collectionToString(this.rejectedProjects);
+		s += collectionToString(this.rejectedProjects);
 		s += "Financiated projects:\n";
-		collectionToString(this.financiatedProjects);
+		s += collectionToString(this.financiatedProjects);
 		s += "Public projects:\n";
-		collectionToString(this.publicProjects);
+		s += collectionToString(this.publicProjects);
 		s += "Expired projects:\n";
-		collectionToString(this.expiredProjects);
+		s += collectionToString(this.expiredProjects);
 		return s;
 	}
 	
 	private String usersToString() {
 		String s = "";
 		s += "Unregistered users:\n";
-		collectionToString(this.unregisteredUsers);
+		s += collectionToString(this.unregisteredUsers);
 		s += "Registered users:\n";
-		collectionToString(this.registeredUsers);
+		s += collectionToString(this.registeredUsers);
 		s += "Banned Users:\n";
-		collectionToString(this.bannedUsers);
+		s += collectionToString(this.bannedUsers);
 		return s;
 	}
 	
 	private String collectivesToString() {
 		String s = "";
 		s += "Collectives:\n";
-		collectionToString(this.collectives);
+		s += collectionToString(this.collectives);
 		return s;
 	}
 	

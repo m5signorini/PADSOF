@@ -8,6 +8,8 @@ import java.util.*;
 
 import modelo.entities.Collective;
 import modelo.entities.individuals.Notification;
+import modelo.exceptions.BannedUserException;
+import modelo.exceptions.JoinException;
 import modelo.projects.Project;
 
 /**
@@ -37,7 +39,7 @@ public class User extends Account implements Voter, Serializable{
 		followedProjects = new ArrayList<Project>();
 		votedProjects = new ArrayList<Project>();
 		createdProjects = new ArrayList<Project>();
-		this.notifications= new ArrayList<Notification>();
+		notifications= new ArrayList<Notification>();
 	}
 		
 	public ArrayList<Collective> getCollectives() {
@@ -147,12 +149,11 @@ public class User extends Account implements Voter, Serializable{
 	 * @param pwd String containing password written by the user trying to login.
 	 * @return True if the login is correct, false otherwise.
 	 */
-	public boolean login(String nif, String pwd) {
-		if (this.tryUnban() == false) return false;
+	public boolean login(String nif, String pwd) throws BannedUserException {
 		if (!nif.equals(this.nif) || !pwd.equals(this.pwd)) {
-			System.out.println(this + " " + nif + " 2");
 			return false;
 		}			
+		if (this.tryUnban() == false) throw new BannedUserException(this);
 		return true;
 	
 	}
@@ -241,20 +242,25 @@ public class User extends Account implements Voter, Serializable{
 	/**
 	 * Adds a collective to the collectives list.
 	 * @param c Collective to be added.
-	 * @return true in case the collective has been added to the list, false if it was already there.
+	 * @return true in case the collective has been added to the list, false if it was already in it.
 	 */
-	public boolean enterCollective(Collective c) {
-		Set<Collective> s = new HashSet<Collective>();
+	public boolean enterCollective(Collective c) throws JoinException{
+		if(this.collectives.contains(c)) return false;
+		return c.join(this);
+		/*Set<Collective> s = new HashSet<Collective>();
 		s = c.getDescendantCollectives();
 		// If the user is in a child collective, it cannot join this collective.
 		for(Collective aux: this.getCollectives()) {
-			if(s.contains(aux)) return false;
+			if(s.contains(aux)) throw new JoinException(this, c, aux);
 		}
 		
-		if(this.collectives.contains(c)) return false;
-		this.collectives.add(c);
-		c.join(this);
-		return true;
+		if(!this.collectives.contains(c)) {
+			this.collectives.add(c);
+			if(!c.getMembers().contains(this)) {
+				c.getMembers().add(this);
+				return true;
+			}
+		}*/
 	}
 	
 	/**
@@ -279,9 +285,10 @@ public class User extends Account implements Voter, Serializable{
 	 * @return true in case the collective has been added to the list, false if it was already there.
 	 */
 	public boolean createCollective(Collective c) {
-		if(this.representedCollectives.contains(c))
+		if(this.representedCollectives.contains(c) || c.getRepresentative()!=this)
 			return false;
 		this.representedCollectives.add(c);
+		this.collectives.add(c);
 		return true;
 	}
 	

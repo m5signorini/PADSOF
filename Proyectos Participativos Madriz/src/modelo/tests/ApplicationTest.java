@@ -99,7 +99,7 @@ public class ApplicationTest {
 	}
 
 	@Test
-	public void testLogin() {
+	public void testLogin() throws Exception{
 		User u = new User("John", "pwd", "nif");
 		app.register(u);
 		assertFalse(app.login("nif", "pwd"));
@@ -148,7 +148,7 @@ public class ApplicationTest {
 	}
 	
 	@Test
-	public void testLogout() {
+	public void testLogout() throws Exception{
 		assertTrue(app.login(usersR.get(0).getNif(), usersR.get(0).getNif()));
 		assertTrue(app.getLoggedUser() != null);
 		app.logout();

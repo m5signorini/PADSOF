@@ -6,6 +6,8 @@ import org.junit.*;
 
 import modelo.entities.Collective;
 import modelo.entities.individuals.*;
+import modelo.exceptions.BannedUserException;
+import modelo.exceptions.JoinException;
 import modelo.projects.*;
 
 public class UserTest {	
@@ -53,7 +55,7 @@ public class UserTest {
 	}
 	
 	@Test
-	public void testLogin() {
+	public void testLogin() throws Exception{
 		assertEquals(u1.login("asdf", "sdjfs"), false);
 		assertEquals(u1.login("Luis", "sdjfs"), false);
 		assertEquals(u1.login("asdf", "qwerty"), false);
@@ -62,7 +64,7 @@ public class UserTest {
 	}
 	
 	@Test
-	public void testBanning() {
+	public void testBanning() throws Exception{
 		//we add vote p1 with u2 twice, the second time it returns error
 		assertEquals(u2.getBanned(), false);
 		assertEquals(u2.ban("I am angry with you", 1), true);
@@ -70,7 +72,7 @@ public class UserTest {
 		//should be banned now and if we try to unban it returns false and we cannot login
 		assertEquals(u2.getBanned(), true);
 		assertEquals(u2.tryUnban(), false);
-		assertEquals(u2.login("6543210H", "poiuy"), false);
+		assertThrows(BannedUserException.class, () -> u2.login("6543210H", "poiuy"));
 		//we manually set the unban date (not recommended) and now we can unban u2 and login
 		u2.setUnbanDate(Calendar.getInstance());
 		assertEquals(u2.tryUnban(), true);
@@ -112,7 +114,7 @@ public class UserTest {
 	}
 	
 	@Test
-	public void testCollectives() {
+	public void testCollectives() throws Exception {
 		//u1 is already in c1 because he created it
 		assert(!u1.enterCollective(c1));
 		assert(u1.enterCollective(c2));
@@ -125,7 +127,7 @@ public class UserTest {
 		// User can enter in a descendant collective of his collectives.
 		assert(u3.enterCollective(c8));
 		// User cannot enter in a father collective of his collectives.
-		assert(!u4.enterCollective(c5));
+		assertThrows(JoinException.class,()-> u4.enterCollective(c5));
 		assert(u4.enterCollective(c8));
 		// Users can join to the siblings of his collectives.
 		assert(u4.enterCollective(c7));
@@ -136,9 +138,9 @@ public class UserTest {
 		//u1 is already c1's representative as specified when created c1
 		assert(!u1.createCollective(c1));
 		//the same collective can be in two representedCollectives lists. 
-		//That is why this function must only be used in the Collective's constructor.
-		assert(u1.createCollective(c2)); 
-		assert(u1.getRepresentedCollectives().contains(c2));
+		//That is why this function can only be used in the Collective's constructor.
+		assert(!u1.createCollective(c2)); 
+		assert(!u1.getRepresentedCollectives().contains(c2));
 		assert(u2.getRepresentedCollectives().contains(c2));		
 	}
 	

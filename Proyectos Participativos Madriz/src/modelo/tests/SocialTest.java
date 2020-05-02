@@ -45,7 +45,14 @@ public class SocialTest {
 	@Test
 	public void testSend() {
 
-		projectS.send();
+		try {
+			projectS.send();
+		}
+		catch(Exception ex) {
+			System.out.println(ex + "\nNow trying again");
+			testSend();
+			return;
+		}
 		
 		Notification not = projectS.getFollowers().get(0).getNotifications().get(0);
 		assertEquals("Sent", not.getTitle());
@@ -91,7 +98,7 @@ public class SocialTest {
 	}
 
 	@Test
-	public void testCountVotes() {
+	public void testCountVotes() throws Exception{
 		User representative = new User("Antonio", "bye", "39036520H");
 		Collective collective = new Collective("Go retirees", "fighting for retirees rights", representative);
 		

@@ -5,6 +5,8 @@ package modelo.entities.individuals;
 
 import java.io.*;
 
+import modelo.exceptions.BannedUserException;
+
 /**
  * Abstract class from which Admin and User inherit. This forces both classes to have a login function
  * having both of them a name and a password in order to login.
@@ -26,7 +28,7 @@ public abstract class Account implements Serializable {
 	public String getPwd() { return pwd; }
 	public void setPwd(String pwd) { this.pwd = pwd; }
 	
-	public abstract boolean login(String nif, String pwd);
+	public abstract boolean login(String nif, String pwd) throws BannedUserException;
 
 }
 	

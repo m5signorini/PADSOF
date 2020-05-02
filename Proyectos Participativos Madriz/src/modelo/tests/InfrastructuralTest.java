@@ -46,7 +46,13 @@ public class InfrastructuralTest {
 
 	@Test
 	public void testSend() {
-		projectI.send();
+		try {
+			projectI.send();
+		}
+		catch(Exception ex) {
+			System.out.println(ex);
+			testSend();
+		}
 		
 		Notification not = projectI.getFollowers().get(0).getNotifications().get(0);
 		assertEquals("Sent", not.getTitle());
@@ -87,7 +93,7 @@ public class InfrastructuralTest {
 	}
 
 	@Test
-	public void testCountVotes() {
+	public void testCountVotes() throws Exception{
 		User representative = new User("Antonio", "bye", "39036520H");
 		Collective collective = new Collective("Go retirees", "fighting for retirees rights", representative);
 		
