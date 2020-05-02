@@ -9,6 +9,7 @@ import modelo.functionalities.Application;
 import vista.*;
 import vista.inicio.Inicio;
 import vista.inicio.Registro;
+import vista.principal.PantallaPrincipal;
 import vista.proyectos.CreateProjectView;
 
 public class ControlInicio implements ActionListener {
@@ -41,11 +42,22 @@ public class ControlInicio implements ActionListener {
 			vista.update();
 			return;
 		}	
-
+		
+		PantallaPrincipal pantallaPrincipal = frame.getVistaPantallaPrincipal();
+		User u = modelo.getLoggedUser();
+			
 		JOptionPane.showMessageDialog(null, "Correctly logged in!");
-		frame.getVistaPantallaPrincipal().setVisible(true);
+		pantallaPrincipal.setVisible(true);
 		frame.getVistaInicio().setVisible(false);
 		frame.pack();
+
+		pantallaPrincipal.setCreatedProjects(u.getCreatedProjects());
+		pantallaPrincipal.setFollowedProjects(u.getFollowedProjects());
+		pantallaPrincipal.setCollectives(u.getCollectives());
+		pantallaPrincipal.setRepresentedCollectives(u.getRepresentedCollectives());
+		pantallaPrincipal.setNotifications(u.getNotifications());
+		
+		pantallaPrincipal.update();
 	}
 	
 	public Inicio getPanelVistaIn() {

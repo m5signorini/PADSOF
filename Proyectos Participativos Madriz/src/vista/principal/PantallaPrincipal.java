@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -14,8 +16,26 @@ import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-public class PantallaPrincipal extends JPanel {
+import modelo.entities.Collective;
+import modelo.entities.individuals.Notification;
+import modelo.projects.Project;
 
+public class PantallaPrincipal extends JPanel {
+	
+
+	private List<Project> createdProjects;
+	private List<Project> followedProjects;
+	private List<Collective> collectives;
+	private List<Collective> representedCollectives;
+	private ArrayList<Notification> notifications;
+	
+	private JPanel pestaniaMisColectivos;
+	private JPanel pestaniaColectivosCreados;
+	private JPanel pestaniaMisProyectos;
+	private JPanel pestaniaInformePoularidad;
+	private JPanel pestaniaInformeAfinidad;
+	private JPanel pestaniaProyectosSeguidos;
+	private JPanel pestaniaNotificaciones;
 	
 	private JButton botonMiPagina;
 	private JButton botonBuscarProyecto;
@@ -87,21 +107,30 @@ public class PantallaPrincipal extends JPanel {
 
 
 		JTabbedPane pestanias = new JTabbedPane(2);
-		
-		JPanel pestaniaMisColectivos = new JPanel();
-		JPanel pestaniaMisProyectos = new JPanel();
-		JPanel pestaniaInformePoularidad = new JPanel();
-		JPanel pestaniaInformeAfinidad = new JPanel();
-		JPanel pestaniaProyectosSeguidos = new JPanel();
-		JPanel pestaniaNotificaciones = new JPanel();
+
+		pestaniaMisColectivos = new JPanel();
+		pestaniaColectivosCreados = new JPanel();
+		pestaniaMisProyectos = new JPanel();
+		pestaniaInformePoularidad = new JPanel();
+		pestaniaInformeAfinidad = new JPanel();
+		pestaniaProyectosSeguidos = new JPanel();
+		pestaniaNotificaciones = new JPanel();
 		pestaniaMisColectivos.setPreferredSize(new Dimension(500, 500));
 
 		pestanias.addTab("Mis Proyectos", pestaniaMisProyectos);
 		pestanias.addTab("Mis Colectivos", pestaniaMisColectivos);
+		pestanias.addTab("Colectivos Creados", pestaniaColectivosCreados);
 		pestanias.addTab("Informe de Popularidad", pestaniaInformePoularidad);
 		pestanias.addTab("Informe Afinidad", pestaniaInformeAfinidad);
 		pestanias.addTab("Proyectos Seguidos", pestaniaProyectosSeguidos);
 		pestanias.addTab("Notificaciones", pestaniaNotificaciones);
+
+		pestaniaMisProyectos.setLayout(new BoxLayout(pestaniaMisProyectos, BoxLayout.Y_AXIS));
+		pestaniaMisColectivos.setLayout(new BoxLayout(pestaniaMisColectivos, BoxLayout.Y_AXIS));
+		pestaniaColectivosCreados.setLayout(new BoxLayout(pestaniaColectivosCreados, BoxLayout.Y_AXIS));
+		pestaniaProyectosSeguidos.setLayout(new BoxLayout(pestaniaProyectosSeguidos, BoxLayout.Y_AXIS));
+		pestaniaNotificaciones.setLayout(new BoxLayout(pestaniaNotificaciones, BoxLayout.Y_AXIS));
+		
 		
 		// Podemos seleccionar una pestaña del contendor con setSelectedIndex(<indice>)
 		pestanias.setSelectedIndex(0);
@@ -138,6 +167,66 @@ public class PantallaPrincipal extends JPanel {
 		botonCerrarSesion.addActionListener(c);
 	}
 	
+	public void setCreatedProjects(List<Project> createdProjects) {
+		this.createdProjects = createdProjects;
+	}
+	
+	public void setFollowedProjects(List<Project> followedProjects) {
+		this.followedProjects = followedProjects;
+	}
+	
+	public void setCollectives(List<Collective> collectives) {
+		this.collectives = collectives;
+	}
+	
+	public void setRepresentedCollectives(List<Collective> c) {
+		this.representedCollectives = c;
+	}
+	
+	public void setNotifications(ArrayList<Notification> notifications) {
+		this.notifications = notifications;
+	}
+	
 	public void update () {
+		for (Project p: createdProjects) {
+			JPanel c = new JPanel();
+			c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
+			c.add(new JLabel(p.getTitle()));
+			c.add(Box.createRigidArea(new Dimension(130, 070)));
+			c.add(new JLabel(p.getDescription()));
+			pestaniaMisProyectos.add(c);
+		}
+		for (Project p: followedProjects) {
+			JPanel c = new JPanel();
+			c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
+			c.add(new JLabel(p.getTitle()));
+			c.add(Box.createRigidArea(new Dimension(130, 070)));
+			c.add(new JLabel(p.getDescription()));
+			pestaniaProyectosSeguidos.add(c);
+		}
+		for (Collective p: collectives) {
+			JPanel c = new JPanel();
+			c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
+			c.add(new JLabel(p.getName()));
+			c.add(Box.createRigidArea(new Dimension(130, 070)));
+			c.add(new JLabel(p.getDescription()));
+			pestaniaMisColectivos.add(c);
+		}
+		for (Collective p: representedCollectives) {
+			JPanel c = new JPanel();
+			c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
+			c.add(new JLabel(p.getName()));
+			c.add(Box.createRigidArea(new Dimension(130, 070)));
+			c.add(new JLabel(p.getDescription()));
+			pestaniaColectivosCreados.add(c);
+		}
+		for (Notification p: notifications) {
+			JPanel c = new JPanel();
+			c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
+			c.add(new JLabel(p.getTitle()));
+			c.add(Box.createRigidArea(new Dimension(130, 070)));
+			c.add(new JLabel(p.getText()));
+			pestaniaNotificaciones.add(c);
+		}
 	}
 }
