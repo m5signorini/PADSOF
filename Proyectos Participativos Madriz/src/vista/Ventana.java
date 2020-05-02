@@ -8,8 +8,6 @@ import javax.swing.JPanel;
 
 
 import controlador.Controlador;
-import controlador.inicio.ControlCambioInicio;
-import controlador.inicio.ControlCambioRegistro;
 import controlador.inicio.ControlInicio;
 import controlador.inicio.ControlRegistro;
 import controlador.principal.ControlPantallaPrincipal;
@@ -25,8 +23,6 @@ public class Ventana extends JFrame {
 
 	private ControlInicio contInicio;
 	private ControlRegistro contRegistro;
-	private ControlCambioRegistro contCambioRegistro;
-	private ControlCambioInicio contCambioInicio;
 	private ControlPantallaPrincipal contPantallaPrincipal;
 	
 	private JPanel contentPane;
@@ -61,15 +57,11 @@ public class Ventana extends JFrame {
 	public void setControlador(Controlador controlador) {
 		this.contInicio = controlador.getControlInicio();
 		vistaInicio.setControladorValidar(contInicio);
-
-		this.contCambioRegistro = controlador.getControlCambioRegistro();
-		vistaInicio.setControladorCambioRegistro(contCambioRegistro);
+		vistaInicio.setControladorCambioRegistro(contInicio);
 		
 		this.contRegistro = controlador.getControlRegistro();
 		vistaRegistro.setControladorRegistro(contRegistro);
-
-		this.contCambioInicio = controlador.getControlCambioInicio();
-		vistaRegistro.setControladorCambioInicio(contCambioInicio);
+		vistaRegistro.setControladorCambioInicio(contRegistro);
 	}
 
 	public Inicio getVistaInicio() {

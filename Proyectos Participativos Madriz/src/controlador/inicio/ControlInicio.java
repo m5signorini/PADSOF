@@ -25,7 +25,26 @@ public class ControlInicio implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		
+		JButton button = (JButton)e.getSource();
+		switch(button.getActionCommand()) {
+		case "Validar":
+			intentaLogin();
+		case "Pulse aqui para registrarse":
+			cambioRegistro();
+		}
+	}
+	
+
+	private void cambioRegistro() {
+		Registro nuevaVista = frame.getVistaRegistro();
+		nuevaVista.update();
+		nuevaVista.setVisible(true);
+		vista.setVisible(false);
+		frame.pack();		
+	}
+	
+	private void intentaLogin() {
+	
 		String nif = vista.getNif();
 		if (nif.equals("")) {
 			JOptionPane.showMessageDialog(vista, "Debe introducir un nif.", "Error", JOptionPane.ERROR_MESSAGE);

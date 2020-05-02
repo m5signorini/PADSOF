@@ -3,6 +3,7 @@ package controlador.inicio;
 import java.awt.*;
 import java.awt.event.*;
 
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import modelo.*;
@@ -26,10 +27,24 @@ public class ControlRegistro implements ActionListener {
 
 
 	public void actionPerformed(ActionEvent e) {
-		mostrarPanelRegistro();
+		JButton button = (JButton)e.getSource();
+		switch(button.getActionCommand()) {
+		case "Registrarse":
+			intentarRegistro();
+		case "Pulse aqui para iniciar sesion":
+			cambioInicio();
+		}
 	}
 	
-	private void mostrarPanelRegistro() {
+	private void cambioInicio() {
+		Inicio nuevaVista = frame.getVistaInicio();
+		nuevaVista.update();
+		nuevaVista.setVisible(true);
+		vista.setVisible(false);
+		frame.pack();	
+	}
+	
+	private void intentarRegistro() {
 		String name = vista.getName();
 		String nif = vista.getNif();
 		String pwd = vista.getPwd();
@@ -65,9 +80,7 @@ public class ControlRegistro implements ActionListener {
 		nuevaVista.update();
 
 		nuevaVista.setVisible(true);
-		vista.setVisible(false);
-		
-		
+		vista.setVisible(false);		
 	}
 	
 }
