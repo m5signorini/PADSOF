@@ -25,6 +25,8 @@ public class Controlador {
 		this.contInicio = new ControlInicio(frame, app);
 		this.contRegistro= new ControlRegistro(frame, app);
 		this.contPantallaPrincipal = new ControlPantallaPrincipal(frame, app);
+		this.contCreateProject = new ControlCreateProject(app, frame);
+
 	}
 
 	public ControlInicio getControlInicio() {
