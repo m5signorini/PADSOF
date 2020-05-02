@@ -265,7 +265,7 @@ public class User extends Account implements Voter, Serializable{
 	public boolean exitCollective(Collective c) {
 		if (c.getRepresentative() == this) return false;
 		if(this.collectives.contains(c)) {
-			this.collectives.remove(collectives.indexOf(c));
+			this.collectives.remove(c);
 			c.leave(this);
 			return true;
 		}
@@ -291,9 +291,8 @@ public class User extends Account implements Voter, Serializable{
 	 * @return True if the project was not already created by the user, false otherwise.
 	 */
 	public boolean addCreatedProject(Project p) {
-		if (this.createdProjects.contains(p)) {
+		if (this.createdProjects.contains(p))
 			return false;
-		}
 		this.createdProjects.add(p);
 		return true;
 	}

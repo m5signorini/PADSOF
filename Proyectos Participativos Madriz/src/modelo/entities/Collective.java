@@ -43,7 +43,6 @@ public class Collective implements Voter, Serializable{
     
     public Collective(String name, String description, User representative, Collective father) {
     	this(name, description, representative);
-    	this.parent = father;
     	father.addChildCollective(this);
     }
     
