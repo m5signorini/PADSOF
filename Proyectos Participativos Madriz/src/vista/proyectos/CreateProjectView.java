@@ -38,11 +38,12 @@ public class CreateProjectView {
 	JButton create;
 	//Cancel button
 	JButton cancel;
+
 	
 	//SOCIAL
 	//Collective option
-	JLabel etiquetaColectiveS;
-    JComboBox<String> comboS;
+	JLabel etiquetaCollectiveS;
+	JTextField collectiveNameS;
 	
 	//Title project
 	JLabel etiquetaTitleS;
@@ -75,8 +76,9 @@ public class CreateProjectView {
 	//INFRASTRUCTURAL
 	
 	//Collective option
-	JLabel etiquetaColectiveI;
-	JComboBox<String> comboI;
+	
+	JLabel etiquetaCollectiveI;
+	JTextField collectiveNameI;
 		
 	//Title project
 	JLabel etiquetaTitleI;
@@ -123,6 +125,9 @@ public class CreateProjectView {
 	JLabel etiquetaSc;
 	JTextField scheme;
 	
+	//Auxiliar
+	String aux = "Social";
+	
 	public CreateProjectView() {
 		window = new JFrame("Nuevo proyecto");
 		
@@ -145,21 +150,23 @@ public class CreateProjectView {
 					location.setText("");
 					descI.setText("");
 					scheme.setText("");
-					comboI.setSelectedIndex(1);
+					collectiveNameI.setText("");
 					Component[] components = districts.getComponents();
 					for(Component c : components) {
 						((JCheckBox) c).setSelected(false);
 					}
 					budgetI.setText("1");
+					aux = "Social";
 				}
 				else {
 					titleS.setText("");
 					descS.setText("");
 					image.setText("");
-					comboS.setSelectedIndex(1);
+					collectiveNameS.setText("");
 					budgetS.setText("1");
 					group.setText("");
 					nacS.setSelected(true);
+					aux = "Infrastructural";
 				}
 			}
 		});
@@ -168,27 +175,30 @@ public class CreateProjectView {
 		create = new JButton("Crear");
 		container.add(create);
 		
-		layout.putConstraint(SpringLayout.WEST, create, 607, SpringLayout.WEST, container);
-		layout.putConstraint(SpringLayout.NORTH, create, 425, SpringLayout.NORTH, container);
+		layout.putConstraint(SpringLayout.WEST, create, 875, SpringLayout.WEST, container);
+		layout.putConstraint(SpringLayout.NORTH, create, 430, SpringLayout.NORTH, container);
 		
 		//Boton cancelar
 		cancel = new JButton("Cancelar");
 		container.add(cancel);
 		
 		layout.putConstraint(SpringLayout.WEST, cancel, 3, SpringLayout.WEST, container);
-		layout.putConstraint(SpringLayout.NORTH, cancel, 425, SpringLayout.NORTH, container);
-		     
+		layout.putConstraint(SpringLayout.NORTH, cancel, 430, SpringLayout.NORTH, container);
+		
 		
 		//OPCION SOCIAL
 		
-		//Colectivo ComboBox
-		String[] opciones = {"Sí", "No"};
-		etiquetaColectiveS = new JLabel("Crear como colectivo:");
-		comboS = new JComboBox<String>(opciones);
-		comboS.setSelectedIndex(1);
-		etiquetaColectiveS.setLabelFor(comboS);
-		MainPanelSoc.add(etiquetaColectiveS);
-		MainPanelSoc.add(comboS);
+		//Colectivo 
+		//String[] opciones = {"Sí", "No"};
+		//etiquetaColectiveS = new JLabel("Crear como colectivo:");
+		//comboS = new JComboBox<String>(opciones);
+		//comboS.setSelectedIndex(1);
+		//etiquetaColectiveS.setLabelFor(comboS);
+		
+		etiquetaCollectiveS = new JLabel("<html>Nombre colectivo (Opcional): <br> (Si el nombre no es correcto usted será asignado como creador.)</html>");
+		collectiveNameS = new JTextField();
+		MainPanelSoc.add(etiquetaCollectiveS);
+		MainPanelSoc.add(collectiveNameS);
 		
 		//Titulo proyecto
 		etiquetaTitleS = new JLabel("Título del proyecto:");
@@ -255,12 +265,15 @@ public class CreateProjectView {
 		//OPCION INFRAESTRUCTURAL
 		
 		//Colectivo ComboBox
-		etiquetaColectiveI = new JLabel("Crear como colectivo:");
-		JComboBox<String> comboI = new JComboBox<String>(opciones);
-		comboI.setSelectedIndex(1);
-		etiquetaColectiveI.setLabelFor(comboI);
-		MainPanelInfr.add(etiquetaColectiveI);
-		MainPanelInfr.add(comboI);
+		//etiquetaColectiveI = new JLabel("Crear como colectivo:");
+		//JComboBox<String> comboI = new JComboBox<String>(opciones);
+		//comboI.setSelectedIndex(1);
+		//etiquetaColectiveI.setLabelFor(comboI);
+	
+		etiquetaCollectiveI = new JLabel("<html>Nombre colectivo (Opcional): <br> (Si el nombre no es correcto usted será asignado como creador.)</html>");
+		collectiveNameI = new JTextField();
+		MainPanelInfr.add(etiquetaCollectiveI);
+		MainPanelInfr.add(collectiveNameI);
 				
 		//Titulo proyecto
 		etiquetaTitleI = new JLabel("Título del proyecto:");
@@ -357,9 +370,17 @@ public class CreateProjectView {
 		
 		container.add(tab);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setSize(690,480);
+		window.setSize(950,480);
 		window.setVisible(true);
 	
+	}
+
+	/**
+	 * Shows or hides this window depending on the value of parameter visible (boolean).
+	 * @param visible
+	 */
+	public void setVisible(boolean visible_) {
+		window.setVisible(visible_);
 	}
 	
 	/**
@@ -367,34 +388,22 @@ public class CreateProjectView {
 	 * @return the project type.
 	 */
 	public String getProjectType() {
-		if(tab.getSelectedIndex() == 0) {
-			return "Social";
-		}
-		else {
-			return "Infrastructural";
-		}
+		return aux;
 	}
 	
 	/**
 	 * Return if the project has been created by the user as a collective or not.
-	 * @return if the project has been created by the user as a collective or not.
+	 * @return the name collective that has created the project or null if it has been created by the user.
 	 */
-	public String getCollectiveOption() {
-		if(tab.getSelectedIndex() == 0) {
-			if(String.valueOf(comboS.getSelectedItem()) == "No") {
-				return "No";
-			}
-			else {
-				return "Sí";
-			}
+	public String getCollectiveName() {
+		if((collectiveNameS.getText() == null || collectiveNameS.getText().equals("")) && (collectiveNameI.getText() == null || collectiveNameI.getText() == "")) {
+			return null;
+		}
+		if((collectiveNameS.getText() == null || collectiveNameS.getText().equals(""))) {
+			return collectiveNameI.getText();
 		}
 		else {
-			if(String.valueOf(comboI.getSelectedItem()) == "No") {
-				return "No";
-			}
-			else {
-				return "Sí";
-			}
+			return collectiveNameS.getText();
 		}
 	}
 	
@@ -407,11 +416,11 @@ public class CreateProjectView {
 			JOptionPane.showMessageDialog(null, "You must a project name.", "Wrong project name.", JOptionPane.OK_OPTION);
 			return null; 
 		}
-		if(tab.getSelectedIndex() == 0){
+		if(aux == "Social"){
 			return titleS.getText();
 		}
 		else {
-			return titleS.getText();
+			return titleI.getText();
 		}
 	}
 	
@@ -424,11 +433,11 @@ public class CreateProjectView {
 			JOptionPane.showMessageDialog(null, "You must write a description.", "Wrong description.", JOptionPane.OK_OPTION);
 			return null; 
 		}
-		if(tab.getSelectedIndex() == 0){
-			return descI.getText();
+		if(aux == "Social"){
+			return descS.getText();
 		}
 		else {
-			return descS.getText();
+			return descI.getText();
 		}
 	}
 	
@@ -438,18 +447,31 @@ public class CreateProjectView {
 	 */
 	public double getBudget() {
 		if ((budgetS.getText() == null || budgetS.getText().equals("")) && (budgetI.getText() == null || budgetI.getText().equals(""))) {
-			JOptionPane.showMessageDialog(null, "You must write a description.", "Wrong description.", JOptionPane.OK_OPTION);
+			JOptionPane.showMessageDialog(null, "You must write a budget.", "Wrong budget.", JOptionPane.OK_OPTION);
 			return -1; 
 		}
-		
-		if(Double.parseDouble(budgetS.getText()) <= 0 || Double.parseDouble(budgetI.getText()) <= 0){
-			return -2;
-		}
-		if(tab.getSelectedIndex() == 0) {
-			return Double.parseDouble(budgetI.getText());
+		if(aux =="Social") {
+			if(budgetS.getText().matches((".*[a-zA-Z]+.*"))) {
+				JOptionPane.showMessageDialog(null, "A budget must be a number.", "You must write a valid budget.", JOptionPane.OK_OPTION);
+				return -3;
+			}
 		}
 		else {
+			if(budgetI.getText().matches((".*[a-zA-Z]+.*"))) {
+				JOptionPane.showMessageDialog(null, "A budget must be a number.", "You must write a valid budget.", JOptionPane.OK_OPTION);
+				return -3;
+			}
+		}
+		if(Double.parseDouble(budgetS.getText()) <= 1 && Double.parseDouble(budgetI.getText()) <= 1){
+			JOptionPane.showMessageDialog(null, "You must write a valid budget.", "You must write a valid budget.", JOptionPane.OK_OPTION);
+			return -2;
+		}
+		if(aux == "Social") {
 			return Double.parseDouble(budgetS.getText());
+
+		}
+		else {
+			return Double.parseDouble(budgetI.getText());
 		}
 	}
 	
@@ -488,12 +510,23 @@ public class CreateProjectView {
 	public List<String> getAffectedDistricts() {
 		List<String> affected = new ArrayList<String>();
 		Component[] components = districts.getComponents();
+		int aux = 0;
 		for(Component c : components) {
 			if(((JCheckBox) c).isSelected() == true) {
 				affected.add(((JCheckBox) c).getText());
 			}
+			else {
+				aux = aux + 1;
+			}
 		}
-		return affected;
+		
+		if(aux == 21) {
+			JOptionPane.showMessageDialog(null, "You must select at least one district.", "District Error.", JOptionPane.OK_OPTION);
+			return null; 
+		}
+		else {
+			return affected;
+		}
 	}
 	
 	/**
@@ -501,7 +534,7 @@ public class CreateProjectView {
 	 * @return the image as a string.
 	 */
 	public String getImage() {
-		if(image.getText() == null || image.getText() == "") {
+		if(image.getText() == null || image.getText().equals("")) {
 			return null;
 		}
 		return image.getText();
@@ -512,7 +545,7 @@ public class CreateProjectView {
 	 * @return the location as a string.
 	 */
 	public String getLocation() {
-		if(location.getText() == null || location.getText() == "") {
+		if(location.getText() == null || location.getText().equals("")) {
 			JOptionPane.showMessageDialog(null, "You must write a location for the project.", "Wrong location.", JOptionPane.OK_OPTION);
 			return null; 
 		}
@@ -524,7 +557,7 @@ public class CreateProjectView {
 	 * @return the scheme as a string.
 	 */
 	public String getScheme() {
-		if(scheme.getText() == null || scheme.getText() == "") {
+		if(scheme.getText() == null || scheme.getText().equals("")) {
 			JOptionPane.showMessageDialog(null, "You must write an scheme for the project.", "Wrong scheme.", JOptionPane.OK_OPTION);
 			return null; 
 		}
