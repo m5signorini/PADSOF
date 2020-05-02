@@ -143,27 +143,12 @@ public class PantallaPrincipal extends JPanel {
 		this.add(pestanias);
 	}
 
-	public void setControladorMiPagina(ActionListener c) {  
+	public void setControladores(ActionListener c) {  
 		botonMiPagina.addActionListener(c);
-	}
-
-	public void setControladorBuscarProyecto(ActionListener c) {  
-		botonCrearProyecto.addActionListener(c);
-	}
-
-	public void setControladorBuscarColectivo(ActionListener c) {  
-		botonBuscarColectivo.addActionListener(c);
-	}
-
-	public void setControladorCrearProyecto(ActionListener c) {  
-		botonCrearProyecto.addActionListener(c);
-	}
-
-	public void setControladorCrearColectivo(ActionListener c) {  
-		botonCrearColectivo.addActionListener(c);
-	}
-
-	public void setControladorCerrarSesion(ActionListener c) {  
+		botonCrearProyecto.addActionListener(c);  
+		botonBuscarColectivo.addActionListener(c);  
+		botonCrearProyecto.addActionListener(c); 
+		botonCrearColectivo.addActionListener(c);  
 		botonCerrarSesion.addActionListener(c);
 	}
 	
