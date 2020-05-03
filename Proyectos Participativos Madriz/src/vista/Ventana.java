@@ -8,15 +8,19 @@ import javax.swing.JPanel;
 
 
 import controlador.Controlador;
+import controlador.colectivos.ControlCollectiveView;
 import controlador.colectivos.ControlCreateCollective;
 import controlador.inicio.*;
 import controlador.principal.ControlAdmin;
 import controlador.principal.ControlPantallaPrincipal;
 import controlador.proyectos.ControlCreateProject;
+import controlador.proyectos.ControlProjectView;
+import vista.colectivos.CollectiveView;
 import vista.colectivos.CreateCollectiveView;
 import vista.inicio.*;
 import vista.principal.*;
 import vista.proyectos.CreateProjectView;
+import vista.proyectos.ProjectView;
 
 public class Ventana extends JFrame {
 	
@@ -27,6 +31,8 @@ public class Ventana extends JFrame {
 	private PantallaPrincipal vistaPantallaPrincipal;
 	private CreateProjectView vistaCreacionProyecto;
 	private CreateCollectiveView vistaCreacionColectivo;
+	private ProjectView vistaProjectView;
+	private CollectiveView vistaCollectiveView;
 
 	private ControlInicio contInicio;
 	private ControlInicioAdmin contInicioAdmin;
@@ -35,6 +41,8 @@ public class Ventana extends JFrame {
 	private ControlPantallaPrincipal contPantallaPrincipal;
 	private ControlCreateProject contCreateProject;
 	private ControlCreateCollective contCreateCollective;
+	private ControlCollectiveView contCollectiveView;
+	private ControlProjectView contProjectView;
 	
 	private JPanel contentPane;
 	
@@ -69,7 +77,13 @@ public class Ventana extends JFrame {
 		contentPane.add(vistaCreacionProyecto, "CREACION DE PROYECTO");
 		
 		this.vistaCreacionColectivo = new CreateCollectiveView();
-		contentPane.add(vistaCreacionColectivo, "CREACION DE PROYECTO");
+		contentPane.add(vistaCreacionColectivo, "CREACION DE COLECTIVO");
+
+		this.vistaProjectView = new ProjectView();
+		contentPane.add(vistaProjectView, "VISTA DE PROYECTO");
+		
+		this.vistaCollectiveView = new CollectiveView();
+		contentPane.add(vistaCollectiveView, "VISTA DE COLECTIVO");
 
 		this.setAllInvisible();
 		vistaInicio.setVisible(true);
@@ -103,6 +117,12 @@ public class Ventana extends JFrame {
 		
 		this.contCreateCollective = controlador.getControlCreateCollective();
 		vistaCreacionColectivo.setController(contCreateCollective);
+		
+		this.contProjectView = controlador.getControlProjectView();
+		vistaProjectView.setController(contProjectView);
+		
+		this.contCollectiveView = controlador.getControlCollectiveView();
+		vistaCollectiveView.setController(contCollectiveView);
 	}
 
 	public Inicio getVistaInicio() {
@@ -133,6 +153,15 @@ public class Ventana extends JFrame {
 		return this.vistaCreacionColectivo;
 	}
 	
+	public ProjectView getProjectView() {
+		return this.vistaProjectView;
+	}
+	
+	public CollectiveView getCollectiveView() {
+		return this.vistaCollectiveView;
+	}
+	
+	
 	//
 	
 	public ControlCreateCollective getControlCreateCollective() {
@@ -155,5 +184,8 @@ public class Ventana extends JFrame {
 		vistaPantallaPrincipal.setVisible(false);
 		vistaCreacionProyecto.setVisible(false);
 		vistaCreacionColectivo.setVisible(false);
+		vistaProjectView.setVisible(false);
+		vistaCollectiveView.setVisible(false);
+		vistaInicioAdmin.setVisible(false);
 	}
 }

@@ -98,6 +98,7 @@ public class ControlInicio implements ActionListener {
 		frame.pack();
 		
 		pantallaPrincipal.setCreatedProjects(u.getCreatedProjects());
+		pantallaPrincipal.setVotedProjects(u.getVotedProjects());
 		pantallaPrincipal.setFollowedProjects(u.getFollowedProjects());
 		pantallaPrincipal.setCollectives(u.getCollectives());
 		pantallaPrincipal.setRepresentedCollectives(u.getRepresentedCollectives());

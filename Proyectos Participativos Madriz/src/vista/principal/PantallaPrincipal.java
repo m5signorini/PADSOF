@@ -5,11 +5,14 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -23,8 +26,10 @@ import modelo.projects.Project;
 
 public class PantallaPrincipal extends JPanel {
 	
-
+	private ActionListener listener;
+	
 	private List<Project> createdProjects;
+	private List<Project> votedProjects;
 	private List<Project> followedProjects;
 	private List<Collective> collectives;
 	private List<Collective> representedCollectives;
@@ -36,7 +41,7 @@ public class PantallaPrincipal extends JPanel {
 	private JPanel pestaniaMisColectivos;
 	private JPanel pestaniaColectivosCreados;
 	private JPanel pestaniaMisProyectos;
-	private JPanel pestaniaInformePoularidad;
+	private JPanel pestaniaInformePopularidad;
 	private JPanel pestaniaInformeAfinidad;
 	private JPanel pestaniaProyectosSeguidos;
 	private JPanel pestaniaNotificaciones;
@@ -61,6 +66,8 @@ public class PantallaPrincipal extends JPanel {
 	private JTextField barraBusquedaProyecto;
 	private JButton botonBuscadorProyecto;
 	private JPanel resultadosBusquedaProyecto;
+	
+	private JComboBox<String> afinidadColectivo;
 	
 	public PantallaPrincipal() {
 		
@@ -157,7 +164,7 @@ public class PantallaPrincipal extends JPanel {
 		pestaniaMisColectivos = new JPanel();
 		pestaniaColectivosCreados = new JPanel();
 		pestaniaMisProyectos = new JPanel();
-		pestaniaInformePoularidad = new JPanel();
+		pestaniaInformePopularidad = new JPanel();
 		pestaniaInformeAfinidad = new JPanel();
 		pestaniaProyectosSeguidos = new JPanel();
 		pestaniaNotificaciones = new JPanel();
@@ -166,7 +173,7 @@ public class PantallaPrincipal extends JPanel {
 		pestaniaMisColectivos.setBackground(new Color(255,255,255));
 		pestaniaColectivosCreados.setBackground(new Color(255,255,255));
 		pestaniaMisProyectos.setBackground(new Color(255,255,255));
-		pestaniaInformePoularidad.setBackground(new Color(255,255,255));
+		pestaniaInformePopularidad.setBackground(new Color(255,255,255));
 		pestaniaInformeAfinidad.setBackground(new Color(255,255,255));
 		pestaniaProyectosSeguidos.setBackground(new Color(255,255,255));
 		pestaniaNotificaciones.setBackground(new Color(255,255,255));
@@ -174,7 +181,7 @@ public class PantallaPrincipal extends JPanel {
 		pestanias1.addTab("Mis Proyectos", pestaniaMisProyectos);
 		pestanias1.addTab("Mis Colectivos", pestaniaMisColectivos);
 		pestanias1.addTab("Colectivos Creados", pestaniaColectivosCreados);
-		pestanias1.addTab("Informe de Popularidad", pestaniaInformePoularidad);
+		pestanias1.addTab("Informe de Popularidad", pestaniaInformePopularidad);
 		pestanias1.addTab("Informe Afinidad", pestaniaInformeAfinidad);
 		pestanias1.addTab("Proyectos Seguidos", pestaniaProyectosSeguidos);
 		pestanias1.addTab("Notificaciones", pestaniaNotificaciones);
@@ -184,6 +191,9 @@ public class PantallaPrincipal extends JPanel {
 		pestaniaColectivosCreados.setLayout(new BoxLayout(pestaniaColectivosCreados, BoxLayout.Y_AXIS));
 		pestaniaProyectosSeguidos.setLayout(new BoxLayout(pestaniaProyectosSeguidos, BoxLayout.Y_AXIS));
 		pestaniaNotificaciones.setLayout(new BoxLayout(pestaniaNotificaciones, BoxLayout.Y_AXIS));
+		pestaniaInformePopularidad.setLayout(new BoxLayout(pestaniaInformePopularidad, BoxLayout.Y_AXIS));
+		pestaniaInformeAfinidad.setLayout(new BoxLayout(pestaniaInformeAfinidad, BoxLayout.Y_AXIS));
+
 
 		return pestanias1;
 	}
@@ -243,6 +253,7 @@ public class PantallaPrincipal extends JPanel {
 		return searchProyectos1;
 	}
 	
+	
 	public String getSearchedCollectiveText() {
 		return barraBusquedaColectivo.getText();
 	}
@@ -260,10 +271,15 @@ public class PantallaPrincipal extends JPanel {
 		botonCerrarSesion.addActionListener(c);
 		botonBuscadorColectivo.addActionListener(c);
 		botonBuscadorProyecto.addActionListener(c);
+		listener = c;
 	}
 	
 	public void setCreatedProjects(List<Project> createdProjects) {
 		this.createdProjects = createdProjects;
+	}
+	
+	public void setVotedProjects(List<Project> votedProjects) {
+		this.votedProjects = votedProjects;
 	}
 	
 	public void setFollowedProjects(List<Project> followedProjects) {
@@ -282,6 +298,14 @@ public class PantallaPrincipal extends JPanel {
 		this.resultadoBusquedaProyectos = collectives;
 	}
 	
+	public List<Project> getResultadoBusquedaProyectos() {
+		return this.resultadoBusquedaProyectos;
+	}
+	
+	public List<Collective> getResultadoBusquedaColectivos() {
+		return this.resultadoBusquedaColectivos;
+	}
+		
 	public void setRepresentedCollectives(List<Collective> c) {
 		this.representedCollectives = c;
 	}
@@ -302,10 +326,11 @@ public class PantallaPrincipal extends JPanel {
 		return this.searchProjects;
 	}
 	
-	private JPanel representacionProyecto(Project p) {
+	
+	private JPanel representacionProyecto(Project p, int index) {
 		JPanel c = new JPanel();
 		c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
-		Dimension d = new Dimension(1300, 100);
+		Dimension d = new Dimension(1700, 100);
         c.setMinimumSize(d);
         c.setMaximumSize(d);
         c.setPreferredSize(d);
@@ -314,17 +339,44 @@ public class PantallaPrincipal extends JPanel {
 		JLabel title = new JLabel(p.getTitle());
 		title.setFont(new Font("serif", Font.BOLD, 25));
 		c.add(title);
+		
+		int votes = p.getVoters().size();
 		c.add(Box.createRigidArea(new Dimension(200, 0)));
 		c.add(new JLabel(p.getDescription()));
+		
+		c.add(Box.createRigidArea(new Dimension(200, 0)));
+		
+		JButton b = new JButton("Mas informacion proyecto");
+		b.addActionListener(listener);
+		b.setName(Integer.toString(index));
+		c.add(b);
+		
 		return c;
 	}
 	
-	private JPanel representacionColectivo(Collective p) {
+	private JPanel representacionColectivo(Collective p, int index) {
 		JPanel c = new JPanel();
 		c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
-		c.add(new JLabel(p.getName()));
-		c.add(Box.createRigidArea(new Dimension(130, 070)));
+		Dimension d = new Dimension(1700, 100);
+        c.setMinimumSize(d);
+        c.setMaximumSize(d);
+        c.setPreferredSize(d);
+
+		c.add(Box.createRigidArea(new Dimension(200, 0)));
+		JLabel title = new JLabel(p.getName());
+		title.setFont(new Font("serif", Font.BOLD, 25));
+		c.add(title);
+
+		c.add(Box.createRigidArea(new Dimension(200, 0)));
 		c.add(new JLabel(p.getDescription()));
+		
+		c.add(Box.createRigidArea(new Dimension(200, 0)));
+		
+		JButton b = new JButton("Mas informacion colectivo");
+		b.addActionListener(listener);
+		b.setName(Integer.toString(index));
+		c.add(b);
+		
 		return c;
 	}
 	
@@ -337,6 +389,67 @@ public class PantallaPrincipal extends JPanel {
 		return c;
 	}
 	
+	private JPanel primeraFilaInformePopularidad() {
+		JPanel c = new JPanel();
+		c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
+		c.add(new JLabel("Título"));
+		c.add(Box.createRigidArea(new Dimension(130, 070)));
+		c.add(new JLabel("Votos"));
+		c.add(Box.createRigidArea(new Dimension(130, 070)));
+		c.add(new JLabel("Tipo"));
+		c.add(Box.createRigidArea(new Dimension(130, 070)));
+		c.add(new JLabel("Presupuesto"));
+		return c;
+	}
+	
+	private JPanel representacionProyectoEnInformePopularidad(Project p) {
+		JPanel c = new JPanel();
+		c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
+		c.add(new JLabel(p.getTitle()));
+		c.add(Box.createRigidArea(new Dimension(130, 070)));
+		c.add(new JLabel(String.valueOf(p.countVotes())));
+		c.add(Box.createRigidArea(new Dimension(130, 070)));
+		c.add(new JLabel(String.valueOf(p.getProjectKind())));
+		c.add(Box.createRigidArea(new Dimension(130, 070)));
+		c.add(new JLabel(String.valueOf(p.getRequestedAmount())));
+		return c;
+	}
+	
+	private JPanel primeraFilaInformeAfinidad() {
+		JPanel c = new JPanel();
+		JPanel aux = new JPanel(); 
+		c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
+		aux.setLayout(new BoxLayout(aux, BoxLayout.X_AXIS));
+
+		aux.add(new JLabel("Encontrar colectivos afines a:"));
+		aux.add(Box.createRigidArea(new Dimension(130, 070)));
+		aux.add(afinidadColectivo);
+		c.add(aux);
+		c.add(Box.createRigidArea(new Dimension(130, 070)));
+		c.add(new JLabel("Colectivos"));
+		c.add(Box.createRigidArea(new Dimension(130, 070)));
+		c.add(new JLabel("Índice de afinidad"));
+		c.add(Box.createRigidArea(new Dimension(130, 070)));
+		c.add(new JLabel("Tipo"));
+		c.add(Box.createRigidArea(new Dimension(130, 070)));
+		c.add(new JLabel("Cantidad de miembros"));
+		
+		return c;
+	}
+	
+	/*private JPanel representacionInformeAfinidad(Collective co) {
+		JPanel c = new JPanel();
+		c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
+		c.add(new JLabel(p.getTitle()));
+		c.add(Box.createRigidArea(new Dimension(130, 070)));
+		c.add(new JLabel(String.valueOf(p.countVotes())));
+		c.add(Box.createRigidArea(new Dimension(130, 070)));
+		c.add(new JLabel(String.valueOf(p.getProjectKind())));
+		c.add(Box.createRigidArea(new Dimension(130, 070)));
+		c.add(new JLabel(String.valueOf(p.getRequestedAmount())));
+		return c;
+	}*/
+	
 	public void update () {
 		
 		pestaniaMisProyectos.removeAll();
@@ -345,20 +458,47 @@ public class PantallaPrincipal extends JPanel {
 		pestaniaColectivosCreados.removeAll();
 		pestaniaNotificaciones.removeAll();
 		
+		int i = 0;
 		for (Project p: createdProjects) {
-			pestaniaMisProyectos.add(representacionProyecto(p));
+			pestaniaMisProyectos.add(representacionProyecto(p, i));
+			i++;
 		}
+		i = 0;
 		for (Project p: followedProjects) {
-			pestaniaProyectosSeguidos.add(representacionProyecto(p));
+			pestaniaProyectosSeguidos.add(representacionProyecto(p, i));
+			i++;
 		}
+		i = 0;
 		for (Collective p: collectives) {
-			pestaniaMisColectivos.add(representacionColectivo(p));
+			pestaniaMisColectivos.add(representacionColectivo(p, i));
+			i++;
 		}
+		i = 0;
 		for (Collective p: representedCollectives) {
-			pestaniaColectivosCreados.add(representacionColectivo(p));
+			pestaniaColectivosCreados.add(representacionColectivo(p, i));
+			i++;
 		}
 		for (Notification p: notifications) {
 			pestaniaNotificaciones.add(representacionNotificacion(p));
+		}
+		
+		pestaniaInformePopularidad.add(primeraFilaInformePopularidad());
+		createdProjects.sort(Comparator.comparing(Project::countVotes));
+		for(Project p:votedProjects) {
+			pestaniaInformePopularidad.add(representacionProyectoEnInformePopularidad(p));
+		}
+		String[] opciones = {"Ninguno"};
+		afinidadColectivo = new JComboBox<String>(opciones);
+		afinidadColectivo.setSize(new Dimension(20, 20));
+		afinidadColectivo.setSelectedIndex(0);
+		
+		pestaniaInformeAfinidad.add(primeraFilaInformeAfinidad());
+		if(	afinidadColectivo.getSelectedIndex() == 0) {
+			return;
+		}
+
+		for(Collective c:collectives) {
+			//pestaniaInformeAfinidad.add(representacionInformeAfinidad(c));
 		}
 	}
 	
@@ -368,13 +508,10 @@ public class PantallaPrincipal extends JPanel {
 			resultadosBusquedaColectivo.add(new JLabel("No reults found!"));
 			return;
 		}
+		int i = 0;
 		for (Collective p: resultadoBusquedaColectivos) {
-			JPanel c = new JPanel();
-			c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
-			c.add(new JLabel(p.getName()));
-			c.add(Box.createRigidArea(new Dimension(130, 070)));
-			c.add(new JLabel(p.getDescription()));
-			resultadosBusquedaColectivo.add(c);
+			resultadosBusquedaColectivo.add(representacionColectivo(p, i));
+			i++;
 		}
 	}
 	
@@ -384,13 +521,10 @@ public class PantallaPrincipal extends JPanel {
 			resultadosBusquedaProyecto.add(new JLabel("No reults found!"));
 			return;
 		}
+		int i = 0;
 		for (Project p: resultadoBusquedaProyectos) {
-			JPanel c = new JPanel();
-			c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
-			c.add(new JLabel(p.getTitle()));
-			c.add(Box.createRigidArea(new Dimension(130, 070)));
-			c.add(new JLabel(p.getDescription()));
-			resultadosBusquedaProyecto.add(c);
+			resultadosBusquedaProyecto.add(representacionProyecto(p, i));
+			i++;
 		}
 	}
 }

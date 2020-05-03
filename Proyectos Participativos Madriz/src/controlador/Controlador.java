@@ -1,10 +1,12 @@
 package controlador;
 
+import controlador.colectivos.ControlCollectiveView;
 import controlador.colectivos.ControlCreateCollective;
 import controlador.inicio.*;
 import controlador.principal.ControlAdmin;
 import controlador.principal.ControlPantallaPrincipal;
 import controlador.proyectos.ControlCreateProject;
+import controlador.proyectos.ControlProjectView;
 import modelo.*;
 import modelo.functionalities.Application;
 import vista.*;
@@ -20,7 +22,9 @@ public class Controlador {
 	private ControlRegistro contRegistro;
 	private ControlPantallaPrincipal contPantallaPrincipal;
 	private ControlCreateProject contCreateProject;
-	private ControlCreateCollective contCreateCollective;
+	private ControlCreateCollective contCreateCollective;	
+	private ControlCollectiveView contCollectiveView;
+	private ControlProjectView contProjectView;
 
 	public Controlador(Ventana frame2, Application app) {
 		this.frame = frame2;
@@ -33,6 +37,8 @@ public class Controlador {
 		this.contPantallaPrincipal = new ControlPantallaPrincipal(frame, app);
 		this.contCreateProject = new ControlCreateProject(app, frame);
 		this.contCreateCollective = new ControlCreateCollective(app, frame);
+		this.contCollectiveView = new ControlCollectiveView(app, frame);
+		this.contProjectView = new ControlProjectView(app, frame);
 	}
 
 	public ControlInicio getControlInicio() {
@@ -61,5 +67,13 @@ public class Controlador {
 
 	public ControlCreateCollective getControlCreateCollective() {
 		return this.contCreateCollective;
+	}
+	
+	public ControlProjectView getControlProjectView() {
+		return this.contProjectView;
+	}
+
+	public ControlCollectiveView getControlCollectiveView() {
+		return this.contCollectiveView;
 	}
 }

@@ -1,22 +1,17 @@
 package controlador.principal;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
-import javax.swing.*;
-import modelo.*;
+import javax.swing.JButton;
+
 import modelo.entities.Collective;
 import modelo.entities.individuals.User;
-import modelo.exceptions.BannedUserException;
 import modelo.functionalities.Application;
 import modelo.projects.Project;
-import vista.*;
-import vista.colectivos.CreateCollectiveView;
-import vista.inicio.Inicio;
-import vista.inicio.Registro;
+import vista.Ventana;
 import vista.principal.PantallaPrincipal;
-import vista.proyectos.CreateProjectView;
 
 public class ControlPantallaPrincipal implements ActionListener {
 
@@ -74,9 +69,34 @@ public class ControlPantallaPrincipal implements ActionListener {
 		case "Buscar Proyectos":
 			realizarBusquedaProyectos();
 			break;
+		case "Mas informacion proyecto":
+			// En el nombre hemos almacenado el indice del proyecto del que queremos mas informacion.
+			int indiceProyecto = Integer.parseInt(((JButton)e.getSource()).getName());
+			System.out.println(indiceProyecto);
+			mostrarInformacionProyecto((pantallaPrincipal.getResultadoBusquedaProyectos()).get(indiceProyecto));
+			break;
+		case "Mas informacion colectivo":
+			// En el nombre hemos almacenado el indice del colectivo del que queremos mas informacion.
+			int indiceColectivo = Integer.parseInt(((JButton)e.getSource()).getName());
+			System.out.println(indiceColectivo);
+			mostrarInformacionColectivo((pantallaPrincipal.getResultadoBusquedaColectivos()).get(indiceColectivo));
+			break;
 		}
 	}
-
+	
+	private void mostrarInformacionProyecto(Project p) {
+		System.out.println(p);
+		frame.getProjectView().update(p);
+		frame.setAllInvisible();
+		frame.getProjectView().setVisible(true);
+	}
+	
+	private void mostrarInformacionColectivo(Collective c) {
+		System.out.println(c);
+		frame.getCollectiveView().update(c);
+		frame.setAllInvisible();
+		frame.getCollectiveView().setVisible(true);
+	}
 
 	private void realizarBusquedaColectivos() {
 		String text = pantallaPrincipal.getSearchedCollectiveText();
@@ -107,6 +127,7 @@ public class ControlPantallaPrincipal implements ActionListener {
 		frame.pack();
 
 		pantallaPrincipal.setCreatedProjects(u.getCreatedProjects());
+		pantallaPrincipal.setVotedProjects(u.getVotedProjects());
 		pantallaPrincipal.setFollowedProjects(u.getFollowedProjects());
 		pantallaPrincipal.setCollectives(u.getCollectives());
 		pantallaPrincipal.setRepresentedCollectives(u.getRepresentedCollectives());
