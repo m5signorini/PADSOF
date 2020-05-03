@@ -95,7 +95,7 @@ public class CreateCollectiveView extends JPanel{
 	                6, 6); //xPad, yPad
 			
 			container.add(MainPanel);
-			window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			//window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			window.setSize(450, 250);
 			//window.setVisible(true);
 		

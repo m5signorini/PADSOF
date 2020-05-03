@@ -391,7 +391,7 @@ public class CreateProjectView extends JPanel{
 		              6, 6); //xPad, yPad
 		
 		container.add(tab);
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setSize(950,480);
 		//window.setVisible(true);
 	
