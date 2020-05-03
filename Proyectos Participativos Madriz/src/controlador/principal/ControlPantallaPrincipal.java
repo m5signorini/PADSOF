@@ -1,22 +1,17 @@
 package controlador.principal;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
-import javax.swing.*;
-import modelo.*;
+import javax.swing.JButton;
+
 import modelo.entities.Collective;
 import modelo.entities.individuals.User;
-import modelo.exceptions.BannedUserException;
 import modelo.functionalities.Application;
 import modelo.projects.Project;
-import vista.*;
-import vista.colectivos.CreateCollectiveView;
-import vista.inicio.Inicio;
-import vista.inicio.Registro;
+import vista.Ventana;
 import vista.principal.PantallaPrincipal;
-import vista.proyectos.CreateProjectView;
 
 public class ControlPantallaPrincipal implements ActionListener {
 
@@ -85,7 +80,6 @@ public class ControlPantallaPrincipal implements ActionListener {
 	
 	private void mostrarInformacionProyecto(Project p) {
 		System.out.println(p);
-		p.get
 	}
 
 	private void realizarBusquedaColectivos() {

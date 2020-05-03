@@ -1,15 +1,14 @@
 package controlador.inicio;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
-import modelo.*;
 import modelo.entities.individuals.User;
 import modelo.functionalities.Application;
-import vista.*;
+import vista.Ventana;
 import vista.inicio.Inicio;
 import vista.inicio.Registro;
 

@@ -6,16 +6,23 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-
 import controlador.Controlador;
+import controlador.colectivos.ControlCollectiveView;
 import controlador.colectivos.ControlCreateCollective;
-import controlador.inicio.*;
+import controlador.inicio.ControlInicio;
+import controlador.inicio.ControlInicioAdmin;
+import controlador.inicio.ControlRegistro;
 import controlador.principal.ControlPantallaPrincipal;
 import controlador.proyectos.ControlCreateProject;
+import controlador.proyectos.ControlProjectView;
+import vista.colectivos.CollectiveView;
 import vista.colectivos.CreateCollectiveView;
-import vista.inicio.*;
+import vista.inicio.Inicio;
+import vista.inicio.InicioAdmin;
+import vista.inicio.Registro;
 import vista.principal.PantallaPrincipal;
 import vista.proyectos.CreateProjectView;
+import vista.proyectos.ProjectView;
 
 public class Ventana extends JFrame {
 	

@@ -1,12 +1,15 @@
 package controlador;
 
+import controlador.colectivos.ControlCollectiveView;
 import controlador.colectivos.ControlCreateCollective;
-import controlador.inicio.*;
+import controlador.inicio.ControlInicio;
+import controlador.inicio.ControlInicioAdmin;
+import controlador.inicio.ControlRegistro;
 import controlador.principal.ControlPantallaPrincipal;
 import controlador.proyectos.ControlCreateProject;
-import modelo.*;
+import controlador.proyectos.ControlProjectView;
 import modelo.functionalities.Application;
-import vista.*;
+import vista.Ventana;
 
 public class Controlador {
 	
