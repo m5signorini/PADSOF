@@ -74,9 +74,19 @@ public class ControlPantallaPrincipal implements ActionListener {
 		case "Buscar Proyectos":
 			realizarBusquedaProyectos();
 			break;
+		case "Mas informacion":
+			// En el nombre hemos almacenado el indice del proyecto del que queremos mas informacion.
+			int indiceProyecto = Integer.parseInt(((JButton)e.getSource()).getName());
+			System.out.println(indiceProyecto);
+			mostrarInformacionProyecto((pantallaPrincipal.getResultadoBusquedaProyectos()).get(indiceProyecto));
+			break;
 		}
 	}
-
+	
+	private void mostrarInformacionProyecto(Project p) {
+		System.out.println(p);
+		p.get
+	}
 
 	private void realizarBusquedaColectivos() {
 		String text = pantallaPrincipal.getSearchedCollectiveText();
