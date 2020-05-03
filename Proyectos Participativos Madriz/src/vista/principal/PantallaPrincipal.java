@@ -285,6 +285,33 @@ public class PantallaPrincipal extends JPanel {
 		return this.searchProjects;
 	}
 	
+	private JPanel representacionProyecto(Project p) {
+		JPanel c = new JPanel();
+		c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
+		c.add(new JLabel(p.getTitle()));
+		c.add(Box.createRigidArea(new Dimension(130, 070)));
+		c.add(new JLabel(p.getDescription()));
+		return c;
+	}
+	
+	private JPanel representacionColectivo(Collective p) {
+		JPanel c = new JPanel();
+		c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
+		c.add(new JLabel(p.getName()));
+		c.add(Box.createRigidArea(new Dimension(130, 070)));
+		c.add(new JLabel(p.getDescription()));
+		return c;
+	}
+	
+	private JPanel representacionNotificacion(Notification p) {
+		JPanel c = new JPanel();
+		c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
+		c.add(new JLabel(p.getTitle()));
+		c.add(Box.createRigidArea(new Dimension(130, 070)));
+		c.add(new JLabel(p.getText()));
+		return c;
+	}
+	
 	public void update () {
 		
 		pestaniaMisProyectos.removeAll();
@@ -294,44 +321,19 @@ public class PantallaPrincipal extends JPanel {
 		pestaniaNotificaciones.removeAll();
 		
 		for (Project p: createdProjects) {
-			JPanel c = new JPanel();
-			c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
-			c.add(new JLabel(p.getTitle()));
-			c.add(Box.createRigidArea(new Dimension(130, 070)));
-			c.add(new JLabel(p.getDescription()));
-			pestaniaMisProyectos.add(c);
+			pestaniaMisProyectos.add(representacionProyecto(p));
 		}
 		for (Project p: followedProjects) {
-			JPanel c = new JPanel();
-			c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
-			c.add(new JLabel(p.getTitle()));
-			c.add(Box.createRigidArea(new Dimension(130, 070)));
-			c.add(new JLabel(p.getDescription()));
-			pestaniaProyectosSeguidos.add(c);
+			pestaniaProyectosSeguidos.add(representacionProyecto(p));
 		}
 		for (Collective p: collectives) {
-			JPanel c = new JPanel();
-			c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
-			c.add(new JLabel(p.getName()));
-			c.add(Box.createRigidArea(new Dimension(130, 070)));
-			c.add(new JLabel(p.getDescription()));
-			pestaniaMisColectivos.add(c);
+			pestaniaMisColectivos.add(representacionColectivo(p));
 		}
 		for (Collective p: representedCollectives) {
-			JPanel c = new JPanel();
-			c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
-			c.add(new JLabel(p.getName()));
-			c.add(Box.createRigidArea(new Dimension(130, 070)));
-			c.add(new JLabel(p.getDescription()));
-			pestaniaColectivosCreados.add(c);
+			pestaniaColectivosCreados.add(representacionColectivo(p));
 		}
 		for (Notification p: notifications) {
-			JPanel c = new JPanel();
-			c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
-			c.add(new JLabel(p.getTitle()));
-			c.add(Box.createRigidArea(new Dimension(130, 070)));
-			c.add(new JLabel(p.getText()));
-			pestaniaNotificaciones.add(c);
+			pestaniaNotificaciones.add(representacionNotificacion(p));
 		}
 	}
 	
