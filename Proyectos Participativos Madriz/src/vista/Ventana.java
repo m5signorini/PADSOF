@@ -119,6 +119,16 @@ public class Ventana extends JFrame {
 		return this.vistaCreacionColectivo;
 	}
 	
+	//
+	
+	public ControlCreateCollective getControlCreateCollective() {
+		return this.contCreateCollective;
+	}
+	
+	public ControlCreateProject getControlCreateProject() {
+		return this.contCreateProject;
+	}
+	
 	public void setAllInvisible() {
 		vistaInicio.setVisible(false);
 		vistaInicioAdmin.setVisible(false);
