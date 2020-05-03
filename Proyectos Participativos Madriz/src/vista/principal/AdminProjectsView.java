@@ -48,6 +48,7 @@ public class AdminProjectsView extends JPanel{
         
 		tabs = new JTabbedPane();
 		tabs.addTab("Pendientes", new JScrollPane(projectList));
+		tabs.setPreferredSize(new Dimension(700, 500));
 		
 		center.add(tabs);
 		
