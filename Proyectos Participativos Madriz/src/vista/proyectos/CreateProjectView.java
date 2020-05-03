@@ -8,6 +8,8 @@ import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 
 import javax.swing.AbstractButton;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -26,6 +28,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import modelo.entities.Collective;
+import modelo.projects.Project;
 
 import java.util.*;
 
@@ -50,7 +53,8 @@ public class CreateProjectView extends JPanel{
 	//SOCIAL
 	//Collective option
 	JLabel etiquetaCollectiveS;
-	JTextField collectiveNameS;
+	JComboBox<String>comboS;
+	//JTextField collectiveNameS;
 	
 	//Title project
 	JLabel etiquetaTitleS;
@@ -85,7 +89,8 @@ public class CreateProjectView extends JPanel{
 	//Collective option
 	
 	JLabel etiquetaCollectiveI;
-	JTextField collectiveNameI;
+	JComboBox<String>comboI;
+	//JTextField collectiveNameI;
 		
 	//Title project
 	JLabel etiquetaTitleI;
@@ -157,7 +162,8 @@ public class CreateProjectView extends JPanel{
 					location.setText("");
 					descI.setText("");
 					scheme.setText("");
-					collectiveNameI.setText("");
+					//collectiveNameI.setText("");
+					comboI.setSelectedIndex(0);
 					Component[] components = districts.getComponents();
 					for(Component c : components) {
 						((JCheckBox) c).setSelected(false);
@@ -169,7 +175,8 @@ public class CreateProjectView extends JPanel{
 					titleS.setText("");
 					descS.setText("");
 					image.setText("");
-					collectiveNameS.setText("");
+					//collectiveNameS.setText("");
+					comboS.setSelectedIndex(0);
 					budgetS.setText("1");
 					group.setText("");
 					nacS.setSelected(true);
@@ -207,10 +214,13 @@ public class CreateProjectView extends JPanel{
 		//comboS.setSelectedIndex(1);
 		//etiquetaColectiveS.setLabelFor(comboS);
 		
-		etiquetaCollectiveS = new JLabel("<html>Nombre colectivo (Opcional): <br> (Si el nombre no es correcto usted será asignado como creador.)</html>");
-		collectiveNameS = new JTextField();
+		//etiquetaCollectiveS = new JLabel("<html>Nombre colectivo (Opcional): <br> (Si el nombre no es correcto usted será asignado como creador.)</html>");
+		//collectiveNameS = new JTextField();
+		
+		etiquetaCollectiveS = new JLabel("Nombre del colectivo:");
+		comboS = new JComboBox<String>();
 		MainPanelSoc.add(etiquetaCollectiveS);
-		MainPanelSoc.add(collectiveNameS);
+		MainPanelSoc.add(comboS);
 		
 		//Titulo proyecto
 		etiquetaTitleS = new JLabel("Título del proyecto:");
@@ -282,10 +292,10 @@ public class CreateProjectView extends JPanel{
 		//comboI.setSelectedIndex(1);
 		//etiquetaColectiveI.setLabelFor(comboI);
 	
-		etiquetaCollectiveI = new JLabel("<html>Nombre colectivo (Opcional): <br> (Si el nombre no es correcto usted será asignado como creador.)</html>");
-		collectiveNameI = new JTextField();
+		etiquetaCollectiveI = new JLabel("Nombre del colectivo");
+		comboI = new JComboBox<String>();
 		MainPanelInfr.add(etiquetaCollectiveI);
-		MainPanelInfr.add(collectiveNameI);
+		MainPanelInfr.add(comboI);
 				
 		//Titulo proyecto
 		etiquetaTitleI = new JLabel("Título del proyecto:");
@@ -387,6 +397,10 @@ public class CreateProjectView extends JPanel{
 	
 	}
 
+	public void setRepresentedCollectives(List<Collective> c) {
+		this.representedCollectives = c;
+	}
+	
 	/**
 	 * Shows or hides this window depending on the value of parameter visible (boolean).
 	 * @param visible
@@ -408,14 +422,17 @@ public class CreateProjectView extends JPanel{
 	 * @return the name collective that has created the project or null if it has been created by the user.
 	 */
 	public String getCollectiveName() {
-		if((collectiveNameS.getText() == null || collectiveNameS.getText().equals("")) && (collectiveNameI.getText() == null || collectiveNameI.getText() == "")) {
+		if(aux == "Social" && comboS.getSelectedIndex() == 0 ) {
 			return null;
 		}
-		if((collectiveNameS.getText() == null || collectiveNameS.getText().equals(""))) {
-			return collectiveNameI.getText();
+		if(aux == "Infrastructural"&& comboI.getSelectedIndex() == 0) {
+			return null;
+		}
+		if(aux == "Social" && comboS.getSelectedIndex() != 0 ) {
+			return comboS.getItemAt(comboS.getSelectedIndex());
 		}
 		else {
-			return collectiveNameS.getText();
+			return comboI.getItemAt(comboI.getSelectedIndex());
 		}
 	}
 	
@@ -574,6 +591,21 @@ public class CreateProjectView extends JPanel{
 			return null; 
 		}
 		return scheme.getText();
+	}
+	
+	public void update () {
+		comboS.removeAllItems();
+		comboS.addItem("Ninguno");
+		comboI.removeAllItems();
+		comboI.addItem("Ninguno");
+		if(representedCollectives == null) {
+			return;
+		}
+		for(Collective co: representedCollectives) {
+			comboS.addItem(co.getName());
+			comboI.addItem(co.getName());
+		}
+		return;
 	}
 	
 	public void setController(ActionListener c) {

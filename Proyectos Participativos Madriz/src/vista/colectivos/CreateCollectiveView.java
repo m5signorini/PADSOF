@@ -5,11 +5,14 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import modelo.entities.Collective;
 import vista.proyectos.SpringUtilities;
 
-import java.util.*;
+import java.util.List;
 
 public class CreateCollectiveView extends JPanel{
+
+		List<Collective> collectives;
 
 		JFrame window;
 		//Main panel
@@ -24,14 +27,15 @@ public class CreateCollectiveView extends JPanel{
 		//Collective name
 		JLabel etiquetaCollectiveName;
 		JTextField collectiveName;
-		
+			
 		//Description
 		JLabel etiquetaDescCollective;
 		JTextArea descCollective;
 
 		//Father colective
 		JLabel etiquetaFather;
-		JTextField father;
+		JComboBox<String> father;
+		//JTextField father;
 		
 		
 		public CreateCollectiveView() {
@@ -80,8 +84,8 @@ public class CreateCollectiveView extends JPanel{
 			
 			//Father name
 			//etiquetaFather = new JLabel("<html>Nombre colectivo padre(Opcional):  <br> (Si el nombre no es correcto el <br> colectivo será creado sin padre.)</html>");
-			etiquetaFather = new JLabel("Nombre colectivo padre(Opcional):");
-			father = new JTextField();
+			etiquetaFather = new JLabel("Nombre colectivo padre:");
+			father = new JComboBox<String>();
 			MainPanel.add(etiquetaFather);
 			MainPanel.add(father);
 
@@ -97,6 +101,10 @@ public class CreateCollectiveView extends JPanel{
 		
 		}
 
+		public void setCollectives(List<Collective> c) {
+			this.collectives = c;
+		}
+		
 		/**
 		 * Shows or hides this window depending on the value of parameter visible (boolean).
 		 * @param visible
@@ -137,18 +145,29 @@ public class CreateCollectiveView extends JPanel{
 		}
 		
 		/**
-		 * Return the budget of the project the user has written.
-		 * @return budget of the project or -1 in case there is nothing written or -2 in case the budget is less than or equal to 0.
+		 * Return the father of the created project.
+		 * @return father of the created project.
 		 */
 		public String getFather() {
-			if ((father.getText() == null || father.getText().equals(""))) {
+			if(father.getSelectedIndex() == 0 ) {
 				return null;
 			}
 			else {
-				return father.getText();
+				return father.getItemAt(father.getSelectedIndex());
 			}
 		}
 		
+		public void update () {
+			father.removeAllItems();
+			father.addItem("Ninguno");
+			if(collectives == null) {
+				return;
+			}
+			for(Collective c: collectives) {
+				father.addItem(c.getName());
+			}
+			return;
+		}
 		
 		public void setController(ActionListener c) {
 			create.addActionListener(c);
