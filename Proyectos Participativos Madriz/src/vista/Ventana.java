@@ -9,19 +9,18 @@ import javax.swing.JPanel;
 
 import controlador.Controlador;
 import controlador.colectivos.ControlCreateCollective;
-import controlador.inicio.ControlInicio;
-import controlador.inicio.ControlRegistro;
+import controlador.inicio.*;
 import controlador.principal.ControlPantallaPrincipal;
 import controlador.proyectos.ControlCreateProject;
 import vista.colectivos.CreateCollectiveView;
-import vista.inicio.Inicio;
-import vista.inicio.Registro;
+import vista.inicio.*;
 import vista.principal.PantallaPrincipal;
 import vista.proyectos.CreateProjectView;
 
 public class Ventana extends JFrame {
 	
 	private Inicio vistaInicio;
+	private InicioAdmin vistaInicioAdmin;
 	private Registro vistaRegistro;
 	private PantallaPrincipal vistaPantallaPrincipal;
 	private CreateProjectView vistaCreacionProyecto;
@@ -49,6 +48,9 @@ public class Ventana extends JFrame {
 		
 		this.vistaInicio = new Inicio();
 		contentPane.add(vistaInicio, "INICIO DE SESION");
+		
+		this.vistaInicioAdmin = new InicioAdmin();
+		contentPane.add(vistaInicioAdmin, "INICIO DE ADMIN");
 
 		this.vistaRegistro = new Registro(); 
 		contentPane.add(vistaRegistro, "REGISTRO");
@@ -72,6 +74,7 @@ public class Ventana extends JFrame {
 		this.contInicio = controlador.getControlInicio();
 		vistaInicio.setControladorValidar(contInicio);
 		vistaInicio.setControladorCambioRegistro(contInicio);
+		/*vistaInicio.setControladorCambioAdmin(contInicio);*/
 		
 		this.contRegistro = controlador.getControlRegistro();
 		vistaRegistro.setControladorRegistro(contRegistro);
@@ -89,6 +92,10 @@ public class Ventana extends JFrame {
 
 	public Inicio getVistaInicio() {
 		return this.vistaInicio;
+	}
+	
+	public InicioAdmin getVistaInicioAdmin() {
+		return this.vistaInicioAdmin;
 	}
 
 	public Registro getVistaRegistro() {
