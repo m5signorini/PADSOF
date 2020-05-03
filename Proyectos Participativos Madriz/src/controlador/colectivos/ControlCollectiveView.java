@@ -29,8 +29,6 @@ public class ControlCollectiveView implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		
 		JButton button = (JButton)arg0.getSource();
-		Collective finalC;
-		User u = this.modelo.getLoggedUser();
 		
 		switch(button.getActionCommand()) {
 		case "Unirse al colectivo":
@@ -48,7 +46,6 @@ public class ControlCollectiveView implements ActionListener {
 	}
 	
 	private void intentaUnirte() {
-		System.out.println("Intentando unirte");
 		
 		User u = modelo.getLoggedUser();
 		Collective col = colectiveView.getCollective();
@@ -56,15 +53,15 @@ public class ControlCollectiveView implements ActionListener {
 		try {
 			if(col.join(u)) {
 				JOptionPane.showMessageDialog(colectiveView, "¡Te has unido al colectivo!");
-			} 
+			} else {
+				JOptionPane.showMessageDialog(colectiveView, "No puedes unirte a este colectivo.", "Error", JOptionPane.ERROR_MESSAGE);
+			}
 		} catch(JoinException e) {
 			JOptionPane.showMessageDialog(colectiveView, "No puedes unirte a este colectivo.", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
-	private void vuelveAtras() {
-		System.out.println("Intentando volver atras");
-		
+	private void vuelveAtras() {	
 
 		frame.setAllInvisible();
 		frame.getVistaPantallaPrincipal().setVisible(true);
@@ -73,7 +70,14 @@ public class ControlCollectiveView implements ActionListener {
 	}
 	
 	private void intentaAbandonar() {
-		System.out.println("Intentando salirte");
+
+		User u = modelo.getLoggedUser();
+		Collective col = colectiveView.getCollective();
 		
+		if(col.leave(u)) {
+			JOptionPane.showMessageDialog(colectiveView, "¡Has abandonado el colectivo!");
+		} else {
+			JOptionPane.showMessageDialog(colectiveView, "No puedes salir de este colectivo.", "Error", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 }
