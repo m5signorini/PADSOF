@@ -1,8 +1,7 @@
 package controlador;
 
 import controlador.colectivos.ControlCreateCollective;
-import controlador.inicio.ControlInicio;
-import controlador.inicio.ControlRegistro;
+import controlador.inicio.*;
 import controlador.principal.ControlPantallaPrincipal;
 import controlador.proyectos.ControlCreateProject;
 import modelo.*;
@@ -15,6 +14,7 @@ public class Controlador {
 	private Application app;	
 
 	private ControlInicio contInicio;
+	private ControlInicioAdmin contInicioAdmin;
 	private ControlRegistro contRegistro;
 	private ControlPantallaPrincipal contPantallaPrincipal;
 	private ControlCreateProject contCreateProject;
@@ -25,6 +25,7 @@ public class Controlador {
 		this.app = app;
 		
 		this.contInicio = new ControlInicio(frame, app);
+		this.contInicioAdmin = new ControlInicioAdmin(frame, app);
 		this.contRegistro= new ControlRegistro(frame, app);
 		this.contPantallaPrincipal = new ControlPantallaPrincipal(frame, app);
 		this.contCreateProject = new ControlCreateProject(app, frame);
@@ -33,6 +34,10 @@ public class Controlador {
 
 	public ControlInicio getControlInicio() {
 		return this.contInicio;
+	}
+	
+	public ControlInicioAdmin getControlInicioAdmin() {
+		return this.contInicioAdmin;
 	}
 	
 	public ControlRegistro getControlRegistro() {
