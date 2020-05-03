@@ -1,5 +1,6 @@
 package controlador.principal;
 
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -46,6 +47,8 @@ public class ControlAdmin {
             
             viewRegisters.getPendingList().add(reg, viewRegisters.getGbc(), 0);
 		}
+		viewRegisters.getPendingList().validate();
+		viewRegisters.getPendingList().repaint();
 	}
 	
 	private void setRegisteredList() {
@@ -66,6 +69,8 @@ public class ControlAdmin {
             
             viewRegisters.getRegisteredList().add(reg, viewRegisters.getGbc(), 0);
 		}
+		viewRegisters.getRegisteredList().validate();
+		viewRegisters.getRegisteredList().repaint();
 	}
 	
 	public void update() {

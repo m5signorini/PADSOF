@@ -47,16 +47,17 @@ public class ControlInicioAdmin implements ActionListener {
 		frame.pack();
 	}
 	
-	private void loginCheck() {
+	private boolean loginCheck() {
 		String pwd = vista.getPwd();
 		if (pwd.equals("")) {
 			JOptionPane.showMessageDialog(vista, "Debe introducir un pwd.", "Error", JOptionPane.ERROR_MESSAGE);
-			return;
+			return false;
 		}
+		return true;
 	}
 	
 	private void intentaAdminLogin() {
-		loginCheck();
+		if(!loginCheck()) return;
 		
 		String pwd = vista.getPwd();
 		

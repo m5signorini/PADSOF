@@ -14,16 +14,18 @@ public class AdminRegistersView extends JPanel{
 	private JPanel pendingList;
 	private JPanel registeredList;
 	
-	private GridBagConstraints gbc;
-	
 	public AdminRegistersView() {
 		setLayout(new BorderLayout());
 		setPreferredSize(new Dimension(1200, 700));
 		
-		gbc = new GridBagConstraints();
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.weightx = 1;
-        gbc.weighty = 1;
+		GridBagConstraints gbc1 = new GridBagConstraints();
+        gbc1.gridwidth = GridBagConstraints.REMAINDER;
+        gbc1.weightx = 1;
+        gbc1.weighty = 1;
+        GridBagConstraints gbc2 = new GridBagConstraints();
+        gbc2.gridwidth = GridBagConstraints.REMAINDER;
+        gbc2.weightx = 1;
+        gbc2.weighty = 1;
 		
 		// NORTH Panel
 		JPanel north = new JPanel();
@@ -49,12 +51,13 @@ public class AdminRegistersView extends JPanel{
 		pendingList = new JPanel(new GridBagLayout());
 		registeredList = new JPanel(new GridBagLayout());
 		
-		pendingList.add(new JPanel(), gbc);
-		registeredList.add(new JPanel(), gbc);
+		pendingList.add(new JPanel(), gbc1);
+		registeredList.add(new JPanel(), gbc2);
         
 		tabs = new JTabbedPane();
 		tabs.addTab("Pendientes", new JScrollPane(pendingList));
 		tabs.addTab("Registrados", new JScrollPane(registeredList));
+		tabs.setPreferredSize(new Dimension(700, 500));
 		
 		center.add(tabs);
 		
@@ -78,7 +81,12 @@ public class AdminRegistersView extends JPanel{
 		return registeredList;
 	}
 	public GridBagConstraints getGbc() {
-		return gbc;
+		GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.weightx = 1;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        /*gbc.anchor = GridBagConstraints.SOUTHEAST;*/
+        return gbc;
 	}
 	
 	public void setControladorLogout(ActionListener l) {
