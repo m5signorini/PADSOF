@@ -20,7 +20,7 @@ public class Controlador {
 	private ControlCreateProject contCreateProject;
 	private ControlCreateCollective contCreateCollective;
 
-	public Controlador(vista.Ventana frame2, Application app) {
+	public Controlador(Ventana frame2, Application app) {
 		this.frame = frame2;
 		this.app = app;
 		
