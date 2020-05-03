@@ -75,14 +75,16 @@ public class ControlPantallaPrincipal implements ActionListener {
 
 
 	private void realizarBusquedaColectivos() {
-		List<Collective> collectives = modelo.getSearcher().searchCollectives(pantallaPrincipal.getSearchedCollectiveText());
+		String text = pantallaPrincipal.getSearchedCollectiveText();
+		List<Collective> collectives = modelo.getSearcher().searchCollectives(text);
 		pantallaPrincipal.setResultadoBusquedaColectivos(collectives);
 		pantallaPrincipal.actualizarResultadosBusquedaColectivo();
 		frame.pack();
 	}
 
 	private void realizarBusquedaProyectos() {
-		List<Project> collectives = modelo.getSearcher().searchPublicProjects(pantallaPrincipal.getSearchedProjectText());
+		String text = pantallaPrincipal.getSearchedProjectText();
+		List<Project> collectives = modelo.getSearcher().searchPublicProjects(text);
 		pantallaPrincipal.setResultadoBusquedaProyectos(collectives);
 		pantallaPrincipal.actualizarResultadosBusquedaProyecto();
 		frame.pack();
