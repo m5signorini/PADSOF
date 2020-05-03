@@ -50,12 +50,16 @@ public class ControlPantallaPrincipal implements ActionListener {
 			frame.getVistaPantallaPrincipal().getSearchProjects().setVisible(true);
 			break;
 		case "Crear Proyecto":
+			frame.getCreateProjectView().setRepresentedCollectives(this.modelo.getLoggedUser().getRepresentedCollectives());
+			frame.getCreateProjectView().update();
 			frame.getCreateProjectView().setVisible(true);
 			frame.pack();
 			//frame.getVistaInicio().setVisible(false);
 			frame.pack();
 			break;
 		case "Crear Colectivo":
+			frame.getCreateCollectiveView().setCollectives(this.modelo.getCollectives());
+			frame.getCreateCollectiveView().update();
 			frame.getCreateCollectiveView().setVisible(true);
 			frame.pack();
 			//frame.getVistaInicio().setVisible(false);
