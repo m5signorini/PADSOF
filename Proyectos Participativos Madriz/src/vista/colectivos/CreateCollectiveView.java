@@ -57,6 +57,11 @@ public class CreateCollectiveView extends JPanel{
 			layout.putConstraint(SpringLayout.WEST, cancel, 3, SpringLayout.WEST, container);
 			layout.putConstraint(SpringLayout.NORTH, cancel, 200, SpringLayout.NORTH, container);
 			
+			Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+			int a = (dim.width/2-this.getSize().width/2)/2;
+			int b = (dim.height/2-this.getSize().height/2)/2;
+			this.window.setLocation(a, b);
+			
 			//Collective name
 			etiquetaCollectiveName = new JLabel("Nombre del colectivo:");
 			collectiveName = new JTextField(10);

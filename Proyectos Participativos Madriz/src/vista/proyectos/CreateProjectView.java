@@ -2,7 +2,9 @@ package vista.proyectos;
 
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 
 import javax.swing.AbstractButton;
@@ -175,6 +177,11 @@ public class CreateProjectView extends JPanel{
 				}
 			}
 		});
+		
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		int a = (dim.width/2-this.getSize().width/2)/2;
+		int b = (dim.height/2-this.getSize().height/2)/2;
+		this.window.setLocation(a, b);
 		 
 		//Boton crear
 		create = new JButton("Crear");
