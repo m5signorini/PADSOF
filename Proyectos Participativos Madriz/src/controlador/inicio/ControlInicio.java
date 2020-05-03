@@ -73,10 +73,11 @@ public class ControlInicio implements ActionListener {
 		User u = modelo.getLoggedUser();
 			
 		JOptionPane.showMessageDialog(null, "Correctly logged in!");
+		
+		frame.setAllInvisible();
 		pantallaPrincipal.setVisible(true);
-		frame.getVistaInicio().setVisible(false);
 		frame.pack();
-
+		
 		pantallaPrincipal.setCreatedProjects(u.getCreatedProjects());
 		pantallaPrincipal.setFollowedProjects(u.getFollowedProjects());
 		pantallaPrincipal.setCollectives(u.getCollectives());

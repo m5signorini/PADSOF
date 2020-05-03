@@ -62,10 +62,8 @@ public class Ventana extends JFrame {
 		this.vistaCreacionColectivo = new CreateCollectiveView();
 		contentPane.add(vistaCreacionColectivo, "CREACION DE PROYECTO");
 
-		vistaRegistro.setVisible(false);	
-		vistaPantallaPrincipal.setVisible(false);	
-		vistaCreacionProyecto.setVisible(false);
-		vistaCreacionColectivo.setVisible(false);
+		this.setAllInvisible();
+		vistaInicio.setVisible(true);
 		
 		this.pack();
 	}
@@ -107,5 +105,13 @@ public class Ventana extends JFrame {
 	
 	public CreateCollectiveView getCreateCollectiveView() {
 		return this.vistaCreacionColectivo;
+	}
+	
+	public void setAllInvisible() {
+		vistaInicio.setVisible(false);
+		vistaRegistro.setVisible(false);
+		vistaPantallaPrincipal.setVisible(false);
+		vistaCreacionProyecto.setVisible(false);
+		vistaCreacionColectivo.setVisible(false);
 	}
 }

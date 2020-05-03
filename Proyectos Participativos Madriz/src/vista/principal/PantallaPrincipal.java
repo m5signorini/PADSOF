@@ -173,6 +173,13 @@ public class PantallaPrincipal extends JPanel {
 	}
 	
 	public void update () {
+		
+		pestaniaMisProyectos.removeAll();
+		pestaniaProyectosSeguidos.removeAll();
+		pestaniaMisColectivos.removeAll();
+		pestaniaColectivosCreados.removeAll();
+		pestaniaNotificaciones.removeAll();
+		
 		for (Project p: createdProjects) {
 			JPanel c = new JPanel();
 			c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));

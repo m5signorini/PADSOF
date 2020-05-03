@@ -29,25 +29,19 @@ public class ControlPantallaPrincipal implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		JButton button = (JButton)e.getSource();
 		switch(button.getActionCommand()) {
-		case "Validar":
-			try {
-				intentaLogin();
-				break;
-			} catch (BannedUserException e1) {
-				e1.printStackTrace();
-			}
+		case "Mi Pagina":
+			actualizarMiPagina();
+			break;
 		case "Cerrar Sesion":
 			cerrarSesion();
 			break;
 		case "Crear Proyecto":
-			CreateProjectView createProject = frame.getCreateProjectView();
-			createProject.setVisible(true);
+			frame.getCreateProjectView().setVisible(true);
 			//frame.getVistaInicio().setVisible(false);
 			frame.pack();
 			break;
 		case "Crear Colectivo":
-			CreateCollectiveView createCollective = frame.getCreateCollectiveView();
-			createCollective.setVisible(true);
+			frame.getCreateCollectiveView().setVisible(true);
 			//frame.getVistaInicio().setVisible(false);
 			frame.pack();
 			break;
@@ -59,31 +53,12 @@ public class ControlPantallaPrincipal implements ActionListener {
 		modelo.writeToFile("data");	
 	}
 	
-	private void intentaLogin() throws BannedUserException {
-	
-		String nif = vista.getNif();
-		if (nif.equals("")) {
-			JOptionPane.showMessageDialog(vista, "Debe introducir un nif.", "Error", JOptionPane.ERROR_MESSAGE);
-			return;
-		}
-		String pwd = vista.getPwd();
-		if (pwd.equals("")) {
-			JOptionPane.showMessageDialog(vista, "Debe introducir un pwd.", "Error", JOptionPane.ERROR_MESSAGE);
-			return;
-		}
-		
-		if(!modelo.login(nif, pwd)){
-			JOptionPane.showMessageDialog(null, "Incorrect login! Please, try again.");
-			vista.update();
-			return;
-		}	
-		
+	private void actualizarMiPagina() {	
 		PantallaPrincipal pantallaPrincipal = frame.getVistaPantallaPrincipal();
 		User u = modelo.getLoggedUser();
-			
-		JOptionPane.showMessageDialog(null, "Correctly logged in!");
+		
+		frame.setAllInvisible();
 		pantallaPrincipal.setVisible(true);
-		frame.getVistaInicio().setVisible(false);
 		frame.pack();
 
 		pantallaPrincipal.setCreatedProjects(u.getCreatedProjects());
