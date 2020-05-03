@@ -68,6 +68,7 @@ public class PantallaPrincipal extends JPanel {
 	private JPanel resultadosBusquedaProyecto;
 	
 	private JComboBox<String> afinidadColectivo;
+	private JButton calcularAfinidad;
 	
 	public PantallaPrincipal() {
 		
@@ -147,6 +148,12 @@ public class PantallaPrincipal extends JPanel {
 		this.botonCerrarSesion = new JButton("Cerrar Sesion");
 		this.botonCerrarSesion.setAlignmentX(CENTER_ALIGNMENT);
 		cont.add(this.botonCerrarSesion);
+		
+		this.calcularAfinidad = new JButton("Calcular");
+		String[] opciones = {"Ninguno"};
+		afinidadColectivo = new JComboBox<String>(opciones);
+		afinidadColectivo.setSize(new Dimension(20, 20));
+		afinidadColectivo.setSelectedIndex(0);
 		
 		cont.add(Box.createRigidArea(new Dimension(0, 40)));
 		return cont;
@@ -261,6 +268,10 @@ public class PantallaPrincipal extends JPanel {
 	public String getSearchedProjectText() {
 		return barraBusquedaProyecto.getText();
 	}
+	
+	public String getCollectiveCalcAffinity() {
+		return afinidadColectivo.getItemAt(afinidadColectivo.getSelectedIndex());
+	}
 
 	public void setControladores(ActionListener c) {  
 		botonMiPagina.addActionListener(c);
@@ -271,6 +282,7 @@ public class PantallaPrincipal extends JPanel {
 		botonCerrarSesion.addActionListener(c);
 		botonBuscadorColectivo.addActionListener(c);
 		botonBuscadorProyecto.addActionListener(c);
+		calcularAfinidad.addActionListener(c);
 		listener = c;
 	}
 	
@@ -398,63 +410,198 @@ public class PantallaPrincipal extends JPanel {
 	private JPanel primeraFilaInformePopularidad() {
 		JPanel c = new JPanel();
 		c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
-		c.add(new JLabel("Título"));
-		c.add(Box.createRigidArea(new Dimension(130, 070)));
-		c.add(new JLabel("Votos"));
-		c.add(Box.createRigidArea(new Dimension(130, 070)));
-		c.add(new JLabel("Tipo"));
-		c.add(Box.createRigidArea(new Dimension(130, 070)));
-		c.add(new JLabel("Presupuesto"));
+
+		Dimension d = new Dimension(1700, 100);
+		Dimension d1 = new Dimension(200,120);
+        c.setMinimumSize(d);
+        c.setMaximumSize(d);
+        c.setPreferredSize(d);
+        
+		c.add(Box.createRigidArea(new Dimension(200, 0)));
+
+		JLabel title =new JLabel("Título");
+		title.setMaximumSize(d1);
+		title.setMaximumSize(d1);
+		title.setPreferredSize(d1);
+		title.setFont(new Font("serif", Font.ITALIC, 22));
+		c.add(title);
+		
+		c.add(Box.createRigidArea(new Dimension(200, 0)));
+		
+		JLabel votes =new JLabel("Votos");
+		votes.setMaximumSize(d1);
+		votes.setMaximumSize(d1);
+		votes.setPreferredSize(d1);
+		votes.setFont(new Font("serif", Font.ITALIC, 22));
+		c.add(votes);
+		
+		c.add(Box.createRigidArea(new Dimension(200, 0)));
+		
+		JLabel type =new JLabel("Tipo");
+		type.setMaximumSize(d1);
+		type.setMaximumSize(d1);
+		type.setPreferredSize(d1);
+		type.setFont(new Font("serif", Font.ITALIC, 22));
+		c.add(type);
+		
+		c.add(Box.createRigidArea(new Dimension(200, 0)));
+		
+		JLabel budget =new JLabel("Presupuesto");
+		budget.setFont(new Font("serif", Font.ITALIC, 22));
+		c.add(budget);
 		return c;
 	}
 	
 	private JPanel representacionProyectoEnInformePopularidad(Project p) {
 		JPanel c = new JPanel();
 		c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
-		c.add(new JLabel(p.getTitle()));
-		c.add(Box.createRigidArea(new Dimension(130, 070)));
-		c.add(new JLabel(String.valueOf(p.countVotes())));
-		c.add(Box.createRigidArea(new Dimension(130, 070)));
-		c.add(new JLabel(String.valueOf(p.getProjectKind())));
-		c.add(Box.createRigidArea(new Dimension(130, 070)));
-		c.add(new JLabel(String.valueOf(p.getRequestedAmount())));
+
+		Dimension d = new Dimension(1700, 100);
+		Dimension d1 = new Dimension(200,120);
+        c.setMinimumSize(d);
+        c.setMaximumSize(d);
+        c.setPreferredSize(d);
+        
+		c.add(Box.createRigidArea(new Dimension(200, 0)));
+
+		JLabel title = new JLabel(p.getTitle());
+		title.setMaximumSize(d1);
+		title.setMaximumSize(d1);
+		title.setPreferredSize(d1);
+		title.setFont(new Font("serif", Font.PLAIN, 22));
+		c.add(title);
+		c.add(Box.createRigidArea(new Dimension(200, 0)));
+
+		JLabel votes =new JLabel(String.valueOf(p.countVotes()));
+		votes.setMaximumSize(d1);
+		votes.setMaximumSize(d1);
+		votes.setPreferredSize(d1);
+		votes.setFont(new Font("serif", Font.PLAIN, 22));
+		c.add(votes);
+		c.add(Box.createRigidArea(new Dimension(200, 0)));
+		
+		JLabel type =new JLabel(String.valueOf(p.getProjectKind()));
+		type.setMaximumSize(d1);
+		type.setMaximumSize(d1);
+		type.setPreferredSize(d1);
+		type.setFont(new Font("serif", Font.PLAIN, 22));
+		c.add(type);
+		c.add(Box.createRigidArea(new Dimension(200, 0)));
+		
+		JLabel budget =new JLabel(String.valueOf(p.getRequestedAmount()));
+		budget.setMaximumSize(d1);
+		budget.setMaximumSize(d1);
+		budget.setPreferredSize(d1);
+		budget.setFont(new Font("serif", Font.PLAIN, 22));
+		c.add(budget);
 		return c;
 	}
 	
 	private JPanel primeraFilaInformeAfinidad() {
 		JPanel c = new JPanel();
-		JPanel aux = new JPanel(); 
 		c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
-		aux.setLayout(new BoxLayout(aux, BoxLayout.X_AXIS));
+		
+		Dimension d = new Dimension(1700, 100);
+        c.setMinimumSize(d);
+        c.setMaximumSize(d);
+        c.setPreferredSize(d);
+        
+		c.add(Box.createRigidArea(new Dimension(200, 0)));
 
-		aux.add(new JLabel("Encontrar colectivos afines a:"));
-		aux.add(Box.createRigidArea(new Dimension(130, 070)));
-		aux.add(afinidadColectivo);
-		c.add(aux);
-		c.add(Box.createRigidArea(new Dimension(130, 070)));
-		c.add(new JLabel("Colectivos"));
-		c.add(Box.createRigidArea(new Dimension(130, 070)));
-		c.add(new JLabel("Índice de afinidad"));
-		c.add(Box.createRigidArea(new Dimension(130, 070)));
-		c.add(new JLabel("Tipo"));
-		c.add(Box.createRigidArea(new Dimension(130, 070)));
-		c.add(new JLabel("Cantidad de miembros"));
+		JLabel search = new JLabel("Encontrar colectivos afines a:");
+		search.setFont(new Font("serif", Font.PLAIN, 22));
+		c.add(search);
+		c.add(Box.createRigidArea(new Dimension(200, 0)));
+		
+		c.add(afinidadColectivo);
+		c.add(Box.createRigidArea(new Dimension(200, 0)));
+		c.add(calcularAfinidad);
 		
 		return c;
 	}
 	
-	/*private JPanel representacionInformeAfinidad(Collective co) {
+	public void representacionInformeAfinidad(List<Collective> list1, List<Double> list2, List<Integer> list3) {
+		if(	list1 == null || list2 == null || list3 == null) {
+			return;
+		}
+		
 		JPanel c = new JPanel();
 		c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
-		c.add(new JLabel(p.getTitle()));
-		c.add(Box.createRigidArea(new Dimension(130, 070)));
-		c.add(new JLabel(String.valueOf(p.countVotes())));
-		c.add(Box.createRigidArea(new Dimension(130, 070)));
-		c.add(new JLabel(String.valueOf(p.getProjectKind())));
-		c.add(Box.createRigidArea(new Dimension(130, 070)));
-		c.add(new JLabel(String.valueOf(p.getRequestedAmount())));
-		return c;
-	}*/
+
+		Dimension d = new Dimension(1700, 100);
+		Dimension d1 = new Dimension(200,120);
+        c.setMinimumSize(d);
+        c.setMaximumSize(d);
+        c.setPreferredSize(d);
+        
+		c.add(Box.createRigidArea(new Dimension(200, 0)));
+
+		JLabel title =new JLabel("Colectivos:");
+		title.setFont(new Font("serif", Font.ITALIC, 22));
+		title.setMaximumSize(d1);
+		title.setMaximumSize(d1);
+		title.setPreferredSize(d1);
+		c.add(title);
+		
+		c.add(Box.createRigidArea(new Dimension(200, 0)));
+		
+		JLabel indice =new JLabel("Índice de afinidad:");
+		indice.setFont(new Font("serif", Font.ITALIC, 22));
+		indice.setMaximumSize(d1);
+		indice.setMaximumSize(d1);
+		indice.setPreferredSize(d1);
+		c.add(indice);
+		
+		c.add(Box.createRigidArea(new Dimension(200, 0)));
+		
+		JLabel members =new JLabel("Miembros:");
+		members.setFont(new Font("serif", Font.ITALIC, 22));
+		members.setMaximumSize(d1);
+		members.setMaximumSize(d1);
+		members.setPreferredSize(d1);
+		c.add(members);
+		pestaniaInformeAfinidad.add(c);
+
+		int i;
+		
+		for( i = 0; i < list1.size(); i++) {
+			
+	        JPanel p = new JPanel();
+			p.setLayout(new BoxLayout(p, BoxLayout.X_AXIS));
+
+	        p.setMinimumSize(d);
+	        p.setMaximumSize(d);
+	        p.setPreferredSize(d);
+	        
+			p.add(Box.createRigidArea(new Dimension(200, 0)));
+
+			JLabel name = new JLabel(list1.get(i).getName());
+			name.setMaximumSize(d1);
+			name.setMaximumSize(d1);
+			name.setPreferredSize(d1);
+			name.setFont(new Font("serif", Font.PLAIN, 22));
+			p.add(name);
+			p.add(Box.createRigidArea(new Dimension(200, 25)));
+			
+			JLabel index =new JLabel(String.valueOf(list2.get(i)));
+			index.setMaximumSize(d1);
+			index.setMaximumSize(d1);
+			index.setPreferredSize(d1);
+			index.setFont(new Font("serif", Font.PLAIN, 22));
+			p.add(index);
+			p.add(Box.createRigidArea(new Dimension(200, 0)));
+			
+			JLabel memberQuantity =new JLabel(String.valueOf(list3.get(i)));
+			memberQuantity.setMaximumSize(d1);
+			memberQuantity.setMaximumSize(d1);
+			memberQuantity.setPreferredSize(d1);
+			memberQuantity.setFont(new Font("serif", Font.PLAIN, 22));
+			p.add(memberQuantity);
+			
+			pestaniaInformeAfinidad.add(p);
+
+		}
+	}
 	
 	public void update () {
 		
@@ -517,18 +664,15 @@ public class PantallaPrincipal extends JPanel {
 		for(Project p:votedProjects) {
 			pestaniaInformePopularidad.add(representacionProyectoEnInformePopularidad(p));
 		}
-		String[] opciones = {"Ninguno"};
-		afinidadColectivo = new JComboBox<String>(opciones);
-		afinidadColectivo.setSize(new Dimension(20, 20));
-		afinidadColectivo.setSelectedIndex(0);
 		
 		pestaniaInformeAfinidad.add(primeraFilaInformeAfinidad());
-		if(	afinidadColectivo.getSelectedIndex() == 0) {
+		afinidadColectivo.removeAllItems();
+		afinidadColectivo.addItem("Ninguno");
+		if(collectives == null) {
 			return;
 		}
-
-		for(Collective c:collectives) {
-			//pestaniaInformeAfinidad.add(representacionInformeAfinidad(c));
+		for(Collective c: collectives) {
+			afinidadColectivo.addItem(c.getName());
 		}
 	}
 	

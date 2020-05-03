@@ -2,6 +2,7 @@ package controlador.principal;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -99,6 +100,9 @@ public class ControlPantallaPrincipal implements ActionListener {
 			int indiceColectivo2 = Integer.parseInt(((JButton)e.getSource()).getName());
 			mostrarInformacionColectivo((pantallaPrincipal.getRepresentedCollectives()).get(indiceColectivo2));
 			break;
+		case "Calcular":	
+			realizarCalculoDeAfinidad();
+			break;
 		}
 	}
 	
@@ -129,6 +133,22 @@ public class ControlPantallaPrincipal implements ActionListener {
 		List<Project> collectives = modelo.getSearcher().searchPublicProjects(text);
 		pantallaPrincipal.setResultadoBusquedaProyectos(collectives);
 		pantallaPrincipal.actualizarResultadosBusquedaProyecto();
+		frame.pack();
+	}
+	
+	private void realizarCalculoDeAfinidad() {
+		String text = pantallaPrincipal.getCollectiveCalcAffinity();
+		List<Collective> collectives = this.modelo.getCollectives();
+		List<Integer> members = new ArrayList<Integer>();
+		Collective co = null;
+		for(Collective c:this.modelo.getCollectives()) {
+			if(c.getName() == text) {
+				co = c;
+			}
+			members.add(c.getMembers().size());
+		}
+		List<Double> indices = this.modelo.affinityList(co);
+		pantallaPrincipal.representacionInformeAfinidad(collectives, indices, members);
 		frame.pack();
 	}
 	
