@@ -77,7 +77,7 @@ public class ControlAdmin {
 	}
 	
 	private void setProjects() {
-		viewRegisters.prepareList(viewProjects.getProjects());
+		viewProjects.prepareList(viewProjects.getProjects());
 		// Set the list of registered registers
 		for(Project p: modelo.getPendingProjects()) {
 			JPanel proj = new JPanel();
@@ -127,6 +127,14 @@ public class ControlAdmin {
 		return (e) -> {
 			viewRegisters.setVisible(false);
 			viewProjects.setVisible(true);
+			frame.pack();
+		};
+	}
+	
+	public ActionListener controlGotoRegisters() {
+		return (e) -> {
+			viewProjects.setVisible(false);
+			viewRegisters.setVisible(true);
 			frame.pack();
 		};
 	}

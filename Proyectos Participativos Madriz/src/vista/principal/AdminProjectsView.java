@@ -13,13 +13,11 @@ public class AdminProjectsView extends JPanel{
 	
 	private JPanel projectList;
 	
-	private GridBagConstraints gbc;
-	
 	public AdminProjectsView() {
 		setLayout(new BorderLayout());
 		setPreferredSize(new Dimension(1200, 700));
 		
-		gbc = new GridBagConstraints();
+		GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         gbc.weightx = 1;
         gbc.weighty = 1;
@@ -70,7 +68,12 @@ public class AdminProjectsView extends JPanel{
 		return projectList;
 	}
 	public GridBagConstraints getGbc() {
-		return gbc;
+		GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.weightx = 1;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        /*gbc.anchor = GridBagConstraints.SOUTHEAST;*/
+        return gbc;
 	}
 	
 	public void setControladorLogout(ActionListener l) {
