@@ -32,48 +32,31 @@ public class ControlCollectiveView implements ActionListener {
 		User u = this.modelo.getLoggedUser();
 		
 		switch(button.getActionCommand()) {
-		case "Crear":
-			String name = collectiveView.getCollectiveName();
-			if(name == null) {
-				return;
-			}
-			String description = collectiveView.getDescription();
-			if(description == null) {
-				return;
-			}
-			String father = collectiveView.getFather();
-			if(father != null) {
-				Collective fatherC = null;
-				List<Collective> collectives = this.modelo.getCollectives();
-				for(Collective c:collectives) {
-					if(c.getName() == father) {
-						fatherC = c;
-					}
-				}
-				//Como colectivo sin padre
-				if(fatherC == null) {
-					finalC = new Collective(name, description, u);
-					u.createCollective(finalC);
-					
-				}
-				//Colectivo con padre
-				else {
-					finalC = new Collective(name, description, u, fatherC);
-					u.createCollective(finalC);
-				}
-			}
-			else {
-				finalC = new Collective(name, description, u);
-				u.createCollective(finalC);
-			}
-			this.modelo.createCollective(finalC);
-			this.collectiveView.setVisible(false);
+		case "Unirse al colectivo":
+			intentaUnirte();
 			break;
-		case "Cancelar":
-			this.collectiveView.setVisible(false);
+		case "Volver":
+			vuelveAtras();
+			break;
+		case "Abandonar colectivo":
+			intentaAbandonar();
 			break;
 		default:
 			break;
 		}
+	}
+	
+	private void intentaUnirte() {
+		System.out.println("Intentando unirte");
+	}
+	
+	private void vuelveAtras() {
+		System.out.println("Intentando volver atras");
+		
+	}
+	
+	private void intentaAbandonar() {
+		System.out.println("Intentando salirte");
+		
 	}
 }

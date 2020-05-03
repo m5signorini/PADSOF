@@ -1,5 +1,9 @@
 package vista.proyectos;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -26,6 +30,11 @@ public class ProjectView extends JPanel{
 		container = new JPanel();
 		container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
 		this.add(container);
+		container.setBackground(new Color(190,255,255));
+		Dimension d = new Dimension(1000, 1000);
+		container.setMinimumSize(d);
+		container.setMaximumSize(d);
+		container.setPreferredSize(d);
 
 		title = new JLabel("None");
 		desc = new JLabel("None");
@@ -34,12 +43,9 @@ public class ProjectView extends JPanel{
 		creationDate = new JLabel("None");
 		creator = new JLabel("None");
 		nVoters = new JLabel("None");
-		
-		JPanel auxTitle = new JPanel();
-		container.add(auxTitle);
-		auxTitle.setLayout(new BoxLayout(auxTitle, BoxLayout.X_AXIS));
-		auxTitle.add(new JLabel("Title: "));
-		auxTitle.add(title);
+
+		title.setFont(new Font("serif", Font.BOLD, 50));
+		container.add(title);
 		
 		JPanel auxDesc = new JPanel();
 		container.add(auxDesc);

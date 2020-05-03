@@ -17,84 +17,85 @@ public class CollectiveView extends JPanel{
 	
 	JPanel container;
 	
-	Project p;
+	Collective c;
 	
 	JLabel title;
 	JLabel desc;
-	JLabel type;
-	JLabel budget;
-	JLabel creationDate;
 	JLabel creator;
-	JLabel nVoters;
+	JLabel nMembers;
+	
+	JButton unirse;
+	JButton volver;
+	JButton abandonar;
 	
 	public CollectiveView() {
 		container = new JPanel();
 		container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
 		this.add(container);
-	
-		Dimension d = new Dimension(1000, 700);
-        this.setMinimumSize(d);
-        this.setMaximumSize(d);
-        this.setPreferredSize(d);
-
+		container.setBackground(new Color(190,255,255));
+		Dimension d = new Dimension(1000, 1000);
+		container.setMinimumSize(d);
+		container.setMaximumSize(d);
+		container.setPreferredSize(d);
+		
 		title = new JLabel("None");
 		desc = new JLabel("None");
-		type = new JLabel("None");
-		budget = new JLabel("None");
-		creationDate = new JLabel("None");
 		creator = new JLabel("None");
-		nVoters = new JLabel("None");
+		nMembers = new JLabel("None");
 		
-		JPanel auxTitle = new JPanel();
-		container.add(auxTitle);
-		auxTitle.setLayout(new BoxLayout(auxTitle, BoxLayout.X_AXIS));
-		auxTitle.add(new JLabel("Title: "));
-		auxTitle.add(title);
+		container.add(Box.createRigidArea(new Dimension(0, 100)));
+
+		title.setFont(new Font("serif", Font.BOLD, 70));
+		container.add(title);
+		
+		container.add(Box.createRigidArea(new Dimension(0, 50)));
 		
 		JPanel auxDesc = new JPanel();
+		auxDesc.setFont(new Font("serif", Font.BOLD, 20));
 		container.add(auxDesc);
 		auxDesc.setLayout(new BoxLayout(auxDesc, BoxLayout.X_AXIS));
 		auxDesc.add(new JLabel("Description: "));
 		auxDesc.add(desc);
 		
-		JPanel auxType = new JPanel();
-		container.add(auxType);
-		auxType.setLayout(new BoxLayout(auxType, BoxLayout.X_AXIS));
-		auxType.add(new JLabel("Type: "));
-		auxType.add(type);
-		
-		JPanel auxBudget = new JPanel();
-		container.add(auxBudget);
-		auxBudget.setLayout(new BoxLayout(auxBudget, BoxLayout.X_AXIS));
-		auxBudget.add(new JLabel("Budget: "));
-		auxBudget.add(budget);
-		
-		JPanel auxDate = new JPanel();
-		container.add(auxDate);
-		auxDate.setLayout(new BoxLayout(auxDate, BoxLayout.X_AXIS));
-		auxDate.add(new JLabel("Creation date: "));
-		auxDate.add(creationDate);
+		container.add(Box.createRigidArea(new Dimension(0, 50)));
 		
 		JPanel auxCreator = new JPanel();
+		auxCreator.setFont(new Font("serif", Font.BOLD, 20));
 		container.add(auxCreator);
 		auxCreator.setLayout(new BoxLayout(auxCreator, BoxLayout.X_AXIS));
 		auxCreator.add(new JLabel("Creator: "));
 		auxCreator.add(creator);
 		
-		JPanel auxVotes = new JPanel();
-		container.add(auxVotes);
-		auxVotes.setLayout(new BoxLayout(auxVotes, BoxLayout.X_AXIS));
-		auxVotes.add(new JLabel("Number of votes: "));
-		auxVotes.add(nVoters);
+		container.add(Box.createRigidArea(new Dimension(0, 50)));
+		
+		JPanel auxMembers = new JPanel();
+		auxMembers.setFont(new Font("serif", Font.BOLD, 20));
+		container.add(auxMembers);
+		auxMembers.setLayout(new BoxLayout(auxMembers, BoxLayout.X_AXIS));
+		auxMembers.add(new JLabel("Number of members: "));
+		auxMembers.add(nMembers);
+
+		unirse = new JButton("Unirse al colectivo");
+		volver = new JButton("Volver");
+		abandonar = new JButton("Abandonar colectivo");
+
+		container.add(unirse);
+		container.add(volver);
+		container.add(abandonar);
 		
 	}
 
-	public void setController(ControlCollectiveView contCollectiveView) {
-		// TODO Auto-generated method stub
-		
+	public void setController(ActionListener a) {
+		unirse.addActionListener(a);
+		volver.addActionListener(a);
+		abandonar.addActionListener(a);		
 	}
 
 	public void update(Collective c) {
+		this.c = c;
 		title.setText(c.getName());
+		desc.setText(c.getDescription());
+		creator.setText(c.getRepresentative().toString());
+		nMembers.setText(Integer.toString(c.getMembers().size()));		
 	}	
 }
