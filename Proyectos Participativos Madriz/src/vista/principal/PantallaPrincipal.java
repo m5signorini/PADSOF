@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -27,7 +28,9 @@ public class PantallaPrincipal extends JPanel {
 	private List<Project> followedProjects;
 	private List<Collective> collectives;
 	private List<Collective> representedCollectives;
-	private ArrayList<Notification> notifications;
+	private ArrayList<Notification> notifications;	
+
+	private List<Collective> resultadoBusquedaColectivos;
 	
 	private JPanel pestaniaMisColectivos;
 	private JPanel pestaniaColectivosCreados;
@@ -45,6 +48,11 @@ public class PantallaPrincipal extends JPanel {
 	private JButton botonCerrarSesion;
 	
 	private JTabbedPane pestanias;
+	
+	private JPanel searchCollectives;	
+	private JTextField barraBusqueda;
+	private JButton botonBuscadorColectivo;
+	private JPanel resultadosBusquedaColectivo;
 	
 	public PantallaPrincipal() {
 		
@@ -143,6 +151,39 @@ public class PantallaPrincipal extends JPanel {
 			 }
 		});
 		this.add(pestanias);
+		
+		searchCollectives = new JPanel();
+		searchCollectives.setLayout(new BoxLayout(searchCollectives, BoxLayout.Y_AXIS));
+		searchCollectives.setBackground(new Color(204,204,204));
+		//searchCollectives.setPreferredSize(new Dimension(100, 1000));
+		
+		this.add(searchCollectives);
+		
+		JPanel cajonBusqueda = new JPanel();
+		cajonBusqueda.setLayout(new BoxLayout(cajonBusqueda, BoxLayout.X_AXIS));
+		cajonBusqueda.setBackground(new Color(204,204,204));
+		// cajonBusqueda.setPreferredSize(new Dimension(100, 1000));
+		searchCollectives.add(cajonBusqueda);
+
+		barraBusqueda = new JTextField();
+		cajonBusqueda.add(barraBusqueda);		
+		//barraBusqueda.setPreferredSize(new Dimension(50, 10));
+		
+		botonBuscadorColectivo = new JButton("Buscar Colectivos");
+		cajonBusqueda.add(botonBuscadorColectivo);
+		
+		resultadosBusquedaColectivo = new JPanel();
+		resultadosBusquedaColectivo.setLayout(new BoxLayout(resultadosBusquedaColectivo, BoxLayout.Y_AXIS));
+		resultadosBusquedaColectivo.setBackground(new Color(204,204,204));
+		//resultadosBusquedaColectivo.setPreferredSize(new Dimension(100, 100));
+		
+		
+		searchCollectives.setVisible(false);
+		
+	}
+	
+	public String getSearchedCollectiveText() {
+		return barraBusqueda.getText();
 	}
 
 	public void setControladores(ActionListener c) {  
@@ -152,6 +193,7 @@ public class PantallaPrincipal extends JPanel {
 		botonCrearProyecto.addActionListener(c); 
 		botonCrearColectivo.addActionListener(c);  
 		botonCerrarSesion.addActionListener(c);
+		botonBuscadorColectivo.addActionListener(c);
 	}
 	
 	public void setCreatedProjects(List<Project> createdProjects) {
@@ -166,6 +208,10 @@ public class PantallaPrincipal extends JPanel {
 		this.collectives = collectives;
 	}
 	
+	public void setResultadoBusquedaColectivos(List<Collective> collectives) {
+		this.resultadoBusquedaColectivos = collectives;
+	}
+	
 	public void setRepresentedCollectives(List<Collective> c) {
 		this.representedCollectives = c;
 	}
@@ -176,6 +222,10 @@ public class PantallaPrincipal extends JPanel {
 	
 	public JTabbedPane getPestanias() {
 		return this.pestanias;
+	}
+	
+	public JPanel getSearchCollectives() {
+		return this.searchCollectives;
 	}
 	
 	public void update () {
@@ -225,6 +275,18 @@ public class PantallaPrincipal extends JPanel {
 			c.add(Box.createRigidArea(new Dimension(130, 070)));
 			c.add(new JLabel(p.getText()));
 			pestaniaNotificaciones.add(c);
+		}
+	}
+	
+	public void actualizarResultadosBusquedaColectivo () {		
+		resultadosBusquedaColectivo.removeAll();
+		for (Collective p: resultadoBusquedaColectivos) {
+			JPanel c = new JPanel();
+			c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
+			c.add(new JLabel(p.getName()));
+			c.add(Box.createRigidArea(new Dimension(130, 070)));
+			c.add(new JLabel(p.getDescription()));
+			resultadoBusquedaColectivos.add(c);
 		}
 	}
 }

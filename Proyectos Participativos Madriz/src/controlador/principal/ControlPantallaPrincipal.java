@@ -2,8 +2,11 @@ package controlador.principal;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.List;
+
 import javax.swing.*;
 import modelo.*;
+import modelo.entities.Collective;
 import modelo.entities.individuals.User;
 import modelo.exceptions.BannedUserException;
 import modelo.functionalities.Application;
@@ -17,10 +20,12 @@ import vista.proyectos.CreateProjectView;
 public class ControlPantallaPrincipal implements ActionListener {
 
 	private Ventana frame;
+	private PantallaPrincipal pantallaPrincipal;
 	private Application modelo;
 	
 	public ControlPantallaPrincipal(Ventana frame2, Application modelo) {
 		this.frame = frame2;
+		this.pantallaPrincipal = frame2.getVistaPantallaPrincipal();
 		this.modelo = modelo;
 	}
 
@@ -32,9 +37,11 @@ public class ControlPantallaPrincipal implements ActionListener {
 			break;
 		case "Buscar Colectivo":
 			frame.getVistaPantallaPrincipal().getPestanias().setVisible(false);
+			frame.getVistaPantallaPrincipal().getSearchCollectives().setVisible(true);
 			break;
 		case "Buscar Proyecto":
 			frame.getVistaPantallaPrincipal().getPestanias().setVisible(false);
+			frame.getVistaPantallaPrincipal().getSearchCollectives().setVisible(true);
 			break;
 		case "Crear Proyecto":
 			frame.getCreateProjectView().setVisible(true);
@@ -51,10 +58,19 @@ public class ControlPantallaPrincipal implements ActionListener {
 		case "Cerrar Sesion":
 			cerrarSesion();
 			break;
+		case "Buscar Colectivos":
+			realizarBusquedaColectivos();
+			break;
 		}
 	}
 	
 
+	private void realizarBusquedaColectivos() {
+		List<Collective> collectives = modelo.getSearcher().searchCollectives(pantallaPrincipal.getSearchedCollectiveText());
+		pantallaPrincipal.setResultadoBusquedaColectivos(collectives);
+		pantallaPrincipal.actualizarResultadosBusquedaColectivo();
+	}
+	
 	private void cerrarSesion() {
 		modelo.writeToFile("data");	
 	}
