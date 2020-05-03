@@ -290,6 +290,10 @@ public class PantallaPrincipal extends JPanel {
 		this.followedProjects = followedProjects;
 	}
 	
+	public List<Project> getFollowedProjects() {
+		return this.followedProjects;
+	}
+	
 	public void setCollectives(List<Collective> collectives) {
 		this.collectives = collectives;
 	}
@@ -339,7 +343,7 @@ public class PantallaPrincipal extends JPanel {
 	}
 	
 	
-	private JPanel representacionProyecto(Project p, int index) {
+	private JPanel representacionProyecto(Project p) {
 		JPanel c = new JPanel();
 		c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
 		Dimension d = new Dimension(1700, 100);
@@ -357,11 +361,6 @@ public class PantallaPrincipal extends JPanel {
 		c.add(new JLabel(p.getDescription()));
 		
 		c.add(Box.createRigidArea(new Dimension(200, 0)));
-		
-		JButton b = new JButton("Mas informacion proyecto");
-		b.addActionListener(listener);
-		b.setName(Integer.toString(index));
-		c.add(b);
 		
 		return c;
 	}
@@ -467,12 +466,24 @@ public class PantallaPrincipal extends JPanel {
 		
 		int i = 0;
 		for (Project p: createdProjects) {
-			pestaniaMisProyectos.add(representacionProyecto(p, i));
+			JPanel cont = representacionProyecto(p);
+			JButton b = new JButton("Mas informacion sobre tu proyecto");
+			b.addActionListener(listener);
+			b.setName(Integer.toString(i));
+			cont.add(b);
+			
+			pestaniaMisProyectos.add(cont);
 			i++;
 		}
 		i = 0;
 		for (Project p: followedProjects) {
-			pestaniaProyectosSeguidos.add(representacionProyecto(p, i));
+			JPanel cont = representacionProyecto(p);
+			JButton b = new JButton("Mas informacion sobre el proyecto");
+			b.addActionListener(listener);
+			b.setName(Integer.toString(i));
+			cont.add(b);
+			
+			pestaniaProyectosSeguidos.add(cont);
 			i++;
 		}
 		i = 0;
@@ -548,7 +559,13 @@ public class PantallaPrincipal extends JPanel {
 		}
 		int i = 0;
 		for (Project p: resultadoBusquedaProyectos) {
-			resultadosBusquedaProyecto.add(representacionProyecto(p, i));
+			JPanel cont = representacionProyecto(p);
+			JButton b = new JButton("Mas informacion proyecto");
+			b.addActionListener(listener);
+			b.setName(Integer.toString(i));
+			cont.add(b);
+			
+			resultadosBusquedaProyecto.add(cont);
 			i++;
 		}
 	}

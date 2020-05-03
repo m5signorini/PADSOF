@@ -75,7 +75,7 @@ public class ControlProjectView implements ActionListener {
 		User u = modelo.getLoggedUser();
 		Project proj = projectView.getProject();
 		
-		if(proj.addFollower(u)) {
+		if(u.addFollowedProject(proj)) {
 			JOptionPane.showMessageDialog(projectView, "¡Has seguido el proyecto!");
 		} else {
 			JOptionPane.showMessageDialog(projectView, "No puedes seguir a este proyecto.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -87,7 +87,7 @@ public class ControlProjectView implements ActionListener {
 		User u = modelo.getLoggedUser();
 		Project proj = projectView.getProject();
 		
-		if(proj.removeFollower(u)) {
+		if(u.removeFollowedProject(proj)) {
 			JOptionPane.showMessageDialog(projectView, "¡Has dejado de seguir el proyecto!");
 		} else {
 			JOptionPane.showMessageDialog(projectView, "No puedes dejar de seguir a este proyecto.", "Error", JOptionPane.ERROR_MESSAGE);

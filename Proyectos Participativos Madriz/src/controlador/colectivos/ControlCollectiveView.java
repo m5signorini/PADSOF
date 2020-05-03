@@ -39,6 +39,7 @@ public class ControlCollectiveView implements ActionListener {
 			break;
 		case "Abandonar colectivo":
 			intentaAbandonar();
+			vuelveAtras();
 			break;
 		default:
 			break;

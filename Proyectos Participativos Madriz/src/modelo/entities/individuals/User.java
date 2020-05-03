@@ -223,6 +223,7 @@ public class User extends Account implements Voter, Serializable{
 		if(this.followedProjects.contains(p))
 			return false;
 		this.followedProjects.add(p);
+		p.addFollower(this);
 		return true;
 	}
 	
@@ -234,6 +235,7 @@ public class User extends Account implements Voter, Serializable{
 	public boolean removeFollowedProject(Project p) {
 		if(this.followedProjects.contains(p)) {
 			this.followedProjects.remove(followedProjects.indexOf(p));
+			p.removeFollower(this);
 			return true;
 		}
 		return false;
