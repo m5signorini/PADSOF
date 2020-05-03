@@ -10,6 +10,7 @@ import modelo.entities.Collective;
 import modelo.entities.individuals.User;
 import modelo.exceptions.BannedUserException;
 import modelo.functionalities.Application;
+import modelo.projects.Project;
 import vista.*;
 import vista.colectivos.CreateCollectiveView;
 import vista.inicio.Inicio;
@@ -33,15 +34,20 @@ public class ControlPantallaPrincipal implements ActionListener {
 		JButton button = (JButton)e.getSource();
 		switch(button.getActionCommand()) {
 		case "Actualizar Mi Pagina":
+			frame.getVistaPantallaPrincipal().getPestanias().setVisible(true);
+			frame.getVistaPantallaPrincipal().getSearchProjects().setVisible(false);
+			frame.getVistaPantallaPrincipal().getSearchCollectives().setVisible(false);
 			actualizarMiPagina();
 			break;
 		case "Buscar Colectivo":
 			frame.getVistaPantallaPrincipal().getPestanias().setVisible(false);
+			frame.getVistaPantallaPrincipal().getSearchProjects().setVisible(false);
 			frame.getVistaPantallaPrincipal().getSearchCollectives().setVisible(true);
 			break;
 		case "Buscar Proyecto":
 			frame.getVistaPantallaPrincipal().getPestanias().setVisible(false);
-			frame.getVistaPantallaPrincipal().getSearchCollectives().setVisible(true);
+			frame.getVistaPantallaPrincipal().getSearchCollectives().setVisible(false);
+			frame.getVistaPantallaPrincipal().getSearchProjects().setVisible(true);
 			break;
 		case "Crear Proyecto":
 			frame.getCreateProjectView().setVisible(true);
@@ -61,14 +67,24 @@ public class ControlPantallaPrincipal implements ActionListener {
 		case "Buscar Colectivos":
 			realizarBusquedaColectivos();
 			break;
+		case "Buscar Proyectos":
+			realizarBusquedaProyectos();
+			break;
 		}
 	}
-	
+
 
 	private void realizarBusquedaColectivos() {
 		List<Collective> collectives = modelo.getSearcher().searchCollectives(pantallaPrincipal.getSearchedCollectiveText());
 		pantallaPrincipal.setResultadoBusquedaColectivos(collectives);
 		pantallaPrincipal.actualizarResultadosBusquedaColectivo();
+		frame.pack();
+	}
+
+	private void realizarBusquedaProyectos() {
+		List<Project> collectives = modelo.getSearcher().searchPublicProjects(pantallaPrincipal.getSearchedProjectText());
+		pantallaPrincipal.setResultadoBusquedaProyectos(collectives);
+		pantallaPrincipal.actualizarResultadosBusquedaProyecto();
 		frame.pack();
 	}
 	

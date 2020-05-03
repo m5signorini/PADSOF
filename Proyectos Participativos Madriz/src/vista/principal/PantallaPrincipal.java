@@ -31,6 +31,7 @@ public class PantallaPrincipal extends JPanel {
 	private ArrayList<Notification> notifications;	
 
 	private List<Collective> resultadoBusquedaColectivos;
+	private List<Project> resultadoBusquedaProyectos;
 	
 	private JPanel pestaniaMisColectivos;
 	private JPanel pestaniaColectivosCreados;
@@ -49,10 +50,17 @@ public class PantallaPrincipal extends JPanel {
 	
 	private JTabbedPane pestanias;
 	
+	private JPanel leftMenu;
+	
 	private JPanel searchCollectives;	
-	private JTextField barraBusqueda;
+	private JTextField barraBusquedaColectivo;
 	private JButton botonBuscadorColectivo;
 	private JPanel resultadosBusquedaColectivo;
+	
+	private JPanel searchProjects;	
+	private JTextField barraBusquedaProyecto;
+	private JButton botonBuscadorProyecto;
+	private JPanel resultadosBusquedaProyecto;
 	
 	public PantallaPrincipal() {
 		
@@ -60,6 +68,26 @@ public class PantallaPrincipal extends JPanel {
 		this.setBackground(new Color(204,255,204));
 		this.setPreferredSize(new Dimension(2000, 1000));
 
+		leftMenu = createLeftMenu();		
+		this.add(leftMenu);
+		
+		this.add(Box.createRigidArea(new Dimension(130, 70)));
+
+		pestanias = createMiPagina();
+		this.add(pestanias);
+		
+		searchCollectives = createZonaBusquedaColectivos();		
+		this.add(searchCollectives);
+		
+		searchProjects = createZonaBusquedaProyectos();		
+		this.add(searchProjects);	
+
+		searchCollectives.setVisible(false);
+		searchProjects.setVisible(false);
+		
+	}
+	
+	private JPanel createLeftMenu() {
 		JPanel cont = new JPanel();
 		cont.setLayout(new BoxLayout(cont, BoxLayout.Y_AXIS));
 		cont.setBackground(new Color(255,255,204));
@@ -111,12 +139,11 @@ public class PantallaPrincipal extends JPanel {
 		cont.add(Box.createRigidArea(new Dimension(0, 40)));
 
 		cont.add(Box.createRigidArea(new Dimension(0, 20)));
-		
-		this.add(cont);
-		this.add(Box.createRigidArea(new Dimension(130, 70)));
-
-
-		pestanias = new JTabbedPane(2);
+		return cont;
+	}
+	
+	private JTabbedPane createMiPagina() {
+		JTabbedPane pestanias1 = new JTabbedPane(2);
 
 		pestaniaMisColectivos = new JPanel();
 		pestaniaColectivosCreados = new JPanel();
@@ -127,47 +154,38 @@ public class PantallaPrincipal extends JPanel {
 		pestaniaNotificaciones = new JPanel();
 		pestaniaMisColectivos.setPreferredSize(new Dimension(500, 500));
 
-		pestanias.addTab("Mis Proyectos", pestaniaMisProyectos);
-		pestanias.addTab("Mis Colectivos", pestaniaMisColectivos);
-		pestanias.addTab("Colectivos Creados", pestaniaColectivosCreados);
-		pestanias.addTab("Informe de Popularidad", pestaniaInformePoularidad);
-		pestanias.addTab("Informe Afinidad", pestaniaInformeAfinidad);
-		pestanias.addTab("Proyectos Seguidos", pestaniaProyectosSeguidos);
-		pestanias.addTab("Notificaciones", pestaniaNotificaciones);
+		pestanias1.addTab("Mis Proyectos", pestaniaMisProyectos);
+		pestanias1.addTab("Mis Colectivos", pestaniaMisColectivos);
+		pestanias1.addTab("Colectivos Creados", pestaniaColectivosCreados);
+		pestanias1.addTab("Informe de Popularidad", pestaniaInformePoularidad);
+		pestanias1.addTab("Informe Afinidad", pestaniaInformeAfinidad);
+		pestanias1.addTab("Proyectos Seguidos", pestaniaProyectosSeguidos);
+		pestanias1.addTab("Notificaciones", pestaniaNotificaciones);
 
 		pestaniaMisProyectos.setLayout(new BoxLayout(pestaniaMisProyectos, BoxLayout.Y_AXIS));
 		pestaniaMisColectivos.setLayout(new BoxLayout(pestaniaMisColectivos, BoxLayout.Y_AXIS));
 		pestaniaColectivosCreados.setLayout(new BoxLayout(pestaniaColectivosCreados, BoxLayout.Y_AXIS));
 		pestaniaProyectosSeguidos.setLayout(new BoxLayout(pestaniaProyectosSeguidos, BoxLayout.Y_AXIS));
 		pestaniaNotificaciones.setLayout(new BoxLayout(pestaniaNotificaciones, BoxLayout.Y_AXIS));
-		
-		
-		// Podemos seleccionar una pestaña del contendor con setSelectedIndex(<indice>)
-		pestanias.setSelectedIndex(0);
-		// Para realizar acciones al cambiar de pestañas definiremos un ChangeListener
-		pestanias.addChangeListener(new ChangeListener() {
-			 public void stateChanged(ChangeEvent e) { 
-				 
-			 }
-		});
-		this.add(pestanias);
-		
-		searchCollectives = new JPanel();
-		searchCollectives.setLayout(new BoxLayout(searchCollectives, BoxLayout.Y_AXIS));
-		searchCollectives.setBackground(new Color(204,204,204));
+
+		return pestanias1;
+	}
+	
+	private JPanel createZonaBusquedaColectivos() {
+		JPanel searchCollectives1 = new JPanel();
+		searchCollectives1.setLayout(new BoxLayout(searchCollectives1, BoxLayout.Y_AXIS));
+		searchCollectives1.setBackground(new Color(204,204,204));
 		//searchCollectives.setPreferredSize(new Dimension(100, 1000));
-		
-		this.add(searchCollectives);
 		
 		JPanel cajonBusqueda = new JPanel();
 		cajonBusqueda.setLayout(new BoxLayout(cajonBusqueda, BoxLayout.X_AXIS));
 		cajonBusqueda.setBackground(new Color(204,204,204));
 		// cajonBusqueda.setPreferredSize(new Dimension(100, 1000));
-		searchCollectives.add(cajonBusqueda);
+		searchCollectives1.add(cajonBusqueda);
 
-		barraBusqueda = new JTextField();
-		cajonBusqueda.add(barraBusqueda);		
-		barraBusqueda.setMaximumSize(new Dimension(300, 50));
+		barraBusquedaColectivo = new JTextField();
+		cajonBusqueda.add(barraBusquedaColectivo);		
+		barraBusquedaColectivo.setMaximumSize(new Dimension(300, 50));
 		
 		botonBuscadorColectivo = new JButton("Buscar Colectivos");
 		cajonBusqueda.add(botonBuscadorColectivo);
@@ -176,26 +194,55 @@ public class PantallaPrincipal extends JPanel {
 		resultadosBusquedaColectivo.setLayout(new BoxLayout(resultadosBusquedaColectivo, BoxLayout.Y_AXIS));
 		resultadosBusquedaColectivo.setBackground(new Color(204,204,204));
 		//resultadosBusquedaColectivo.setPreferredSize(new Dimension(100, 100));
+		searchCollectives1.add(resultadosBusquedaColectivo);
 		
-		searchCollectives.add(resultadosBusquedaColectivo);
+		return searchCollectives1;
+	}
+	
+	private JPanel createZonaBusquedaProyectos() {
+		JPanel searchProyectos1 = new JPanel();
+		searchProyectos1.setLayout(new BoxLayout(searchProyectos1, BoxLayout.Y_AXIS));
+		searchProyectos1.setBackground(new Color(204,204,204));
+		//searchCollectives.setPreferredSize(new Dimension(100, 1000));
 		
+		JPanel cajonBusqueda = new JPanel();
+		cajonBusqueda.setLayout(new BoxLayout(cajonBusqueda, BoxLayout.X_AXIS));
+		cajonBusqueda.setBackground(new Color(204,204,204));
+		// cajonBusqueda.setPreferredSize(new Dimension(100, 1000));
+		searchProyectos1.add(cajonBusqueda);
+
+		barraBusquedaProyecto = new JTextField();
+		cajonBusqueda.add(barraBusquedaProyecto);		
+		barraBusquedaProyecto.setMaximumSize(new Dimension(300, 50));
 		
-		searchCollectives.setVisible(false);
+		botonBuscadorProyecto = new JButton("Buscar Proyectos");
+		cajonBusqueda.add(botonBuscadorProyecto);
 		
+		resultadosBusquedaProyecto = new JPanel();
+		resultadosBusquedaProyecto.setLayout(new BoxLayout(resultadosBusquedaProyecto, BoxLayout.Y_AXIS));
+		resultadosBusquedaProyecto.setBackground(new Color(204,204,204));
+		searchProyectos1.add(resultadosBusquedaProyecto);
+		
+		return searchProyectos1;
 	}
 	
 	public String getSearchedCollectiveText() {
-		return barraBusqueda.getText();
+		return barraBusquedaColectivo.getText();
+	}
+	
+	public String getSearchedProjectText() {
+		return barraBusquedaProyecto.getText();
 	}
 
 	public void setControladores(ActionListener c) {  
 		botonMiPagina.addActionListener(c);
 		botonCrearProyecto.addActionListener(c);  
 		botonBuscarColectivo.addActionListener(c);  
-		botonCrearProyecto.addActionListener(c); 
+		botonBuscarProyecto.addActionListener(c); 
 		botonCrearColectivo.addActionListener(c);  
 		botonCerrarSesion.addActionListener(c);
 		botonBuscadorColectivo.addActionListener(c);
+		botonBuscadorProyecto.addActionListener(c);
 	}
 	
 	public void setCreatedProjects(List<Project> createdProjects) {
@@ -214,6 +261,10 @@ public class PantallaPrincipal extends JPanel {
 		this.resultadoBusquedaColectivos = collectives;
 	}
 	
+	public void setResultadoBusquedaProyectos(List<Project> collectives) {
+		this.resultadoBusquedaProyectos = collectives;
+	}
+	
 	public void setRepresentedCollectives(List<Collective> c) {
 		this.representedCollectives = c;
 	}
@@ -228,6 +279,10 @@ public class PantallaPrincipal extends JPanel {
 	
 	public JPanel getSearchCollectives() {
 		return this.searchCollectives;
+	}
+	
+	public JPanel getSearchProjects() {
+		return this.searchProjects;
 	}
 	
 	public void update () {
@@ -293,6 +348,22 @@ public class PantallaPrincipal extends JPanel {
 			c.add(Box.createRigidArea(new Dimension(130, 070)));
 			c.add(new JLabel(p.getDescription()));
 			resultadosBusquedaColectivo.add(c);
+		}
+	}
+	
+	public void actualizarResultadosBusquedaProyecto () {		
+		resultadosBusquedaProyecto.removeAll();
+		if(resultadoBusquedaProyectos.isEmpty()) {
+			resultadosBusquedaProyecto.add(new JLabel("No reults found!"));
+			return;
+		}
+		for (Project p: resultadoBusquedaProyectos) {
+			JPanel c = new JPanel();
+			c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
+			c.add(new JLabel(p.getTitle()));
+			c.add(Box.createRigidArea(new Dimension(130, 070)));
+			c.add(new JLabel(p.getDescription()));
+			resultadosBusquedaProyecto.add(c);
 		}
 	}
 }

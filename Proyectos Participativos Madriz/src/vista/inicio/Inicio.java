@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 
 public class Inicio extends JPanel {
 
@@ -21,7 +22,7 @@ public class Inicio extends JPanel {
 	private JButton botonRegistro;
 	
 	public Inicio() {
-		
+				
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		JLabel etiqueta = new JLabel("INICIO DE SESION:");
