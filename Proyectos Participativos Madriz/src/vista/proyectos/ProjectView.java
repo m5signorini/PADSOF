@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import controlador.proyectos.ControlProjectView;
 import modelo.projects.Project;
 
 public class ProjectView extends JPanel{
@@ -75,6 +76,13 @@ public class ProjectView extends JPanel{
 		auxVotes.add(new JLabel("Number of votes: "));
 		auxVotes.add(nVoters);
 		
+	}
+
+	public void setController(ControlProjectView contProjectView) {
+		// TODO Auto-generated method stub
+		
 	}	
+	
+	
 }
 
