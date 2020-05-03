@@ -69,7 +69,7 @@ public class Ventana extends JFrame {
 		contentPane.add(vistaAdminRegisters, "ADMINISTRAR REGISTROS");
 		
 		this.vistaAdminProjects = new AdminProjectsView();
-		contentPane.add(vistaAdminRegisters, "ADMINISTRAR PROYECTOS");
+		contentPane.add(vistaAdminProjects, "ADMINISTRAR PROYECTOS");
 		
 		this.vistaRegistro = new Registro(); 
 		contentPane.add(vistaRegistro, "REGISTRO");
@@ -108,6 +108,8 @@ public class Ventana extends JFrame {
 		this.contAdmin = controlador.getControlAdmin();
 		vistaAdminRegisters.setControladorLogout(contAdmin.controlLogout());
 		vistaAdminRegisters.setControladorGotoProjects(contAdmin.controlGotoProjects());
+		vistaAdminProjects.setControladorLogout(contAdmin.controlLogout());
+		vistaAdminProjects.setControladorGotoRegisters(contAdmin.controlGotoProjects());
 		
 		this.contRegistro = controlador.getControlRegistro();
 		vistaRegistro.setControladorRegistro(contRegistro);

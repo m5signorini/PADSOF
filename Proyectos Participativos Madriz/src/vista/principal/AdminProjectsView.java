@@ -7,12 +7,11 @@ import javax.swing.*;
 
 public class AdminProjectsView extends JPanel{
 	
-	private JButton projects;
+	private JButton registers;
 	private JButton logout;
 	private JTabbedPane tabs;
 	
-	private JPanel pendingList;
-	private JPanel registeredList;
+	private JPanel projectList;
 	
 	private GridBagConstraints gbc;
 	
@@ -36,25 +35,21 @@ public class AdminProjectsView extends JPanel{
 		JPanel west = new JPanel();
 		west.setLayout(new BoxLayout(west, BoxLayout.Y_AXIS));
 		
-		projects = new JButton("Administrar Proyectos");
+		registers = new JButton("Administrar Registros");
 		logout = new JButton("Cerrar Sesión");
 		west.add(new JLabel("Navegacion"));
 		west.add(Box.createRigidArea(new Dimension(0, 10)));
-		west.add(projects);
+		west.add(registers);
 		west.add(logout);
 		
 		//CENTER Panel
 		JPanel center = new JPanel();
 		
-		pendingList = new JPanel(new GridBagLayout());
-		registeredList = new JPanel(new GridBagLayout());
-		
-		pendingList.add(new JPanel(), gbc);
-		registeredList.add(new JPanel(), gbc);
+		projectList = new JPanel(new GridBagLayout());
+		projectList.add(new JPanel(), gbc);
         
 		tabs = new JTabbedPane();
-		tabs.addTab("Pendientes", new JScrollPane(pendingList));
-		tabs.addTab("Registrados", new JScrollPane(registeredList));
+		tabs.addTab("Pendientes", new JScrollPane(projectList));
 		
 		center.add(tabs);
 		
@@ -71,11 +66,8 @@ public class AdminProjectsView extends JPanel{
 		list.repaint();
 	}
 	
-	public JPanel getPendingList() {
-		return pendingList;
-	}
-	public JPanel getRegisteredList() {
-		return registeredList;
+	public JPanel getProjects() {
+		return projectList;
 	}
 	public GridBagConstraints getGbc() {
 		return gbc;
@@ -85,7 +77,7 @@ public class AdminProjectsView extends JPanel{
 		logout.addActionListener(l);
 	}
 	
-	public void setControladorGotoProjects(ActionListener l) {
-		projects.addActionListener(l);
+	public void setControladorGotoRegisters(ActionListener l) {
+		registers.addActionListener(l);
 	}
 }

@@ -4,12 +4,14 @@ package controlador.principal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import modelo.entities.individuals.User;
 import modelo.functionalities.Application;
+import modelo.projects.Project;
 import vista.*;
 import vista.inicio.*;
 import vista.principal.AdminProjectsView;
@@ -25,6 +27,7 @@ public class ControlAdmin {
 	public ControlAdmin(Ventana mainFrame, Application modelo) {
 		this.frame = mainFrame;
 		this.viewRegisters = mainFrame.getVistaAdminRegisters();
+		this.viewProjects = mainFrame.getVistaAdminProjects();
 		this.modelo = modelo;
 	}
 	
@@ -73,9 +76,40 @@ public class ControlAdmin {
 		viewRegisters.getRegisteredList().repaint();
 	}
 	
+	private void setProjects() {
+		viewRegisters.prepareList(viewProjects.getProjects());
+		// Set the list of registered registers
+		for(Project p: modelo.getPendingProjects()) {
+			JPanel proj = new JPanel();
+			JPanel info = new JPanel();
+			info.setLayout(new BoxLayout(info, BoxLayout.Y_AXIS));
+			info.add(new JLabel(p.getTitle()));
+			info.add(new JLabel(p.getDescription()));
+			info.add(new JLabel("Creator:"));
+			for(String s: p.getCreator().toString().split("\n")) {
+				info.add(new JLabel(s));
+			}
+			
+			proj.add(info);
+            
+			JButton approve = new JButton("Aprobar");
+            JButton deny = new JButton("Rechazar");
+            approve.addActionListener((e) ->{modelo.validateProject(p); update();});
+            deny.addActionListener((e) -> {modelo.rejectProject(p); update();});
+            
+            proj.add(approve);
+            proj.add(deny);
+            
+            viewProjects.getProjects().add(proj, viewProjects.getGbc(), 0);
+		}
+		viewProjects.getProjects().validate();
+		viewProjects.getProjects().repaint();
+	}
+	
 	public void update() {
 		setPendingList();
 		setRegisteredList();
+		setProjects();
 	}
 	
 	public ActionListener controlLogout() {
@@ -91,7 +125,9 @@ public class ControlAdmin {
 	
 	public ActionListener controlGotoProjects() {
 		return (e) -> {
-			
+			viewRegisters.setVisible(false);
+			viewProjects.setVisible(true);
+			frame.pack();
 		};
 	}
 	
