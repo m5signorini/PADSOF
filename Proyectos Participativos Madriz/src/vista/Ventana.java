@@ -169,5 +169,6 @@ public class Ventana extends JFrame {
 		vistaCreacionColectivo.setVisible(false);
 		vistaProjectView.setVisible(false);
 		vistaCollectiveView.setVisible(false);
+		vistaInicioAdmin.setVisible(false);
 	}
 }

@@ -25,6 +25,7 @@ public class ProjectView extends JPanel{
 	public ProjectView() {
 		container = new JPanel();
 		container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
+		this.add(container);
 
 		title = new JLabel("None");
 		desc = new JLabel("None");
@@ -79,6 +80,11 @@ public class ProjectView extends JPanel{
 	}
 
 	public void setController(ControlProjectView contProjectView) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void update(Project p) {
 		// TODO Auto-generated method stub
 		
 	}	

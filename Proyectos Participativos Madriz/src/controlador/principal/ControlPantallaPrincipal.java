@@ -86,10 +86,16 @@ public class ControlPantallaPrincipal implements ActionListener {
 	
 	private void mostrarInformacionProyecto(Project p) {
 		System.out.println(p);
+		frame.getProjectView().update(p);
+		frame.setAllInvisible();
+		frame.getProjectView().setVisible(true);
 	}
 	
 	private void mostrarInformacionColectivo(Collective c) {
 		System.out.println(c);
+		frame.getCollectiveView().update(c);
+		frame.setAllInvisible();
+		frame.getCollectiveView().setVisible(true);
 	}
 
 	private void realizarBusquedaColectivos() {
