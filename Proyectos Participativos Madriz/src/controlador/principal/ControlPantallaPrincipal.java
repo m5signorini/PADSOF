@@ -50,7 +50,7 @@ public class ControlPantallaPrincipal implements ActionListener {
 			frame.getVistaPantallaPrincipal().getSearchProjects().setVisible(true);
 			break;
 		case "Crear Proyecto":
-			frame.getControlCreateProject().setCollectivos(this.modelo.getCollectives());
+			frame.getCreateProjectView().setRepresentedCollectives(this.modelo.getCollectives());
 			frame.getCreateProjectView().update();
 			frame.getCreateProjectView().setVisible(true);
 			frame.pack();
@@ -58,7 +58,7 @@ public class ControlPantallaPrincipal implements ActionListener {
 			frame.pack();
 			break;
 		case "Crear Colectivo":
-			frame.getControlCreateCollective().setCollectivos(this.modelo.getCollectives());
+			frame.getCreateCollectiveView().setCollectives(this.modelo.getCollectives());
 			frame.getCreateCollectiveView().update();
 			frame.getCreateCollectiveView().setVisible(true);
 			frame.pack();
