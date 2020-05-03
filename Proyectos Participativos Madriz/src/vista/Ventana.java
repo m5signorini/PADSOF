@@ -27,6 +27,7 @@ public class Ventana extends JFrame {
 	private Inicio vistaInicio;
 	private InicioAdmin vistaInicioAdmin;
 	private AdminRegistersView vistaAdminRegisters;
+	private AdminProjectsView vistaAdminProjects;
 	private Registro vistaRegistro;
 	private PantallaPrincipal vistaPantallaPrincipal;
 	private CreateProjectView vistaCreacionProyecto;
@@ -66,6 +67,9 @@ public class Ventana extends JFrame {
 		
 		this.vistaAdminRegisters = new AdminRegistersView();
 		contentPane.add(vistaAdminRegisters, "ADMINISTRAR REGISTROS");
+		
+		this.vistaAdminProjects = new AdminProjectsView();
+		contentPane.add(vistaAdminRegisters, "ADMINISTRAR PROYECTOS");
 		
 		this.vistaRegistro = new Registro(); 
 		contentPane.add(vistaRegistro, "REGISTRO");
@@ -136,6 +140,10 @@ public class Ventana extends JFrame {
 	public AdminRegistersView getVistaAdminRegisters() {
 		return this.vistaAdminRegisters;
 	}
+	
+	public AdminProjectsView getVistaAdminProjects() {
+		return this.vistaAdminProjects;
+	}
 
 	public Registro getVistaRegistro() {
 		return this.vistaRegistro;
@@ -180,6 +188,7 @@ public class Ventana extends JFrame {
 		vistaInicio.setVisible(false);
 		vistaInicioAdmin.setVisible(false);
 		vistaAdminRegisters.setVisible(false);
+		vistaAdminProjects.setVisible(false);
 		vistaRegistro.setVisible(false);
 		vistaPantallaPrincipal.setVisible(false);
 		vistaCreacionProyecto.setVisible(false);
