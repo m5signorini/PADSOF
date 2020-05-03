@@ -23,10 +23,15 @@ import javax.swing.SpringLayout;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import modelo.entities.Collective;
+
 import java.util.*;
 
 
 public class CreateProjectView extends JPanel{
+	
+	List<Collective> representedCollectives;
+	
 	JFrame window;
 	//Group of tabs
 	JTabbedPane tab;
@@ -371,7 +376,7 @@ public class CreateProjectView extends JPanel{
 		container.add(tab);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setSize(950,480);
-		window.setVisible(true);
+		//window.setVisible(true);
 	
 	}
 
