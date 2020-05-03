@@ -2,26 +2,27 @@ package controlador.colectivos;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.*;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 import modelo.entities.Collective;
 import modelo.entities.individuals.User;
+import modelo.exceptions.JoinException;
 import modelo.functionalities.Application;
 import vista.Ventana;
-import vista.colectivos.CreateCollectiveView;
+import vista.colectivos.CollectiveView;
 
 
 public class ControlCollectiveView implements ActionListener {
 	private Application modelo;
-	private CreateCollectiveView collectiveView;
 	private Ventana frame;
+	private CollectiveView colectiveView;
 	
 	public ControlCollectiveView(Application modelo, Ventana frame2) {
 		this.modelo = modelo;
 		this.frame = frame2;
-		this.collectiveView = frame2.getCreateCollectiveView();
+		this.colectiveView = frame.getCollectiveView();
 	}
 
 	@Override
@@ -48,10 +49,26 @@ public class ControlCollectiveView implements ActionListener {
 	
 	private void intentaUnirte() {
 		System.out.println("Intentando unirte");
+		
+		User u = modelo.getLoggedUser();
+		Collective col = colectiveView.getCollective();
+		
+		try {
+			if(col.join(u)) {
+				JOptionPane.showMessageDialog(colectiveView, "¡Te has unido al colectivo!");
+			} 
+		} catch(JoinException e) {
+			JOptionPane.showMessageDialog(colectiveView, "No puedes unirte a este colectivo.", "Error", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 	
 	private void vuelveAtras() {
 		System.out.println("Intentando volver atras");
+		
+
+		frame.setAllInvisible();
+		frame.getVistaPantallaPrincipal().setVisible(true);
+		frame.pack();
 		
 	}
 	

@@ -79,10 +79,17 @@ public class CollectiveView extends JPanel{
 		volver = new JButton("Volver");
 		abandonar = new JButton("Abandonar colectivo");
 
+		container.add(Box.createRigidArea(new Dimension(0, 50)));
 		container.add(unirse);
+		container.add(Box.createRigidArea(new Dimension(0, 50)));
 		container.add(volver);
+		container.add(Box.createRigidArea(new Dimension(0, 50)));
 		container.add(abandonar);
 		
+	}
+	
+	public Collective getCollective() {
+		return this.c;
 	}
 
 	public void setController(ActionListener a) {
