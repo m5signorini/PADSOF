@@ -66,12 +66,14 @@ public class PantallaPrincipal extends JPanel {
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		this.setBackground(new Color(204,255,204));
-		this.setPreferredSize(new Dimension(2000, 1000));
+		this.setPreferredSize(new Dimension(2300, 1200));
 
+		this.add(Box.createRigidArea(new Dimension(80, 70)));
+		
 		leftMenu = createLeftMenu();		
 		this.add(leftMenu);
 		
-		this.add(Box.createRigidArea(new Dimension(130, 70)));
+		this.add(Box.createRigidArea(new Dimension(80, 70)));
 
 		pestanias = createMiPagina();
 		this.add(pestanias);
@@ -91,59 +93,66 @@ public class PantallaPrincipal extends JPanel {
 		JPanel cont = new JPanel();
 		cont.setLayout(new BoxLayout(cont, BoxLayout.Y_AXIS));
 		cont.setBackground(new Color(255,255,204));
-		cont.setPreferredSize(new Dimension(300, 1000));
+		Dimension d = new Dimension(300, 700);
+        cont.setMinimumSize(d);
+        cont.setMaximumSize(d);
+        cont.setPreferredSize(d);
 		
-		cont.add(Box.createRigidArea(new Dimension(0, 40)));
+		cont.add(Box.createRigidArea(new Dimension(0, 50)));
 		
 		JLabel etiqueta = new JLabel("Navegacion:");
 		etiqueta.setFont(new Font("serif", Font.BOLD, 25));
 		etiqueta.setAlignmentX(CENTER_ALIGNMENT);
 		cont.add(etiqueta);
 
-		cont.add(Box.createRigidArea(new Dimension(0, 40)));
+		cont.add(Box.createRigidArea(new Dimension(0, 55)));
 
 		this.botonMiPagina = new JButton("Actualizar Mi Pagina");
 		this.botonMiPagina.setAlignmentX(CENTER_ALIGNMENT);
 		cont.add(this.botonMiPagina);
 
-		cont.add(Box.createRigidArea(new Dimension(0, 40)));
+		cont.add(Box.createRigidArea(new Dimension(0, 70)));
 		
 		this.botonBuscarColectivo = new JButton("Buscar Colectivo");
 		this.botonBuscarColectivo.setAlignmentX(CENTER_ALIGNMENT);
 		cont.add(this.botonBuscarColectivo);
 
-		cont.add(Box.createRigidArea(new Dimension(0, 20)));
+		cont.add(Box.createRigidArea(new Dimension(0, 40)));
 		
 		this.botonBuscarProyecto = new JButton("Buscar Proyecto");
 		this.botonBuscarProyecto.setAlignmentX(CENTER_ALIGNMENT);
 		cont.add(this.botonBuscarProyecto);
 
-		cont.add(Box.createRigidArea(new Dimension(0, 40)));
+		cont.add(Box.createRigidArea(new Dimension(0, 70)));
 		
 		this.botonCrearColectivo = new JButton("Crear Colectivo");
 		this.botonCrearColectivo.setAlignmentX(CENTER_ALIGNMENT);
 		cont.add(this.botonCrearColectivo);
 
-		cont.add(Box.createRigidArea(new Dimension(0, 20)));
+		cont.add(Box.createRigidArea(new Dimension(0, 40)));
 		
 		this.botonCrearProyecto = new JButton("Crear Proyecto");
 		this.botonCrearProyecto.setAlignmentX(CENTER_ALIGNMENT);
 		cont.add(this.botonCrearProyecto);
 
-		cont.add(Box.createRigidArea(new Dimension(0, 50)));
+		cont.add(Box.createRigidArea(new Dimension(0, 70)));
 		
 		this.botonCerrarSesion = new JButton("Cerrar Sesion");
 		this.botonCerrarSesion.setAlignmentX(CENTER_ALIGNMENT);
 		cont.add(this.botonCerrarSesion);
 		
 		cont.add(Box.createRigidArea(new Dimension(0, 40)));
-
-		cont.add(Box.createRigidArea(new Dimension(0, 20)));
 		return cont;
 	}
 	
 	private JTabbedPane createMiPagina() {
-		JTabbedPane pestanias1 = new JTabbedPane(2);
+		JTabbedPane pestanias1 = new JTabbedPane(1);
+		pestanias1.setFont(new Font("serif", Font.BOLD, 20));
+		pestanias1.setBackground(new Color(190,255,255));
+		Dimension d = new Dimension(1700, 1000);
+		pestanias1.setMinimumSize(d);
+		pestanias1.setMaximumSize(d);
+		pestanias1.setPreferredSize(d);
 
 		pestaniaMisColectivos = new JPanel();
 		pestaniaColectivosCreados = new JPanel();
@@ -152,8 +161,16 @@ public class PantallaPrincipal extends JPanel {
 		pestaniaInformeAfinidad = new JPanel();
 		pestaniaProyectosSeguidos = new JPanel();
 		pestaniaNotificaciones = new JPanel();
-		pestaniaMisColectivos.setPreferredSize(new Dimension(500, 500));
+		//pestaniaMisColectivos.setPreferredSize(new Dimension(500, 500));
 
+		pestaniaMisColectivos.setBackground(new Color(255,255,255));
+		pestaniaColectivosCreados.setBackground(new Color(255,255,255));
+		pestaniaMisProyectos.setBackground(new Color(255,255,255));
+		pestaniaInformePoularidad.setBackground(new Color(255,255,255));
+		pestaniaInformeAfinidad.setBackground(new Color(255,255,255));
+		pestaniaProyectosSeguidos.setBackground(new Color(255,255,255));
+		pestaniaNotificaciones.setBackground(new Color(255,255,255));
+		
 		pestanias1.addTab("Mis Proyectos", pestaniaMisProyectos);
 		pestanias1.addTab("Mis Colectivos", pestaniaMisColectivos);
 		pestanias1.addTab("Colectivos Creados", pestaniaColectivosCreados);
@@ -288,8 +305,16 @@ public class PantallaPrincipal extends JPanel {
 	private JPanel representacionProyecto(Project p) {
 		JPanel c = new JPanel();
 		c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
-		c.add(new JLabel(p.getTitle()));
-		c.add(Box.createRigidArea(new Dimension(130, 070)));
+		Dimension d = new Dimension(1300, 100);
+        c.setMinimumSize(d);
+        c.setMaximumSize(d);
+        c.setPreferredSize(d);
+
+		c.add(Box.createRigidArea(new Dimension(200, 0)));
+		JLabel title = new JLabel(p.getTitle());
+		title.setFont(new Font("serif", Font.BOLD, 25));
+		c.add(title);
+		c.add(Box.createRigidArea(new Dimension(200, 0)));
 		c.add(new JLabel(p.getDescription()));
 		return c;
 	}
