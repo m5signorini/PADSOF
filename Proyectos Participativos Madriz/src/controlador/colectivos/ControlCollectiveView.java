@@ -61,9 +61,9 @@ public class ControlCollectiveView implements ActionListener {
 		}
 	}
 	
-	private void vuelveAtras() {	
-
+	private void vuelveAtras() {
 		frame.setAllInvisible();
+		frame.getVistaPantallaPrincipal().update();
 		frame.getVistaPantallaPrincipal().setVisible(true);
 		frame.pack();
 		
@@ -74,7 +74,7 @@ public class ControlCollectiveView implements ActionListener {
 		User u = modelo.getLoggedUser();
 		Collective col = colectiveView.getCollective();
 		
-		if(col.leave(u)) {
+		if(u.exitCollective(col)) {
 			JOptionPane.showMessageDialog(colectiveView, "¡Has abandonado el colectivo!");
 		} else {
 			JOptionPane.showMessageDialog(colectiveView, "No puedes salir de este colectivo.", "Error", JOptionPane.ERROR_MESSAGE);

@@ -114,7 +114,7 @@ public class PantallaPrincipal extends JPanel {
 
 		cont.add(Box.createRigidArea(new Dimension(0, 55)));
 
-		this.botonMiPagina = new JButton("Actualizar Mi Pagina");
+		this.botonMiPagina = new JButton("Mi Pagina");
 		this.botonMiPagina.setAlignmentX(CENTER_ALIGNMENT);
 		cont.add(this.botonMiPagina);
 
@@ -278,6 +278,10 @@ public class PantallaPrincipal extends JPanel {
 		this.createdProjects = createdProjects;
 	}
 	
+	public List<Project> getCreatedProjects() {
+		return this.createdProjects;
+	}
+	
 	public void setVotedProjects(List<Project> votedProjects) {
 		this.votedProjects = votedProjects;
 	}
@@ -288,6 +292,10 @@ public class PantallaPrincipal extends JPanel {
 	
 	public void setCollectives(List<Collective> collectives) {
 		this.collectives = collectives;
+	}
+	
+	public List<Collective> getCollectives() {
+		return this.collectives;
 	}
 	
 	public void setResultadoBusquedaColectivos(List<Collective> collectives) {
@@ -308,6 +316,10 @@ public class PantallaPrincipal extends JPanel {
 		
 	public void setRepresentedCollectives(List<Collective> c) {
 		this.representedCollectives = c;
+	}
+	
+	public List<Collective> getRepresentedCollectives() {
+		return this.representedCollectives;
 	}
 	
 	public void setNotifications(ArrayList<Notification> notifications) {
@@ -354,7 +366,7 @@ public class PantallaPrincipal extends JPanel {
 		return c;
 	}
 	
-	private JPanel representacionColectivo(Collective p, int index) {
+	private JPanel representacionColectivo(Collective p) {
 		JPanel c = new JPanel();
 		c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
 		Dimension d = new Dimension(1700, 100);
@@ -371,11 +383,6 @@ public class PantallaPrincipal extends JPanel {
 		c.add(new JLabel(p.getDescription()));
 		
 		c.add(Box.createRigidArea(new Dimension(200, 0)));
-		
-		JButton b = new JButton("Mas informacion colectivo");
-		b.addActionListener(listener);
-		b.setName(Integer.toString(index));
-		c.add(b);
 		
 		return c;
 	}
@@ -470,12 +477,24 @@ public class PantallaPrincipal extends JPanel {
 		}
 		i = 0;
 		for (Collective p: collectives) {
-			pestaniaMisColectivos.add(representacionColectivo(p, i));
+			JPanel cont = representacionColectivo(p);
+			JButton b = new JButton("Mas informacion el colectivo al que perteneces");
+			b.addActionListener(listener);
+			b.setName(Integer.toString(i));
+			cont.add(b);
+			
+			pestaniaMisColectivos.add(cont);
 			i++;
 		}
 		i = 0;
 		for (Collective p: representedCollectives) {
-			pestaniaColectivosCreados.add(representacionColectivo(p, i));
+			JPanel cont1 = representacionColectivo(p);
+			JButton b = new JButton("Mas informacion sobre tu colectivo");
+			b.addActionListener(listener);
+			b.setName(Integer.toString(i));
+			cont1.add(b);
+			
+			pestaniaColectivosCreados.add(cont1);
 			i++;
 		}
 		for (Notification p: notifications) {
@@ -510,7 +529,13 @@ public class PantallaPrincipal extends JPanel {
 		}
 		int i = 0;
 		for (Collective p: resultadoBusquedaColectivos) {
-			resultadosBusquedaColectivo.add(representacionColectivo(p, i));
+			JPanel cont = representacionColectivo(p);
+			JButton b = new JButton("Mas informacion colectivo");
+			b.addActionListener(listener);
+			b.setName(Integer.toString(i));
+			cont.add(b);
+			
+			resultadosBusquedaColectivo.add(cont);
 			i++;
 		}
 	}

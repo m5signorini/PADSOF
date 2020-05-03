@@ -28,7 +28,7 @@ public class ControlPantallaPrincipal implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		JButton button = (JButton)e.getSource();
 		switch(button.getActionCommand()) {
-		case "Actualizar Mi Pagina":
+		case "Mi Pagina":
 			frame.getVistaPantallaPrincipal().getPestanias().setVisible(true);
 			frame.getVistaPantallaPrincipal().getSearchProjects().setVisible(false);
 			frame.getVistaPantallaPrincipal().getSearchCollectives().setVisible(false);
@@ -78,6 +78,16 @@ public class ControlPantallaPrincipal implements ActionListener {
 			// En el nombre hemos almacenado el indice del colectivo del que queremos mas informacion.
 			int indiceColectivo = Integer.parseInt(((JButton)e.getSource()).getName());
 			mostrarInformacionColectivo((pantallaPrincipal.getResultadoBusquedaColectivos()).get(indiceColectivo));
+			break;
+		case "Mas informacion el colectivo al que perteneces":
+			// En el nombre hemos almacenado el indice del colectivo del que queremos mas informacion.
+			int indiceColectivo1 = Integer.parseInt(((JButton)e.getSource()).getName());
+			mostrarInformacionColectivo((pantallaPrincipal.getCollectives()).get(indiceColectivo1));
+			break;
+		case "Mas informacion sobre tu colectivo":
+			// En el nombre hemos almacenado el indice del colectivo del que queremos mas informacion.
+			int indiceColectivo2 = Integer.parseInt(((JButton)e.getSource()).getName());
+			mostrarInformacionColectivo((pantallaPrincipal.getRepresentedCollectives()).get(indiceColectivo2));
 			break;
 		}
 	}

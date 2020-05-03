@@ -65,6 +65,7 @@ public class ControlProjectView implements ActionListener {
 	
 	private void vuelveAtras() {	
 		frame.setAllInvisible();
+		frame.getVistaPantallaPrincipal().update();
 		frame.getVistaPantallaPrincipal().setVisible(true);
 		frame.pack();		
 	}
