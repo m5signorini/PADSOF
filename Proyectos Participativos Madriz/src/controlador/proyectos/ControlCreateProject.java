@@ -147,4 +147,8 @@ public class ControlCreateProject implements ActionListener {
 			break;
 		}
 	}
+	
+	public void setCollectivos(List<Collective> l) {
+		this.projectView.setRepresentedCollectives(l);
+	}
 }
