@@ -10,17 +10,19 @@ import javax.swing.JPanel;
 import controlador.Controlador;
 import controlador.colectivos.ControlCreateCollective;
 import controlador.inicio.*;
+import controlador.principal.ControlAdmin;
 import controlador.principal.ControlPantallaPrincipal;
 import controlador.proyectos.ControlCreateProject;
 import vista.colectivos.CreateCollectiveView;
 import vista.inicio.*;
-import vista.principal.PantallaPrincipal;
+import vista.principal.*;
 import vista.proyectos.CreateProjectView;
 
 public class Ventana extends JFrame {
 	
 	private Inicio vistaInicio;
 	private InicioAdmin vistaInicioAdmin;
+	private AdminRegistersView vistaAdminRegisters;
 	private Registro vistaRegistro;
 	private PantallaPrincipal vistaPantallaPrincipal;
 	private CreateProjectView vistaCreacionProyecto;
@@ -28,6 +30,7 @@ public class Ventana extends JFrame {
 
 	private ControlInicio contInicio;
 	private ControlInicioAdmin contInicioAdmin;
+	private ControlAdmin contAdmin;
 	private ControlRegistro contRegistro;
 	private ControlPantallaPrincipal contPantallaPrincipal;
 	private ControlCreateProject contCreateProject;
@@ -52,7 +55,10 @@ public class Ventana extends JFrame {
 		
 		this.vistaInicioAdmin = new InicioAdmin();
 		contentPane.add(vistaInicioAdmin, "INICIO DE ADMIN");
-
+		
+		this.vistaAdminRegisters = new AdminRegistersView();
+		contentPane.add(vistaAdminRegisters, "ADMINISTRAR REGISTROS");
+		
 		this.vistaRegistro = new Registro(); 
 		contentPane.add(vistaRegistro, "REGISTRO");
 		
@@ -81,6 +87,10 @@ public class Ventana extends JFrame {
 		vistaInicioAdmin.setControladorLoginAdmin(contInicioAdmin);
 		vistaInicioAdmin.setControladorVolver(contInicioAdmin);
 		
+		this.contAdmin = controlador.getControlAdmin();
+		vistaAdminRegisters.setControladorLogout(contAdmin.controlLogout());
+		vistaAdminRegisters.setControladorGotoProjects(contAdmin.controlGotoProjects());
+		
 		this.contRegistro = controlador.getControlRegistro();
 		vistaRegistro.setControladorRegistro(contRegistro);
 		vistaRegistro.setControladorCambioInicio(contRegistro);
@@ -101,6 +111,10 @@ public class Ventana extends JFrame {
 	
 	public InicioAdmin getVistaInicioAdmin() {
 		return this.vistaInicioAdmin;
+	}
+	
+	public AdminRegistersView getVistaAdminRegisters() {
+		return this.vistaAdminRegisters;
 	}
 
 	public Registro getVistaRegistro() {
@@ -129,9 +143,14 @@ public class Ventana extends JFrame {
 		return this.contCreateProject;
 	}
 	
+	public ControlAdmin getControlAdmin() {
+		return this.contAdmin;
+	}
+	
 	public void setAllInvisible() {
 		vistaInicio.setVisible(false);
 		vistaInicioAdmin.setVisible(false);
+		vistaAdminRegisters.setVisible(false);
 		vistaRegistro.setVisible(false);
 		vistaPantallaPrincipal.setVisible(false);
 		vistaCreacionProyecto.setVisible(false);

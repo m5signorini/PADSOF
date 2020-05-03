@@ -3,12 +3,15 @@ package controlador.inicio;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+
+import controlador.principal.ControlAdmin;
 import modelo.*;
 import modelo.entities.individuals.User;
 import modelo.exceptions.BannedUserException;
 import modelo.functionalities.Application;
 import vista.*;
 import vista.inicio.*;
+import vista.principal.AdminRegistersView;
 import vista.principal.PantallaPrincipal;
 import vista.proyectos.CreateProjectView;
 
@@ -63,21 +66,15 @@ public class ControlInicioAdmin implements ActionListener {
 			return;
 		}	
 		
-		PantallaPrincipal pantallaPrincipal = frame.getVistaPantallaPrincipal();
-		User u = modelo.getLoggedUser();
+		AdminRegistersView adminRegs = frame.getVistaAdminRegisters();
+		ControlAdmin contAdmin = frame.getControlAdmin();
 			
 		JOptionPane.showMessageDialog(null, "Correctly logged in!");
 		
 		frame.setAllInvisible();
-		pantallaPrincipal.setVisible(true);
+		adminRegs.setVisible(true);
+		contAdmin.update();
 		frame.pack();
 		
-		pantallaPrincipal.setCreatedProjects(u.getCreatedProjects());
-		pantallaPrincipal.setFollowedProjects(u.getFollowedProjects());
-		pantallaPrincipal.setCollectives(u.getCollectives());
-		pantallaPrincipal.setRepresentedCollectives(u.getRepresentedCollectives());
-		pantallaPrincipal.setNotifications(u.getNotifications());
-		
-		pantallaPrincipal.update();
 	}	
 }

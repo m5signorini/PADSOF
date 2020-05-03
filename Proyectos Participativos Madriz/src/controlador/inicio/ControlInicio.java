@@ -28,12 +28,8 @@ public class ControlInicio implements ActionListener {
 		JButton button = (JButton)e.getSource();
 		switch(button.getActionCommand()) {
 		case "Validar":
-			try {
-				intentaLogin();
-				break;
-			} catch (BannedUserException e1) {
-				e1.printStackTrace();
-			}
+			intentaLogin();
+			break;
 		case "Pulse aqui para registrarse":
 			cambioRegistro();
 			break;
@@ -59,30 +55,38 @@ public class ControlInicio implements ActionListener {
 		frame.pack();		
 	}
 	
-	private void loginCheck() {
+	private boolean loginCheck() {
 		String nif = vista.getNif();
 		if (nif.equals("")) {
 			JOptionPane.showMessageDialog(vista, "Debe introducir un nif.", "Error", JOptionPane.ERROR_MESSAGE);
-			return;
+			return false;
 		}
 		String pwd = vista.getPwd();
 		if (pwd.equals("")) {
 			JOptionPane.showMessageDialog(vista, "Debe introducir un pwd.", "Error", JOptionPane.ERROR_MESSAGE);
-			return;
+			return false;
 		}
+		return true;
 	}
 	
-	private void intentaLogin() throws BannedUserException {
-		loginCheck();
+	private void intentaLogin() {
+		if(!loginCheck()) return;
 	
 		String nif = vista.getNif();
 		String pwd = vista.getPwd();
 		
-		if(!modelo.login(nif, pwd)){
-			JOptionPane.showMessageDialog(null, "Incorrect login! Please, try again.");
+		try {
+			if(!modelo.login(nif, pwd)){
+				JOptionPane.showMessageDialog(null, "Incorrect login! Please, try again.");
+				vista.update();
+				return;
+			}
+		}
+		catch(BannedUserException ex) {
+			JOptionPane.showMessageDialog(null, ex);
 			vista.update();
 			return;
-		}	
+		}
 		
 		PantallaPrincipal pantallaPrincipal = frame.getVistaPantallaPrincipal();
 		User u = modelo.getLoggedUser();

@@ -3,6 +3,9 @@
  */
 package modelo.exceptions;
 
+import java.util.Calendar;
+import java.util.Locale;
+
 import modelo.entities.individuals.*;
 
 /**
@@ -16,6 +19,6 @@ public class BannedUserException extends UserException {
 	}
 	
 	public String toString() {
-		return user + " has been banned until " + user.getUnbanDate();
+		return user + " has been banned.";
 	}
 }
