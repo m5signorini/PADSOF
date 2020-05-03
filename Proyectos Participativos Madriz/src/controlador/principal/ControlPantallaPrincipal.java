@@ -15,35 +15,41 @@ import vista.principal.PantallaPrincipal;
 import vista.proyectos.CreateProjectView;
 
 public class ControlPantallaPrincipal implements ActionListener {
-	
-	private Inicio vista;
+
 	private Ventana frame;
 	private Application modelo;
 	
 	public ControlPantallaPrincipal(Ventana frame2, Application modelo) {
 		this.frame = frame2;
-		this.vista = frame2.getVistaInicio();
 		this.modelo = modelo;
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		JButton button = (JButton)e.getSource();
 		switch(button.getActionCommand()) {
-		case "Mi Pagina":
+		case "Actualizar Mi Pagina":
 			actualizarMiPagina();
 			break;
-		case "Cerrar Sesion":
-			cerrarSesion();
+		case "Buscar Colectivo":
+			frame.getVistaPantallaPrincipal().getPestanias().setVisible(false);
+			break;
+		case "Buscar Proyecto":
+			frame.getVistaPantallaPrincipal().getPestanias().setVisible(false);
 			break;
 		case "Crear Proyecto":
 			frame.getCreateProjectView().setVisible(true);
+			frame.pack();
 			//frame.getVistaInicio().setVisible(false);
 			frame.pack();
 			break;
 		case "Crear Colectivo":
 			frame.getCreateCollectiveView().setVisible(true);
+			frame.pack();
 			//frame.getVistaInicio().setVisible(false);
 			frame.pack();
+			break;
+		case "Cerrar Sesion":
+			cerrarSesion();
 			break;
 		}
 	}

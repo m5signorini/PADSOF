@@ -44,6 +44,8 @@ public class PantallaPrincipal extends JPanel {
 	private JButton botonCrearProyecto;
 	private JButton botonCerrarSesion;
 	
+	private JTabbedPane pestanias;
+	
 	public PantallaPrincipal() {
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
@@ -64,7 +66,7 @@ public class PantallaPrincipal extends JPanel {
 
 		cont.add(Box.createRigidArea(new Dimension(0, 40)));
 
-		this.botonMiPagina = new JButton("Mi Pagina");
+		this.botonMiPagina = new JButton("Actualizar Mi Pagina");
 		this.botonMiPagina.setAlignmentX(CENTER_ALIGNMENT);
 		cont.add(this.botonMiPagina);
 
@@ -106,7 +108,7 @@ public class PantallaPrincipal extends JPanel {
 		this.add(Box.createRigidArea(new Dimension(130, 70)));
 
 
-		JTabbedPane pestanias = new JTabbedPane(2);
+		pestanias = new JTabbedPane(2);
 
 		pestaniaMisColectivos = new JPanel();
 		pestaniaColectivosCreados = new JPanel();
@@ -170,6 +172,10 @@ public class PantallaPrincipal extends JPanel {
 	
 	public void setNotifications(ArrayList<Notification> notifications) {
 		this.notifications = notifications;
+	}
+	
+	public JTabbedPane getPestanias() {
+		return this.pestanias;
 	}
 	
 	public void update () {
