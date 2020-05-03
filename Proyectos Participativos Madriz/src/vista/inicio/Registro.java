@@ -45,7 +45,7 @@ public class Registro extends JPanel {
 		campoNif = new JTextField();
 		cont.add(campoNif);
 		
-		etiqueta = new JLabel("Contraseña: ");
+		etiqueta = new JLabel("Contrasena: ");
 		cont.add(etiqueta);
 		campoPwd = new JPasswordField();
 		cont.add(campoPwd);

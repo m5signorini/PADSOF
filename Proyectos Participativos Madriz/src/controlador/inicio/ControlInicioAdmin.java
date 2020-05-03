@@ -12,59 +12,39 @@ import vista.inicio.*;
 import vista.principal.PantallaPrincipal;
 import vista.proyectos.CreateProjectView;
 
-public class ControlInicio implements ActionListener {
+public class ControlInicioAdmin implements ActionListener {
 	
-	private Inicio vista;
+	private InicioAdmin vista;
 	private Ventana frame;
 	private Application modelo;
 	
-	public ControlInicio(Ventana frame, Application modelo) {
+	public ControlInicioAdmin(Ventana frame, Application modelo) {
 		this.frame = frame;
-		this.vista = frame.getVistaInicio();
+		this.vista = frame.getVistaInicioAdmin();
 		this.modelo = modelo;
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		JButton button = (JButton)e.getSource();
 		switch(button.getActionCommand()) {
-		case "Validar":
-			try {
-				intentaLogin();
-				break;
-			} catch (BannedUserException e1) {
-				e1.printStackTrace();
-			}
-		case "Pulse aqui para registrarse":
-			cambioRegistro();
+		case "Iniciar sesion como Administrador":
+			intentaAdminLogin();
 			break;
-		case "Entrar como administrador":
-			cambioLoginAdmin();
+		case "Pulse aqui para volver":
+			cambioInicio();
 			break;
 		}
 	}
 	
-	private void cambioLoginAdmin() {
-		InicioAdmin nuevaVista = frame.getVistaInicioAdmin();
+	private void cambioInicio() {
+		Inicio nuevaVista = frame.getVistaInicio();
 		nuevaVista.update();
 		nuevaVista.setVisible(true);
 		vista.setVisible(false);
 		frame.pack();
 	}
-
-	private void cambioRegistro() {
-		Registro nuevaVista = frame.getVistaRegistro();
-		nuevaVista.update();
-		nuevaVista.setVisible(true);
-		vista.setVisible(false);
-		frame.pack();		
-	}
 	
 	private void loginCheck() {
-		String nif = vista.getNif();
-		if (nif.equals("")) {
-			JOptionPane.showMessageDialog(vista, "Debe introducir un nif.", "Error", JOptionPane.ERROR_MESSAGE);
-			return;
-		}
 		String pwd = vista.getPwd();
 		if (pwd.equals("")) {
 			JOptionPane.showMessageDialog(vista, "Debe introducir un pwd.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -72,13 +52,12 @@ public class ControlInicio implements ActionListener {
 		}
 	}
 	
-	private void intentaLogin() throws BannedUserException {
+	private void intentaAdminLogin() {
 		loginCheck();
-	
-		String nif = vista.getNif();
+		
 		String pwd = vista.getPwd();
 		
-		if(!modelo.login(nif, pwd)){
+		if(!modelo.loginAdmin(pwd)){
 			JOptionPane.showMessageDialog(null, "Incorrect login! Please, try again.");
 			vista.update();
 			return;

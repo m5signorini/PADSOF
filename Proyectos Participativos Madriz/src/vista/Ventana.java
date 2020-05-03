@@ -27,6 +27,7 @@ public class Ventana extends JFrame {
 	private CreateCollectiveView vistaCreacionColectivo;
 
 	private ControlInicio contInicio;
+	private ControlInicioAdmin contInicioAdmin;
 	private ControlRegistro contRegistro;
 	private ControlPantallaPrincipal contPantallaPrincipal;
 	private ControlCreateProject contCreateProject;
@@ -74,7 +75,11 @@ public class Ventana extends JFrame {
 		this.contInicio = controlador.getControlInicio();
 		vistaInicio.setControladorValidar(contInicio);
 		vistaInicio.setControladorCambioRegistro(contInicio);
-		/*vistaInicio.setControladorCambioAdmin(contInicio);*/
+		vistaInicio.setControladorCambioAdmin(contInicio);
+		
+		this.contInicioAdmin = controlador.getControlInicioAdmin();
+		vistaInicioAdmin.setControladorLoginAdmin(contInicioAdmin);
+		vistaInicioAdmin.setControladorVolver(contInicioAdmin);
 		
 		this.contRegistro = controlador.getControlRegistro();
 		vistaRegistro.setControladorRegistro(contRegistro);
@@ -116,6 +121,7 @@ public class Ventana extends JFrame {
 	
 	public void setAllInvisible() {
 		vistaInicio.setVisible(false);
+		vistaInicioAdmin.setVisible(false);
 		vistaRegistro.setVisible(false);
 		vistaPantallaPrincipal.setVisible(false);
 		vistaCreacionProyecto.setVisible(false);

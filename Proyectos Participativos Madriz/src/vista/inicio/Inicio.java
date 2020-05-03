@@ -20,6 +20,7 @@ public class Inicio extends JPanel {
 	private JTextField campoPwd;
 	private JButton botonValidar;
 	private JButton botonRegistro;
+	private JButton botonAdmin;
 	
 	public Inicio() {
 				
@@ -56,7 +57,13 @@ public class Inicio extends JPanel {
 
 		botonRegistro = new JButton("Pulse aqui para registrarse");
 		botonRegistro.setAlignmentX(CENTER_ALIGNMENT);
-		add(botonRegistro);	
+		add(botonRegistro);
+		
+		add(Box.createRigidArea(new Dimension(0, 10)));
+		
+		botonAdmin = new JButton("Entrar como administrador");
+		botonAdmin.setAlignmentX(CENTER_ALIGNMENT);
+		add(botonAdmin);
 		
 	}
 
@@ -66,6 +73,10 @@ public class Inicio extends JPanel {
 	
 	public void setControladorCambioRegistro(ActionListener c) {  
 		botonRegistro.addActionListener(c);
+	}
+	
+	public void setControladorCambioAdmin(ActionListener c) {  
+		botonAdmin.addActionListener(c);
 	}
 
 	public String getNif() {
