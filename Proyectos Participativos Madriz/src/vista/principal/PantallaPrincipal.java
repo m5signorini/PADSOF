@@ -167,7 +167,7 @@ public class PantallaPrincipal extends JPanel {
 
 		barraBusqueda = new JTextField();
 		cajonBusqueda.add(barraBusqueda);		
-		//barraBusqueda.setPreferredSize(new Dimension(50, 10));
+		barraBusqueda.setMaximumSize(new Dimension(300, 50));
 		
 		botonBuscadorColectivo = new JButton("Buscar Colectivos");
 		cajonBusqueda.add(botonBuscadorColectivo);
@@ -176,6 +176,8 @@ public class PantallaPrincipal extends JPanel {
 		resultadosBusquedaColectivo.setLayout(new BoxLayout(resultadosBusquedaColectivo, BoxLayout.Y_AXIS));
 		resultadosBusquedaColectivo.setBackground(new Color(204,204,204));
 		//resultadosBusquedaColectivo.setPreferredSize(new Dimension(100, 100));
+		
+		searchCollectives.add(resultadosBusquedaColectivo);
 		
 		
 		searchCollectives.setVisible(false);
@@ -286,7 +288,7 @@ public class PantallaPrincipal extends JPanel {
 			c.add(new JLabel(p.getName()));
 			c.add(Box.createRigidArea(new Dimension(130, 070)));
 			c.add(new JLabel(p.getDescription()));
-			resultadoBusquedaColectivos.add(c);
+			resultadosBusquedaColectivo.add(c);
 		}
 	}
 }

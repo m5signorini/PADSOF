@@ -69,6 +69,7 @@ public class ControlPantallaPrincipal implements ActionListener {
 		List<Collective> collectives = modelo.getSearcher().searchCollectives(pantallaPrincipal.getSearchedCollectiveText());
 		pantallaPrincipal.setResultadoBusquedaColectivos(collectives);
 		pantallaPrincipal.actualizarResultadosBusquedaColectivo();
+		frame.pack();
 	}
 	
 	private void cerrarSesion() {
