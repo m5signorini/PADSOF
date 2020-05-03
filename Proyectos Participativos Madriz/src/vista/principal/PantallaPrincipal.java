@@ -282,6 +282,10 @@ public class PantallaPrincipal extends JPanel {
 	
 	public void actualizarResultadosBusquedaColectivo () {		
 		resultadosBusquedaColectivo.removeAll();
+		if(resultadoBusquedaColectivos.isEmpty()) {
+			resultadosBusquedaColectivo.add(new JLabel("No reults found!"));
+			return;
+		}
 		for (Collective p: resultadoBusquedaColectivos) {
 			JPanel c = new JPanel();
 			c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
