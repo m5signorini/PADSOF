@@ -346,7 +346,7 @@ public class PantallaPrincipal extends JPanel {
 		
 		c.add(Box.createRigidArea(new Dimension(200, 0)));
 		
-		JButton b = new JButton("Mas informacion");
+		JButton b = new JButton("Mas informacion proyecto");
 		b.addActionListener(listener);
 		b.setName(Integer.toString(index));
 		c.add(b);
@@ -354,12 +354,29 @@ public class PantallaPrincipal extends JPanel {
 		return c;
 	}
 	
-	private JPanel representacionColectivo(Collective p) {
+	private JPanel representacionColectivo(Collective p, int index) {
 		JPanel c = new JPanel();
 		c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
-		c.add(new JLabel(p.getName()));
-		c.add(Box.createRigidArea(new Dimension(130, 070)));
+		Dimension d = new Dimension(1700, 100);
+        c.setMinimumSize(d);
+        c.setMaximumSize(d);
+        c.setPreferredSize(d);
+
+		c.add(Box.createRigidArea(new Dimension(200, 0)));
+		JLabel title = new JLabel(p.getName());
+		title.setFont(new Font("serif", Font.BOLD, 25));
+		c.add(title);
+
+		c.add(Box.createRigidArea(new Dimension(200, 0)));
 		c.add(new JLabel(p.getDescription()));
+		
+		c.add(Box.createRigidArea(new Dimension(200, 0)));
+		
+		JButton b = new JButton("Mas informacion colectivo");
+		b.addActionListener(listener);
+		b.setName(Integer.toString(index));
+		c.add(b);
+		
 		return c;
 	}
 	
@@ -451,11 +468,15 @@ public class PantallaPrincipal extends JPanel {
 			pestaniaProyectosSeguidos.add(representacionProyecto(p, i));
 			i++;
 		}
+		i = 0;
 		for (Collective p: collectives) {
-			pestaniaMisColectivos.add(representacionColectivo(p));
+			pestaniaMisColectivos.add(representacionColectivo(p, i));
+			i++;
 		}
+		i = 0;
 		for (Collective p: representedCollectives) {
-			pestaniaColectivosCreados.add(representacionColectivo(p));
+			pestaniaColectivosCreados.add(representacionColectivo(p, i));
+			i++;
 		}
 		for (Notification p: notifications) {
 			pestaniaNotificaciones.add(representacionNotificacion(p));
@@ -487,13 +508,10 @@ public class PantallaPrincipal extends JPanel {
 			resultadosBusquedaColectivo.add(new JLabel("No reults found!"));
 			return;
 		}
+		int i = 0;
 		for (Collective p: resultadoBusquedaColectivos) {
-			JPanel c = new JPanel();
-			c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
-			c.add(new JLabel(p.getName()));
-			c.add(Box.createRigidArea(new Dimension(130, 070)));
-			c.add(new JLabel(p.getDescription()));
-			resultadosBusquedaColectivo.add(c);
+			resultadosBusquedaColectivo.add(representacionColectivo(p, i));
+			i++;
 		}
 	}
 	
@@ -503,13 +521,10 @@ public class PantallaPrincipal extends JPanel {
 			resultadosBusquedaProyecto.add(new JLabel("No reults found!"));
 			return;
 		}
+		int i = 0;
 		for (Project p: resultadoBusquedaProyectos) {
-			JPanel c = new JPanel();
-			c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
-			c.add(new JLabel(p.getTitle()));
-			c.add(Box.createRigidArea(new Dimension(130, 070)));
-			c.add(new JLabel(p.getDescription()));
-			resultadosBusquedaProyecto.add(c);
+			resultadosBusquedaProyecto.add(representacionProyecto(p, i));
+			i++;
 		}
 	}
 }
