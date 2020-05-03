@@ -26,7 +26,8 @@ import modelo.projects.Project;
 
 public class PantallaPrincipal extends JPanel {
 	
-
+	private ActionListener listener;
+	
 	private List<Project> createdProjects;
 	private List<Project> votedProjects;
 	private List<Project> followedProjects;
@@ -270,6 +271,7 @@ public class PantallaPrincipal extends JPanel {
 		botonCerrarSesion.addActionListener(c);
 		botonBuscadorColectivo.addActionListener(c);
 		botonBuscadorProyecto.addActionListener(c);
+		listener = c;
 	}
 	
 	public void setCreatedProjects(List<Project> createdProjects) {
@@ -296,6 +298,14 @@ public class PantallaPrincipal extends JPanel {
 		this.resultadoBusquedaProyectos = collectives;
 	}
 	
+	public List<Project> getResultadoBusquedaProyectos() {
+		return this.resultadoBusquedaProyectos;
+	}
+	
+	public List<Collective> getResultadoBusquedaColectivos() {
+		return this.resultadoBusquedaColectivos;
+	}
+		
 	public void setRepresentedCollectives(List<Collective> c) {
 		this.representedCollectives = c;
 	}
@@ -317,10 +327,10 @@ public class PantallaPrincipal extends JPanel {
 	}
 	
 	
-	private JPanel representacionProyecto(Project p) {
+	private JPanel representacionProyecto(Project p, int index) {
 		JPanel c = new JPanel();
 		c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
-		Dimension d = new Dimension(1300, 100);
+		Dimension d = new Dimension(1700, 100);
         c.setMinimumSize(d);
         c.setMaximumSize(d);
         c.setPreferredSize(d);
@@ -329,8 +339,18 @@ public class PantallaPrincipal extends JPanel {
 		JLabel title = new JLabel(p.getTitle());
 		title.setFont(new Font("serif", Font.BOLD, 25));
 		c.add(title);
+		
+		int votes = p.getVoters().size();
 		c.add(Box.createRigidArea(new Dimension(200, 0)));
 		c.add(new JLabel(p.getDescription()));
+		
+		c.add(Box.createRigidArea(new Dimension(200, 0)));
+		
+		JButton b = new JButton("Mas informacion");
+		b.addActionListener(listener);
+		b.setName(Integer.toString(index));
+		c.add(b);
+		
 		return c;
 	}
 	
@@ -421,11 +441,15 @@ public class PantallaPrincipal extends JPanel {
 		pestaniaColectivosCreados.removeAll();
 		pestaniaNotificaciones.removeAll();
 		
+		int i = 0;
 		for (Project p: createdProjects) {
-			pestaniaMisProyectos.add(representacionProyecto(p));
+			pestaniaMisProyectos.add(representacionProyecto(p, i));
+			i++;
 		}
+		i = 0;
 		for (Project p: followedProjects) {
-			pestaniaProyectosSeguidos.add(representacionProyecto(p));
+			pestaniaProyectosSeguidos.add(representacionProyecto(p, i));
+			i++;
 		}
 		for (Collective p: collectives) {
 			pestaniaMisColectivos.add(representacionColectivo(p));
