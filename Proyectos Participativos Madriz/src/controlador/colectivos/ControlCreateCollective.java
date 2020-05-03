@@ -76,4 +76,8 @@ public class ControlCreateCollective implements ActionListener {
 			break;
 		}
 	}
+	
+	public void setCollectivos(List<Collective> l) {
+		this.collectiveView.setCollectives(l);
+	}
 }
