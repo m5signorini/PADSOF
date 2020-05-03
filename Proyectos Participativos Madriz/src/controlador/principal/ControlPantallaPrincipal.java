@@ -82,7 +82,7 @@ public class ControlPantallaPrincipal implements ActionListener {
 		case "Mas informacion sobre el proyecto":
 			// En el nombre hemos almacenado el indice del proyecto del que queremos mas informacion.
 			int indiceProyecto2 = Integer.parseInt(((JButton)e.getSource()).getName());
-			mostrarInformacionProyecto((pantallaPrincipal.getFollowedProjectsx()).get(indiceProyecto2));
+			mostrarInformacionProyecto((pantallaPrincipal.getFollowedProjects()).get(indiceProyecto2));
 			break;
 		case "Mas informacion colectivo":
 			// En el nombre hemos almacenado el indice del colectivo del que queremos mas informacion.
