@@ -165,6 +165,17 @@ public abstract class Project implements GrantRequest, Serializable {
     	this.followers.add(user);
     	return true;
     }
+	
+	/**
+	 * Method used to remove a follower from the followers list of a project.
+	 * @param user User that will be removed from the project followers.
+	 * @return true if removing follower was a success
+	 */
+    public boolean removeFollower(User user) {
+    	if(!this.followers.contains(user)) return false;
+    	this.followers.remove(user);
+    	return true;
+    }
     
 	/**
 	 * Method used to send any notification to the followers of a project.
@@ -215,10 +226,10 @@ public abstract class Project implements GrantRequest, Serializable {
     /**
      * Method used to add a vote to the project.
 	 * @param voter Voter that will be added to the voters list of the project.
-	 * @return The project itself.
+	 * @return The project itself or null in case of error.
 	 */
     public Project support(Voter voter) {
-    	if(voters.contains(voter)) return this;
+    	if(voters.contains(voter)) return null;
     	this.voters.add(voter);
     	voter.addVotedProject(this);
     	return this;
