@@ -26,6 +26,7 @@ public class Main {
 					app.setAdmin(new Admin("admin"));
 					app.setMinSupports(1000);
 					app.setMaxInactivity(30);
+					app.readDistrictsFromFile("Distritos.txt");
 					app.writeToFile("data");
 					System.out.println("Guardado nuevo fichero data");
 				}
