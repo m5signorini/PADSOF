@@ -64,12 +64,7 @@ public class ControlRegistro implements ActionListener {
 		}
 		
 		User u = new User(name, pwd, nif);
-		if (app.register(u)) {
-			/*if (!app.validateUser(u)) {
-				JOptionPane.showMessageDialog(null, "Error when validating user!");
-				return;
-			}*/
-		} else {
+		if (!app.register(u)) {
 			JOptionPane.showMessageDialog(null, "Error when registering user!");
 			return;
 		}
