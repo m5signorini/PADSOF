@@ -11,6 +11,13 @@ import modelo.*;
 import modelo.functionalities.Application;
 import vista.*;
 
+/**
+ * The Controlador class y used to manage, contain and coordinate all
+ * the other smaller controllers that we need for our views to communicate 
+ * with our model.
+ * @author Pedro Urbina Rodriguez 
+ */
+
 public class Controlador {
 	
 	private Ventana frame;

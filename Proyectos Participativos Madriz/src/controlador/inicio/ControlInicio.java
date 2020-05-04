@@ -12,6 +12,14 @@ import vista.inicio.*;
 import vista.principal.PantallaPrincipal;
 import vista.proyectos.CreateProjectView;
 
+
+/**
+ * The ControlInicio class implements the actions that should be performed when 
+ * the different bottons in the Inicio view are clicked.
+ * @author Pedro Urbina Rodriguez 
+ * @author Martin Sanchez Signorini
+ */
+
 public class ControlInicio implements ActionListener {
 	
 	private Inicio vista;
@@ -23,7 +31,13 @@ public class ControlInicio implements ActionListener {
 		this.vista = frame.getVistaInicio();
 		this.modelo = modelo;
 	}
-
+	
+	/**
+	 * When the event occurs in the views which have this controller correctly set,
+	 * different actions are performed depending on the origin of the action.
+	 * @param e ActionEvent which caused the controller to act.
+	 * @return None.
+	 */
 	public void actionPerformed(ActionEvent e) {
 		JButton button = (JButton)e.getSource();
 		switch(button.getActionCommand()) {
@@ -39,6 +53,11 @@ public class ControlInicio implements ActionListener {
 		}
 	}
 	
+	/**
+	 * Changes the view, making invisible the login view and making visible the administrator's
+	 * login view.
+	 * @return None.
+	 */	
 	private void cambioLoginAdmin() {
 		InicioAdmin nuevaVista = frame.getVistaInicioAdmin();
 		nuevaVista.update();
@@ -46,7 +65,12 @@ public class ControlInicio implements ActionListener {
 		vista.setVisible(false);
 		frame.pack();
 	}
-
+	
+	/**
+	 * Changes the view, making invisible the login view and making visible the view
+	 * to register a new user.
+	 * @return None.
+	 */	
 	private void cambioRegistro() {
 		Registro nuevaVista = frame.getVistaRegistro();
 		nuevaVista.update();
@@ -55,6 +79,10 @@ public class ControlInicio implements ActionListener {
 		frame.pack();		
 	}
 	
+	/**
+	 * Tries to login with the written information on the JLabels.
+	 * @return True in case login was successful, false in other case.
+	 */	
 	private boolean loginCheck() {
 		String nif = vista.getNif();
 		if (nif.equals("")) {
@@ -69,6 +97,11 @@ public class ControlInicio implements ActionListener {
 		return true;
 	}
 	
+	/**
+	 * Tries to login with the written information on the JLabels and if login was successful,
+	 * MiPagina will be shown with the updated data of the logged in user.
+	 * @return None.
+	 */
 	private void intentaLogin() {
 		if(!loginCheck()) return;
 	
@@ -95,15 +128,7 @@ public class ControlInicio implements ActionListener {
 		
 		frame.setAllInvisible();
 		pantallaPrincipal.setVisible(true);
-		
-		/*pantallaPrincipal.setCreatedProjects(u.getCreatedProjects());
-		pantallaPrincipal.setVotedProjects(u.getVotedProjects());
-		pantallaPrincipal.setFollowedProjects(u.getFollowedProjects());
-		pantallaPrincipal.setCollectives(u.getCollectives());
-		pantallaPrincipal.setRepresentedCollectives(u.getRepresentedCollectives());
-		pantallaPrincipal.setNotifications(u.getNotifications());
-		
-		pantallaPrincipal.update();*/
+
 		frame.getControlPantallaPrincipal().actualizarMiPagina();
 		frame.pack();
 		frame.setLocationRelativeTo(null);

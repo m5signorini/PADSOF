@@ -14,6 +14,13 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 
+/**
+ * The Inicio class is an extension of JPanels which contains all the swing
+ * components to create the view in order to login into the application, 
+ * once all ActionListeners have been set.
+ * @author Pedro Urbina Rodriguez 
+ */
+
 public class Inicio extends JPanel {
 
 	private JTextField campoNif;
@@ -67,26 +74,39 @@ public class Inicio extends JPanel {
 		
 	}
 
-	public void setControladorValidar(ActionListener c) {  
-		botonValidar.addActionListener(c);
-	}
 	
-	public void setControladorCambioRegistro(ActionListener c) {  
+	/**
+	 * Sets all the ActionListeners of all the buttons in the Inicio class.
+	 * @param c ActionListener for the buttons in Inicio.
+	 * @return None.
+	 */
+	public void setControladores(ActionListener c) {  
+		botonValidar.addActionListener(c); 
+		botonAdmin.addActionListener(c);  
 		botonRegistro.addActionListener(c);
 	}
 	
-	public void setControladorCambioAdmin(ActionListener c) {  
-		botonAdmin.addActionListener(c);
-	}
-
+	/**
+	 * Returns the text written as a String in the nif JLabel.
+	 * @return A String containing the text written by the User in campoNif.
+	 */
 	public String getNif() {
 		return campoNif.getText();
 	}
 
+	
+	/**
+	 * Returns the text written as a String in the pwd JLabel.
+	 * @return A String containing the text written by the User in campoPwd.
+	 */
 	public String getPwd() {
 		return campoPwd.getText();
 	}
 	
+	/**
+	 * Clears the all the JLabels in the view.
+	 * @return None.
+	 */
 	public void update () {
 		campoNif.setText("");
 		campoPwd.setText("");
