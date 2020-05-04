@@ -518,9 +518,24 @@ public class PantallaPrincipal extends JPanel {
 		return c;
 	}
 	
-	public void representacionInformeAfinidad(List<Collective> list1, List<Double> list2, List<Integer> list3) {
+	public void representacionInformeAfinidad(List<Collective> list1, List<Double> list2, List<Integer> list3, String text) {
 		if(	list1 == null || list2 == null || list3 == null) {
 			return;
+		}
+		
+		pestaniaInformeAfinidad.removeAll();
+		
+		pestaniaInformeAfinidad.add(primeraFilaInformeAfinidad());
+		afinidadColectivo.removeAllItems();
+		afinidadColectivo.addItem("Ninguno");
+		if(collectives == null) {
+			return;
+		}
+		for(Collective c: collectives) {
+			afinidadColectivo.addItem(c.getName());
+			if(c.getName() == text) {
+				afinidadColectivo.setSelectedItem(c.getName());
+			}
 		}
 		
 		JPanel c = new JPanel();

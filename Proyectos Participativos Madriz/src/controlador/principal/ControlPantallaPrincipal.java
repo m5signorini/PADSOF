@@ -161,17 +161,31 @@ public class ControlPantallaPrincipal implements ActionListener {
 	
 	private void realizarCalculoDeAfinidad() {
 		String text = pantallaPrincipal.getCollectiveCalcAffinity();
+		//We obtain all the collectives of the app
 		List<Collective> collectives = this.modelo.getCollectives();
+		//To get the affinity list we only want to compare our collective
+		//with the rest of the collectives of the app that we dont belong to
+		collectives.removeAll(this.modelo.getLoggedUser().getCollectives());
 		List<Integer> members = new ArrayList<Integer>();
 		Collective co = null;
 		for(Collective c:this.modelo.getCollectives()) {
 			if(c.getName() == text) {
+				//This will be the collective we will use to obtain the affinity list
 				co = c;
 			}
+		}
+		for(Collective c:collectives) {
 			members.add(c.getMembers().size());
 		}
+		
 		List<Double> indices = this.modelo.affinityList(co);
-		pantallaPrincipal.representacionInformeAfinidad(collectives, indices, members);
+		for(Double d: indices) {
+			if (d == -1) {
+				indices.remove(d);
+			}
+		}
+		
+		pantallaPrincipal.representacionInformeAfinidad(collectives, indices, members, text);
 		frame.pack();
 	}
 	
