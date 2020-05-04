@@ -37,7 +37,7 @@ public class Infrastructural extends Project {
 		this.affectedDistricts = affectedDistricts;
 	}
 
-	public String getScheme() {
+	public String getImagePath() {
 		return scheme;
 	}
 

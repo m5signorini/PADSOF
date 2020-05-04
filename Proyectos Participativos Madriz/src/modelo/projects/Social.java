@@ -51,7 +51,7 @@ public class Social extends Project {
 		this.group = group;
 	}
 
-	public String getPicture() {
+	public String getImagePath() {
 		return picture;
 	}
 

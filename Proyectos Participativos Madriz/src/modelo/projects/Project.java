@@ -285,6 +285,8 @@ public abstract class Project implements GrantRequest, Serializable {
     	return false;
     }
     
+    public abstract String getImagePath();
+    
     public String toString() {
     	String s = "PROJECT\n";
     	s += "Title: "+ title + "\n";

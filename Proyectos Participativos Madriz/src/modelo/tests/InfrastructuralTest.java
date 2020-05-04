@@ -152,7 +152,7 @@ public class InfrastructuralTest {
 	
 	@Test
 	public void testGetExtraData() {
-		assertEquals(String.valueOf(projectI.getCost()) + String.valueOf(projectI.getCreationDate()) + String.valueOf(projectI.getLastVote()) + String.valueOf(projectI.getCreator()) + projectI.getScheme() + projectI.getLocation(), projectI.getExtraData());
+		assertEquals(String.valueOf(projectI.getCost()) + String.valueOf(projectI.getCreationDate()) + String.valueOf(projectI.getLastVote()) + String.valueOf(projectI.getCreator()) + projectI.getImagePath() + projectI.getLocation(), projectI.getExtraData());
 	}
 	
 	@Test
