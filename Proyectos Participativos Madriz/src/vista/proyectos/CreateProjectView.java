@@ -28,6 +28,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import modelo.entities.Collective;
+import modelo.projects.District;
 import modelo.projects.Project;
 
 import java.util.*;
@@ -36,6 +37,7 @@ import java.util.*;
 public class CreateProjectView extends JPanel{
 	
 	List<Collective> representedCollectives;
+	List<District> availableDistricts;
 	
 	JFrame window;
 	//Group of tabs
@@ -107,7 +109,8 @@ public class CreateProjectView extends JPanel{
 	//Districts
 	JPanel districts;
 	JLabel etiquetaDistricts = new JLabel("Distritos afectados:");
-	JCheckBox d1;
+	List<JCheckBox> ds;
+	/*JCheckBox d1;
 	JCheckBox d2;
 	JCheckBox d3;
 	JCheckBox d4;
@@ -127,7 +130,7 @@ public class CreateProjectView extends JPanel{
 	JCheckBox d18;
 	JCheckBox d19;
 	JCheckBox d20;
-	JCheckBox d21;
+	JCheckBox d21;*/
 	
 	//Location
 	JLabel etiquetaLocation;
@@ -298,14 +301,14 @@ public class CreateProjectView extends JPanel{
 		MainPanelInfr.add(comboI);
 				
 		//Titulo proyecto
-		etiquetaTitleI = new JLabel("Título del proyecto:");
+		etiquetaTitleI = new JLabel("Titulo del proyecto:");
 		titleI = new JTextField(10);
 		etiquetaTitleI.setLabelFor(titleI);
 		MainPanelInfr.add(etiquetaTitleI);
 		MainPanelInfr.add(titleI); 
 				
 		//Presupuesto
-		etiquetaBudgetI = new JLabel("Presupuesto (€):");
+		etiquetaBudgetI = new JLabel("Presupuesto (euros):");
 		budgetI = new JTextField(10);
 		etiquetaBudgetI.setLabelFor(budgetI);
 		budgetI.setText("1");
@@ -324,7 +327,7 @@ public class CreateProjectView extends JPanel{
 		//Distritos
 		districts = new JPanel(new GridLayout(7,3));
 		etiquetaDistricts = new JLabel("Distritos afectados:");
-		d1 = new JCheckBox("Arganzuela");
+		/*d1 = new JCheckBox("Arganzuela");
 		districts.add(d1);
 		d2 = new JCheckBox("Barajas");
 		districts.add(d2);
@@ -365,12 +368,12 @@ public class CreateProjectView extends JPanel{
 		d20 = new JCheckBox("Villa de Vallecas");
 		districts.add(d20);
 		d21 = new JCheckBox("Villaverde");
-		districts.add(d21);
+		districts.add(d21);*/
 		
 		MainPanelInfr.add(etiquetaDistricts);
 		MainPanelInfr.add(districts);
 		
-		//Localización
+		//Localizacion
 		etiquetaLocation = new JLabel("Localizacion:");
 		location = new JTextField(10);
 		etiquetaLocation.setLabelFor(location);
@@ -399,6 +402,13 @@ public class CreateProjectView extends JPanel{
 
 	public void setRepresentedCollectives(List<Collective> c) {
 		this.representedCollectives = c;
+	}
+	public void setDistricts(List<District> dlist) {
+		this.availableDistricts = dlist;
+		districts.removeAll();
+		for(District d: dlist) {
+			districts.add(new JCheckBox(d.getName()));
+		}
 	}
 	
 	/**

@@ -48,6 +48,7 @@ public class ControlPantallaPrincipal implements ActionListener {
 			break;
 		case "Crear Proyecto":
 			frame.getControlCreateProject().setCollectivos(this.modelo.getCollectives());
+			frame.getCreateProjectView().setDistricts(modelo.getDistricts());
 			frame.getCreateProjectView().update();
 			frame.getCreateProjectView().setVisible(true);
 			frame.pack();

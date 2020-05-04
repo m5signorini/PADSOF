@@ -27,6 +27,10 @@ public class Demonstration {
 		Admin admin = new Admin("admin");
 		Application app = Application.getApplication();
 		
+		app.readDistrictsFromFile("Distritos.txt");
+		
+		System.out.println(app.getDistricts());
+		
 		app.setAdmin(admin);
 		app.setMaxInactivity(2);
 		app.setMinSupports(2);
