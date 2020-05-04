@@ -8,6 +8,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.event.ChangeListener;
 
 import modelo.entities.individuals.User;
 import modelo.functionalities.Application;
@@ -119,7 +120,9 @@ public class ControlAdmin {
 			nuevaVista.update();
 			nuevaVista.setVisible(true);
 			viewRegisters.setVisible(false);
+			viewProjects.setVisible(false);
 			frame.pack();
+			frame.setLocationRelativeTo(null);
 		};
 	}
 	
@@ -146,6 +149,20 @@ public class ControlAdmin {
 			bd.setControlador(cb);
 			bd.pack();
 			bd.setVisible(true);
+		};
+	}
+	
+	public ChangeListener controlCaduca() {
+		return (e) -> {
+			modelo.setMaxInactivity(viewProjects.getCaduca());
+			System.out.println(modelo.getMaxInactivity());
+			System.out.println(modelo.getMinSupports());
+		};
+	}
+	
+	public ChangeListener controlApoyos() {
+		return (e) -> {
+			modelo.setMinSupports(viewProjects.getApoyos());
 		};
 	}
 }

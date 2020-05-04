@@ -18,32 +18,40 @@ public class AdminRegistersView extends JPanel{
 		setLayout(new BorderLayout());
 		setPreferredSize(new Dimension(1200, 700));
 		
-		GridBagConstraints gbc1 = new GridBagConstraints();
-        gbc1.gridwidth = GridBagConstraints.REMAINDER;
-        gbc1.weightx = 1;
-        gbc1.weighty = 1;
-        GridBagConstraints gbc2 = new GridBagConstraints();
-        gbc2.gridwidth = GridBagConstraints.REMAINDER;
-        gbc2.weightx = 1;
-        gbc2.weighty = 1;
+		GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
 		
 		// NORTH Panel
 		JPanel north = new JPanel();
 		north.setLayout(new BoxLayout(north, BoxLayout.Y_AXIS));
 		
 		JLabel title = new JLabel("Administrar Registros");
+		title.setFont(title.getFont().deriveFont(64.0f));
+		title.setAlignmentX(CENTER_ALIGNMENT);
 		north.add(title);
 		
 		//WEST Panel
-		JPanel west = new JPanel();
-		west.setLayout(new BoxLayout(west, BoxLayout.Y_AXIS));
+		JPanel west = new JPanel(new GridBagLayout());
+		GridBagConstraints gbc2 = new GridBagConstraints();
+		gbc2.anchor = GridBagConstraints.NORTH;
+		gbc2.insets = new Insets(0, 10, 0, 0);
+		gbc2.weightx = 1;
+		gbc2.weighty = 1;
 		
+		JPanel box = new JPanel(new GridLayout(3, 1, 0, 100));
 		projects = new JButton("Administrar Proyectos");
 		logout = new JButton("Cerrar Sesión");
-		west.add(new JLabel("Navegacion"));
-		west.add(Box.createRigidArea(new Dimension(0, 10)));
-		west.add(projects);
-		west.add(logout);
+		JLabel nav = new JLabel("Navegacion");
+		
+		nav.setFont(nav.getFont().deriveFont(24f));
+		
+		box.add(nav);
+		box.add(projects);
+		box.add(logout);
+		
+		west.add(box, gbc2);
 		
 		//CENTER Panel
 		JPanel center = new JPanel();
@@ -51,8 +59,8 @@ public class AdminRegistersView extends JPanel{
 		pendingList = new JPanel(new GridBagLayout());
 		registeredList = new JPanel(new GridBagLayout());
 		
-		pendingList.add(new JPanel(), gbc1);
-		registeredList.add(new JPanel(), gbc2);
+		pendingList.add(new JPanel(), gbc);
+		registeredList.add(new JPanel(), gbc);
         
 		tabs = new JTabbedPane();
 		tabs.addTab("Pendientes", new JScrollPane(pendingList));

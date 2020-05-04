@@ -20,21 +20,9 @@ public class ControlBan implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e) {
 		String message = vista.getMessage();
-		String time = vista.getDays();
-		int days = 0;
+		Integer time = vista.getDays();
 		
-		try {
-			days = Integer.parseInt(time.trim());
-			if(days <= 0) {
-				throw new Exception();
-			}
-		}
-		catch(Exception ex) {
-			JOptionPane.showMessageDialog(vista, "Debe introducir un numero positivo entero de dias.", "Error", JOptionPane.ERROR_MESSAGE);
-			return;
-		}
-		
-		if(!modelo.ban(vista.getUser(), message, days)) {
+		if(!modelo.ban(vista.getUser(), message, time)) {
 			JOptionPane.showMessageDialog(vista, "No se ha podido banear al usuario.", "Error", JOptionPane.ERROR_MESSAGE);
 			return;
 		}

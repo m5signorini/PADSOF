@@ -110,6 +110,8 @@ public class Ventana extends JFrame {
 		vistaAdminRegisters.setControladorGotoProjects(contAdmin.controlGotoProjects());
 		vistaAdminProjects.setControladorLogout(contAdmin.controlLogout());
 		vistaAdminProjects.setControladorGotoRegisters(contAdmin.controlGotoRegisters());
+		vistaAdminProjects.setControladorCaduca(contAdmin.controlCaduca());
+		vistaAdminProjects.setControladorApoyos(contAdmin.controlApoyos());
 		
 		this.contRegistro = controlador.getControlRegistro();
 		vistaRegistro.setControladorRegistro(contRegistro);

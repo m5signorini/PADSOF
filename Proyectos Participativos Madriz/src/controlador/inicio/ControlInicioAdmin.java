@@ -76,6 +76,6 @@ public class ControlInicioAdmin implements ActionListener {
 		adminRegs.setVisible(true);
 		contAdmin.update();
 		frame.pack();
-		
+		frame.setLocationRelativeTo(null);
 	}	
 }
