@@ -16,6 +16,13 @@ import modelo.projects.Project;
 import vista.Ventana;
 import vista.principal.PantallaPrincipal;
 
+/**
+ * Class that contains the components and functionalities
+ * to control the main screen.
+ * @author Pedro Rodriguez Urbina
+ * @author Cesar Ramirez Martinez
+ */
+
 public class ControlPantallaPrincipal implements ActionListener {
 
 	private Ventana frame;
@@ -27,7 +34,10 @@ public class ControlPantallaPrincipal implements ActionListener {
 		this.pantallaPrincipal = frame2.getVistaPantallaPrincipal();
 		this.modelo = modelo;
 	}
-
+	
+	/** 
+	 * Here we set the action for every button in the main screen. 
+	 */
 	public void actionPerformed(ActionEvent e) {
 		JButton button = (JButton)e.getSource();
 		switch(button.getActionCommand()) {
@@ -115,6 +125,10 @@ public class ControlPantallaPrincipal implements ActionListener {
 		}
 	}
 	
+	/**
+	 * Function that tries to send a project to the town hall
+	 * for the final validation
+	 */
 	private void intentaEnviar(Project p) {
 		User u = modelo.getLoggedUser();
 		try {
@@ -127,7 +141,10 @@ public class ControlPantallaPrincipal implements ActionListener {
 			JOptionPane.showMessageDialog(pantallaPrincipal, "Huvo un problema al enviar este proyecto.", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-
+	
+	/**
+	 * Function that shows the information of a project
+	 */
 	private void mostrarInformacionProyecto(Project p) {
 		User u = modelo.getLoggedUser();
 		//System.out.println(p);
@@ -137,13 +154,19 @@ public class ControlPantallaPrincipal implements ActionListener {
 		frame.pack();
 	}
 	
+	/**
+	 * Function that shows the information of a collective
+	 */
 	private void mostrarInformacionColectivo(Collective c) {
 		frame.getCollectiveView().update(c);
 		frame.setAllInvisible();
 		frame.getCollectiveView().setVisible(true);
 		frame.pack();
 	}
-
+	
+	/**
+	 * Function that makes the collective search
+	 */
 	private void realizarBusquedaColectivos() {
 		String text = pantallaPrincipal.getSearchedCollectiveText();
 		List<Collective> collectives = modelo.getSearcher().searchCollectives(text);
@@ -151,7 +174,10 @@ public class ControlPantallaPrincipal implements ActionListener {
 		pantallaPrincipal.actualizarResultadosBusquedaColectivo();
 		frame.pack();
 	}
-
+	
+	/**
+	 * Function that makes the project search
+	 */
 	private void realizarBusquedaProyectos() {
 		String text = pantallaPrincipal.getSearchedProjectText();
 		List<Project> collectives = modelo.getSearcher().searchPublicProjects(text);
@@ -160,6 +186,9 @@ public class ControlPantallaPrincipal implements ActionListener {
 		frame.pack();
 	}
 	
+	/**
+	 * Function that makes the affinity operations
+	 */
 	private void realizarCalculoDeAfinidad() {
 		String text = pantallaPrincipal.getCollectiveCalcAffinity();
 		//We obtain all the collectives of the app
@@ -190,6 +219,9 @@ public class ControlPantallaPrincipal implements ActionListener {
 		frame.pack();
 	}
 	
+	/**
+	 * Function to sign out
+	 */
 	private void cerrarSesion() {
 		modelo.writeToFile("data");			
 		frame.setAllInvisible();
@@ -198,6 +230,10 @@ public class ControlPantallaPrincipal implements ActionListener {
 		frame.pack();
 	}
 	
+	/**
+	 * Function that sets all the information needed in the main screen.
+	 * It will be called after some actions are executed.
+	 */
 	public void actualizarMiPagina() {	
 		PantallaPrincipal pantallaPrincipal = frame.getVistaPantallaPrincipal();
 		User u = modelo.getLoggedUser();
