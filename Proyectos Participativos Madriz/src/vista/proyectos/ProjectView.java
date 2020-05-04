@@ -4,12 +4,17 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -36,6 +41,7 @@ public class ProjectView extends JPanel{
 	private JLabel creator;
 	private JLabel nVoters;
 	private BufferedImage image;
+	private JPanel imagePanel;
 
 	private JButton seguir;
 	private JButton dejarDeSeguir;
@@ -121,7 +127,10 @@ public class ProjectView extends JPanel{
 		volver = new JButton("Volver");
 		apoyar = new JButton("Votar por el proyecto");
 		dejarDeSeguir = new JButton("Dejar de seguir el proyecto");
-
+		
+		imagePanel = new JPanel();
+		
+		action.add(imagePanel);
 		action.add(Box.createRigidArea(new Dimension(0, 30)));
 		action.add(seguir);
 		action.add(Box.createRigidArea(new Dimension(0, 30)));
@@ -138,6 +147,7 @@ public class ProjectView extends JPanel{
 		votarRepresentante = new JComboBox<String>(opciones);
 		votarRepresentante.setBackground(new Color(190,255,255));
 		action.add(votarRepresentante);
+		
 		this.add(info, BorderLayout.WEST);
 		this.add(action, BorderLayout.EAST);
 	}
@@ -178,6 +188,16 @@ public class ProjectView extends JPanel{
 		type.setText(p.typeToString());
 		cost.setText(p.getCost() + "");
 		creationDate.setText(p.getCreationDate().toString());
+		
+		try {
+			image = ImageIO.read(new File(p.getImagePath()));
+			JLabel imglabel = new JLabel(new ImageIcon(image.getScaledInstance(300, 200, Image.SCALE_SMOOTH)));
+			imagePanel.removeAll();
+			imagePanel.add(imglabel);
+		}
+		catch(Exception ex) {
+			System.out.println("ERROR IMG: " +p.getImagePath());
+		}
 	}	
 	
 	

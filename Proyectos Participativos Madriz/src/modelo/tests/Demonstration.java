@@ -123,7 +123,7 @@ public class Demonstration {
 		
 		/* PROJECT LIFE */
 		app.login("a", "a");
-		sProj = new Social("Proyecto C1", "Desc", 10000.0, new Date(), app.getLoggedUser(), ScopeType.international, "", "");
+		sProj = new Social("Proyecto C1", "Desc", 12300.0, new Date(), app.getLoggedUser(), ScopeType.international, "", "blueprint-1.jpg");
 		app.createProject(sProj);
 		//
 		app.logout();
