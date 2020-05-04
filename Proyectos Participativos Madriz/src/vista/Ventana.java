@@ -109,7 +109,6 @@ public class Ventana extends JFrame {
 	/**
 	 * Sets all the controllers of all the different views in the application.
 	 * @param controlador Controlador which contains all the controllers for the different views.
-	 * @return None.
 	 */
 	public void setControlador(Controlador controlador) {
 		this.contInicio = controlador.getControlInicio();
@@ -208,7 +207,6 @@ public class Ventana extends JFrame {
 
 	/**
 	 * All the different views contained in the current object are made invisible.
-	 * @return None.
 	 */
 	public void setAllInvisible() {
 		vistaInicio.setVisible(false);

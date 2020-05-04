@@ -104,8 +104,7 @@ public class CollectiveView extends JPanel{
 
 	/**
 	 * Sets all the ActionListeners of all the buttons in the current object.
-	 * @param c ActionListener for the buttons in CollectiveView.
-	 * @return None.
+	 * @param a ActionListener for the buttons in CollectiveView.
 	 */
 	public void setController(ActionListener a) {
 		unirse.addActionListener(a);
@@ -123,7 +122,7 @@ public class CollectiveView extends JPanel{
 
 	/**
 	 * Reloads all the content in the view (usually because the Collective attribute has changed).
-	 * @return None.
+	 * @param c Colelctives to update
 	 */
 	public void update(Collective c) {
 		this.c = c;

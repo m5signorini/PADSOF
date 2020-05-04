@@ -13,7 +13,11 @@ public class AdminRegistersView extends JPanel{
 	
 	private JPanel pendingList;
 	private JPanel registeredList;
-	
+	/**
+	 * View of admin registers
+	 * @author Martin Sanchez Signorini
+	 *
+	 */
 	public AdminRegistersView() {
 		setLayout(new BorderLayout());
 		//setPreferredSize(new Dimension(1200, 700));

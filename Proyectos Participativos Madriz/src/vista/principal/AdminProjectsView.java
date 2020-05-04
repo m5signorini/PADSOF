@@ -6,6 +6,11 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
 
+/**
+ * View of admin projects
+ * @author Martin Sanchez Signorini
+ *
+ */
 public class AdminProjectsView extends JPanel{
 	
 	private JButton registers;

@@ -19,6 +19,11 @@ import vista.principal.AdminProjectsView;
 import vista.principal.AdminRegistersView;
 import vista.principal.BanDialog;
 
+/**
+ * Controller for admin
+ * @author Martin Sanchez Signorini
+ *
+ */
 public class ControlAdmin {
 	private Ventana frame;
 	private AdminRegistersView viewRegisters;
@@ -168,6 +173,7 @@ public class ControlAdmin {
 	
 	/**
 	 * Getter of a ban action
+	 * @param u User to be banned
 	 * @return ActionListener controller for banning
 	 */
 	public ActionListener controlBanUser(User u) {

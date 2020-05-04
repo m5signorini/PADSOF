@@ -7,6 +7,11 @@ import javax.swing.*;
 
 import modelo.entities.individuals.User;
 
+/**
+ * View of ban dialog
+ * @author Martin Sanchez Signorini
+ *
+ */
 public class BanDialog extends JDialog {
 	
 	private User banned;

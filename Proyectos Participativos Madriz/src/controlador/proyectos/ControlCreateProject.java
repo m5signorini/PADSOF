@@ -144,7 +144,7 @@ public class ControlCreateProject implements ActionListener {
 					col.addCreatedProject(project);
 				}
 			}
-			this.modelo.getPendingProjects().add(project);
+			this.modelo.createProject(project);
 			this.projectView.setVisible(false);
 			
 			break;

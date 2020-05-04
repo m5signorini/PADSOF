@@ -793,7 +793,13 @@ public class PantallaPrincipal extends JPanel {
 		i = 0;
 		for (Project p: followedProjects) {
 			JPanel cont = representacionProyecto(p);
-			JButton b = new JButton("Mas informacion sobre el proyecto");
+			JButton b;
+			if(pendingProjects.contains(p) || deniedProjects.contains(p) || rejectedProjects.contains(p)) {
+				b = new JButton("Informacion no disponible");
+			}
+			else {
+				b = new JButton("Mas informacion sobre el proyecto");
+			}
 			b.addActionListener(listener);
 			b.setName(Integer.toString(i));
 			cont.add(b);
