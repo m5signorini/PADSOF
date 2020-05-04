@@ -33,6 +33,12 @@ import modelo.projects.Project;
 
 import java.util.*;
 
+/**
+ * Class that contains the components and functionalities
+ * to create a view for the creation of a social
+ * or infrastructural project
+ * @author Cesar Ramirez Martinez
+ */
 
 public class CreateProjectView extends JPanel{
 	
@@ -122,23 +128,27 @@ public class CreateProjectView extends JPanel{
 	//Auxiliar
 	String aux = "Social";
 	
+	/**
+	 * Constructor of CreateProjectView:   Initializes all the attributes and puts them in the right 
+	 * places in the container of the window. It is mainly formed by two tabs, a cancel button 
+	 * and a cancel button. Each tab gives the user the option to create either a social project
+	 * or a infrastructural one.
+	 */
 	public CreateProjectView() {
 		window = new JFrame("Nuevo proyecto");
 		
-		//Container container = window.getContentPane();
 		JPanel container = new JPanel();
 		SpringLayout layout = new SpringLayout();
 		MainPanelSoc = new JPanel(layout);
 		MainPanelInfr = new JPanel(layout);
 		
 		container.setLayout(layout);
-		//window.setLayout(layout);
 		
 		JTabbedPane tab = new JTabbedPane();
 		tab.addTab("Social", MainPanelSoc);
 		tab.addTab("Infraestrucutal", MainPanelInfr);
 		
-		//Hacemos que cuando se cambie de pestania se borre lo escrito
+		//When the tab is changed all the selections and written things are eliminated
 		tab.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent ev) {
 				if(tab.getSelectedIndex() == 0) {
@@ -146,7 +156,6 @@ public class CreateProjectView extends JPanel{
 					location.setText("");
 					descI.setText("");
 					scheme.setText("");
-					//collectiveNameI.setText("");
 					comboI.setSelectedIndex(0);
 					Component[] components = districts.getComponents();
 					for(Component c : components) {
@@ -159,7 +168,6 @@ public class CreateProjectView extends JPanel{
 					titleS.setText("");
 					descS.setText("");
 					image.setText("");
-					//collectiveNameS.setText("");
 					comboS.setSelectedIndex(0);
 					costS.setText("1");
 					group.setText("");
@@ -169,53 +177,37 @@ public class CreateProjectView extends JPanel{
 			}
 		});
 		
-		//Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		//int a = (dim.width/2-this.getSize().width/2)/2;
-		//int b = (dim.height/2-this.getSize().height/2)/2;
-		//this.window.setLocation(a, b);
 		 
-		//Boton crear
+		//Create button
 		create = new JButton("Crear");
 		container.add(create);
-		//window.add(create);
 		
 		layout.putConstraint(SpringLayout.WEST, create, 600, SpringLayout.WEST, container);
 		layout.putConstraint(SpringLayout.NORTH, create, 430, SpringLayout.NORTH, container);
 		
-		//Boton cancelar
+		//Cancel button
 		cancel = new JButton("Cancelar");
 		container.add(cancel);
-		//window.add(cancel);
 		
 		layout.putConstraint(SpringLayout.WEST, cancel, 3, SpringLayout.WEST, container);
 		layout.putConstraint(SpringLayout.NORTH, cancel, 430, SpringLayout.NORTH, container);
 		
 		
-		//OPCION SOCIAL
-		
-		//Colectivo 
-		//String[] opciones = {"Si", "No"};
-		//etiquetaColectiveS = new JLabel("Crear como colectivo:");
-		//comboS = new JComboBox<String>(opciones);
-		//comboS.setSelectedIndex(1);
-		//etiquetaColectiveS.setLabelFor(comboS);
-		
-		//etiquetaCollectiveS = new JLabel("<html>Nombre colectivo (Opcional): <br> (Si el nombre no es correcto usted sera asignado como creador.)</html>");
-		//collectiveNameS = new JTextField();
+		//SOCIAL
 		
 		etiquetaCollectiveS = new JLabel("Nombre del colectivo:");
 		comboS = new JComboBox<String>();
 		MainPanelSoc.add(etiquetaCollectiveS);
 		MainPanelSoc.add(comboS);
 		
-		//Titulo proyecto
+		//Title
 		etiquetaTitleS = new JLabel("Titulo del proyecto:");
 		titleS = new JTextField(10);
 		etiquetaTitleS.setLabelFor(titleS);
 		MainPanelSoc.add(etiquetaTitleS);
 		MainPanelSoc.add(titleS); 
 		
-		//Presupuesto
+		//Budget
 		etiquetaCostS = new JLabel("Presupuesto (euros):");
 		costS = new JTextField(10);
 		etiquetaCostS.setLabelFor(costS);
@@ -223,7 +215,7 @@ public class CreateProjectView extends JPanel{
 		MainPanelSoc.add(etiquetaCostS);
 		MainPanelSoc.add(costS);
 		
-		//Descripcion proyecto
+		//Description
 		etiquetaDescS = new JLabel("Descripcion:");
 		descS = new JTextArea(8,6);
 		JScrollPane scrollS = new JScrollPane(descS);
@@ -232,7 +224,7 @@ public class CreateProjectView extends JPanel{
 		MainPanelSoc.add(etiquetaDescS);
 		MainPanelSoc.add(scrollS);
 		
-		//Ambito
+		//Scope
 		etiquetaScopeS = new JLabel("Ambito:");
 		nacS = new JRadioButton("Nacional");
 		interS = new JRadioButton("Internacional");
@@ -249,14 +241,14 @@ public class CreateProjectView extends JPanel{
 		MainPanelSoc.add(etiquetaScopeS);
 		MainPanelSoc.add(scope);
 		
-		//Grupo social
+		//Social group
 		etiquetaGroupS = new JLabel("Grupo social afectado:");
 		group = new JTextField(10);
 		etiquetaGroupS.setLabelFor(group);
 		MainPanelSoc.add(etiquetaGroupS);
 		MainPanelSoc.add(group);
 		
-		//Imagen
+		//Image
 		etiquetaImage = new JLabel("Imagen(Opcional):");
 		image = new JTextField(10);
 		etiquetaImage.setLabelFor(image);
@@ -270,27 +262,21 @@ public class CreateProjectView extends JPanel{
 		
 		
 		
-		//OPCION INFRAESTRUCTURAL
-		
-		//Colectivo ComboBox
-		//etiquetaColectiveI = new JLabel("Crear como colectivo:");
-		//JComboBox<String> comboI = new JComboBox<String>(opciones);
-		//comboI.setSelectedIndex(1);
-		//etiquetaColectiveI.setLabelFor(comboI);
+		//INFRASTRUCTURAL
 	
 		etiquetaCollectiveI = new JLabel("Nombre del colectivo");
 		comboI = new JComboBox<String>();
 		MainPanelInfr.add(etiquetaCollectiveI);
 		MainPanelInfr.add(comboI);
 				
-		//Titulo proyecto
+		//Title
 		etiquetaTitleI = new JLabel("Titulo del proyecto:");
 		titleI = new JTextField(10);
 		etiquetaTitleI.setLabelFor(titleI);
 		MainPanelInfr.add(etiquetaTitleI);
 		MainPanelInfr.add(titleI); 
 				
-		//Presupuesto
+		//Budget
 		etiquetaCostI = new JLabel("Presupuesto (euros):");
 		costI = new JTextField(10);
 		etiquetaCostI.setLabelFor(costI);
@@ -298,7 +284,7 @@ public class CreateProjectView extends JPanel{
 		MainPanelInfr.add(etiquetaCostI);
 		MainPanelInfr.add(costI);
 				
-		//Descripcion proyecto
+		//Descrition
 		etiquetaDescI = new JLabel("Descripcion:");
 		descI = new JTextArea(3,7);
 		JScrollPane scrollI = new JScrollPane(descI);
@@ -307,21 +293,21 @@ public class CreateProjectView extends JPanel{
 		MainPanelInfr.add(etiquetaDescI);
 		MainPanelInfr.add(scrollI);
 				
-		//Distritos
+		//Districts
 		districts = new JPanel(new GridLayout(7,3));
 		etiquetaDistricts = new JLabel("Distritos afectados:");
 		
 		MainPanelInfr.add(etiquetaDistricts);
 		MainPanelInfr.add(districts);
 		
-		//Localizacion
+		//Location
 		etiquetaLocation = new JLabel("Localizacion:");
 		location = new JTextField(10);
 		etiquetaLocation.setLabelFor(location);
 		MainPanelInfr.add(etiquetaLocation);
 		MainPanelInfr.add(location);
 			
-		//Esquema
+		//Scheme
 		etiquetaSc = new JLabel("Esquema/Imagen:");
 		scheme = new JTextField(10);
 		etiquetaSc.setLabelFor(scheme);
@@ -336,15 +322,14 @@ public class CreateProjectView extends JPanel{
 		
 		container.add(tab);
 		window.add(container);
-		//window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setSize(700,520);
 		window.setLocationRelativeTo(null);
-		//window.setVisible(true);
 	}
 
 	public void setRepresentedCollectives(List<Collective> c) {
 		this.representedCollectives = c;
 	}
+	
 	public void setDistricts(List<District> dlist) {
 		this.availableDistricts = dlist;
 		districts.removeAll();
@@ -361,10 +346,6 @@ public class CreateProjectView extends JPanel{
 		window.setVisible(visible_);
 	}
 	
-	/**
-	 * Return the project type.
-	 * @return the project type.
-	 */
 	public String getProjectType() {
 		return aux;
 	}
@@ -471,8 +452,8 @@ public class CreateProjectView extends JPanel{
 	}
 	
 	/**
-	 * Return the ambit of the social project the user has created.
-	 * @return ambit of the affected social group.
+	 * Return the scope of the social project the user has created.
+	 * @return scope of the affected social group.
 	 */
 	public String getScope() {
 		if (nacS.isSelected() == true) {
@@ -511,7 +492,7 @@ public class CreateProjectView extends JPanel{
 	}
 	
 	/**
-	 * Return the image(Optional) districts of a social project.
+	 * Return the image(Optional) of a social project.
 	 * @return the image as a string.
 	 */
 	public String getImage() {
@@ -545,6 +526,10 @@ public class CreateProjectView extends JPanel{
 		return scheme.getText();
 	}
 	
+	/**
+	 * Updates the options of the JComboBoxes
+	 * to show all the collectives 
+	 */
 	public void update () {
 		comboS.removeAllItems();
 		comboS.addItem("Ninguno");
@@ -560,11 +545,19 @@ public class CreateProjectView extends JPanel{
 		return;
 	}
 	
+	/**
+	 * Sets the actions to perform when the cancel or the create button are clicked.
+	 */
 	public void setController(ActionListener c) {
 		create.addActionListener(c);
 		cancel.addActionListener(c);
 	}
 	
+	/**
+	 * Sets the operation that will happen by default when the user initiates a "close" on this 
+	 * frame.
+	 * @param operation
+	 */
 	public void setCloseOperation(int operation) {
 		window.setDefaultCloseOperation(operation);
 	}
