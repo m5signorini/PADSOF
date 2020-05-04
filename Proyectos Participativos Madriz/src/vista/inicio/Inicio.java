@@ -76,7 +76,7 @@ public class Inicio extends JPanel {
 
 	
 	/**
-	 * Sets all the ActionListeners of all the buttons in the Inicio class.
+	 * Sets all the ActionListeners of all the buttons in the current object.
 	 * @param c ActionListener for the buttons in Inicio.
 	 * @return None.
 	 */
@@ -93,7 +93,6 @@ public class Inicio extends JPanel {
 	public String getNif() {
 		return campoNif.getText();
 	}
-
 	
 	/**
 	 * Returns the text written as a String in the pwd JLabel.
@@ -104,7 +103,7 @@ public class Inicio extends JPanel {
 	}
 	
 	/**
-	 * Clears the all the JLabels in the view.
+	 * Clears the text in all the JLabels in the view.
 	 * @return None.
 	 */
 	public void update () {
