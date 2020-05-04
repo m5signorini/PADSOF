@@ -59,6 +59,7 @@ public class Ventana extends JFrame {
 	public Ventana() {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		contentPane = new JPanel();
 		setContentPane(contentPane);
 

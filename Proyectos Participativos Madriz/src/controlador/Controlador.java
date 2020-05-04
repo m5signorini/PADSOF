@@ -1,15 +1,21 @@
 package controlador;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import javax.swing.JOptionPane;
+
 import controlador.colectivos.ControlCollectiveView;
 import controlador.colectivos.ControlCreateCollective;
-import controlador.inicio.*;
+import controlador.inicio.ControlInicio;
+import controlador.inicio.ControlInicioAdmin;
+import controlador.inicio.ControlRegistro;
 import controlador.principal.ControlAdmin;
 import controlador.principal.ControlPantallaPrincipal;
 import controlador.proyectos.ControlCreateProject;
 import controlador.proyectos.ControlProjectView;
-import modelo.*;
 import modelo.functionalities.Application;
-import vista.*;
+import vista.Ventana;
 
 /**
  * The Controlador class y used to manage, contain and coordinate all
@@ -36,6 +42,21 @@ public class Controlador {
 	public Controlador(Ventana frame2, Application app) {
 		this.frame = frame2;
 		this.app = app;
+		
+	    frame.addWindowListener(new WindowAdapter() {
+
+	        @Override
+	        public void windowClosing(WindowEvent e) {
+	            super.windowClosing(e); 
+	    		app.writeToFile("data");	
+	        }
+
+	        @Override
+	        public void windowOpened(WindowEvent e) {
+	            super.windowOpened(e); 
+	        }
+
+	    });
 		
 		this.contInicio = new ControlInicio(frame, app);
 		this.contInicioAdmin = new ControlInicioAdmin(frame, app);

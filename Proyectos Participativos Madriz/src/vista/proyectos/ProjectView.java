@@ -137,8 +137,7 @@ public class ProjectView extends JPanel{
 		auxDate.setBackground(new Color(240,255,255));
 		auxCreator.setBackground(new Color(240,255,255));
 		auxVotes.setBackground(new Color(240,255,255));
-		
-		
+				
 		seguir = new JButton("Seguir al proyecto para mantenerte al dia");
 		volver = new JButton("Volver");
 		apoyar = new JButton("Votar por el proyecto");
