@@ -16,7 +16,7 @@ import java.awt.Toolkit;
 
 /**
  * The Inicio class is an extension of JPanels which contains all the swing
- * components to create the view in order to login in into the application, 
+ * components to create the view in order to login into the application, 
  * once all ActionListeners have been set.
  * @author Pedro Urbina Rodriguez 
  */

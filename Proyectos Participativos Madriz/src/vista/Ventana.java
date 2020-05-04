@@ -112,8 +112,7 @@ public class Ventana extends JFrame {
 		vistaAdminProjects.setControladorApoyos(contAdmin.controlApoyos());
 		
 		this.contRegistro = controlador.getControlRegistro();
-		vistaRegistro.setControladorRegistro(contRegistro);
-		vistaRegistro.setControladorCambioInicio(contRegistro);
+		vistaRegistro.setControladores(contRegistro);
 		
 		this.contPantallaPrincipal = controlador.getControlPantallaPrincipal();
 		vistaPantallaPrincipal.setControladores(contPantallaPrincipal);

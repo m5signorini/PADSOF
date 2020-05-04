@@ -74,7 +74,7 @@ public class ControlRegistro implements ActionListener {
 			return;
 		}
 
-		JOptionPane.showMessageDialog(null, "Now you can login!");
+		JOptionPane.showMessageDialog(null, "You will be able to login when the admin decides!");
 		
 
 		Inicio nuevaVista = frame.getVistaInicio();

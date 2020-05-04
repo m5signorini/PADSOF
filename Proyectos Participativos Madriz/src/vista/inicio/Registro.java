@@ -7,6 +7,13 @@ import java.awt.GridLayout;
 import java.awt.event.*;
 import controlador.*;
 
+/**
+ * The Registro class is an extension of JPanels which contains all the swing
+ * components to create the view in order to register in the application, 
+ * once all ActionListeners have been properly set.
+ * @author Pedro Urbina Rodriguez 
+ */
+
 public class Registro extends JPanel {
 
 	private JButton botonRegistro;
@@ -77,11 +84,8 @@ public class Registro extends JPanel {
 		return campoPwd.getText();
 	}
 
-	public void setControladorRegistro(ActionListener c) {
+	public void setControladores(ActionListener c) {
 		botonRegistro.addActionListener(c);
-	}
-
-	public void setControladorCambioInicio(ActionListener c) {
 		botonInicio.addActionListener(c);
 	}
 		
