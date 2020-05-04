@@ -84,12 +84,12 @@ public class Demonstration {
 		app.logout();
 		
 		/* ADD MEMBER */
-		User secondUser = new User("Jesus", "0", "0000000B");
+		User secondUser = new User("Jesus", "a", "a");
 		app.register(secondUser);
 		app.loginAdmin("admin");
 		app.validateUser(secondUser);
 		app.logout();
-		app.login("0000000B", "0");
+		app.login("a", "a");
 		if(c1.join(secondUser) == false) {
 			System.out.println("Error: Joining Collective");
 		}
@@ -118,7 +118,7 @@ public class Demonstration {
 		app.logout();
 		
 		/* PROJECT LIFE */
-		app.login("0000000B", "0");
+		app.login("a", "a");
 		sProj = new Social("Proyecto C1", "Desc", 10000.0, new Date(), app.getLoggedUser(), ScopeType.international, "", "");
 		app.createProject(sProj);
 		//
@@ -129,7 +129,7 @@ public class Demonstration {
 		app.logout();
 		System.out.print(app.toString()+"\n");
 		//
-		app.login("0000000B", "0");
+		app.login("a", "a");
 		if(app.sendProject(sProj) == false) {
 			System.out.println("Error: Sending Project");
 		}
@@ -141,7 +141,7 @@ public class Demonstration {
 		FechaSimulada.avanzar(10);
 		gateway.setDate(FechaSimulada.getHoy());
 		//
-		app.login("0000000B", "0");
+		app.login("a", "a");
 		System.out.print(app.toString()+"\n");
 		
 		/* FILE WRITING AND READING */

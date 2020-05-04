@@ -1,9 +1,7 @@
 package vista.principal;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.event.ActionListener;
+import java.awt.*;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -70,80 +68,73 @@ public class PantallaPrincipal extends JPanel {
 	private JComboBox<String> afinidadColectivo;
 	private JButton calcularAfinidad;
 	
+	private JPanel currentView;
+	
 	public PantallaPrincipal() {
 		
-		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+		this.setLayout(new BorderLayout());
 		this.setBackground(new Color(204,255,204));
-		this.setPreferredSize(new Dimension(2300, 1200));
-
-		this.add(Box.createRigidArea(new Dimension(80, 70)));
+		//this.setPreferredSize(new Dimension(1200, 700));
 		
-		leftMenu = createLeftMenu();		
-		this.add(leftMenu);
-		
-		this.add(Box.createRigidArea(new Dimension(80, 70)));
-
+		leftMenu = createLeftMenu();
 		pestanias = createMiPagina();
-		this.add(pestanias);
+		searchCollectives = createZonaBusquedaColectivos();
+		searchProjects = createZonaBusquedaProyectos();
 		
-		searchCollectives = createZonaBusquedaColectivos();		
-		this.add(searchCollectives);
-		
-		searchProjects = createZonaBusquedaProyectos();		
-		this.add(searchProjects);	
+		this.add(leftMenu, BorderLayout.WEST);
+		this.add(pestanias, BorderLayout.EAST);
 
 		searchCollectives.setVisible(false);
 		searchProjects.setVisible(false);
-		
 	}
 	
 	private JPanel createLeftMenu() {
 		JPanel cont = new JPanel();
 		cont.setLayout(new BoxLayout(cont, BoxLayout.Y_AXIS));
 		cont.setBackground(new Color(255,255,204));
-		Dimension d = new Dimension(300, 700);
-        cont.setMinimumSize(d);
-        cont.setMaximumSize(d);
-        cont.setPreferredSize(d);
+		//Dimension d = new Dimension(300, 700);
+        //cont.setMinimumSize(d);
+        //cont.setMaximumSize(d);
+        //cont.setPreferredSize(d);
 		
-		cont.add(Box.createRigidArea(new Dimension(0, 50)));
+		//cont.add(Box.createRigidArea(new Dimension(0, 50)));
 		
 		JLabel etiqueta = new JLabel("Navegacion:");
 		etiqueta.setFont(new Font("serif", Font.BOLD, 25));
 		etiqueta.setAlignmentX(CENTER_ALIGNMENT);
 		cont.add(etiqueta);
 
-		cont.add(Box.createRigidArea(new Dimension(0, 55)));
+		//cont.add(Box.createRigidArea(new Dimension(0, 55)));
 
 		this.botonMiPagina = new JButton("Mi Pagina");
 		this.botonMiPagina.setAlignmentX(CENTER_ALIGNMENT);
 		cont.add(this.botonMiPagina);
 
-		cont.add(Box.createRigidArea(new Dimension(0, 70)));
+		//cont.add(Box.createRigidArea(new Dimension(0, 70)));
 		
 		this.botonBuscarColectivo = new JButton("Buscar Colectivo");
 		this.botonBuscarColectivo.setAlignmentX(CENTER_ALIGNMENT);
 		cont.add(this.botonBuscarColectivo);
 
-		cont.add(Box.createRigidArea(new Dimension(0, 40)));
+		//cont.add(Box.createRigidArea(new Dimension(0, 40)));
 		
 		this.botonBuscarProyecto = new JButton("Buscar Proyecto");
 		this.botonBuscarProyecto.setAlignmentX(CENTER_ALIGNMENT);
 		cont.add(this.botonBuscarProyecto);
 
-		cont.add(Box.createRigidArea(new Dimension(0, 70)));
+		//cont.add(Box.createRigidArea(new Dimension(0, 70)));
 		
 		this.botonCrearColectivo = new JButton("Crear Colectivo");
 		this.botonCrearColectivo.setAlignmentX(CENTER_ALIGNMENT);
 		cont.add(this.botonCrearColectivo);
 
-		cont.add(Box.createRigidArea(new Dimension(0, 40)));
+		//cont.add(Box.createRigidArea(new Dimension(0, 40)));
 		
 		this.botonCrearProyecto = new JButton("Crear Proyecto");
 		this.botonCrearProyecto.setAlignmentX(CENTER_ALIGNMENT);
 		cont.add(this.botonCrearProyecto);
 
-		cont.add(Box.createRigidArea(new Dimension(0, 70)));
+		//cont.add(Box.createRigidArea(new Dimension(0, 70)));
 		
 		this.botonCerrarSesion = new JButton("Cerrar Sesion");
 		this.botonCerrarSesion.setAlignmentX(CENTER_ALIGNMENT);
@@ -155,18 +146,18 @@ public class PantallaPrincipal extends JPanel {
 		afinidadColectivo.setSize(new Dimension(20, 20));
 		afinidadColectivo.setSelectedIndex(0);
 		
-		cont.add(Box.createRigidArea(new Dimension(0, 40)));
+		//cont.add(Box.createRigidArea(new Dimension(0, 40)));
 		return cont;
 	}
 	
 	private JTabbedPane createMiPagina() {
-		JTabbedPane pestanias1 = new JTabbedPane(1);
+		JTabbedPane pestanias1 = new JTabbedPane(JTabbedPane.TOP);
 		pestanias1.setFont(new Font("serif", Font.BOLD, 20));
 		pestanias1.setBackground(new Color(190,255,255));
-		Dimension d = new Dimension(1700, 1000);
-		pestanias1.setMinimumSize(d);
-		pestanias1.setMaximumSize(d);
-		pestanias1.setPreferredSize(d);
+		//Dimension d = new Dimension(1700, 1000);
+		//pestanias1.setMinimumSize(d);
+		//pestanias1.setMaximumSize(d);
+		//pestanias1.setPreferredSize(d);
 
 		pestaniaMisColectivos = new JPanel();
 		pestaniaColectivosCreados = new JPanel();
@@ -247,7 +238,7 @@ public class PantallaPrincipal extends JPanel {
 
 		barraBusquedaProyecto = new JTextField();
 		cajonBusqueda.add(barraBusquedaProyecto);		
-		barraBusquedaProyecto.setMaximumSize(new Dimension(300, 50));
+		//barraBusquedaProyecto.setMaximumSize(new Dimension(300, 50));
 		
 		botonBuscadorProyecto = new JButton("Buscar Proyectos");
 		cajonBusqueda.add(botonBuscadorProyecto);
@@ -358,10 +349,10 @@ public class PantallaPrincipal extends JPanel {
 	private JPanel representacionProyecto(Project p) {
 		JPanel c = new JPanel();
 		c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
-		Dimension d = new Dimension(1700, 100);
-        c.setMinimumSize(d);
-        c.setMaximumSize(d);
-        c.setPreferredSize(d);
+		//Dimension d = new Dimension(1700, 100);
+        //c.setMinimumSize(d);
+        //c.setMaximumSize(d);
+        //c.setPreferredSize(d);
 
 		c.add(Box.createRigidArea(new Dimension(200, 0)));
 		JLabel title = new JLabel(p.getTitle());
@@ -380,10 +371,10 @@ public class PantallaPrincipal extends JPanel {
 	private JPanel representacionColectivo(Collective p) {
 		JPanel c = new JPanel();
 		c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
-		Dimension d = new Dimension(1700, 100);
-        c.setMinimumSize(d);
-        c.setMaximumSize(d);
-        c.setPreferredSize(d);
+		//Dimension d = new Dimension(1700, 100);
+        //c.setMinimumSize(d);
+        //c.setMaximumSize(d);
+        //c.setPreferredSize(d);
 
 		c.add(Box.createRigidArea(new Dimension(200, 0)));
 		JLabel title = new JLabel(p.getName());
@@ -402,7 +393,7 @@ public class PantallaPrincipal extends JPanel {
 		JPanel c = new JPanel();
 		c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
 		c.add(new JLabel(p.getTitle()));
-		c.add(Box.createRigidArea(new Dimension(130, 070)));
+		c.add(Box.createRigidArea(new Dimension(130, 70)));
 		c.add(new JLabel(p.getText()));
 		return c;
 	}
@@ -411,36 +402,36 @@ public class PantallaPrincipal extends JPanel {
 		JPanel c = new JPanel();
 		c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
 
-		Dimension d = new Dimension(1700, 100);
-		Dimension d1 = new Dimension(200,120);
-        c.setMinimumSize(d);
-        c.setMaximumSize(d);
-        c.setPreferredSize(d);
+		//Dimension d = new Dimension(1700, 100);
+		//Dimension d1 = new Dimension(200,120);
+        //c.setMinimumSize(d);
+        //c.setMaximumSize(d);
+        //c.setPreferredSize(d);
         
 		c.add(Box.createRigidArea(new Dimension(200, 0)));
 
-		JLabel title =new JLabel("Título");
-		title.setMaximumSize(d1);
-		title.setMaximumSize(d1);
-		title.setPreferredSize(d1);
+		JLabel title =new JLabel("Titulo");
+		//title.setMaximumSize(d1);
+		//title.setMaximumSize(d1);
+		//title.setPreferredSize(d1);
 		title.setFont(new Font("serif", Font.ITALIC, 22));
 		c.add(title);
 		
 		c.add(Box.createRigidArea(new Dimension(200, 0)));
 		
 		JLabel votes =new JLabel("Votos");
-		votes.setMaximumSize(d1);
-		votes.setMaximumSize(d1);
-		votes.setPreferredSize(d1);
+		//votes.setMaximumSize(d1);
+		//votes.setMaximumSize(d1);
+		//votes.setPreferredSize(d1);
 		votes.setFont(new Font("serif", Font.ITALIC, 22));
 		c.add(votes);
 		
 		c.add(Box.createRigidArea(new Dimension(200, 0)));
 		
 		JLabel type =new JLabel("Tipo");
-		type.setMaximumSize(d1);
-		type.setMaximumSize(d1);
-		type.setPreferredSize(d1);
+		//type.setMaximumSize(d1);
+		//type.setMaximumSize(d1);
+		//type.setPreferredSize(d1);
 		type.setFont(new Font("serif", Font.ITALIC, 22));
 		c.add(type);
 		
@@ -456,42 +447,42 @@ public class PantallaPrincipal extends JPanel {
 		JPanel c = new JPanel();
 		c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
 
-		Dimension d = new Dimension(1700, 100);
-		Dimension d1 = new Dimension(200,120);
-        c.setMinimumSize(d);
-        c.setMaximumSize(d);
-        c.setPreferredSize(d);
+		//Dimension d = new Dimension(1700, 100);
+		//Dimension d1 = new Dimension(200,120);
+        //c.setMinimumSize(d);
+        //c.setMaximumSize(d);
+        //c.setPreferredSize(d);
         
 		c.add(Box.createRigidArea(new Dimension(200, 0)));
 
 		JLabel title = new JLabel(p.getTitle());
-		title.setMaximumSize(d1);
-		title.setMaximumSize(d1);
-		title.setPreferredSize(d1);
+		//title.setMaximumSize(d1);
+		//title.setMaximumSize(d1);
+		//title.setPreferredSize(d1);
 		title.setFont(new Font("serif", Font.PLAIN, 22));
 		c.add(title);
 		c.add(Box.createRigidArea(new Dimension(200, 0)));
 
 		JLabel votes =new JLabel(String.valueOf(p.countVotes()));
-		votes.setMaximumSize(d1);
-		votes.setMaximumSize(d1);
-		votes.setPreferredSize(d1);
+		//votes.setMaximumSize(d1);
+		//votes.setMaximumSize(d1);
+		//votes.setPreferredSize(d1);
 		votes.setFont(new Font("serif", Font.PLAIN, 22));
 		c.add(votes);
 		c.add(Box.createRigidArea(new Dimension(200, 0)));
 		
 		JLabel type =new JLabel(String.valueOf(p.getProjectKind()));
-		type.setMaximumSize(d1);
-		type.setMaximumSize(d1);
-		type.setPreferredSize(d1);
+		//type.setMaximumSize(d1);
+		//type.setMaximumSize(d1);
+		//type.setPreferredSize(d1);
 		type.setFont(new Font("serif", Font.PLAIN, 22));
 		c.add(type);
 		c.add(Box.createRigidArea(new Dimension(200, 0)));
 		
 		JLabel budget =new JLabel(String.valueOf(p.getRequestedAmount()));
-		budget.setMaximumSize(d1);
-		budget.setMaximumSize(d1);
-		budget.setPreferredSize(d1);
+		//budget.setMaximumSize(d1);
+		//budget.setMaximumSize(d1);
+		//budget.setPreferredSize(d1);
 		budget.setFont(new Font("serif", Font.PLAIN, 22));
 		c.add(budget);
 		return c;
@@ -501,10 +492,10 @@ public class PantallaPrincipal extends JPanel {
 		JPanel c = new JPanel();
 		c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
 		
-		Dimension d = new Dimension(1700, 100);
-        c.setMinimumSize(d);
-        c.setMaximumSize(d);
-        c.setPreferredSize(d);
+		//Dimension d = new Dimension(1700, 100);
+        //c.setMinimumSize(d);
+        //c.setMaximumSize(d);
+        //c.setPreferredSize(d);
         
 		c.add(Box.createRigidArea(new Dimension(200, 0)));
 
@@ -528,37 +519,37 @@ public class PantallaPrincipal extends JPanel {
 		JPanel c = new JPanel();
 		c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
 
-		Dimension d = new Dimension(1700, 100);
-		Dimension d1 = new Dimension(200,120);
-        c.setMinimumSize(d);
-        c.setMaximumSize(d);
-        c.setPreferredSize(d);
+		//Dimension d = new Dimension(1700, 100);
+		//Dimension d1 = new Dimension(200,120);
+        //c.setMinimumSize(d);
+        //c.setMaximumSize(d);
+        //c.setPreferredSize(d);
         
 		c.add(Box.createRigidArea(new Dimension(200, 0)));
 
 		JLabel title =new JLabel("Colectivos:");
 		title.setFont(new Font("serif", Font.ITALIC, 22));
-		title.setMaximumSize(d1);
-		title.setMaximumSize(d1);
-		title.setPreferredSize(d1);
+		//title.setMaximumSize(d1);
+		//title.setMaximumSize(d1);
+		//title.setPreferredSize(d1);
 		c.add(title);
 		
 		c.add(Box.createRigidArea(new Dimension(200, 0)));
 		
-		JLabel indice =new JLabel("Índice de afinidad:");
+		JLabel indice =new JLabel("Indice de afinidad:");
 		indice.setFont(new Font("serif", Font.ITALIC, 22));
-		indice.setMaximumSize(d1);
-		indice.setMaximumSize(d1);
-		indice.setPreferredSize(d1);
+		//indice.setMaximumSize(d1);
+		//indice.setMaximumSize(d1);
+		//indice.setPreferredSize(d1);
 		c.add(indice);
 		
 		c.add(Box.createRigidArea(new Dimension(200, 0)));
 		
 		JLabel members =new JLabel("Miembros:");
 		members.setFont(new Font("serif", Font.ITALIC, 22));
-		members.setMaximumSize(d1);
-		members.setMaximumSize(d1);
-		members.setPreferredSize(d1);
+		//members.setMaximumSize(d1);
+		//members.setMaximumSize(d1);
+		//members.setPreferredSize(d1);
 		c.add(members);
 		pestaniaInformeAfinidad.add(c);
 
@@ -569,32 +560,32 @@ public class PantallaPrincipal extends JPanel {
 	        JPanel p = new JPanel();
 			p.setLayout(new BoxLayout(p, BoxLayout.X_AXIS));
 
-	        p.setMinimumSize(d);
-	        p.setMaximumSize(d);
-	        p.setPreferredSize(d);
+	        //p.setMinimumSize(d);
+	        //p.setMaximumSize(d);
+	        //p.setPreferredSize(d);
 	        
 			p.add(Box.createRigidArea(new Dimension(200, 0)));
 
 			JLabel name = new JLabel(list1.get(i).getName());
-			name.setMaximumSize(d1);
-			name.setMaximumSize(d1);
-			name.setPreferredSize(d1);
+			//name.setMaximumSize(d1);
+			//name.setMaximumSize(d1);
+			//name.setPreferredSize(d1);
 			name.setFont(new Font("serif", Font.PLAIN, 22));
 			p.add(name);
 			p.add(Box.createRigidArea(new Dimension(200, 25)));
 			
 			JLabel index =new JLabel(String.valueOf(list2.get(i)));
-			index.setMaximumSize(d1);
-			index.setMaximumSize(d1);
-			index.setPreferredSize(d1);
+			//index.setMaximumSize(d1);
+			//index.setMaximumSize(d1);
+			//index.setPreferredSize(d1);
 			index.setFont(new Font("serif", Font.PLAIN, 22));
 			p.add(index);
 			p.add(Box.createRigidArea(new Dimension(200, 0)));
 			
 			JLabel memberQuantity =new JLabel(String.valueOf(list3.get(i)));
-			memberQuantity.setMaximumSize(d1);
-			memberQuantity.setMaximumSize(d1);
-			memberQuantity.setPreferredSize(d1);
+			//memberQuantity.setMaximumSize(d1);
+			//memberQuantity.setMaximumSize(d1);
+			//memberQuantity.setPreferredSize(d1);
 			memberQuantity.setFont(new Font("serif", Font.PLAIN, 22));
 			p.add(memberQuantity);
 			
@@ -605,6 +596,8 @@ public class PantallaPrincipal extends JPanel {
 	
 	public void update () {
 		
+		pestaniaInformePopularidad.removeAll();
+		pestaniaInformeAfinidad.removeAll();
 		pestaniaMisProyectos.removeAll();
 		pestaniaProyectosSeguidos.removeAll();
 		pestaniaMisColectivos.removeAll();
@@ -660,6 +653,7 @@ public class PantallaPrincipal extends JPanel {
 		}
 		
 		pestaniaInformePopularidad.add(primeraFilaInformePopularidad());
+		
 		createdProjects.sort(Comparator.comparing(Project::countVotes));
 		for(Project p:votedProjects) {
 			pestaniaInformePopularidad.add(representacionProyectoEnInformePopularidad(p));

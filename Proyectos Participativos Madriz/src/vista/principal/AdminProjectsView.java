@@ -19,7 +19,7 @@ public class AdminProjectsView extends JPanel{
 	
 	public AdminProjectsView() {
 		setLayout(new BorderLayout());
-		setPreferredSize(new Dimension(1200, 700));
+		//setPreferredSize(new Dimension(1200, 700));
 		
 		// NORTH Panel
 		JPanel north = new JPanel();

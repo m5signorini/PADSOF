@@ -16,7 +16,7 @@ public class AdminRegistersView extends JPanel{
 	
 	public AdminRegistersView() {
 		setLayout(new BorderLayout());
-		setPreferredSize(new Dimension(1200, 700));
+		//setPreferredSize(new Dimension(1200, 700));
 		
 		GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridwidth = GridBagConstraints.REMAINDER;
