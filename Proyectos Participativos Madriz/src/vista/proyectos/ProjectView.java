@@ -64,15 +64,15 @@ public class ProjectView extends JPanel{
 		info = new JPanel();
 		action = new JPanel();
 		info.setLayout(new BoxLayout(info, BoxLayout.Y_AXIS));
-		info.setBackground(new Color(190,255,255));
+		info.setBackground(new Color(240,255,255));
 		action.setLayout(new BoxLayout(action, BoxLayout.Y_AXIS));
-		action.setBackground(new Color(190,255,255));
+		action.setBackground(new Color(240,255,255));
 		//Dimension d = new Dimension(1000, 1000);
 		//container.setMinimumSize(d);
 		//container.setMaximumSize(d);
 		//container.setPreferredSize(d);
 
-		title = new JLabel("None");
+		title = new JLabel("None");		
 		desc = new JLabel("None");
 		type = new JLabel("None");
 		cost = new JLabel("None");
@@ -130,6 +130,14 @@ public class ProjectView extends JPanel{
 		auxVotes.setLayout(new BoxLayout(auxVotes, BoxLayout.X_AXIS));
 		auxVotes.add(new JLabel("Numero de apoyos: "));
 		auxVotes.add(nVoters);
+
+		auxDesc.setBackground(new Color(240,255,255));
+		auxType.setBackground(new Color(240,255,255));
+		auxCost.setBackground(new Color(240,255,255));
+		auxDate.setBackground(new Color(240,255,255));
+		auxCreator.setBackground(new Color(240,255,255));
+		auxVotes.setBackground(new Color(240,255,255));
+		
 		
 		seguir = new JButton("Seguir al proyecto para mantenerte al dia");
 		volver = new JButton("Volver");
