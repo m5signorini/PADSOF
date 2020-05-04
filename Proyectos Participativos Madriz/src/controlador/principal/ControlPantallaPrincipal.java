@@ -9,6 +9,7 @@ import javax.swing.JButton;
 
 import modelo.entities.Collective;
 import modelo.entities.individuals.User;
+import modelo.exceptions.SendException;
 import modelo.functionalities.Application;
 import modelo.projects.Project;
 import vista.Ventana;
@@ -72,6 +73,11 @@ public class ControlPantallaPrincipal implements ActionListener {
 		case "Buscar Proyectos":
 			realizarBusquedaProyectos();
 			break;
+		case "Pulsa aqui para enviar al ayuntamiento":
+			// En el nombre hemos almacenado el indice del proyecto del que queremos mas informacion.
+			int indiceProyecto5 = Integer.parseInt(((JButton)e.getSource()).getName());
+			intentaEnviar((pantallaPrincipal.getCreatedProjects()).get(indiceProyecto5));
+			break;
 		case "Mas informacion proyecto":
 			// En el nombre hemos almacenado el indice del proyecto del que queremos mas informacion.
 			int indiceProyecto = Integer.parseInt(((JButton)e.getSource()).getName());
@@ -108,6 +114,19 @@ public class ControlPantallaPrincipal implements ActionListener {
 		}
 	}
 	
+	private void intentaEnviar(Project p) {
+		User u = modelo.getLoggedUser();
+		try {
+			if(modelo.sendProject(p) == false) {
+				JOptionPane.showMessageDialog(pantallaPrincipal, "No puedes enviar a este proyecto aun.", "Error", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			JOptionPane.showMessageDialog(pantallaPrincipal, "Enviaste este proyecto a financiacion.");
+		} catch (SendException e) {
+			JOptionPane.showMessageDialog(pantallaPrincipal, "Huvo un problema al enviar este proyecto.", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+		
 	private void mostrarInformacionProyecto(Project p) {
 		User u = modelo.getLoggedUser();
 		frame.getProjectView().update(p, u.getRepresentedCollectives());
@@ -156,7 +175,11 @@ public class ControlPantallaPrincipal implements ActionListener {
 	}
 	
 	private void cerrarSesion() {
-		modelo.writeToFile("data");	
+		modelo.writeToFile("data");			
+		frame.setAllInvisible();
+		frame.getVistaInicio().update();
+		frame.getVistaInicio().setVisible(true);
+		frame.pack();
 	}
 	
 	private void actualizarMiPagina() {	
