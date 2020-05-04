@@ -15,6 +15,11 @@ import vista.principal.AdminRegistersView;
 import vista.principal.PantallaPrincipal;
 import vista.proyectos.CreateProjectView;
 
+/**
+ * Controller class for the login as admin view
+ * @author Martin Sanchez Signorini
+ *
+ */
 public class ControlInicioAdmin implements ActionListener {
 	
 	private InicioAdmin vista;
@@ -26,7 +31,10 @@ public class ControlInicioAdmin implements ActionListener {
 		this.vista = frame.getVistaInicioAdmin();
 		this.modelo = modelo;
 	}
-
+	
+	/**
+	 * Generic action performed fo the view
+	 */
 	public void actionPerformed(ActionEvent e) {
 		JButton button = (JButton)e.getSource();
 		switch(button.getActionCommand()) {
@@ -39,6 +47,9 @@ public class ControlInicioAdmin implements ActionListener {
 		}
 	}
 	
+	/**
+	 * Method for changing view to login as usual
+	 */
 	private void cambioInicio() {
 		Inicio nuevaVista = frame.getVistaInicio();
 		nuevaVista.update();
@@ -47,6 +58,10 @@ public class ControlInicioAdmin implements ActionListener {
 		frame.pack();
 	}
 	
+	/**
+	 * Method for checking input
+	 * @return boolean true if input was correct syntactically
+	 */
 	private boolean loginCheck() {
 		String pwd = vista.getPwd();
 		if (pwd.equals("")) {
@@ -56,6 +71,9 @@ public class ControlInicioAdmin implements ActionListener {
 		return true;
 	}
 	
+	/**
+	 * Method for trying to login as administrator
+	 */
 	private void intentaAdminLogin() {
 		if(!loginCheck()) return;
 		
@@ -65,7 +83,7 @@ public class ControlInicioAdmin implements ActionListener {
 			JOptionPane.showMessageDialog(null, "Incorrect login! Please, try again.");
 			vista.update();
 			return;
-		}	
+		}
 		
 		AdminRegistersView adminRegs = frame.getVistaAdminRegisters();
 		ControlAdmin contAdmin = frame.getControlAdmin();

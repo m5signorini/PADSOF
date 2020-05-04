@@ -366,7 +366,7 @@ public class Application implements Serializable{
 					financiatedProjects.add(p);
 				}
 			} catch (IOException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 			} catch (InvalidIDException e) {
 				// Invalid ID, treat project as rejected
 				it.remove();

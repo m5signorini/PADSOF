@@ -32,6 +32,9 @@ public class ControlAdmin {
 		this.modelo = modelo;
 	}
 	
+	/**
+	 * Setter for pending users
+	 */
 	private void setPendingList() {
 		viewRegisters.prepareList(viewRegisters.getPendingList());
 		// Set the list of pending registers
@@ -55,6 +58,9 @@ public class ControlAdmin {
 		viewRegisters.getPendingList().repaint();
 	}
 	
+	/**
+	 * Setter for registered users
+	 */
 	private void setRegisteredList() {
 		viewRegisters.prepareList(viewRegisters.getRegisteredList());
 		// Set the list of registered registers
@@ -77,6 +83,9 @@ public class ControlAdmin {
 		viewRegisters.getRegisteredList().repaint();
 	}
 	
+	/**
+	 * Setter for pending projects
+	 */
 	private void setProjects() {
 		viewProjects.prepareList(viewProjects.getProjects());
 		// Set the list of registered registers
@@ -107,12 +116,19 @@ public class ControlAdmin {
 		viewProjects.getProjects().repaint();
 	}
 	
+	/**
+	 * Update all lists
+	 */
 	public void update() {
 		setPendingList();
 		setRegisteredList();
 		setProjects();
 	}
 	
+	/**
+	 * Getter of a logout controller
+	 * @return ActionListener controller for the login out
+	 */
 	public ActionListener controlLogout() {
 		return (e) -> {
 			modelo.logout();
@@ -126,6 +142,10 @@ public class ControlAdmin {
 		};
 	}
 	
+	/**
+	 * Getter of a go-to-projects controller
+	 * @return ActionListener controller for changing view to projects
+	 */
 	public ActionListener controlGotoProjects() {
 		return (e) -> {
 			viewRegisters.setVisible(false);
@@ -134,6 +154,10 @@ public class ControlAdmin {
 		};
 	}
 	
+	/**
+	 * Getter of a go-to-registers controller
+	 * @return ActionListener controller for changing view to registers
+	 */
 	public ActionListener controlGotoRegisters() {
 		return (e) -> {
 			viewProjects.setVisible(false);
@@ -142,6 +166,10 @@ public class ControlAdmin {
 		};
 	}
 	
+	/**
+	 * Getter of a ban action
+	 * @return ActionListener controller for banning
+	 */
 	public ActionListener controlBanUser(User u) {
 		return (e) -> {
 			BanDialog bd = new BanDialog(u, frame);
@@ -152,6 +180,10 @@ public class ControlAdmin {
 		};
 	}
 	
+	/**
+	 * Getter of an expiring input
+	 * @return ActionListener controller for the expiring time input
+	 */
 	public ChangeListener controlCaduca() {
 		return (e) -> {
 			modelo.setMaxInactivity(viewProjects.getCaduca());
@@ -160,6 +192,10 @@ public class ControlAdmin {
 		};
 	}
 	
+	/**
+	 * Getter of the minimum supports input
+	 * @return ActionListener controller for the minimum supports input
+	 */
 	public ChangeListener controlApoyos() {
 		return (e) -> {
 			modelo.setMinSupports(viewProjects.getApoyos());
