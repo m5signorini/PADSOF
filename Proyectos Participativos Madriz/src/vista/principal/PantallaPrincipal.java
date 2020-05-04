@@ -619,6 +619,12 @@ public class PantallaPrincipal extends JPanel {
 			b.setName(Integer.toString(i));
 			cont.add(b);
 			
+						
+			JButton bSend = new JButton("Pulsa aqui para enviar al ayuntamiento");
+			bSend.addActionListener(listener);
+			bSend.setName(Integer.toString(i));
+			cont.add(bSend);
+						
 			pestaniaMisProyectos.add(cont);
 			i++;
 		}
