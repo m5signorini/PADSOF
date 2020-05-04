@@ -36,6 +36,8 @@ public class PantallaPrincipal extends JPanel {
 	
 	private ActionListener listener;
 	
+	private List<Project> deniedProjects;
+	private List<Project> rejectedProjects;
 	private List<Project> sentProjects;
 	private List<Project> financiatedProjects;
 	private List<Project> expiredProjects;
@@ -363,6 +365,18 @@ public class PantallaPrincipal extends JPanel {
 	}
 	public List<Project> getSentProjects(List<Project> p) {
 		return sentProjects;
+	}
+	public void setRejectedProjects(List<Project> p) {
+		this.rejectedProjects = p;
+	}
+	public List<Project> getRejectedProjects(List<Project> p) {
+		return rejectedProjects;
+	}
+	public void setDeniedProjects(List<Project> p) {
+		this.deniedProjects = p;
+	}
+	public List<Project> getDeniedProjects(List<Project> p) {
+		return deniedProjects;
 	}
 	
 	public void setFollowedProjects(List<Project> followedProjects) {
@@ -743,7 +757,7 @@ public class PantallaPrincipal extends JPanel {
 			b.setName(Integer.toString(i));
 			cont.add(b);			
 
-			cont.add(Box.createRigidArea(new Dimension(200, 0)));
+			//cont.add(Box.createRigidArea(new Dimension(200, 0)));
 			
 			JButton bSend;
 			if(sentProjects.contains(p)) {
@@ -758,6 +772,12 @@ public class PantallaPrincipal extends JPanel {
 			else if(expiredProjects.contains(p)) {
 				bSend = new JButton("Proyecto Expirado");
 			}
+			else if(deniedProjects.contains(p)){
+				bSend = new JButton("Proyecto Denegado");
+			}
+			else if(rejectedProjects.contains(p)){
+				bSend = new JButton("Proyecto Rechazado");
+			}
 			else {
 				bSend = new JButton("Pulsa aqui para enviar al ayuntamiento");
 			}
@@ -765,7 +785,7 @@ public class PantallaPrincipal extends JPanel {
 			bSend.setName(Integer.toString(i));
 			cont.add(bSend);
 			
-			cont.add(Box.createRigidArea(new Dimension(200, 0)));
+			//cont.add(Box.createRigidArea(new Dimension(200, 0)));
 						
 			pestaniaMisProyectos.add(cont);
 			i++;
