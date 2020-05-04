@@ -27,6 +27,8 @@ public class PantallaPrincipal extends JPanel {
 	
 	private ActionListener listener;
 	
+	private List<Project> sentProjects;
+	private List<Project> pendingProjects;
 	private List<Project> createdProjects;
 	private List<Project> votedProjects;
 	private List<Project> followedProjects;
@@ -295,6 +297,20 @@ public class PantallaPrincipal extends JPanel {
 	
 	public void setVotedProjects(List<Project> votedProjects) {
 		this.votedProjects = votedProjects;
+	}
+	
+	public void setPendingProjects(List<Project> p) {
+		this.pendingProjects = p;
+	}
+	public List<Project> getPendingProjects(List<Project> p) {
+		return pendingProjects;
+	}
+	
+	public void setSentProjects(List<Project> p) {
+		this.sentProjects = p;
+	}
+	public List<Project> getSentProjects(List<Project> p) {
+		return sentProjects;
 	}
 	
 	public void setFollowedProjects(List<Project> followedProjects) {
@@ -634,8 +650,16 @@ public class PantallaPrincipal extends JPanel {
 			b.addActionListener(listener);
 			b.setName(Integer.toString(i));
 			cont.add(b);
-			
-			JButton bSend = new JButton("Pulsa aqui para enviar al ayuntamiento");
+			JButton bSend;
+			if(sentProjects.contains(p)) {
+				bSend = new JButton("Proyecto ya enviado");
+			}
+			else if(pendingProjects.contains(p)) {
+				bSend = new JButton("Pendiente de validacion, no se puede enviar ");
+			}
+			else {
+				bSend = new JButton("Pulsa aqui para enviar al ayuntamiento");
+			}
 			bSend.addActionListener(listener);
 			bSend.setName(Integer.toString(i));
 			cont.add(bSend);
