@@ -36,6 +36,7 @@ public class ControlPantallaPrincipal implements ActionListener {
 			actualizarMiPagina();
 			break;
 		case "Buscar Colectivo":
+			
 			frame.getVistaPantallaPrincipal().getPestanias().setVisible(false);
 			frame.getVistaPantallaPrincipal().getSearchProjects().setVisible(false);
 			frame.getVistaPantallaPrincipal().getSearchCollectives().setVisible(true);

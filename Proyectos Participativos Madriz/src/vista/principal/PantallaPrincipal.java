@@ -72,7 +72,8 @@ public class PantallaPrincipal extends JPanel {
 	
 	public PantallaPrincipal() {
 		
-		this.setLayout(new BorderLayout());
+		//this.setLayout(new BorderLayout());
+		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		this.setBackground(new Color(204,255,204));
 		//this.setPreferredSize(new Dimension(1200, 700));
 		
@@ -81,8 +82,12 @@ public class PantallaPrincipal extends JPanel {
 		searchCollectives = createZonaBusquedaColectivos();
 		searchProjects = createZonaBusquedaProyectos();
 		
-		this.add(leftMenu, BorderLayout.WEST);
-		this.add(pestanias, BorderLayout.EAST);
+		//this.add(leftMenu, BorderLayout.WEST);
+		//this.add(pestanias, BorderLayout.CENTER);
+		this.add(leftMenu);
+		this.add(pestanias);
+		this.add(searchCollectives);
+		this.add(searchProjects);
 
 		searchCollectives.setVisible(false);
 		searchProjects.setVisible(false);
@@ -209,6 +214,7 @@ public class PantallaPrincipal extends JPanel {
 		searchCollectives1.add(cajonBusqueda);
 
 		barraBusquedaColectivo = new JTextField();
+		barraBusquedaColectivo.setColumns(30);
 		cajonBusqueda.add(barraBusquedaColectivo);		
 		barraBusquedaColectivo.setMaximumSize(new Dimension(300, 50));
 		
@@ -237,8 +243,9 @@ public class PantallaPrincipal extends JPanel {
 		searchProyectos1.add(cajonBusqueda);
 
 		barraBusquedaProyecto = new JTextField();
+		barraBusquedaProyecto.setColumns(30);
 		cajonBusqueda.add(barraBusquedaProyecto);		
-		//barraBusquedaProyecto.setMaximumSize(new Dimension(300, 50));
+		barraBusquedaProyecto.setMaximumSize(new Dimension(300, 50));
 		
 		botonBuscadorProyecto = new JButton("Buscar Proyectos");
 		cajonBusqueda.add(botonBuscadorProyecto);

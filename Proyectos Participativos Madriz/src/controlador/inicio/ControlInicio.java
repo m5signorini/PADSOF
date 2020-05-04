@@ -95,7 +95,6 @@ public class ControlInicio implements ActionListener {
 		
 		frame.setAllInvisible();
 		pantallaPrincipal.setVisible(true);
-		frame.pack();
 		
 		pantallaPrincipal.setCreatedProjects(u.getCreatedProjects());
 		pantallaPrincipal.setVotedProjects(u.getVotedProjects());
@@ -105,5 +104,7 @@ public class ControlInicio implements ActionListener {
 		pantallaPrincipal.setNotifications(u.getNotifications());
 		
 		pantallaPrincipal.update();
+		frame.pack();
+		frame.setLocationRelativeTo(null);
 	}	
 }
