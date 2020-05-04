@@ -23,6 +23,15 @@ import modelo.entities.individuals.Notification;
 import modelo.functionalities.Application;
 import modelo.projects.Project;
 
+/**
+ * Class that contains the components and functionalities
+ * to create a view for the main screen.
+ * From this view the user will be able
+ * to go through all the tabs of the application.
+ * @author Pedro Rodriguez Urbina
+ * @author Cesar Ramirez Martinez
+ */
+
 public class PantallaPrincipal extends JPanel {
 	
 	private ActionListener listener;
@@ -75,6 +84,11 @@ public class PantallaPrincipal extends JPanel {
 	
 	private JPanel currentView;
 	
+	/**
+	 * Constructor of PantallaPrincipal:   Initializes all the attributes and puts them in the right 
+	 * places in the container of the window. It is mainly formed by seven tabs and six buttons
+	 * that will lead the user try all the functionalities of the application. 
+	 */
 	public PantallaPrincipal() {
 		
 		//this.setLayout(new BorderLayout());
@@ -98,6 +112,11 @@ public class PantallaPrincipal extends JPanel {
 		searchProjects.setVisible(false);
 	}
 	
+	/**
+	 * Constructor of the left side menu of the main screen.
+	 * This menu will contain the six button previously mentioned.
+	 * @return the panel with the left side menu created
+	 */
 	private JPanel createLeftMenu() {
 		JPanel cont = new JPanel();
 		cont.setLayout(new BoxLayout(cont, BoxLayout.Y_AXIS));
@@ -160,6 +179,13 @@ public class PantallaPrincipal extends JPanel {
 		return cont;
 	}
 	
+	/**
+	 * Constructor of the seven tabs previously mentioned.
+	 * Each tab will be a section of the user. In each the user will
+	 * be able to take advice of all the information about his 
+	 * projects and collectives among other.
+	 * @return the JTabbedPanel that contains the different tabs
+	 */
 	private JTabbedPane createMiPagina() {
 		JTabbedPane pestanias1 = new JTabbedPane(JTabbedPane.TOP);
 		pestanias1.setFont(new Font("serif", Font.BOLD, 20));
@@ -206,6 +232,11 @@ public class PantallaPrincipal extends JPanel {
 		return pestanias1;
 	}
 	
+	/**
+	 * Constructor of the zone reserved to search the collectives
+	 *  previously created.
+	 * @return the JPanel that will lead the user search the collectives
+	 */
 	private JPanel createZonaBusquedaColectivos() {
 		JPanel searchCollectives1 = new JPanel();
 		searchCollectives1.setLayout(new BoxLayout(searchCollectives1, BoxLayout.Y_AXIS));
@@ -235,6 +266,11 @@ public class PantallaPrincipal extends JPanel {
 		return searchCollectives1;
 	}
 	
+	/**
+	 * Constructor of the zone reserved to search the projects
+	 * previously created.
+	 * @return the JPanel that will lead the user search the projects
+	 */
 	private JPanel createZonaBusquedaProyectos() {
 		JPanel searchProyectos1 = new JPanel();
 		searchProyectos1.setLayout(new BoxLayout(searchProyectos1, BoxLayout.Y_AXIS));
@@ -385,7 +421,11 @@ public class PantallaPrincipal extends JPanel {
 		return this.searchProjects;
 	}
 	
-	
+	/**
+	 * Each project obtained in the search, will appear 
+	 * this way on the screen.
+	 * @return the panel with a project result of the search
+	 */
 	private JPanel representacionProyecto(Project p) {
 		JPanel c = new JPanel();
 		c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
@@ -408,6 +448,11 @@ public class PantallaPrincipal extends JPanel {
 		return c;
 	}
 	
+	/**
+	 * Each collective obtained in the search, will appear 
+	 * this way on the screen.
+	 * @return the panel with a collective result of the search
+	 */
 	private JPanel representacionColectivo(Collective p) {
 		JPanel c = new JPanel();
 		c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
@@ -438,18 +483,22 @@ public class PantallaPrincipal extends JPanel {
 		return c;
 	}
 	
+	/**
+	 * The first row of the "Informe de popularidad" tab
+	 * will be represented this way.
+	 * @return the panel with the first row on this tab
+	 */
 	private JPanel primeraFilaInformePopularidad() {
 		JPanel c = new JPanel();
-		c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
-
+		c.setLayout(new GridLayout(1,3,0,10));
+		
+		c.add(Box.createRigidArea(new Dimension(200, 0)));
 		//Dimension d = new Dimension(1700, 100);
 		//Dimension d1 = new Dimension(200,120);
         //c.setMinimumSize(d);
         //c.setMaximumSize(d);
         //c.setPreferredSize(d);
         
-		c.add(Box.createRigidArea(new Dimension(200, 0)));
-
 		JLabel title =new JLabel("Titulo");
 		//title.setMaximumSize(d1);
 		//title.setMaximumSize(d1);
@@ -457,7 +506,6 @@ public class PantallaPrincipal extends JPanel {
 		title.setFont(new Font("serif", Font.ITALIC, 22));
 		c.add(title);
 		
-		c.add(Box.createRigidArea(new Dimension(200, 0)));
 		
 		JLabel votes =new JLabel("Votos");
 		//votes.setMaximumSize(d1);
@@ -466,7 +514,6 @@ public class PantallaPrincipal extends JPanel {
 		votes.setFont(new Font("serif", Font.ITALIC, 22));
 		c.add(votes);
 		
-		c.add(Box.createRigidArea(new Dimension(200, 0)));
 		
 		JLabel type =new JLabel("Tipo");
 		//type.setMaximumSize(d1);
@@ -475,17 +522,24 @@ public class PantallaPrincipal extends JPanel {
 		type.setFont(new Font("serif", Font.ITALIC, 22));
 		c.add(type);
 		
-		c.add(Box.createRigidArea(new Dimension(200, 0)));
 		
 		JLabel budget =new JLabel("Presupuesto");
 		budget.setFont(new Font("serif", Font.ITALIC, 22));
 		c.add(budget);
+
 		return c;
 	}
 	
+	/**
+	 * Each project in the "Informe de popularidad" tab
+	 * will be represented this way.
+	 * @return the panel with a project representation
+	 */
 	private JPanel representacionProyectoEnInformePopularidad(Project p) {
 		JPanel c = new JPanel();
-		c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
+		c.setLayout(new GridLayout(1,3,0,10));
+		
+		c.add(Box.createRigidArea(new Dimension(200, 0)));
 
 		//Dimension d = new Dimension(1700, 100);
 		//Dimension d1 = new Dimension(200,120);
@@ -493,41 +547,43 @@ public class PantallaPrincipal extends JPanel {
         //c.setMaximumSize(d);
         //c.setPreferredSize(d);
         
-		c.add(Box.createRigidArea(new Dimension(200, 0)));
 
 		JLabel title = new JLabel(p.getTitle());
 		//title.setMaximumSize(d1);
 		//title.setMaximumSize(d1);
 		//title.setPreferredSize(d1);
-		title.setFont(new Font("serif", Font.PLAIN, 22));
+		title.setFont(new Font("serif", Font.PLAIN, 20));
 		c.add(title);
-		c.add(Box.createRigidArea(new Dimension(200, 0)));
 
 		JLabel votes =new JLabel(String.valueOf(p.countVotes()));
 		//votes.setMaximumSize(d1);
 		//votes.setMaximumSize(d1);
 		//votes.setPreferredSize(d1);
-		votes.setFont(new Font("serif", Font.PLAIN, 22));
+		votes.setFont(new Font("serif", Font.PLAIN, 20));
 		c.add(votes);
-		c.add(Box.createRigidArea(new Dimension(200, 0)));
 		
 		JLabel type =new JLabel(String.valueOf(p.getProjectKind()));
 		//type.setMaximumSize(d1);
 		//type.setMaximumSize(d1);
 		//type.setPreferredSize(d1);
-		type.setFont(new Font("serif", Font.PLAIN, 22));
+		type.setFont(new Font("serif", Font.PLAIN, 20));
 		c.add(type);
-		c.add(Box.createRigidArea(new Dimension(200, 0)));
 		
 		JLabel budget =new JLabel(String.valueOf(p.getRequestedAmount()));
 		//budget.setMaximumSize(d1);
 		//budget.setMaximumSize(d1);
 		//budget.setPreferredSize(d1);
-		budget.setFont(new Font("serif", Font.PLAIN, 22));
+		budget.setFont(new Font("serif", Font.PLAIN, 20));
 		c.add(budget);
+
 		return c;
 	}
 	
+	/**
+	 * The first row of the "Informe de afinidad" tab
+	 * will be represented this way.
+	 * @return the panel with the first row on this tab
+	 */
 	private JPanel primeraFilaInformeAfinidad() {
 		JPanel c = new JPanel();
 		c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
@@ -547,10 +603,16 @@ public class PantallaPrincipal extends JPanel {
 		c.add(afinidadColectivo);
 		c.add(Box.createRigidArea(new Dimension(200, 0)));
 		c.add(calcularAfinidad);
-		
+		c.add(Box.createRigidArea(new Dimension(200, 0)));
+
 		return c;
 	}
 	
+	/**
+	 * This private function will receive three lists with all the needed
+	 * info to represent all the collectives and its info in the tab.
+	 * @return the panel with all the collectives and the info required by the user
+	 */
 	public void representacionInformeAfinidad(List<Collective> list1, List<Double> list2, List<Integer> list3, String text) {
 		if(	list1 == null || list2 == null || list3 == null) {
 			return;
@@ -572,7 +634,8 @@ public class PantallaPrincipal extends JPanel {
 		}
 		
 		JPanel c = new JPanel();
-		c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
+		//c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
+		c.setLayout(new GridLayout(1,3,0,10));
 
 		//Dimension d = new Dimension(1700, 100);
 		//Dimension d1 = new Dimension(200,120);
@@ -580,25 +643,27 @@ public class PantallaPrincipal extends JPanel {
         //c.setMaximumSize(d);
         //c.setPreferredSize(d);
         
+		//c.add(Box.createRigidArea(new Dimension(200, 0)));
+		
 		c.add(Box.createRigidArea(new Dimension(200, 0)));
 
-		JLabel title =new JLabel("Colectivos:");
+		JLabel title =new JLabel("Nombre:");
 		title.setFont(new Font("serif", Font.ITALIC, 22));
 		//title.setMaximumSize(d1);
 		//title.setMaximumSize(d1);
 		//title.setPreferredSize(d1);
 		c.add(title);
 		
-		c.add(Box.createRigidArea(new Dimension(200, 0)));
+		//c.add(Box.createRigidArea(new Dimension(200, 0)));
 		
-		JLabel indice =new JLabel("Indice de afinidad:");
+		JLabel indice =new JLabel("Afinidad:");
 		indice.setFont(new Font("serif", Font.ITALIC, 22));
 		//indice.setMaximumSize(d1);
 		//indice.setMaximumSize(d1);
 		//indice.setPreferredSize(d1);
 		c.add(indice);
 		
-		c.add(Box.createRigidArea(new Dimension(200, 0)));
+		//c.add(Box.createRigidArea(new Dimension(200, 0)));
 		
 		JLabel members =new JLabel("Miembros:");
 		members.setFont(new Font("serif", Font.ITALIC, 22));
@@ -606,6 +671,8 @@ public class PantallaPrincipal extends JPanel {
 		//members.setMaximumSize(d1);
 		//members.setPreferredSize(d1);
 		c.add(members);
+		//c.add(Box.createRigidArea(new Dimension(200, 0)));
+
 		pestaniaInformeAfinidad.add(c);
 
 		int i;
@@ -613,42 +680,51 @@ public class PantallaPrincipal extends JPanel {
 		for( i = 0; i < list1.size(); i++) {
 			
 	        JPanel p = new JPanel();
-			p.setLayout(new BoxLayout(p, BoxLayout.X_AXIS));
+			//p.setLayout(new BoxLayout(p, BoxLayout.X_AXIS));
+			p.setLayout(new GridLayout(1,3,0,10));
+			
+			p.add(Box.createRigidArea(new Dimension(200, 0)));
 
 	        //p.setMinimumSize(d);
 	        //p.setMaximumSize(d);
 	        //p.setPreferredSize(d);
 	        
-			p.add(Box.createRigidArea(new Dimension(200, 0)));
+			//p.add(Box.createRigidArea(new Dimension(200, 0)));
 
 			JLabel name = new JLabel(list1.get(i).getName());
 			//name.setMaximumSize(d1);
 			//name.setMaximumSize(d1);
 			//name.setPreferredSize(d1);
-			name.setFont(new Font("serif", Font.PLAIN, 22));
+			name.setFont(new Font("serif", Font.PLAIN, 20));
 			p.add(name);
-			p.add(Box.createRigidArea(new Dimension(200, 25)));
+			//p.add(Box.createRigidArea(new Dimension(200, 0)));
 			
 			JLabel index =new JLabel(String.valueOf(list2.get(i)));
 			//index.setMaximumSize(d1);
 			//index.setMaximumSize(d1);
 			//index.setPreferredSize(d1);
-			index.setFont(new Font("serif", Font.PLAIN, 22));
+			index.setFont(new Font("serif", Font.PLAIN, 20));
 			p.add(index);
-			p.add(Box.createRigidArea(new Dimension(200, 0)));
+			//p.add(Box.createRigidArea(new Dimension(200, 0)));
 			
 			JLabel memberQuantity =new JLabel(String.valueOf(list3.get(i)));
 			//memberQuantity.setMaximumSize(d1);
 			//memberQuantity.setMaximumSize(d1);
 			//memberQuantity.setPreferredSize(d1);
-			memberQuantity.setFont(new Font("serif", Font.PLAIN, 22));
+			memberQuantity.setFont(new Font("serif", Font.PLAIN, 20));
 			p.add(memberQuantity);
 			
+			//p.add(Box.createRigidArea(new Dimension(200, 0)));
+
 			pestaniaInformeAfinidad.add(p);
 
 		}
 	}
 	
+	/**
+	 * This function will add or delete the needed components
+	 * of the main screen after certain action happen.
+	 */
 	public void update () {
 		
 		pestaniaInformePopularidad.removeAll();
@@ -748,6 +824,10 @@ public class PantallaPrincipal extends JPanel {
 		}
 	}
 	
+	/**
+	 * This function will add all the collectives obtained in the search
+	 * in the corresponding tab or none if there is not any search result.
+	 */
 	public void actualizarResultadosBusquedaColectivo () {		
 		resultadosBusquedaColectivo.removeAll();
 		if(resultadoBusquedaColectivos.isEmpty()) {
@@ -767,6 +847,10 @@ public class PantallaPrincipal extends JPanel {
 		}
 	}
 	
+	/**
+	 * This function will add all the projects obtained in the search
+	 * in the corresponding tab or none if there is not any search result.
+	 */
 	public void actualizarResultadosBusquedaProyecto () {		
 		resultadosBusquedaProyecto.removeAll();
 		if(resultadoBusquedaProyectos.isEmpty()) {
