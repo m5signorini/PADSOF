@@ -22,6 +22,15 @@ import vista.principal.*;
 import vista.proyectos.CreateProjectView;
 import vista.proyectos.ProjectView;
 
+
+/**
+ * The Ventana class contains all the graphic objects developed in the different view's classes.
+ * It handle all the views and controllers, setting the adequate controllers to each view.
+ * @author Pedro Urbina Rodriguez 
+ * @author Cesar Ramirez
+ * @author Martin Sanchez
+ */
+
 public class Ventana extends JFrame {
 	
 	private Inicio vistaInicio;
@@ -95,6 +104,12 @@ public class Ventana extends JFrame {
 		this.pack();
 	}
 
+
+	/**
+	 * Sets all the controllers of all the different views in the application.
+	 * @param controlador Controlador which contains all the controllers for the different views.
+	 * @return None.
+	 */
 	public void setControlador(Controlador controlador) {
 		this.contInicio = controlador.getControlInicio();
 		vistaInicio.setControladores(contInicio);
@@ -189,6 +204,11 @@ public class Ventana extends JFrame {
 		return this.contAdmin;
 	}
 	
+
+	/**
+	 * All the different views contained in the current object are made invisible.
+	 * @return None.
+	 */
 	public void setAllInvisible() {
 		vistaInicio.setVisible(false);
 		vistaInicioAdmin.setVisible(false);
