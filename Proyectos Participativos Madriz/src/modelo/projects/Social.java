@@ -55,8 +55,12 @@ public class Social extends Project {
 		return picture;
 	}
 
-	public void setPicture(String picture) {
+	public void setImagePath(String picture) {
 		this.picture = picture;
+	}
+	
+	public String typeToString() {
+		return "Social";
 	}
 	
 	public String getExtraData() {

@@ -40,8 +40,12 @@ public class Infrastructural extends Project {
 	public String getImagePath() {
 		return scheme;
 	}
+	
+	public String typeToString() {
+		return "Infrastructural";
+	}
 
-	public void setScheme(String scheme) {
+	public void setImagePath(String scheme) {
 		this.scheme = scheme;
 	}
 

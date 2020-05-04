@@ -62,9 +62,9 @@ public class CreateProjectView extends JPanel{
 	JLabel etiquetaTitleS;
 	JTextField titleS; 
 	
-	//Budget
-	JLabel etiquetaBudgetS;
-	JTextField budgetS;
+	//Cost
+	JLabel etiquetaCostS;
+	JTextField costS;
 	
 	//Description
 	JLabel etiquetaDescS;
@@ -98,9 +98,9 @@ public class CreateProjectView extends JPanel{
 	JLabel etiquetaTitleI;
 	JTextField titleI; 
 		
-	//Budget
-	JLabel etiquetaBudgetI;
-	JTextField budgetI;
+	//Cost
+	JLabel etiquetaCostI;
+	JTextField costI;
 		
 	//Description
 	JLabel etiquetaDescI;
@@ -152,7 +152,7 @@ public class CreateProjectView extends JPanel{
 					for(Component c : components) {
 						((JCheckBox) c).setSelected(false);
 					}
-					budgetI.setText("1");
+					costI.setText("1");
 					aux = "Social";
 				}
 				else {
@@ -161,7 +161,7 @@ public class CreateProjectView extends JPanel{
 					image.setText("");
 					//collectiveNameS.setText("");
 					comboS.setSelectedIndex(0);
-					budgetS.setText("1");
+					costS.setText("1");
 					group.setText("");
 					nacS.setSelected(true);
 					aux = "Infrastructural";
@@ -216,12 +216,12 @@ public class CreateProjectView extends JPanel{
 		MainPanelSoc.add(titleS); 
 		
 		//Presupuesto
-		etiquetaBudgetS = new JLabel("Presupuesto (euros):");
-		budgetS = new JTextField(10);
-		etiquetaBudgetS.setLabelFor(budgetS);
-		budgetS.setText("1");
-		MainPanelSoc.add(etiquetaBudgetS);
-		MainPanelSoc.add(budgetS);
+		etiquetaCostS = new JLabel("Presupuesto (euros):");
+		costS = new JTextField(10);
+		etiquetaCostS.setLabelFor(costS);
+		costS.setText("1");
+		MainPanelSoc.add(etiquetaCostS);
+		MainPanelSoc.add(costS);
 		
 		//Descripcion proyecto
 		etiquetaDescS = new JLabel("Descripcion:");
@@ -291,12 +291,12 @@ public class CreateProjectView extends JPanel{
 		MainPanelInfr.add(titleI); 
 				
 		//Presupuesto
-		etiquetaBudgetI = new JLabel("Presupuesto (euros):");
-		budgetI = new JTextField(10);
-		etiquetaBudgetI.setLabelFor(budgetI);
-		budgetI.setText("1");
-		MainPanelInfr.add(etiquetaBudgetI);
-		MainPanelInfr.add(budgetI);
+		etiquetaCostI = new JLabel("Presupuesto (euros):");
+		costI = new JTextField(10);
+		etiquetaCostI.setLabelFor(costI);
+		costI.setText("1");
+		MainPanelInfr.add(etiquetaCostI);
+		MainPanelInfr.add(costI);
 				
 		//Descripcion proyecto
 		etiquetaDescI = new JLabel("Descripcion:");
@@ -423,36 +423,36 @@ public class CreateProjectView extends JPanel{
 	}
 	
 	/**
-	 * Return the budget of the project the user has written.
-	 * @return budget of the project or -1 in case there is nothing written or -2 in case the budget is less than or equal to 0.
+	 * Return the cost of the project the user has written.
+	 * @return cost of the project or -1 in case there is nothing written or -2 in case the cost is less than or equal to 0.
 	 */
-	public double getBudget() {
-		if ((budgetS.getText() == null || budgetS.getText().equals("")) && (budgetI.getText() == null || budgetI.getText().equals(""))) {
-			JOptionPane.showMessageDialog(null, "You must write a budget.", "Wrong budget.", JOptionPane.OK_OPTION);
+	public double getCost() {
+		if ((costS.getText() == null || costS.getText().equals("")) && (costI.getText() == null || costI.getText().equals(""))) {
+			JOptionPane.showMessageDialog(null, "You must write a cost.", "Wrong cost.", JOptionPane.OK_OPTION);
 			return -1; 
 		}
 		if(aux =="Social") {
-			if(budgetS.getText().matches((".*[a-zA-Z]+.*"))) {
-				JOptionPane.showMessageDialog(null, "A budget must be a number.", "You must write a valid budget.", JOptionPane.OK_OPTION);
+			if(costS.getText().matches((".*[a-zA-Z]+.*"))) {
+				JOptionPane.showMessageDialog(null, "A cost must be a number.", "You must write a valid cost.", JOptionPane.OK_OPTION);
 				return -3;
 			}
 		}
 		else {
-			if(budgetI.getText().matches((".*[a-zA-Z]+.*"))) {
-				JOptionPane.showMessageDialog(null, "A budget must be a number.", "You must write a valid budget.", JOptionPane.OK_OPTION);
+			if(costI.getText().matches((".*[a-zA-Z]+.*"))) {
+				JOptionPane.showMessageDialog(null, "A cost must be a number.", "You must write a valid cost.", JOptionPane.OK_OPTION);
 				return -3;
 			}
 		}
-		if(Double.parseDouble(budgetS.getText()) <= 1 && Double.parseDouble(budgetI.getText()) <= 1){
-			JOptionPane.showMessageDialog(null, "You must write a valid budget.", "You must write a valid budget.", JOptionPane.OK_OPTION);
+		if(Double.parseDouble(costS.getText()) <= 1 && Double.parseDouble(costI.getText()) <= 1){
+			JOptionPane.showMessageDialog(null, "You must write a valid cost.", "You must write a valid cost.", JOptionPane.OK_OPTION);
 			return -2;
 		}
 		if(aux == "Social") {
-			return Double.parseDouble(budgetS.getText());
+			return Double.parseDouble(costS.getText());
 
 		}
 		else {
-			return Double.parseDouble(budgetI.getText());
+			return Double.parseDouble(costI.getText());
 		}
 	}
 	

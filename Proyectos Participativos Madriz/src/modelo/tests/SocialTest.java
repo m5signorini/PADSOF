@@ -162,7 +162,7 @@ public class SocialTest {
 	
 	@Test
 	public void testGetExtraData() {
-		assertEquals(String.valueOf(projectS.getCost()) + String.valueOf(projectS.getCreationDate()) + String.valueOf(projectS.getLastVote()) + String.valueOf(projectS.getCreator()) + String.valueOf(projectS.getScope()) + projectS.getGroup() +projectS.getPicture(), projectS.getExtraData());
+		assertEquals(String.valueOf(projectS.getCost()) + String.valueOf(projectS.getCreationDate()) + String.valueOf(projectS.getLastVote()) + String.valueOf(projectS.getCreator()) + String.valueOf(projectS.getScope()) + projectS.getGroup() +projectS.getImagePath(), projectS.getExtraData());
 	}
 	
 	@Test

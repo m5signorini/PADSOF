@@ -1,9 +1,11 @@
 package vista.proyectos;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.util.List;
 
 import javax.swing.Box;
@@ -21,17 +23,19 @@ import modelo.projects.Project;
 public class ProjectView extends JPanel{
 	
 	private JPanel container;
+	private JPanel info;
+	private JPanel action;
 	
 	private Project p;
-	
 	
 	private JLabel title;
 	private JLabel desc;
 	private JLabel type;
-	private JLabel budget;
+	private JLabel cost;
 	private JLabel creationDate;
 	private JLabel creator;
 	private JLabel nVoters;
+	private BufferedImage image;
 
 	private JButton seguir;
 	private JButton dejarDeSeguir;
@@ -41,72 +45,76 @@ public class ProjectView extends JPanel{
 	private List<Collective> represented;
 	
 	public ProjectView() {
-		container = new JPanel();
-		container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
-		this.add(container);
-		container.setBackground(new Color(190,255,255));
-		Dimension d = new Dimension(1000, 1000);
-		container.setMinimumSize(d);
-		container.setMaximumSize(d);
-		container.setPreferredSize(d);
+		this.setLayout(new BorderLayout());
+		
+		info = new JPanel();
+		action = new JPanel();
+		info.setLayout(new BoxLayout(info, BoxLayout.Y_AXIS));
+		info.setBackground(new Color(190,255,255));
+		action.setLayout(new BoxLayout(action, BoxLayout.Y_AXIS));
+		action.setBackground(new Color(190,255,255));
+		//Dimension d = new Dimension(1000, 1000);
+		//container.setMinimumSize(d);
+		//container.setMaximumSize(d);
+		//container.setPreferredSize(d);
 
 		title = new JLabel("None");
 		desc = new JLabel("None");
 		type = new JLabel("None");
-		budget = new JLabel("None");
+		cost = new JLabel("None");
 		creationDate = new JLabel("None");
 		creator = new JLabel("None");
 		nVoters = new JLabel("None");
 
 		title.setFont(new Font("serif", Font.BOLD, 50));
-		container.add(title);
+		info.add(title);
 		
-		container.add(Box.createRigidArea(new Dimension(0, 50)));
+		info.add(Box.createRigidArea(new Dimension(0, 50)));
 		
 		JPanel auxDesc = new JPanel();
-		container.add(auxDesc);
+		info.add(auxDesc);
 		auxDesc.setLayout(new BoxLayout(auxDesc, BoxLayout.X_AXIS));
-		auxDesc.add(new JLabel("Description: "));
+		auxDesc.add(new JLabel("Descripcion: "));
 		auxDesc.add(desc);
 		
-		container.add(Box.createRigidArea(new Dimension(0, 30)));
+		info.add(Box.createRigidArea(new Dimension(0, 30)));
 		
 		JPanel auxType = new JPanel();
-		container.add(auxType);
+		info.add(auxType);
 		auxType.setLayout(new BoxLayout(auxType, BoxLayout.X_AXIS));
-		auxType.add(new JLabel("Type: "));
+		auxType.add(new JLabel("Tipo: "));
 		auxType.add(type);
 		
-		container.add(Box.createRigidArea(new Dimension(0, 30)));
+		info.add(Box.createRigidArea(new Dimension(0, 30)));
 		
-		JPanel auxBudget = new JPanel();
-		container.add(auxBudget);
-		auxBudget.setLayout(new BoxLayout(auxBudget, BoxLayout.X_AXIS));
-		auxBudget.add(new JLabel("Budget: "));
-		auxBudget.add(budget);
+		JPanel auxCost = new JPanel();
+		info.add(auxCost);
+		auxCost.setLayout(new BoxLayout(auxCost, BoxLayout.X_AXIS));
+		auxCost.add(new JLabel("Coste: "));
+		auxCost.add(cost);
 		
-		container.add(Box.createRigidArea(new Dimension(0, 30)));
+		info.add(Box.createRigidArea(new Dimension(0, 30)));
 		
 		JPanel auxDate = new JPanel();
-		container.add(auxDate);
+		info.add(auxDate);
 		auxDate.setLayout(new BoxLayout(auxDate, BoxLayout.X_AXIS));
-		auxDate.add(new JLabel("Creation date: "));
+		auxDate.add(new JLabel("Fecha de Creacion: "));
 		auxDate.add(creationDate);
 		
-		container.add(Box.createRigidArea(new Dimension(0, 30)));
+		info.add(Box.createRigidArea(new Dimension(0, 30)));
 		
 		JPanel auxCreator = new JPanel();
-		container.add(auxCreator);
+		info.add(auxCreator);
 		auxCreator.setLayout(new BoxLayout(auxCreator, BoxLayout.X_AXIS));
-		auxCreator.add(new JLabel("Creator: "));
+		auxCreator.add(new JLabel("Creador: "));
 		auxCreator.add(creator);
 		
-		container.add(Box.createRigidArea(new Dimension(0, 30)));
+		info.add(Box.createRigidArea(new Dimension(0, 30)));
 		
 		JPanel auxVotes = new JPanel();
-		container.add(auxVotes);
+		info.add(auxVotes);
 		auxVotes.setLayout(new BoxLayout(auxVotes, BoxLayout.X_AXIS));
-		auxVotes.add(new JLabel("Number of votes: "));
+		auxVotes.add(new JLabel("Numero de apoyos: "));
 		auxVotes.add(nVoters);
 		
 		seguir = new JButton("Seguir al proyecto para mantenerte al dia");
@@ -114,24 +122,24 @@ public class ProjectView extends JPanel{
 		apoyar = new JButton("Votar por el proyecto");
 		dejarDeSeguir = new JButton("Dejar de seguir el proyecto");
 
-		container.add(Box.createRigidArea(new Dimension(0, 30)));
-		container.add(seguir);
-		container.add(Box.createRigidArea(new Dimension(0, 30)));
-		container.add(volver);
-		container.add(Box.createRigidArea(new Dimension(0, 30)));
-		container.add(apoyar);
-		container.add(Box.createRigidArea(new Dimension(0, 30)));
-		container.add(dejarDeSeguir);		
-
-		container.add(Box.createRigidArea(new Dimension(0, 30)));
+		action.add(Box.createRigidArea(new Dimension(0, 30)));
+		action.add(seguir);
+		action.add(Box.createRigidArea(new Dimension(0, 30)));
+		action.add(volver);
+		action.add(Box.createRigidArea(new Dimension(0, 30)));
+		action.add(apoyar);
+		action.add(Box.createRigidArea(new Dimension(0, 30)));
+		action.add(dejarDeSeguir);
+		action.add(Box.createRigidArea(new Dimension(0, 30)));
 		
-		container.add(new JLabel("Votar como representante: "));
+		action.add(new JLabel("Votar como representante: "));
 		
 		String[] opciones = {"Ninguno"};
 		votarRepresentante = new JComboBox<String>(opciones);
 		votarRepresentante.setBackground(new Color(190,255,255));
-		container.add(votarRepresentante);
-		
+		action.add(votarRepresentante);
+		this.add(info, BorderLayout.WEST);
+		this.add(action, BorderLayout.EAST);
 	}
 	
 	public Project getProject() {
@@ -162,14 +170,14 @@ public class ProjectView extends JPanel{
 		for(Collective c: col) {
 			votarRepresentante.addItem(c.getName());
 		}
-	
-		
-		
 		
 		title.setText(p.getTitle());
 		desc.setText(p.getDescription());
 		creator.setText(p.getCreator().toString());
 		nVoters.setText(Integer.toString(p.getVoters().size()));
+		type.setText(p.typeToString());
+		cost.setText(p.getCost() + "");
+		creationDate.setText(p.getCreationDate().toString());
 	}	
 	
 	

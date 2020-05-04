@@ -127,9 +127,10 @@ public class ControlPantallaPrincipal implements ActionListener {
 			JOptionPane.showMessageDialog(pantallaPrincipal, "Huvo un problema al enviar este proyecto.", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-		
+
 	private void mostrarInformacionProyecto(Project p) {
 		User u = modelo.getLoggedUser();
+		//System.out.println(p);
 		frame.getProjectView().update(p, u.getRepresentedCollectives());
 		frame.setAllInvisible();
 		frame.getProjectView().setVisible(true);

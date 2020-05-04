@@ -53,7 +53,7 @@ public class ControlCreateProject implements ActionListener {
 			if(description == null) {
 				return;
 			}
-			Double budget = this.projectView.getBudget();
+			Double budget = this.projectView.getCost();
 			if(budget <= 0) {
 				return;
 			}
@@ -130,7 +130,7 @@ public class ControlCreateProject implements ActionListener {
 					project = new Infrastructural(title, description, budget, date, loggedUser, affectedDistricts, scheme, location);
 					loggedUser.addCreatedProject(project);  
 				}
-				//Sino
+				//Si no
 				else {
 					project = new Infrastructural(title, description, budget, date, col, affectedDistricts, scheme, location);
 					col.addCreatedProject(project);
