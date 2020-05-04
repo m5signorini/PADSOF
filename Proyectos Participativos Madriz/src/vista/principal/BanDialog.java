@@ -47,18 +47,33 @@ public class BanDialog extends JDialog {
 		add(box);
 	}
 	
+	/**
+	 * Getter for the message
+	 * @return Written message
+	 */
 	public String getMessage() {
 		return message.getText();
 	}
 	
+	/**
+	 * Getter for the days banned
+	 * @return Days banned
+	 */
 	public Integer getDays() {
 		return (Integer)time.getValue();
 	}
 	
+	/**
+	 * Getter for the user to be banned
+	 * @return User to be banned
+	 */
 	public User getUser() {
 		return banned;
 	}
 	
+	/**
+	 * Setter for the controller of the dialog
+	 */
 	public void setControlador(ActionListener l) {
 		ban.addActionListener(l);
 	}

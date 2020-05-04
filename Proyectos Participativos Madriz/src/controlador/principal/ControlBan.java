@@ -7,6 +7,11 @@ import javax.swing.JOptionPane;
 import modelo.functionalities.Application;
 import vista.principal.BanDialog;
 
+/**
+ * Controller class for the ban dialog
+ * @author Martin Sanchez Signorini
+ *
+ */
 public class ControlBan implements ActionListener {
 	private ControlAdmin top;
 	private BanDialog vista;
@@ -18,6 +23,9 @@ public class ControlBan implements ActionListener {
 		top = toplevel;
 	}
 	
+	/**
+	 *  Action for the ban dialog
+	 */
 	public void actionPerformed(ActionEvent e) {
 		String message = vista.getMessage();
 		Integer time = vista.getDays();
