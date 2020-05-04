@@ -1,6 +1,7 @@
 package vista.colectivos;
 
 import java.awt.*;
+
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
@@ -9,6 +10,12 @@ import modelo.entities.Collective;
 import vista.proyectos.SpringUtilities;
 
 import java.util.List;
+
+/**
+ * Class that contains the components and functionalities
+ * to create a view for the creation of a collective
+ * @author Cesar Ramirez Martinez
+ */
 
 public class CreateCollectiveView extends JPanel{
 
@@ -35,9 +42,12 @@ public class CreateCollectiveView extends JPanel{
 		//Father collective
 		JLabel etiquetaFather;
 		JComboBox<String> father;
-		//JTextField father;
 		
-		
+		/**
+		 * Constructor of CreateCollectiveView:   Initializes all the attributes and puts them in the right 
+		 * places in the container of the window. It is mainly formed by one tabs, a cancel button 
+		 * and a cancel button. The tab gives the user all the options to create a new collective.
+		 */
 		public CreateCollectiveView() {
 			window = new JFrame("Nuevo colectivo");
 			
@@ -47,14 +57,14 @@ public class CreateCollectiveView extends JPanel{
 			
 			container.setLayout(layout);
 			 
-			//Boton crear
+			//Create button
 			create = new JButton("Crear");
 			container.add(create);
 			
 			layout.putConstraint(SpringLayout.WEST, create, 250, SpringLayout.WEST, container);
 			layout.putConstraint(SpringLayout.NORTH, create,200, SpringLayout.NORTH, container);
 			
-			//Boton cancelar
+			//Cancel button
 			cancel = new JButton("Cancelar");
 			container.add(cancel);
 			
@@ -83,7 +93,6 @@ public class CreateCollectiveView extends JPanel{
 			MainPanel.add(scrollS);
 			
 			//Father name
-			//etiquetaFather = new JLabel("<html>Nombre colectivo padre(Opcional):  <br> (Si el nombre no es correcto el <br> colectivo sera creado sin padre.)</html>");
 			etiquetaFather = new JLabel("Nombre colectivo padre:");
 			father = new JComboBox<String>();
 			MainPanel.add(etiquetaFather);
@@ -95,9 +104,7 @@ public class CreateCollectiveView extends JPanel{
 	                6, 6); //xPad, yPad
 			
 			container.add(MainPanel);
-			//window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			window.setSize(350, 300);
-			//window.setVisible(true);
 		
 		}
 
@@ -157,6 +164,11 @@ public class CreateCollectiveView extends JPanel{
 			}
 		}
 		
+		/**
+		 * Updates the options of the JComboBox
+		 * to show all the collectives available to
+		 * choose as parent
+		 */
 		public void update () {
 			father.removeAllItems();
 			father.addItem("Ninguno");
@@ -169,11 +181,19 @@ public class CreateCollectiveView extends JPanel{
 			return;
 		}
 		
+		/**
+		 * Sets the actions to perform when the cancel or the create button are clicked.
+		 */
 		public void setController(ActionListener c) {
 			create.addActionListener(c);
 			cancel.addActionListener(c);
 		}
 		
+		/**
+		 * Sets the operation that will happen by default when the user initiates a "close" on this 
+		 * frame.
+		 * @param operation
+		 */
 		public void setCloseOperation(int operation) {
 			window.setDefaultCloseOperation(operation);
 		}
