@@ -55,11 +55,21 @@ public class ControlProjectView implements ActionListener {
 		
 		User u = modelo.getLoggedUser();
 		Project proj = projectView.getProject();
+		List<Collective> collect = projectView.getRepresentedCollectives();
+		int selected = projectView.getSelected();
 		
-		if(proj.support(u) == null) {
-			JOptionPane.showMessageDialog(projectView, "No puedes votar a este proyecto.", "Error", JOptionPane.ERROR_MESSAGE);
+		if(selected == 0) {
+			if(proj.support(u) == null) {
+				JOptionPane.showMessageDialog(projectView, "No puedes votar a este proyecto.", "Error", JOptionPane.ERROR_MESSAGE);
+			} else {
+				JOptionPane.showMessageDialog(projectView, "Has apoyado al proyecto");
+			}
 		} else {
-			JOptionPane.showMessageDialog(projectView, "Has apoyado al proyecto");
+			if(proj.support(collect.get(selected-1)) == null) {
+				JOptionPane.showMessageDialog(projectView, "No puedes votar a este proyecto.", "Error", JOptionPane.ERROR_MESSAGE);
+			} else {
+				JOptionPane.showMessageDialog(projectView, "Has apoyado al proyecto como representante");
+			}
 		}
 	}
 	

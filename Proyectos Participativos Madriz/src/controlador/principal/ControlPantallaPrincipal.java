@@ -109,7 +109,8 @@ public class ControlPantallaPrincipal implements ActionListener {
 	}
 	
 	private void mostrarInformacionProyecto(Project p) {
-		frame.getProjectView().update(p);
+		User u = modelo.getLoggedUser();
+		frame.getProjectView().update(p, u.getRepresentedCollectives());
 		frame.setAllInvisible();
 		frame.getProjectView().setVisible(true);
 		frame.pack();

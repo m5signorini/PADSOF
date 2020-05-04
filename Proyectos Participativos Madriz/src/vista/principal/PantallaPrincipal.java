@@ -655,8 +655,12 @@ public class PantallaPrincipal extends JPanel {
 			pestaniaColectivosCreados.add(cont1);
 			i++;
 		}
-		for (Notification p: notifications) {
-			pestaniaNotificaciones.add(representacionNotificacion(p));
+		if (notifications.isEmpty()) {
+			pestaniaNotificaciones.add(new JLabel("No hay nuevas notificaciones!"));
+		} else {
+			for (Notification p: notifications) {
+				pestaniaNotificaciones.add(representacionNotificacion(p));
+			}
 		}
 		
 		pestaniaInformePopularidad.add(primeraFilaInformePopularidad());

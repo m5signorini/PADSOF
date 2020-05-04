@@ -4,10 +4,12 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -18,22 +20,25 @@ import modelo.projects.Project;
 
 public class ProjectView extends JPanel{
 	
-	JPanel container;
+	private JPanel container;
 	
-	Project p;
+	private Project p;
 	
-	JLabel title;
-	JLabel desc;
-	JLabel type;
-	JLabel budget;
-	JLabel creationDate;
-	JLabel creator;
-	JLabel nVoters;
+	
+	private JLabel title;
+	private JLabel desc;
+	private JLabel type;
+	private JLabel budget;
+	private JLabel creationDate;
+	private JLabel creator;
+	private JLabel nVoters;
 
-	JButton seguir;
-	JButton dejarDeSeguir;
-	JButton apoyar;
-	JButton volver;
+	private JButton seguir;
+	private JButton dejarDeSeguir;
+	private JButton apoyar;
+	private JButton volver;
+	private JComboBox<String> votarRepresentante;
+	private List<Collective> represented;
 	
 	public ProjectView() {
 		container = new JPanel();
@@ -64,7 +69,7 @@ public class ProjectView extends JPanel{
 		auxDesc.add(new JLabel("Description: "));
 		auxDesc.add(desc);
 		
-		container.add(Box.createRigidArea(new Dimension(0, 50)));
+		container.add(Box.createRigidArea(new Dimension(0, 30)));
 		
 		JPanel auxType = new JPanel();
 		container.add(auxType);
@@ -72,7 +77,7 @@ public class ProjectView extends JPanel{
 		auxType.add(new JLabel("Type: "));
 		auxType.add(type);
 		
-		container.add(Box.createRigidArea(new Dimension(0, 50)));
+		container.add(Box.createRigidArea(new Dimension(0, 30)));
 		
 		JPanel auxBudget = new JPanel();
 		container.add(auxBudget);
@@ -80,7 +85,7 @@ public class ProjectView extends JPanel{
 		auxBudget.add(new JLabel("Budget: "));
 		auxBudget.add(budget);
 		
-		container.add(Box.createRigidArea(new Dimension(0, 50)));
+		container.add(Box.createRigidArea(new Dimension(0, 30)));
 		
 		JPanel auxDate = new JPanel();
 		container.add(auxDate);
@@ -88,7 +93,7 @@ public class ProjectView extends JPanel{
 		auxDate.add(new JLabel("Creation date: "));
 		auxDate.add(creationDate);
 		
-		container.add(Box.createRigidArea(new Dimension(0, 50)));
+		container.add(Box.createRigidArea(new Dimension(0, 30)));
 		
 		JPanel auxCreator = new JPanel();
 		container.add(auxCreator);
@@ -96,7 +101,7 @@ public class ProjectView extends JPanel{
 		auxCreator.add(new JLabel("Creator: "));
 		auxCreator.add(creator);
 		
-		container.add(Box.createRigidArea(new Dimension(0, 50)));
+		container.add(Box.createRigidArea(new Dimension(0, 30)));
 		
 		JPanel auxVotes = new JPanel();
 		container.add(auxVotes);
@@ -109,19 +114,32 @@ public class ProjectView extends JPanel{
 		apoyar = new JButton("Votar por el proyecto");
 		dejarDeSeguir = new JButton("Dejar de seguir el proyecto");
 
-		container.add(Box.createRigidArea(new Dimension(0, 50)));
+		container.add(Box.createRigidArea(new Dimension(0, 30)));
 		container.add(seguir);
-		container.add(Box.createRigidArea(new Dimension(0, 50)));
+		container.add(Box.createRigidArea(new Dimension(0, 30)));
 		container.add(volver);
-		container.add(Box.createRigidArea(new Dimension(0, 50)));
+		container.add(Box.createRigidArea(new Dimension(0, 30)));
 		container.add(apoyar);
-		container.add(Box.createRigidArea(new Dimension(0, 50)));
-		container.add(dejarDeSeguir);
+		container.add(Box.createRigidArea(new Dimension(0, 30)));
+		container.add(dejarDeSeguir);		
+
+		container.add(Box.createRigidArea(new Dimension(0, 30)));
+		
+		container.add(new JLabel("Votar como representante: "));
+		
+		String[] opciones = {"Ninguno"};
+		votarRepresentante = new JComboBox<String>(opciones);
+		votarRepresentante.setBackground(new Color(190,255,255));
+		container.add(votarRepresentante);
 		
 	}
 	
 	public Project getProject() {
 		return this.p;
+	}
+	
+	public List<Collective> getRepresentedCollectives(){
+		return this.represented;
 	}
 
 	public void setController(ActionListener a) {
@@ -130,9 +148,24 @@ public class ProjectView extends JPanel{
 		apoyar.addActionListener(a);	
 		dejarDeSeguir.addActionListener(a);
 	}
+	
+	public int getSelected() {
+		return votarRepresentante.getSelectedIndex();
+	}
 
-	public void update(Project p) {
+	public void update(Project p, List<Collective> col) {
 		this.p = p;
+		this.represented = col;
+
+		votarRepresentante.removeAllItems();
+		votarRepresentante.addItem("Ninguno");
+		for(Collective c: col) {
+			votarRepresentante.addItem(c.getName());
+		}
+	
+		
+		
+		
 		title.setText(p.getTitle());
 		desc.setText(p.getDescription());
 		creator.setText(p.getCreator().toString());
