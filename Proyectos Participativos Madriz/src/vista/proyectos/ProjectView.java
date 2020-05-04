@@ -2,6 +2,7 @@ package vista.proyectos;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -62,7 +63,9 @@ public class ProjectView extends JPanel{
 		this.setLayout(new BorderLayout());
 		
 		info = new JPanel();
-		action = new JPanel();
+		action = new JPanel();		
+		info.setAlignmentX(Component.CENTER_ALIGNMENT);		
+		action.setAlignmentX(Component.CENTER_ALIGNMENT);
 		info.setLayout(new BoxLayout(info, BoxLayout.Y_AXIS));
 		info.setBackground(new Color(240,255,255));
 		action.setLayout(new BoxLayout(action, BoxLayout.Y_AXIS));

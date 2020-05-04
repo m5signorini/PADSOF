@@ -86,6 +86,8 @@ public class CollectiveView extends JPanel{
 		auxDesc.setBackground(new Color(240,255,255));
 		auxCreator.setBackground(new Color(240,255,255));
 		auxMembers.setBackground(new Color(240,255,255));
+		
+		container.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 		unirse = new JButton("Unirse al colectivo");
 		volver = new JButton("Volver");
