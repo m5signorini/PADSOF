@@ -14,7 +14,7 @@ import vista.inicio.Registro;
 
 /**
  * The ControlRegistro class implements the actions that should be performed when 
- * the different bottons in the Registro view are clicked.
+ * the different buttons in the Registro view are clicked.
  * @author Pedro Urbina Rodriguez 
  */
 

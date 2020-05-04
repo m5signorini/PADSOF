@@ -13,6 +13,11 @@ import modelo.functionalities.Application;
 import vista.Ventana;
 import vista.colectivos.CollectiveView;
 
+/**
+ * The ControlCollectiveView class implements the actions that should be performed when 
+ * the different buttons in the CollectiveView view are clicked.
+ * @author Pedro Urbina Rodriguez 
+ */
 
 public class ControlCollectiveView implements ActionListener {
 	private Application modelo;
@@ -25,6 +30,12 @@ public class ControlCollectiveView implements ActionListener {
 		this.colectiveView = frame.getCollectiveView();
 	}
 
+	/**
+	 * When the event occurs in the views which have this controller correctly set,
+	 * different actions are performed depending on the origin of the action.
+	 * @param e ActionEvent which caused the controller to act.
+	 * @return None.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		
@@ -45,7 +56,11 @@ public class ControlCollectiveView implements ActionListener {
 			break;
 		}
 	}
-	
+
+	/**
+	 * The current logged user tries to enter the collective in the view from which he clicked the button.
+	 * @return None.
+	 */
 	private void intentaUnirte() {
 		
 		User u = modelo.getLoggedUser();
@@ -61,7 +76,11 @@ public class ControlCollectiveView implements ActionListener {
 			JOptionPane.showMessageDialog(colectiveView, "No puedes unirte a este colectivo.", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
+
+	/**
+	 * Changes the view, making invisible all the other views and making visible the PantallaPrincipal view.
+	 * @return None.
+	 */	
 	private void vuelveAtras() {
 		frame.setAllInvisible();
 		frame.getVistaPantallaPrincipal().update();
@@ -69,7 +88,11 @@ public class ControlCollectiveView implements ActionListener {
 		frame.pack();
 		
 	}
-	
+
+	/**
+	 * The current logged user tries to abandon the collective of the view from which he clicked the button.
+	 * @return None.
+	 */
 	private void intentaAbandonar() {
 
 		User u = modelo.getLoggedUser();

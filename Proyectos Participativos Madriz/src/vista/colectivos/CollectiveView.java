@@ -13,6 +13,14 @@ import vista.proyectos.SpringUtilities;
 
 import java.util.List;
 
+
+/**
+ * The CollectiveView class is an extension of JPanels which contains all the swing
+ * components to create the view which contains information about the collective which
+ * which contains as an attribute.
+ * @author Pedro Urbina Rodriguez 
+ */
+
 public class CollectiveView extends JPanel{
 	
 	JPanel container;
@@ -87,17 +95,30 @@ public class CollectiveView extends JPanel{
 		container.add(abandonar);
 		
 	}
-	
-	public Collective getCollective() {
-		return this.c;
-	}
 
+	/**
+	 * Sets all the ActionListeners of all the buttons in the current object.
+	 * @param c ActionListener for the buttons in CollectiveView.
+	 * @return None.
+	 */
 	public void setController(ActionListener a) {
 		unirse.addActionListener(a);
 		volver.addActionListener(a);
 		abandonar.addActionListener(a);		
 	}
+	
+	/**
+	 * Returns the collective represented by this view.
+	 * @return The collective represented in the view.
+	 */
+	public Collective getCollective() {
+		return this.c;
+	}
 
+	/**
+	 * Reloads all the content in the view (usually because the Collective attribute has changed).
+	 * @return None.
+	 */
 	public void update(Collective c) {
 		this.c = c;
 		title.setText(c.getName());

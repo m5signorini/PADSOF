@@ -17,6 +17,12 @@ import vista.colectivos.CollectiveView;
 import vista.proyectos.CreateProjectView;
 import vista.proyectos.ProjectView;
 
+/**
+ * The ControlProjectView class implements the actions that should be performed when 
+ * the different buttons in the ProjectView view are clicked.
+ * @author Pedro Urbina Rodriguez 
+ */
+
 public class ControlProjectView implements ActionListener {
 	private Application modelo;
 	private Ventana frame;
@@ -28,6 +34,12 @@ public class ControlProjectView implements ActionListener {
 		this.projectView = frame.getProjectView();
 	}
 
+	/**
+	 * When the event occurs in the views which have this controller correctly set,
+	 * different actions are performed depending on the origin of the action.
+	 * @param e ActionEvent which caused the controller to act.
+	 * @return None.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		
@@ -50,7 +62,11 @@ public class ControlProjectView implements ActionListener {
 			break;
 		}
 	}
-	
+
+	/**
+	 * The current logged user tries to vote for the project in the view from which he clicked the button.
+	 * @return None.
+	 */
 	private void intentaVotar() {
 		
 		User u = modelo.getLoggedUser();
@@ -63,13 +79,21 @@ public class ControlProjectView implements ActionListener {
 		}
 	}
 	
+	/**
+	 * Changes the view, making invisible all the other views and making visible the PantallaPrincipal view.
+	 * @return None.
+	 */	
 	private void vuelveAtras() {	
 		frame.setAllInvisible();
 		frame.getVistaPantallaPrincipal().update();
 		frame.getVistaPantallaPrincipal().setVisible(true);
 		frame.pack();		
 	}
-	
+
+	/**
+	 * The current logged user tries to follow the project in the view from which he clicked the button.
+	 * @return None.
+	 */
 	private void seguir() {
 		
 		User u = modelo.getLoggedUser();
@@ -81,7 +105,11 @@ public class ControlProjectView implements ActionListener {
 			JOptionPane.showMessageDialog(projectView, "No puedes seguir a este proyecto.", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
+
+	/**
+	 * The current logged user tries to unfollow the project in the view from which he clicked the button.
+	 * @return None.
+	 */
 	private void dejarDeSeguir() {
 		
 		User u = modelo.getLoggedUser();

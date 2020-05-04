@@ -200,7 +200,7 @@ public class ProjectView extends JPanel{
 	}
 
 	/**
-	 * Reloads all the content in the view (usually beacause the Project attribute has changed).
+	 * Reloads all the content in the view (usually because the Project attribute has changed).
 	 * @return None.
 	 */
 	public void update(Project p, List<Collective> col) {
