@@ -40,7 +40,7 @@ public class CollectiveView extends JPanel{
 		container = new JPanel();
 		container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
 		this.add(container);
-		container.setBackground(new Color(190,255,255));
+		container.setBackground(new Color(240,255,255));
 		Dimension d = new Dimension(1000, 1000);
 		container.setMinimumSize(d);
 		container.setMaximumSize(d);
@@ -81,7 +81,11 @@ public class CollectiveView extends JPanel{
 		container.add(auxMembers);
 		auxMembers.setLayout(new BoxLayout(auxMembers, BoxLayout.X_AXIS));
 		auxMembers.add(new JLabel("Number of members: "));
-		auxMembers.add(nMembers);
+		auxMembers.add(nMembers);		
+
+		auxDesc.setBackground(new Color(240,255,255));
+		auxCreator.setBackground(new Color(240,255,255));
+		auxMembers.setBackground(new Color(240,255,255));
 
 		unirse = new JButton("Unirse al colectivo");
 		volver = new JButton("Volver");
