@@ -25,6 +25,14 @@ import controlador.proyectos.ControlProjectView;
 import modelo.entities.Collective;
 import modelo.projects.Project;
 
+
+/**
+ * The ProjectView class is an extension of JPanels which contains all the swing
+ * components to create the view which contains information about the project which
+ * which contains as an attribute.
+ * @author Pedro Urbina Rodriguez 
+ */
+
 public class ProjectView extends JPanel{
 	
 	private JPanel container;
@@ -151,15 +159,12 @@ public class ProjectView extends JPanel{
 		this.add(info, BorderLayout.WEST);
 		this.add(action, BorderLayout.EAST);
 	}
-	
-	public Project getProject() {
-		return this.p;
-	}
-	
-	public List<Collective> getRepresentedCollectives(){
-		return this.represented;
-	}
 
+	/**
+	 * Sets all the ActionListeners of all the buttons in the current object.
+	 * @param c ActionListener for the buttons in ProjectView.
+	 * @return None.
+	 */
 	public void setController(ActionListener a) {
 		seguir.addActionListener(a);
 		volver.addActionListener(a);
@@ -167,10 +172,37 @@ public class ProjectView extends JPanel{
 		dejarDeSeguir.addActionListener(a);
 	}
 	
+	/**
+	 * Returns the project represented by this view.
+	 * @return The project represented in the view.
+	 */
+	public Project getProject() {
+		return this.p;
+	}
+
+	/**
+	 * Returns the list of collectives that can currently vote the project because 
+	 * are represented by the logged user.
+	 * @return A List of collectives containing the collectives that can currently vote the represented project.
+	 */
+	public List<Collective> getRepresentedCollectives(){
+		return this.represented;
+	}
+
+	/**
+	 * Returns the index selected from the JComBox which contains the list of collectives 
+	 * that can currently vote the project because are represented by the logged user.
+	 * are represented by the logged user.
+	 * @return Integer representing the selected Collective.
+	 */
 	public int getSelected() {
 		return votarRepresentante.getSelectedIndex();
 	}
 
+	/**
+	 * Reloads all the content in the view (usually beacause the Project attribute has changed).
+	 * @return None.
+	 */
 	public void update(Project p, List<Collective> col) {
 		this.p = p;
 		this.represented = col;
