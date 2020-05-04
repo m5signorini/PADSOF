@@ -96,7 +96,7 @@ public class ControlAdmin {
 			JButton approve = new JButton("Aprobar");
             JButton deny = new JButton("Rechazar");
             approve.addActionListener((e) ->{modelo.validateProject(p); update();});
-            deny.addActionListener((e) -> {modelo.rejectProject(p); update();});
+            deny.addActionListener((e) -> {modelo.denyProject(p); update();});
             
             proj.add(approve);
             proj.add(deny);
