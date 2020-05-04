@@ -741,7 +741,10 @@ public class PantallaPrincipal extends JPanel {
 			JButton b = new JButton("Mas informacion sobre tu proyecto");
 			b.addActionListener(listener);
 			b.setName(Integer.toString(i));
-			cont.add(b);
+			cont.add(b);			
+
+			cont.add(Box.createRigidArea(new Dimension(200, 0)));
+			
 			JButton bSend;
 			if(sentProjects.contains(p)) {
 				bSend = new JButton("Proyecto ya enviado");
@@ -761,6 +764,8 @@ public class PantallaPrincipal extends JPanel {
 			bSend.addActionListener(listener);
 			bSend.setName(Integer.toString(i));
 			cont.add(bSend);
+			
+			cont.add(Box.createRigidArea(new Dimension(200, 0)));
 						
 			pestaniaMisProyectos.add(cont);
 			i++;
