@@ -110,27 +110,6 @@ public class CreateProjectView extends JPanel{
 	JPanel districts;
 	JLabel etiquetaDistricts = new JLabel("Distritos afectados:");
 	List<JCheckBox> ds;
-	/*JCheckBox d1;
-	JCheckBox d2;
-	JCheckBox d3;
-	JCheckBox d4;
-	JCheckBox d5;
-	JCheckBox d6;
-	JCheckBox d7;
-	JCheckBox d8;
-	JCheckBox d9;
-	JCheckBox d10;
-	JCheckBox d11;
-	JCheckBox d12;
-	JCheckBox d13;
-	JCheckBox d14;
-	JCheckBox d15;
-	JCheckBox d16;
-	JCheckBox d17;
-	JCheckBox d18;
-	JCheckBox d19;
-	JCheckBox d20;
-	JCheckBox d21;*/
 	
 	//Location
 	JLabel etiquetaLocation;
@@ -146,12 +125,14 @@ public class CreateProjectView extends JPanel{
 	public CreateProjectView() {
 		window = new JFrame("Nuevo proyecto");
 		
-		Container container = window.getContentPane();
+		//Container container = window.getContentPane();
+		JPanel container = new JPanel();
 		SpringLayout layout = new SpringLayout();
 		MainPanelSoc = new JPanel(layout);
 		MainPanelInfr = new JPanel(layout);
 		
 		container.setLayout(layout);
+		//window.setLayout(layout);
 		
 		JTabbedPane tab = new JTabbedPane();
 		tab.addTab("Social", MainPanelSoc);
@@ -188,21 +169,23 @@ public class CreateProjectView extends JPanel{
 			}
 		});
 		
-		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		int a = (dim.width/2-this.getSize().width/2)/2;
-		int b = (dim.height/2-this.getSize().height/2)/2;
-		this.window.setLocation(a, b);
+		//Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		//int a = (dim.width/2-this.getSize().width/2)/2;
+		//int b = (dim.height/2-this.getSize().height/2)/2;
+		//this.window.setLocation(a, b);
 		 
 		//Boton crear
 		create = new JButton("Crear");
 		container.add(create);
+		//window.add(create);
 		
-		layout.putConstraint(SpringLayout.WEST, create, 875, SpringLayout.WEST, container);
+		layout.putConstraint(SpringLayout.WEST, create, 600, SpringLayout.WEST, container);
 		layout.putConstraint(SpringLayout.NORTH, create, 430, SpringLayout.NORTH, container);
 		
 		//Boton cancelar
 		cancel = new JButton("Cancelar");
 		container.add(cancel);
+		//window.add(cancel);
 		
 		layout.putConstraint(SpringLayout.WEST, cancel, 3, SpringLayout.WEST, container);
 		layout.putConstraint(SpringLayout.NORTH, cancel, 430, SpringLayout.NORTH, container);
@@ -327,48 +310,6 @@ public class CreateProjectView extends JPanel{
 		//Distritos
 		districts = new JPanel(new GridLayout(7,3));
 		etiquetaDistricts = new JLabel("Distritos afectados:");
-		/*d1 = new JCheckBox("Arganzuela");
-		districts.add(d1);
-		d2 = new JCheckBox("Barajas");
-		districts.add(d2);
-		d3 = new JCheckBox("Carabanchel");
-		districts.add(d3);
-		d4 = new JCheckBox("Centro");
-		districts.add(d4);
-		d5 = new JCheckBox("Chamartin");
-		districts.add(d5);
-		d6 = new JCheckBox("Chambera");
-		districts.add(d6);
-		d7 = new JCheckBox("Ciudad Lineal");
-		districts.add(d7);
-		d8 = new JCheckBox("Fuencarral-El Pardo");
-		districts.add(d8);
-		d9 = new JCheckBox("Hortaleza");
-		districts.add(d9);
-		d10 = new JCheckBox("Latina");
-		districts.add(d10);
-		d11 = new JCheckBox("Moncloa-Aravaca");
-		districts.add(d11);
-		d12 = new JCheckBox("Moratalaz");
-		districts.add(d12);
-		d13 = new JCheckBox("Puente de Vallecas");
-		districts.add(d13);
-		d14 = new JCheckBox("Retiro");
-		districts.add(d14);
-		d15 = new JCheckBox("Salamanca");
-		districts.add(d15);
-		d16 = new JCheckBox("San Blas-Canillejas");
-		districts.add(d16);
-		d17 = new JCheckBox("Tetuan");
-		districts.add(d17);
-		d18 = new JCheckBox("Usera");
-		districts.add(d18);
-		d19 = new JCheckBox("Vicalvaro");
-		districts.add(d19);
-		d20 = new JCheckBox("Villa de Vallecas");
-		districts.add(d20);
-		d21 = new JCheckBox("Villaverde");
-		districts.add(d21);*/
 		
 		MainPanelInfr.add(etiquetaDistricts);
 		MainPanelInfr.add(districts);
@@ -394,10 +335,11 @@ public class CreateProjectView extends JPanel{
 		              6, 6); //xPad, yPad
 		
 		container.add(tab);
+		window.add(container);
 		//window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setSize(950,480);
+		window.setSize(700,520);
+		window.setLocationRelativeTo(null);
 		//window.setVisible(true);
-	
 	}
 
 	public void setRepresentedCollectives(List<Collective> c) {

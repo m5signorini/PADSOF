@@ -53,7 +53,7 @@ public class ControlPantallaPrincipal implements ActionListener {
 			frame.getCreateProjectView().setVisible(true);
 			frame.pack();
 			//frame.getVistaInicio().setVisible(false);
-			frame.pack();
+			//frame.pack();
 			break;
 		case "Crear Colectivo":
 			frame.getControlCreateCollective().setCollectivos(this.modelo.getCollectives());
