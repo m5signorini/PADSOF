@@ -3,6 +3,7 @@ package main;
 import java.awt.EventQueue;
 
 import controlador.Controlador;
+import modelo.entities.individuals.Admin;
 import modelo.functionalities.Application;
 import vista.Ventana;
 
@@ -17,15 +18,20 @@ public class Main {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
-					Ventana frame = new Ventana();
-					Application app = Application.readFromFile("data");					
-					Controlador controlador = new Controlador(frame, app);
-					frame.setControlador(controlador);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
+				Ventana frame = new Ventana();
+				Application app = Application.readFromFile("data");
+				if(app == null) {
+					Application.clearApplication();
+					app = Application.getApplication();
+					app.setAdmin(new Admin("admin"));
+					app.setMinSupports(1000);
+					app.setMaxInactivity(30);
+					app.writeToFile("data");
+					System.out.println("Guardado nuevo fichero data");
 				}
+				Controlador controlador = new Controlador(frame, app);
+				frame.setControlador(controlador);
+				frame.setVisible(true);
 			}
 		});
 	}
