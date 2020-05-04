@@ -28,6 +28,8 @@ public class PantallaPrincipal extends JPanel {
 	private ActionListener listener;
 	
 	private List<Project> sentProjects;
+	private List<Project> financiatedProjects;
+	private List<Project> expiredProjects;
 	private List<Project> pendingProjects;
 	private List<Project> createdProjects;
 	private List<Project> votedProjects;
@@ -304,6 +306,20 @@ public class PantallaPrincipal extends JPanel {
 	}
 	public List<Project> getPendingProjects(List<Project> p) {
 		return pendingProjects;
+	}
+	
+	public void setFinanciatedProjects(List<Project> p) {
+		this.financiatedProjects = p;
+	}
+	public List<Project> getFinanciatedProjects(List<Project> p) {
+		return financiatedProjects;
+	}
+	
+	public void setExpiredProjects(List<Project> p) {
+		this.expiredProjects = p;
+	}
+	public List<Project> getExpiredProjects(List<Project> p) {
+		return expiredProjects;
 	}
 	
 	public void setSentProjects(List<Project> p) {
@@ -655,7 +671,13 @@ public class PantallaPrincipal extends JPanel {
 				bSend = new JButton("Proyecto ya enviado");
 			}
 			else if(pendingProjects.contains(p)) {
-				bSend = new JButton("Pendiente de validacion, no se puede enviar ");
+				bSend = new JButton("Pendiente de validacion, no se puede enviar");
+			}
+			else if(financiatedProjects.contains(p)) {
+				bSend = new JButton("Proyecto Financiado");
+			}
+			else if(expiredProjects.contains(p)) {
+				bSend = new JButton("Proyecto Expirado");
 			}
 			else {
 				bSend = new JButton("Pulsa aqui para enviar al ayuntamiento");

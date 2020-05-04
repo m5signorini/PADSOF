@@ -209,6 +209,8 @@ public class ControlPantallaPrincipal implements ActionListener {
 		pantallaPrincipal.setCreatedProjects(u.getCreatedProjects());
 		pantallaPrincipal.setSentProjects(modelo.getSentProjects());
 		pantallaPrincipal.setPendingProjects(modelo.getPendingProjects());
+		pantallaPrincipal.setExpiredProjects(modelo.getExpiredProjects());
+		pantallaPrincipal.setFinanciatedProjects(modelo.getFinanciatedProjects());
 		pantallaPrincipal.setVotedProjects(u.getVotedProjects());
 		pantallaPrincipal.setFollowedProjects(u.getFollowedProjects());
 		pantallaPrincipal.setCollectives(u.getCollectives());

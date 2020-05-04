@@ -306,7 +306,7 @@ public class Application implements Serializable{
 	public boolean sendProject(Project p) throws SendException{
 		if(!canSendProject(p)) return false;
 		p.send();
-		publicProjects.remove(p);
+		//publicProjects.remove(p);
 		sentProjects.add(p);
 		return true;
 	}
