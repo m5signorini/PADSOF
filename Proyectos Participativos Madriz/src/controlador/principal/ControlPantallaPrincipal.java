@@ -198,15 +198,19 @@ public class ControlPantallaPrincipal implements ActionListener {
 		frame.pack();
 	}
 	
-	private void actualizarMiPagina() {	
+	public void actualizarMiPagina() {	
 		PantallaPrincipal pantallaPrincipal = frame.getVistaPantallaPrincipal();
 		User u = modelo.getLoggedUser();
 		
 		frame.setAllInvisible();
 		pantallaPrincipal.setVisible(true);
 		frame.pack();
-
-		pantallaPrincipal.setCreatedProjects(u.getCreatedProjects());
+		
+		List<Project> visible = new ArrayList<Project>(u.getCreatedProjects());
+		visible.removeAll(modelo.getDeniedProjects());
+		visible.removeAll(modelo.getPendingProjects());
+		
+		pantallaPrincipal.setCreatedProjects(visible);//u.getCreatedProjects());
 		pantallaPrincipal.setVotedProjects(u.getVotedProjects());
 		pantallaPrincipal.setFollowedProjects(u.getFollowedProjects());
 		pantallaPrincipal.setCollectives(u.getCollectives());

@@ -90,20 +90,21 @@ public class ControlInicio implements ActionListener {
 		
 		PantallaPrincipal pantallaPrincipal = frame.getVistaPantallaPrincipal();
 		User u = modelo.getLoggedUser();
-			
+		
 		JOptionPane.showMessageDialog(null, "Correctly logged in!");
 		
 		frame.setAllInvisible();
 		pantallaPrincipal.setVisible(true);
 		
-		pantallaPrincipal.setCreatedProjects(u.getCreatedProjects());
+		/*pantallaPrincipal.setCreatedProjects(u.getCreatedProjects());
 		pantallaPrincipal.setVotedProjects(u.getVotedProjects());
 		pantallaPrincipal.setFollowedProjects(u.getFollowedProjects());
 		pantallaPrincipal.setCollectives(u.getCollectives());
 		pantallaPrincipal.setRepresentedCollectives(u.getRepresentedCollectives());
 		pantallaPrincipal.setNotifications(u.getNotifications());
 		
-		pantallaPrincipal.update();
+		pantallaPrincipal.update();*/
+		frame.getControlPantallaPrincipal().actualizarMiPagina();
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 	}	

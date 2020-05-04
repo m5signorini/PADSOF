@@ -180,6 +180,10 @@ public class Ventana extends JFrame {
 		return this.contCreateCollective;
 	}
 	
+	public ControlPantallaPrincipal getControlPantallaPrincipal() {
+		return this.contPantallaPrincipal;
+	}
+	
 	public ControlCreateProject getControlCreateProject() {
 		return this.contCreateProject;
 	}

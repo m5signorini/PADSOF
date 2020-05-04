@@ -20,6 +20,7 @@ import javax.swing.event.ChangeListener;
 
 import modelo.entities.Collective;
 import modelo.entities.individuals.Notification;
+import modelo.functionalities.Application;
 import modelo.projects.Project;
 
 public class PantallaPrincipal extends JPanel {
@@ -634,7 +635,6 @@ public class PantallaPrincipal extends JPanel {
 			b.setName(Integer.toString(i));
 			cont.add(b);
 			
-						
 			JButton bSend = new JButton("Pulsa aqui para enviar al ayuntamiento");
 			bSend.addActionListener(listener);
 			bSend.setName(Integer.toString(i));
@@ -705,7 +705,7 @@ public class PantallaPrincipal extends JPanel {
 	public void actualizarResultadosBusquedaColectivo () {		
 		resultadosBusquedaColectivo.removeAll();
 		if(resultadoBusquedaColectivos.isEmpty()) {
-			resultadosBusquedaColectivo.add(new JLabel("No reults found!"));
+			resultadosBusquedaColectivo.add(new JLabel("Sin resultados"));
 			return;
 		}
 		int i = 0;
@@ -724,7 +724,7 @@ public class PantallaPrincipal extends JPanel {
 	public void actualizarResultadosBusquedaProyecto () {		
 		resultadosBusquedaProyecto.removeAll();
 		if(resultadoBusquedaProyectos.isEmpty()) {
-			resultadosBusquedaProyecto.add(new JLabel("No reults found!"));
+			resultadosBusquedaProyecto.add(new JLabel("Sin resultados"));
 			return;
 		}
 		int i = 0;
