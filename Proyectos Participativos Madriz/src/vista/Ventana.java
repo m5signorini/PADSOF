@@ -97,9 +97,7 @@ public class Ventana extends JFrame {
 
 	public void setControlador(Controlador controlador) {
 		this.contInicio = controlador.getControlInicio();
-		vistaInicio.setControladorValidar(contInicio);
-		vistaInicio.setControladorCambioRegistro(contInicio);
-		vistaInicio.setControladorCambioAdmin(contInicio);
+		vistaInicio.setControladores(contInicio);
 		
 		this.contInicioAdmin = controlador.getControlInicioAdmin();
 		vistaInicioAdmin.setControladorLoginAdmin(contInicioAdmin);

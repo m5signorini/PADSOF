@@ -39,6 +39,15 @@ public class ControlInicio implements ActionListener {
 		}
 	}
 	
+
+	
+	/**
+	 * Returns true if the login is correct, false otherwise.
+	 * @param nif String containing the nif of the user trying to login.
+	 * @param pwd String containing password written by the user trying to login.
+	 * @return True if the login is correct, false otherwise.
+	 */
+	
 	private void cambioLoginAdmin() {
 		InicioAdmin nuevaVista = frame.getVistaInicioAdmin();
 		nuevaVista.update();
