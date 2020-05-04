@@ -1,6 +1,7 @@
 package controlador.proyectos;
 
 import java.awt.event.ActionEvent;
+
 import java.awt.event.ActionListener;
 import java.text.*;
 
@@ -14,6 +15,10 @@ import modelo.projects.*;
 import vista.Ventana;
 import vista.proyectos.CreateProjectView;
 
+/** Class that contains the components and functionalities
+ * to control the CreateProjectView screen.
+ * @author Cesar Ramirez Martinez
+ */
 public class ControlCreateProject implements ActionListener {
 	private Application modelo;
 	private CreateProjectView projectView;
@@ -24,7 +29,10 @@ public class ControlCreateProject implements ActionListener {
 		this.frame = frame2;
 		this.projectView = frame2.getCreateProjectView();
 	}
-
+	
+	/** 
+	 * Here we set the action for every button in a CreateProjectView. 
+	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		
@@ -77,7 +85,7 @@ public class ControlCreateProject implements ActionListener {
 				}
 				
 				String picture = this.projectView.getImage();
-				//Lo crea como usuario
+				//As individual user
 				if(collective == null || collective.equals("") || col == null) {
 					if(picture == null) {
 						project = new Social(title, description, budget, date, loggedUser, aux, group);
@@ -88,7 +96,7 @@ public class ControlCreateProject implements ActionListener {
 						loggedUser.addCreatedProject(project);
 					}
 				}
-				//Sino
+				//Otherwise
 				else {
 					if(picture == null) {
 						project = new Social(title, description, budget, date, col, aux, group);
@@ -125,12 +133,12 @@ public class ControlCreateProject implements ActionListener {
 				if(scheme == null) {
 					return;
 				}
-				//Lo crea como usuario
+				//As indvidual user
 				if(collective == null || collective.equals("") || col == null) {
 					project = new Infrastructural(title, description, budget, date, loggedUser, affectedDistricts, scheme, location);
 					loggedUser.addCreatedProject(project);  
 				}
-				//Si no
+				//Otherwise
 				else {
 					project = new Infrastructural(title, description, budget, date, col, affectedDistricts, scheme, location);
 					col.addCreatedProject(project);
