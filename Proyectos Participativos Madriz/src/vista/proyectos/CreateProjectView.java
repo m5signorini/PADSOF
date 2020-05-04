@@ -154,7 +154,7 @@ public class CreateProjectView extends JPanel{
 		tab.addTab("Social", MainPanelSoc);
 		tab.addTab("Infraestrucutal", MainPanelInfr);
 		
-		//Hacemos que cuando se cambie de pestaña se borre lo escrito
+		//Hacemos que cuando se cambie de pestania se borre lo escrito
 		tab.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent ev) {
 				if(tab.getSelectedIndex() == 0) {
@@ -208,13 +208,13 @@ public class CreateProjectView extends JPanel{
 		//OPCION SOCIAL
 		
 		//Colectivo 
-		//String[] opciones = {"Sí", "No"};
+		//String[] opciones = {"Si", "No"};
 		//etiquetaColectiveS = new JLabel("Crear como colectivo:");
 		//comboS = new JComboBox<String>(opciones);
 		//comboS.setSelectedIndex(1);
 		//etiquetaColectiveS.setLabelFor(comboS);
 		
-		//etiquetaCollectiveS = new JLabel("<html>Nombre colectivo (Opcional): <br> (Si el nombre no es correcto usted será asignado como creador.)</html>");
+		//etiquetaCollectiveS = new JLabel("<html>Nombre colectivo (Opcional): <br> (Si el nombre no es correcto usted sera asignado como creador.)</html>");
 		//collectiveNameS = new JTextField();
 		
 		etiquetaCollectiveS = new JLabel("Nombre del colectivo:");
@@ -223,14 +223,14 @@ public class CreateProjectView extends JPanel{
 		MainPanelSoc.add(comboS);
 		
 		//Titulo proyecto
-		etiquetaTitleS = new JLabel("Título del proyecto:");
+		etiquetaTitleS = new JLabel("Titulo del proyecto:");
 		titleS = new JTextField(10);
 		etiquetaTitleS.setLabelFor(titleS);
 		MainPanelSoc.add(etiquetaTitleS);
 		MainPanelSoc.add(titleS); 
 		
 		//Presupuesto
-		etiquetaBudgetS = new JLabel("Presupuesto (€):");
+		etiquetaBudgetS = new JLabel("Presupuesto (euros):");
 		budgetS = new JTextField(10);
 		etiquetaBudgetS.setLabelFor(budgetS);
 		budgetS.setText("1");
@@ -238,7 +238,7 @@ public class CreateProjectView extends JPanel{
 		MainPanelSoc.add(budgetS);
 		
 		//Descripcion proyecto
-		etiquetaDescS = new JLabel("Descripción:");
+		etiquetaDescS = new JLabel("Descripcion:");
 		descS = new JTextArea(8,6);
 		JScrollPane scrollS = new JScrollPane(descS);
 		
@@ -247,7 +247,7 @@ public class CreateProjectView extends JPanel{
 		MainPanelSoc.add(scrollS);
 		
 		//Ambito
-		etiquetaScopeS = new JLabel("Ámbito:");
+		etiquetaScopeS = new JLabel("Ambito:");
 		nacS = new JRadioButton("Nacional");
 		interS = new JRadioButton("Internacional");
 		nacS.setSelected(true);
@@ -313,7 +313,7 @@ public class CreateProjectView extends JPanel{
 		MainPanelInfr.add(budgetI);
 				
 		//Descripcion proyecto
-		etiquetaDescI = new JLabel("Descripción:");
+		etiquetaDescI = new JLabel("Descripcion:");
 		descI = new JTextArea(3,7);
 		JScrollPane scrollI = new JScrollPane(descI);
 				
@@ -332,9 +332,9 @@ public class CreateProjectView extends JPanel{
 		districts.add(d3);
 		d4 = new JCheckBox("Centro");
 		districts.add(d4);
-		d5 = new JCheckBox("Chamartín");
+		d5 = new JCheckBox("Chamartin");
 		districts.add(d5);
-		d6 = new JCheckBox("Chamberí");
+		d6 = new JCheckBox("Chambera");
 		districts.add(d6);
 		d7 = new JCheckBox("Ciudad Lineal");
 		districts.add(d7);
@@ -356,11 +356,11 @@ public class CreateProjectView extends JPanel{
 		districts.add(d15);
 		d16 = new JCheckBox("San Blas-Canillejas");
 		districts.add(d16);
-		d17 = new JCheckBox("Tetuán");
+		d17 = new JCheckBox("Tetuan");
 		districts.add(d17);
 		d18 = new JCheckBox("Usera");
 		districts.add(d18);
-		d19 = new JCheckBox("Vicálvaro");
+		d19 = new JCheckBox("Vicalvaro");
 		districts.add(d19);
 		d20 = new JCheckBox("Villa de Vallecas");
 		districts.add(d20);
@@ -371,7 +371,7 @@ public class CreateProjectView extends JPanel{
 		MainPanelInfr.add(districts);
 		
 		//Localización
-		etiquetaLocation = new JLabel("Localización:");
+		etiquetaLocation = new JLabel("Localizacion:");
 		location = new JTextField(10);
 		etiquetaLocation.setLabelFor(location);
 		MainPanelInfr.add(etiquetaLocation);

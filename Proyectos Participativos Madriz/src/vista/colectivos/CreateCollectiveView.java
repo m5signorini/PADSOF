@@ -32,7 +32,7 @@ public class CreateCollectiveView extends JPanel{
 		JLabel etiquetaDescCollective;
 		JTextArea descCollective;
 
-		//Father colective
+		//Father collective
 		JLabel etiquetaFather;
 		JComboBox<String> father;
 		//JTextField father;
@@ -74,7 +74,7 @@ public class CreateCollectiveView extends JPanel{
 			MainPanel.add(collectiveName); 
 			
 			//Collective description
-			etiquetaDescCollective = new JLabel("Descripción:");
+			etiquetaDescCollective = new JLabel("Descripcion:");
 			descCollective = new JTextArea(6,8);
 			JScrollPane scrollS = new JScrollPane(descCollective);
 			
@@ -83,7 +83,7 @@ public class CreateCollectiveView extends JPanel{
 			MainPanel.add(scrollS);
 			
 			//Father name
-			//etiquetaFather = new JLabel("<html>Nombre colectivo padre(Opcional):  <br> (Si el nombre no es correcto el <br> colectivo será creado sin padre.)</html>");
+			//etiquetaFather = new JLabel("<html>Nombre colectivo padre(Opcional):  <br> (Si el nombre no es correcto el <br> colectivo sera creado sin padre.)</html>");
 			etiquetaFather = new JLabel("Nombre colectivo padre:");
 			father = new JComboBox<String>();
 			MainPanel.add(etiquetaFather);
