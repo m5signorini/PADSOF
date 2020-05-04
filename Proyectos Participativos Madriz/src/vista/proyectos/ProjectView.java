@@ -196,7 +196,7 @@ public class ProjectView extends JPanel{
 			imagePanel.add(imglabel);
 		}
 		catch(Exception ex) {
-			System.out.println("ERROR IMG: " +p.getImagePath());
+			imagePanel.removeAll();
 		}
 	}	
 	
