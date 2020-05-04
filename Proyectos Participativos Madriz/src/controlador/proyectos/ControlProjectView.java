@@ -59,7 +59,7 @@ public class ControlProjectView implements ActionListener {
 		if(proj.support(u) == null) {
 			JOptionPane.showMessageDialog(projectView, "No puedes votar a este proyecto.", "Error", JOptionPane.ERROR_MESSAGE);
 		} else {
-			JOptionPane.showMessageDialog(projectView, "¡Has apoyado al proyecto!");
+			JOptionPane.showMessageDialog(projectView, "Has apoyado al proyecto");
 		}
 	}
 	
@@ -76,7 +76,7 @@ public class ControlProjectView implements ActionListener {
 		Project proj = projectView.getProject();
 		
 		if(u.addFollowedProject(proj)) {
-			JOptionPane.showMessageDialog(projectView, "¡Has seguido el proyecto!");
+			JOptionPane.showMessageDialog(projectView, "Has seguido el proyecto");
 		} else {
 			JOptionPane.showMessageDialog(projectView, "No puedes seguir a este proyecto.", "Error", JOptionPane.ERROR_MESSAGE);
 		}
@@ -88,7 +88,7 @@ public class ControlProjectView implements ActionListener {
 		Project proj = projectView.getProject();
 		
 		if(u.removeFollowedProject(proj)) {
-			JOptionPane.showMessageDialog(projectView, "¡Has dejado de seguir el proyecto!");
+			JOptionPane.showMessageDialog(projectView, "Has dejado de seguir el proyecto");
 		} else {
 			JOptionPane.showMessageDialog(projectView, "No puedes dejar de seguir a este proyecto.", "Error", JOptionPane.ERROR_MESSAGE);
 		}

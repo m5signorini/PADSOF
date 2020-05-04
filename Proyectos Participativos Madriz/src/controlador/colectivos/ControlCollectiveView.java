@@ -53,7 +53,7 @@ public class ControlCollectiveView implements ActionListener {
 		
 		try {
 			if(col.join(u)) {
-				JOptionPane.showMessageDialog(colectiveView, "¡Te has unido al colectivo!");
+				JOptionPane.showMessageDialog(colectiveView, "Te has unido al colectivo");
 			} else {
 				JOptionPane.showMessageDialog(colectiveView, "No puedes unirte a este colectivo.", "Error", JOptionPane.ERROR_MESSAGE);
 			}
@@ -76,7 +76,7 @@ public class ControlCollectiveView implements ActionListener {
 		Collective col = colectiveView.getCollective();
 		
 		if(u.exitCollective(col)) {
-			JOptionPane.showMessageDialog(colectiveView, "¡Has abandonado el colectivo!");
+			JOptionPane.showMessageDialog(colectiveView, "Has abandonado el colectivo");
 		} else {
 			JOptionPane.showMessageDialog(colectiveView, "No puedes salir de este colectivo.", "Error", JOptionPane.ERROR_MESSAGE);
 		}
