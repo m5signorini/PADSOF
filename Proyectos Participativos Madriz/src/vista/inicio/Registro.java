@@ -71,24 +71,45 @@ public class Registro extends JPanel {
 		botonInicio.setAlignmentX(CENTER_ALIGNMENT);
 		add(botonInicio);
 	}
-	
-	public String getName() {
-		return campoNombre.getText();
-	}
-	
-	public String getNif() {
-		return campoNif.getText();
-	}
-	
-	public String getPwd() {
-		return campoPwd.getText();
-	}
 
+	/**
+	 * Sets all the ActionListeners of all the buttons in the current object.
+	 * @param c ActionListener for the buttons in Registro.
+	 * @return None.
+	 */
 	public void setControladores(ActionListener c) {
 		botonRegistro.addActionListener(c);
 		botonInicio.addActionListener(c);
 	}
-		
+
+	/**
+	 * Returns the text written as a String in the name JLabel.
+	 * @return A String containing the text written by the User in campoNombre.
+	 */	
+	public String getName() {
+		return campoNombre.getText();
+	}
+
+	/**
+	 * Returns the text written as a String in the nif JLabel.
+	 * @return A String containing the text written by the User in campoNif.
+	 */	
+	public String getNif() {
+		return campoNif.getText();
+	}
+
+	/**
+	 * Returns the text written as a String in the pwd JLabel.
+	 * @return A String containing the text written by the User in campoPwd.
+	 */
+	public String getPwd() {
+		return campoPwd.getText();
+	}
+
+	/**
+	 * Clears the text in all the JLabels in the view.
+	 * @return None.
+	 */	
 	public void update() { 
 		campoNif.setText("");
 		campoNombre.setText("");

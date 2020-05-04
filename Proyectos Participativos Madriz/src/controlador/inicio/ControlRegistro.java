@@ -12,6 +12,12 @@ import vista.Ventana;
 import vista.inicio.Inicio;
 import vista.inicio.Registro;
 
+/**
+ * The ControlRegistro class implements the actions that should be performed when 
+ * the different bottons in the Registro view are clicked.
+ * @author Pedro Urbina Rodriguez 
+ */
+
 public class ControlRegistro implements ActionListener {
 	
 	private Ventana frame;
@@ -24,7 +30,12 @@ public class ControlRegistro implements ActionListener {
 		this.app = app;
 	}
 
-
+	/**
+	 * When the event occurs in the views which have this controller correctly set,
+	 * different actions are performed depending on the origin of the action.
+	 * @param e ActionEvent which caused the controller to act.
+	 * @return None.
+	 */
 	public void actionPerformed(ActionEvent e) {
 		JButton button = (JButton)e.getSource();
 		switch(button.getActionCommand()) {
@@ -36,7 +47,11 @@ public class ControlRegistro implements ActionListener {
 			break;
 		}
 	}
-	
+
+	/**
+	 * Changes the view, making invisible the register view and making visible the login view.
+	 * @return None.
+	 */	
 	private void cambioInicio() {
 		Inicio nuevaVista = frame.getVistaInicio();
 		nuevaVista.update();
@@ -45,6 +60,11 @@ public class ControlRegistro implements ActionListener {
 		frame.pack();	
 	}
 	
+	/**
+	 * Tries to register with the written information on the JLabels and if register was successful,
+	 * the login view will be displayed, having the user for the administrator's verification to login.
+	 * @return None.
+	 */
 	private void intentarRegistro() {
 		String name = vista.getName();
 		String nif = vista.getNif();
