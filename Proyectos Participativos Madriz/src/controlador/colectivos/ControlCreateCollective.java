@@ -1,6 +1,7 @@
 package controlador.colectivos;
 
 import java.awt.event.ActionEvent;
+
 import java.awt.event.ActionListener;
 import java.util.*;
 
@@ -12,7 +13,10 @@ import modelo.functionalities.Application;
 import vista.Ventana;
 import vista.colectivos.CreateCollectiveView;
 
-
+/** Class that contains the components and functionalities
+ * to control the CreateCollectiveView screen.
+ * @author Cesar Ramirez Martinez
+ */
 public class ControlCreateCollective implements ActionListener {
 	private Application modelo;
 	private CreateCollectiveView collectiveView;
@@ -23,7 +27,10 @@ public class ControlCreateCollective implements ActionListener {
 		this.frame = frame2;
 		this.collectiveView = frame2.getCreateCollectiveView();
 	}
-
+	
+	/** 
+	 * Here we set the action for every button in a CreateCollectiveView. 
+	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		
@@ -77,6 +84,10 @@ public class ControlCreateCollective implements ActionListener {
 		}
 	}
 	
+	/**
+	 * ControlCreateCollective sets the action for every button in an CreateCollectiveView. 
+	 * @param l the list of collectives that will be set in the CreateCollectiveView attribute
+	 */
 	public void setCollectivos(List<Collective> l) {
 		this.collectiveView.setCollectives(l);
 	}
