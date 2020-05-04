@@ -51,7 +51,7 @@ public class CreateCollectiveView extends JPanel{
 			create = new JButton("Crear");
 			container.add(create);
 			
-			layout.putConstraint(SpringLayout.WEST, create, 375, SpringLayout.WEST, container);
+			layout.putConstraint(SpringLayout.WEST, create, 250, SpringLayout.WEST, container);
 			layout.putConstraint(SpringLayout.NORTH, create,200, SpringLayout.NORTH, container);
 			
 			//Boton cancelar
@@ -96,7 +96,7 @@ public class CreateCollectiveView extends JPanel{
 			
 			container.add(MainPanel);
 			//window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			window.setSize(450, 250);
+			window.setSize(350, 300);
 			//window.setVisible(true);
 		
 		}
